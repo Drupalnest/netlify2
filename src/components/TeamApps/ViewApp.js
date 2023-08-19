@@ -2121,818 +2121,818 @@
 
 
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import Layout from "../Layout";
-import AppsButton from "./AppsButton";
-import {
-  fetchTeamDetails,
-  fetchAppDetails,
-  updateAppDetails,
-  appDetails,
-} from "../../redux/store";
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useDispatch, useSelector } from "react-redux";
+// import Layout from "../Layout";
+// import AppsButton from "./AppsButton";
+// import {
+//   fetchTeamDetails,
+//   fetchAppDetails,
+//   updateAppDetails,
+//   appDetails,
+// } from "../../redux/store";
 
-import "../../styles/popup.css";
-import { Link } from "gatsby";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
+// import "../../styles/popup.css";
+// import { Link } from "gatsby";
+// import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+// import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+// import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 
-const ViewApp = () => {
-  const dispatch = useDispatch();
-  // const appDetails = useSelector((state) => state.app.appDetails);
-  // console.log("appDetails", appDetails);
+// const ViewApp = () => {
+//   const dispatch = useDispatch();
+//   // const appDetails = useSelector((state) => state.app.appDetails);
+//   // console.log("appDetails", appDetails);
 
-  const teamDetails = useSelector((state) => state.teamDetails);
+//   const teamDetails = useSelector((state) => state.teamDetails);
 
-  const appDetailsData = useSelector(
-    (state) => state.appDetailsData.appDetailsData
-  );
-  console.log("appDetailsData", appDetailsData);
+//   const appDetailsData = useSelector(
+//     (state) => state.appDetailsData.appDetailsData
+//   );
+//   console.log("appDetailsData", appDetailsData);
 
-  const teamName = appDetailsData.companyName;
-  console.log("teamName", teamName);
-  const appName = appDetailsData.name;
-  // console.log("appData",appData)
+//   const teamName = appDetailsData.companyName;
+//   console.log("teamName", teamName);
+//   const appName = appDetailsData.name;
+//   // console.log("appData",appData)
 
-  console.log("appName", appName);
+//   console.log("appName", appName);
 
-  // useEffect(() => {
-  //   // Fetch updated app details after the component mounts
-  //   dispatch(fetchAppDetails(teamName, appName));
-  // }, [dispatch, teamName, appName]);
+//   // useEffect(() => {
+//   //   // Fetch updated app details after the component mounts
+//   //   dispatch(fetchAppDetails(teamName, appName));
+//   // }, [dispatch, teamName, appName]);
 
-  const [showSecret, setShowSecret] = useState(false);
-  const [showKey, setShowKey] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [copyMessage, setCopyMessage] = useState("");
-  const [copiedIndexes, setCopiedIndexes] = useState([]);
+//   const [showSecret, setShowSecret] = useState(false);
+//   const [showKey, setShowKey] = useState(false);
+//   const [showPopup, setShowPopup] = useState(false);
+//   const [copyMessage, setCopyMessage] = useState("");
+//   const [copiedIndexes, setCopiedIndexes] = useState([]);
 
-  const copyToClipboard = (text, index) => {
-    navigator.clipboard.writeText(text);
-    setCopyMessage("Copied!");
-    setCopiedIndexes([...copiedIndexes, index]);
-    setTimeout(() => {
-      setCopyMessage("");
-    }, 2000);
-  };
+//   const copyToClipboard = (text, index) => {
+//     navigator.clipboard.writeText(text);
+//     setCopyMessage("Copied!");
+//     setCopiedIndexes([...copiedIndexes, index]);
+//     setTimeout(() => {
+//       setCopyMessage("");
+//     }, 2000);
+//   };
 
   
 
-  const generateRandomSecret = () => {
-    const characters =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let key = "";
-    for (let i = 0; i < 16; i++) {
-      key += characters[Math.floor(Math.random() * characters.length)];
-    }
-    return key;
-  };
+//   const generateRandomSecret = () => {
+//     const characters =
+//       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//     let key = "";
+//     for (let i = 0; i < 16; i++) {
+//       key += characters[Math.floor(Math.random() * characters.length)];
+//     }
+//     return key;
+//   };
 
-  const generateRandomKey = () => {
-    const characters =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let secret = "";
-    for (let i = 0; i < 32; i++) {
-      secret += characters[Math.floor(Math.random() * characters.length)];
-    }
-    return secret;
-  };
+//   const generateRandomKey = () => {
+//     const characters =
+//       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//     let secret = "";
+//     for (let i = 0; i < 32; i++) {
+//       secret += characters[Math.floor(Math.random() * characters.length)];
+//     }
+//     return secret;
+//   };
 
-  const togglePopup = async () => {
-    setShowPopup(!showPopup);
-  };
+//   const togglePopup = async () => {
+//     setShowPopup(!showPopup);
+//   };
 
-  const handleConfirmClick = async () => {
-    try {
-      const randomKey = generateRandomKey();
-      const randomSecret = generateRandomSecret();
+//   const handleConfirmClick = async () => {
+//     try {
+//       const randomKey = generateRandomKey();
+//       const randomSecret = generateRandomSecret();
 
-      const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create`;
-      const bearerToken = process.env.BEARER_TOKEN;
+//       const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create`;
+//       const bearerToken = process.env.BEARER_TOKEN;
 
-      const response = await axios.post(
-        apiUrl,
-        {
-          consumerKey: randomKey,
-          consumerSecret: randomSecret,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      dispatch(fetchAppDetails(teamName, appName));
-      alert("API key created successfully");
-      setShowPopup(false);
-    } catch (error) {
-      alert("Error creating API key: " + error.message);
-    }
-  };
+//       const response = await axios.post(
+//         apiUrl,
+//         {
+//           consumerKey: randomKey,
+//           consumerSecret: randomSecret,
+//         },
+//         {
+//           headers: {
+//             Authorization: `Bearer ${bearerToken}`,
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+//       dispatch(fetchAppDetails(teamName, appName));
+//       alert("API key created successfully");
+//       setShowPopup(false);
+//     } catch (error) {
+//       alert("Error creating API key: " + error.message);
+//     }
+//   };
 
-  const toggleVisibility1 = () => {
-    setShowSecret((prevShowSecret) => !prevShowSecret);
-  };
+//   const toggleVisibility1 = () => {
+//     setShowSecret((prevShowSecret) => !prevShowSecret);
+//   };
 
-  const toggleVisibility2 = () => {
-    setShowKey((prevShowKey) => !prevShowKey);
-  };
+//   const toggleVisibility2 = () => {
+//     setShowKey((prevShowKey) => !prevShowKey);
+//   };
 
-  const hideKey = (key) => {
-    return "•".repeat(key.length);
-  };
+//   const hideKey = (key) => {
+//     return "•".repeat(key.length);
+//   };
 
-  const handleRemovekey = async (teamName, appName, consumerKey) => {
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN;
+//   const handleRemovekey = async (teamName, appName, consumerKey) => {
+//     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
+//     const bearerToken = process.env.BEARER_TOKEN;
 
-    try {
-      await axios.delete(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
-      dispatch(fetchAppDetails(teamName, appName));
-      alert("Key removed successfully");
-    } catch (error) {
-      alert("Error removing key: " + error);
-    }
-  };
+//     try {
+//       await axios.delete(apiUrl, {
+//         headers: {
+//           Authorization: `Bearer ${bearerToken}`,
+//         },
+//       });
+//       dispatch(fetchAppDetails(teamName, appName));
+//       alert("Key removed successfully");
+//     } catch (error) {
+//       alert("Error removing key: " + error);
+//     }
+//   };
 
-  const handleRevokeKey = async (teamName, appName, consumerKey) => {
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
-    const bearerToken = process.env.BEARER_TOKEN;
+//   const handleRevokeKey = async (teamName, appName, consumerKey) => {
+//     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
+//     const bearerToken = process.env.BEARER_TOKEN;
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
+//     try {
+//       const response = await fetch(apiUrl, {
+//         method: "POST",
+//         headers: {
+//           Authorization: `Bearer ${bearerToken}`,
+//         },
+//       });
 
-      if (response.status === 204) {
-        // Key revoked successfully
-        dispatch(fetchAppDetails(teamName, appName));
-        alert("Key revoked successfully");
-      } else {
-        alert("Key revocation was not successful");
-      }
-    } catch (error) {
-      alert("Error revoking key: " + error.message);
-    }
-  };
+//       if (response.status === 204) {
+//         // Key revoked successfully
+//         dispatch(fetchAppDetails(teamName, appName));
+//         alert("Key revoked successfully");
+//       } else {
+//         alert("Key revocation was not successful");
+//       }
+//     } catch (error) {
+//       alert("Error revoking key: " + error.message);
+//     }
+//   };
 
-  return (
-    <Layout>
-      <AppsButton />
-      <div>
-        <div
-          className="dialog-off-canvas-main-canvas"
-          data-off-canvas-main-canvas=""
-        >
-          <div className="page">
-            <div className="page__content-above">
-              <div className="container-fluid px-0">
-                <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                  <div
-                    data-contextual-id="block:block=pagetitle:langcode=en"
-                    data-contextual-token="JWbfFvQC8xC4unlMvQKgq1Qc29aLahBItOfax5aiGxo"
-                  />
-                  <div className="container">
-                    <h1 className="js-quickedit-page-title page__title mb-0">
-                      {appDetailsData.name} team app
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            </div>
+//   return (
+//     <Layout>
+//       <AppsButton />
+//       <div>
+//         <div
+//           className="dialog-off-canvas-main-canvas"
+//           data-off-canvas-main-canvas=""
+//         >
+//           <div className="page">
+//             <div className="page__content-above">
+//               <div className="container-fluid px-0">
+//                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
+//                   <div
+//                     data-contextual-id="block:block=pagetitle:langcode=en"
+//                     data-contextual-token="JWbfFvQC8xC4unlMvQKgq1Qc29aLahBItOfax5aiGxo"
+//                   />
+//                   <div className="container">
+//                     <h1 className="js-quickedit-page-title page__title mb-0">
+//                       {appDetailsData.name} team app
+//                     </h1>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
 
-            <main className="main" role="main">
-              <div className="page-layout-sidebar-default">
-                <div className="container py-5">
-                  <div className="row">
-                    <div className="page__content col-md">
-                      <div className="contextual-region apigee-entity--app apigee-entity--app--view-mode-full">
-                        <div
-                          className="tab-pane show active"
-                          // style={{ border: "1px solid red" }}
-                        >
-                          <div className="card apigee-entity--app__details">
-                            <h4 className="card-header bg-white">Details</h4>
-                            <div className="card-body">
-                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__status">
-                                <div className="field__label">
-                                  Team App status
-                                </div>
-                                <div className="field__item">
-                                  <span className="badge badge-success">
-                                    {appDetailsData.status}
-                                  </span>
-                                </div>
-                              </div>
+//             <main className="main" role="main">
+//               <div className="page-layout-sidebar-default">
+//                 <div className="container py-5">
+//                   <div className="row">
+//                     <div className="page__content col-md">
+//                       <div className="contextual-region apigee-entity--app apigee-entity--app--view-mode-full">
+//                         <div
+//                           className="tab-pane show active"
+//                           // style={{ border: "1px solid red" }}
+//                         >
+//                           <div className="card apigee-entity--app__details">
+//                             <h4 className="card-header bg-white">Details</h4>
+//                             <div className="card-body">
+//                               <div className="field field--inline d-sm-flex align-items-sm-center team-app__status">
+//                                 <div className="field__label">
+//                                   Team App status
+//                                 </div>
+//                                 <div className="field__item">
+//                                   <span className="badge badge-success">
+//                                     {appDetailsData.status}
+//                                   </span>
+//                                 </div>
+//                               </div>
 
-                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__createdat">
-                                <div className="field__label">Created</div>
-                                <div className="field__item">
-                                  {new Date(
-                                    appDetailsData.createdAt
-                                  ).toString()}
-                                </div>
-                              </div>
+//                               <div className="field field--inline d-sm-flex align-items-sm-center team-app__createdat">
+//                                 <div className="field__label">Created</div>
+//                                 <div className="field__item">
+//                                   {new Date(
+//                                     appDetailsData.createdAt
+//                                   ).toString()}
+//                                 </div>
+//                               </div>
 
-                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__lastmodifiedat">
-                                <div className="field__label">Last updated</div>
-                                <div className="field__item">
-                                  {new Date(
-                                    appDetailsData.lastModifiedAt
-                                  ).toString()}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card apigee-entity--app__credentials">
-                            <h4 className="card-header bg-white">
-                              Credentials
-                              <button
-                                className="use-ajax button btn btn-primary btn-sm"
-                                onClick={togglePopup}
-                              >
-                                Add key
-                              </button>
-                            </h4>
+//                               <div className="field field--inline d-sm-flex align-items-sm-center team-app__lastmodifiedat">
+//                                 <div className="field__label">Last updated</div>
+//                                 <div className="field__item">
+//                                   {new Date(
+//                                     appDetailsData.lastModifiedAt
+//                                   ).toString()}
+//                                 </div>
+//                               </div>
+//                             </div>
+//                           </div>
+//                           <div className="card apigee-entity--app__credentials">
+//                             <h4 className="card-header bg-white">
+//                               Credentials
+//                               <button
+//                                 className="use-ajax button btn btn-primary btn-sm"
+//                                 onClick={togglePopup}
+//                               >
+//                                 Add key
+//                               </button>
+//                             </h4>
 
-                            {showPopup && (
-                              <div className="popup-overlay">
-                                <div className="popup">
-                                  <span className="close" onClick={togglePopup}>
-                                    &times;
-                                  </span>
-                                  <div className="popup-content">
-                                    <h2>Add Key</h2>
-                                    <p>
-                                      Do you really want to create a new API key
-                                      for this team app?
-                                    </p>
-                                    <label>
-                                      Set an expiry date:
-                                      <select>
-                                        <option>1 Year</option>
-                                        {/* Add other options here */}
-                                      </select>
-                                    </label>
-                                    <div className="popup-buttons">
-                                      <button
-                                        className="popup-button cancel-button"
-                                        onClick={togglePopup}
-                                      >
-                                        Cancel
-                                      </button>
-                                      <button
-                                        className="popup-button confirm-button"
-                                        onClick={handleConfirmClick}
-                                      >
-                                        Confirm
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            )}
+//                             {showPopup && (
+//                               <div className="popup-overlay">
+//                                 <div className="popup">
+//                                   <span className="close" onClick={togglePopup}>
+//                                     &times;
+//                                   </span>
+//                                   <div className="popup-content">
+//                                     <h2>Add Key</h2>
+//                                     <p>
+//                                       Do you really want to create a new API key
+//                                       for this team app?
+//                                     </p>
+//                                     <label>
+//                                       Set an expiry date:
+//                                       <select>
+//                                         <option>1 Year</option>
+//                                         {/* Add other options here */}
+//                                       </select>
+//                                     </label>
+//                                     <div className="popup-buttons">
+//                                       <button
+//                                         className="popup-button cancel-button"
+//                                         onClick={togglePopup}
+//                                       >
+//                                         Cancel
+//                                       </button>
+//                                       <button
+//                                         className="popup-button confirm-button"
+//                                         onClick={handleConfirmClick}
+//                                       >
+//                                         Confirm
+//                                       </button>
+//                                     </div>
+//                                   </div>
+//                                 </div>
+//                               </div>
+//                             )}
 
-                            <div
-                              className="card-body pb-0"
-                              // style={{ border: "7px solid green" }}
-                            >
-                              {appDetailsData.credentials.map(
-                                (credential, index) => {
-                                  if (credential.status === "approved") {
-                                    return (
-                                      <fieldset
-                                        className="items--inline app-credential"
-                                        key={index}
-                                        // style={{ border: "1px solid red" }}
-                                      >
-                                        <legend>Credential</legend>
+//                             <div
+//                               className="card-body pb-0"
+//                               // style={{ border: "7px solid green" }}
+//                             >
+//                               {appDetailsData.credentials.map(
+//                                 (credential, index) => {
+//                                   if (credential.status === "approved") {
+//                                     return (
+//                                       <fieldset
+//                                         className="items--inline app-credential"
+//                                         key={index}
+//                                         // style={{ border: "1px solid red" }}
+//                                       >
+//                                         <legend>Credential</legend>
 
-                                        <div className="fieldset-wrapper">
-                                          <div
-                                            className="wrapper--primary app-details-wrapper"
-                                            // style={{
-                                            //   border: "8px solid yellow",
-                                            // }}
-                                          >
-                                            <div className="item-property">
-                                              <label>Consumer Key</label>
-                                              <div className="secret field__item">
-                                                {showSecret ? (
-                                                  <div className="secret__value">
-                                                    {credential.consumerKey}
-                                                  </div>
-                                                ) : (
-                                                  <div className="secret__value__hidden">
-                                                    {hideKey(
-                                                      credential.consumerKey
-                                                    )}
-                                                  </div>
-                                                )}
-                                                <br />
-                                                <button
-                                                  className="secret__toggle"
-                                                  onClick={toggleVisibility1}
-                                                >
-                                                  {showSecret ? (
-                                                    <Link className="secret__toggle__hide">
-                                                      {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
+//                                         <div className="fieldset-wrapper">
+//                                           <div
+//                                             className="wrapper--primary app-details-wrapper"
+//                                             // style={{
+//                                             //   border: "8px solid yellow",
+//                                             // }}
+//                                           >
+//                                             <div className="item-property">
+//                                               <label>Consumer Key</label>
+//                                               <div className="secret field__item">
+//                                                 {showSecret ? (
+//                                                   <div className="secret__value">
+//                                                     {credential.consumerKey}
+//                                                   </div>
+//                                                 ) : (
+//                                                   <div className="secret__value__hidden">
+//                                                     {hideKey(
+//                                                       credential.consumerKey
+//                                                     )}
+//                                                   </div>
+//                                                 )}
+//                                                 <br />
+//                                                 <button
+//                                                   className="secret__toggle"
+//                                                   onClick={toggleVisibility1}
+//                                                 >
+//                                                   {showSecret ? (
+//                                                     <Link className="secret__toggle__hide">
+//                                                       {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
 
-                                                      <VisibilityOffOutlinedIcon />
-                                                    </Link>
-                                                  ) : (
-                                                    <Link className="secret__toggle__show">
-                                                      {/* <i className="fas fa-eye secret__toggle__show" /> */}
-                                                      <RemoveRedEyeOutlinedIcon />
-                                                    </Link>
-                                                  )}
-                                                </button>
-                                                <div className="secret__copy">
-                                                  <button
-                                                    className="secret__copy"
-                                                    onClick={() =>
-                                                      copyToClipboard(
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                    title="Click to copy"
-                                                  >
-                                                    {/* <i className="fas fa-paste" /> */}
-                                                    <ContentCopyOutlinedIcon />
-                                                  </button>
-                                                  <span className="copy-message">
-                                                    {copyMessage}
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
+//                                                       <VisibilityOffOutlinedIcon />
+//                                                     </Link>
+//                                                   ) : (
+//                                                     <Link className="secret__toggle__show">
+//                                                       {/* <i className="fas fa-eye secret__toggle__show" /> */}
+//                                                       <RemoveRedEyeOutlinedIcon />
+//                                                     </Link>
+//                                                   )}
+//                                                 </button>
+//                                                 <div className="secret__copy">
+//                                                   <button
+//                                                     className="secret__copy"
+//                                                     onClick={() =>
+//                                                       copyToClipboard(
+//                                                         credential.consumerKey
+//                                                       )
+//                                                     }
+//                                                     title="Click to copy"
+//                                                   >
+//                                                     {/* <i className="fas fa-paste" /> */}
+//                                                     <ContentCopyOutlinedIcon />
+//                                                   </button>
+//                                                   <span className="copy-message">
+//                                                     {copyMessage}
+//                                                   </span>
+//                                                 </div>
+//                                               </div>
+//                                             </div>
 
-                                            <div className="item-property">
-                                              <label>Consumer Secret</label>
-                                              <div className="secret field__item">
-                                                {showKey ? (
-                                                  <div className="secret__value">
-                                                    {credential.consumerSecret}
-                                                  </div>
-                                                ) : (
-                                                  <div className="secret__value__hidden">
-                                                    {hideKey(
-                                                      credential.consumerSecret
-                                                    )}
-                                                  </div>
-                                                )}
-                                                <br />
-                                                <button
-                                                  className="secret__toggle"
-                                                  onClick={toggleVisibility2}
-                                                  // style={{
-                                                  //   color: "green",
-                                                  //   height: "20px",
-                                                  //   width: "20px",
-                                                  // }}
-                                                >
-                                                  {showKey ? (
-                                                    <Link className="secret__toggle__hide">
-                                                      <VisibilityOffOutlinedIcon />
-                                                    </Link>
-                                                  ) : (
-                                                    <Link className="secret__toggle__show">
-                                                      <RemoveRedEyeOutlinedIcon />
-                                                    </Link>
-                                                  )}
-                                                </button>
-                                                <div className="secret__copy">
-                                                  <button
-                                                    className="secret__copy"
-                                                    onClick={() =>
-                                                      copyToClipboard(
-                                                        credential.consumerSecret
-                                                      )
-                                                    }
-                                                    title="Click to copy"
-                                                  >
-                                                    <ContentCopyOutlinedIcon />
-                                                  </button>
-                                                  <span className="copy-message">
-                                                    {copyMessage}
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
+//                                             <div className="item-property">
+//                                               <label>Consumer Secret</label>
+//                                               <div className="secret field__item">
+//                                                 {showKey ? (
+//                                                   <div className="secret__value">
+//                                                     {credential.consumerSecret}
+//                                                   </div>
+//                                                 ) : (
+//                                                   <div className="secret__value__hidden">
+//                                                     {hideKey(
+//                                                       credential.consumerSecret
+//                                                     )}
+//                                                   </div>
+//                                                 )}
+//                                                 <br />
+//                                                 <button
+//                                                   className="secret__toggle"
+//                                                   onClick={toggleVisibility2}
+//                                                   // style={{
+//                                                   //   color: "green",
+//                                                   //   height: "20px",
+//                                                   //   width: "20px",
+//                                                   // }}
+//                                                 >
+//                                                   {showKey ? (
+//                                                     <Link className="secret__toggle__hide">
+//                                                       <VisibilityOffOutlinedIcon />
+//                                                     </Link>
+//                                                   ) : (
+//                                                     <Link className="secret__toggle__show">
+//                                                       <RemoveRedEyeOutlinedIcon />
+//                                                     </Link>
+//                                                   )}
+//                                                 </button>
+//                                                 <div className="secret__copy">
+//                                                   <button
+//                                                     className="secret__copy"
+//                                                     onClick={() =>
+//                                                       copyToClipboard(
+//                                                         credential.consumerSecret
+//                                                       )
+//                                                     }
+//                                                     title="Click to copy"
+//                                                   >
+//                                                     <ContentCopyOutlinedIcon />
+//                                                   </button>
+//                                                   <span className="copy-message">
+//                                                     {copyMessage}
+//                                                   </span>
+//                                                 </div>
+//                                               </div>
+//                                             </div>
 
-                                            <div className="item-property">
-                                              <label> Issued </label>
-                                              {new Date(
-                                                credential.issuedAt
-                                              ).toString()}
-                                            </div>
-                                            <div className="item-property">
-                                              <label> Expires </label>{" "}
-                                              {new Date(
-                                                credential.expiresAt
-                                              ).toString()}
-                                            </div>
-                                            <div className="item-property">
-                                              <label> Key Status </label>
-                                              <span className="badge badge-success">
-                                                {credential.status}
-                                              </span>
-                                            </div>
-                                          </div>
-                                          {/* API Products */}
+//                                             <div className="item-property">
+//                                               <label> Issued </label>
+//                                               {new Date(
+//                                                 credential.issuedAt
+//                                               ).toString()}
+//                                             </div>
+//                                             <div className="item-property">
+//                                               <label> Expires </label>{" "}
+//                                               {new Date(
+//                                                 credential.expiresAt
+//                                               ).toString()}
+//                                             </div>
+//                                             <div className="item-property">
+//                                               <label> Key Status </label>
+//                                               <span className="badge badge-success">
+//                                                 {credential.status}
+//                                               </span>
+//                                             </div>
+//                                           </div>
+//                                           {/* API Products */}
 
-                                          <div
-                                            className="item-property"
-                                            // style={
-                                            //   credential.apiProducts.length > 0
-                                            //     ? { border: "8px solid pink" }
-                                            //     : {}
-                                            // }
-                                          >
-                                            <div className="wrapper--secondary">
-                                              <label>Products</label>
-                                              {credential.apiProducts.length >
-                                              0 ? (
-                                                <div>
-                                                  {credential.apiProducts.map(
-                                                    (product, productIndex) => (
-                                                      <div
-                                                        className="api-product-list-row clearfix"
-                                                        key={productIndex}
-                                                      >
-                                                        <div className="api-product-list-row clearfix">
-                                                          <span className="api-product-name">
-                                                            {product.apiproduct}
-                                                          </span>
-                                                          <span className="badge badge-success">
-                                                            {product.status}
-                                                          </span>
-                                                        </div>
-                                                      </div>
-                                                    )
-                                                  )}
-                                                </div>
-                                              ) : (
-                                                <p>
-                                                  No API products found for this
-                                                  credential.
-                                                </p>
-                                              )}
-                                            </div>
-                                          </div>
+//                                           <div
+//                                             className="item-property"
+//                                             // style={
+//                                             //   credential.apiProducts.length > 0
+//                                             //     ? { border: "8px solid pink" }
+//                                             //     : {}
+//                                             // }
+//                                           >
+//                                             <div className="wrapper--secondary">
+//                                               <label>Products</label>
+//                                               {credential.apiProducts.length >
+//                                               0 ? (
+//                                                 <div>
+//                                                   {credential.apiProducts.map(
+//                                                     (product, productIndex) => (
+//                                                       <div
+//                                                         className="api-product-list-row clearfix"
+//                                                         key={productIndex}
+//                                                       >
+//                                                         <div className="api-product-list-row clearfix">
+//                                                           <span className="api-product-name">
+//                                                             {product.apiproduct}
+//                                                           </span>
+//                                                           <span className="badge badge-success">
+//                                                             {product.status}
+//                                                           </span>
+//                                                         </div>
+//                                                       </div>
+//                                                     )
+//                                                   )}
+//                                                 </div>
+//                                               ) : (
+//                                                 <p>
+//                                                   No API products found for this
+//                                                   credential.
+//                                                 </p>
+//                                               )}
+//                                             </div>
+//                                           </div>
 
-                                          <div
-                                            className="dropbutton-wrapper"
-                                            // style={{ border: "8px solid blue" }}
-                                          >
-                                            <div className="dropbutton-widget">
-                                              <div className="dropbutton">
-                                                <div>
-                                                  <button
-                                                    className="button btn btn-primary "
-                                                    style={{
-                                                      padding: "5px 10px",
-                                                      fontSize: "12px",
-                                                    }}
-                                                    onClick={() =>
-                                                      handleRevokeKey(
-                                                        teamName,
-                                                        appDetailsData.name,
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    Revoke
-                                                  </button>
-                                                </div>
-                                                <div>
-                                                  <button
-                                                    className="button btn btn-primary"
-                                                    style={{
-                                                      padding: "5px 10px",
-                                                      width: "10px",
-                                                      fontSize: "12px",
-                                                      marginTop: "10px",
-                                                      marginRight: "20px",
-                                                    }}
-                                                    onClick={() =>
-                                                      handleRemovekey(
-                                                        teamName,
-                                                        appDetailsData.name,
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    Delete
-                                                  </button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </fieldset>
-                                    );
-                                  } else {
-                                    return null; // Don't render credentials with status other than "approved"
-                                  }
-                                }
-                              )}
-                            </div>
-                          </div>
-                          <div className="card apigee-entity--app__credentials">
-                            <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
-                              <summary
-                                role="button"
-                                aria-expanded="false"
-                                aria-pressed="false"
-                                className="card-header bg-lighter"
-                              >
-                                Revoked keys (
-                                {
-                                  appDetailsData.credentials.filter(
-                                    (credential) =>
-                                      credential.status === "revoked"
-                                  ).length
-                                }
-                                )
-                              </summary>
-                              <div
-                                className="card-body pb-0"
-                                // style={{ border: "7px solid green" }}
-                              >
-                                {/* Iterate over revoked credentials */}
-                                {appDetailsData.credentials.map(
-                                  (credential, index) => {
-                                    if (credential.status === "revoked") {
-                                      return (
-                                        <fieldset
-                                          className="items--inline app-credential"
-                                          key={index}
-                                          // style={{ border: "1px solid red" }}
-                                        >
-                                          <legend>Credential</legend>
+//                                           <div
+//                                             className="dropbutton-wrapper"
+//                                             // style={{ border: "8px solid blue" }}
+//                                           >
+//                                             <div className="dropbutton-widget">
+//                                               <div className="dropbutton">
+//                                                 <div>
+//                                                   <button
+//                                                     className="button btn btn-primary "
+//                                                     style={{
+//                                                       padding: "5px 10px",
+//                                                       fontSize: "12px",
+//                                                     }}
+//                                                     onClick={() =>
+//                                                       handleRevokeKey(
+//                                                         teamName,
+//                                                         appDetailsData.name,
+//                                                         credential.consumerKey
+//                                                       )
+//                                                     }
+//                                                   >
+//                                                     Revoke
+//                                                   </button>
+//                                                 </div>
+//                                                 <div>
+//                                                   <button
+//                                                     className="button btn btn-primary"
+//                                                     style={{
+//                                                       padding: "5px 10px",
+//                                                       width: "10px",
+//                                                       fontSize: "12px",
+//                                                       marginTop: "10px",
+//                                                       marginRight: "20px",
+//                                                     }}
+//                                                     onClick={() =>
+//                                                       handleRemovekey(
+//                                                         teamName,
+//                                                         appDetailsData.name,
+//                                                         credential.consumerKey
+//                                                       )
+//                                                     }
+//                                                   >
+//                                                     Delete
+//                                                   </button>
+//                                                 </div>
+//                                               </div>
+//                                             </div>
+//                                           </div>
+//                                         </div>
+//                                       </fieldset>
+//                                     );
+//                                   } else {
+//                                     return null; 
+//                                   }
+//                                 }
+//                               )}
+//                             </div>
+//                           </div>
+//                           <div className="card apigee-entity--app__credentials">
+//                             <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
+//                               <summary
+//                                 role="button"
+//                                 aria-expanded="false"
+//                                 aria-pressed="false"
+//                                 className="card-header bg-lighter"
+//                               >
+//                                 Revoked keys (
+//                                 {
+//                                   appDetailsData.credentials.filter(
+//                                     (credential) =>
+//                                       credential.status === "revoked"
+//                                   ).length
+//                                 }
+//                                 )
+//                               </summary>
+//                               <div
+//                                 className="card-body pb-0"
+//                                 // style={{ border: "7px solid green" }}
+//                               >
+//                                 {/* Iterate over revoked credentials */}
+//                                 {appDetailsData.credentials.map(
+//                                   (credential, index) => {
+//                                     if (credential.status === "revoked") {
+//                                       return (
+//                                         <fieldset
+//                                           className="items--inline app-credential"
+//                                           key={index}
+//                                           // style={{ border: "1px solid red" }}
+//                                         >
+//                                           <legend>Credential</legend>
 
-                                          <div className="fieldset-wrapper">
-                                            <div
-                                              className="wrapper--primary app-details-wrapper"
-                                              // style={{
-                                              //   border: "8px solid yellow",
-                                              // }}
-                                            >
-                                              <div className="item-property">
-                                                <label>Consumer Key</label>
-                                                <div className="secret field__item">
-                                                  {showSecret ? (
-                                                    <div className="secret__value">
-                                                      {credential.consumerKey}
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerKey
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle"
-                                                    onClick={toggleVisibility1}
-                                                  >
-                                                    {showSecret ? (
-                                                      <Link className="secret__toggle__hide">
-                                                        {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
+//                                           <div className="fieldset-wrapper">
+//                                             <div
+//                                               className="wrapper--primary app-details-wrapper"
+//                                               // style={{
+//                                               //   border: "8px solid yellow",
+//                                               // }}
+//                                             >
+//                                               <div className="item-property">
+//                                                 <label>Consumer Key</label>
+//                                                 <div className="secret field__item">
+//                                                   {showSecret ? (
+//                                                     <div className="secret__value">
+//                                                       {credential.consumerKey}
+//                                                     </div>
+//                                                   ) : (
+//                                                     <div className="secret__value__hidden">
+//                                                       {hideKey(
+//                                                         credential.consumerKey
+//                                                       )}
+//                                                     </div>
+//                                                   )}
+//                                                   <br />
+//                                                   <button
+//                                                     className="secret__toggle"
+//                                                     onClick={toggleVisibility1}
+//                                                   >
+//                                                     {showSecret ? (
+//                                                       <Link className="secret__toggle__hide">
+//                                                         {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
 
-                                                        <VisibilityOffOutlinedIcon />
-                                                      </Link>
-                                                    ) : (
-                                                      <Link className="secret__toggle__show">
-                                                        {/* <i className="fas fa-eye secret__toggle__show" /> */}
-                                                        <RemoveRedEyeOutlinedIcon />
-                                                      </Link>
-                                                    )}
-                                                  </button>
-                                                  <div className="secret__copy">
-                                                    <button
-                                                      className="secret__copy"
-                                                      onClick={() =>
-                                                        copyToClipboard(
-                                                          credential.consumerKey
-                                                        )
-                                                      }
-                                                      title="Click to copy"
-                                                    >
-                                                      {/* <i className="fas fa-paste" /> */}
-                                                      <ContentCopyOutlinedIcon />
-                                                    </button>
-                                                    <span className="copy-message">
-                                                      {copyMessage}
-                                                    </span>
-                                                  </div>
-                                                </div>
-                                              </div>
+//                                                         <VisibilityOffOutlinedIcon />
+//                                                       </Link>
+//                                                     ) : (
+//                                                       <Link className="secret__toggle__show">
+//                                                         {/* <i className="fas fa-eye secret__toggle__show" /> */}
+//                                                         <RemoveRedEyeOutlinedIcon />
+//                                                       </Link>
+//                                                     )}
+//                                                   </button>
+//                                                   <div className="secret__copy">
+//                                                     <button
+//                                                       className="secret__copy"
+//                                                       onClick={() =>
+//                                                         copyToClipboard(
+//                                                           credential.consumerKey
+//                                                         )
+//                                                       }
+//                                                       title="Click to copy"
+//                                                     >
+//                                                       {/* <i className="fas fa-paste" /> */}
+//                                                       <ContentCopyOutlinedIcon />
+//                                                     </button>
+//                                                     <span className="copy-message">
+//                                                       {copyMessage}
+//                                                     </span>
+//                                                   </div>
+//                                                 </div>
+//                                               </div>
 
-                                              <div className="item-property">
-                                                <label>Consumer Secret</label>
-                                                <div className="secret field__item">
-                                                  {showKey ? (
-                                                    <div className="secret__value">
-                                                      {
-                                                        credential.consumerSecret
-                                                      }
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerSecret
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle"
-                                                    onClick={toggleVisibility2}
-                                                    // style={{
-                                                    //   color: "green",
-                                                    //   height: "20px",
-                                                    //   width: "20px",
-                                                    // }}
-                                                  >
-                                                    {showKey ? (
-                                                      <Link className="secret__toggle__hide">
-                                                        <VisibilityOffOutlinedIcon />
-                                                      </Link>
-                                                    ) : (
-                                                      <Link className="secret__toggle__show">
-                                                        <RemoveRedEyeOutlinedIcon />
-                                                      </Link>
-                                                    )}
-                                                  </button>
-                                                  <div className="secret__copy">
-                                                    <button
-                                                      className="secret__copy"
-                                                      onClick={() =>
-                                                        copyToClipboard(
-                                                          credential.consumerSecret
-                                                        )
-                                                      }
-                                                      title="Click to copy"
-                                                    >
-                                                      <ContentCopyOutlinedIcon />
-                                                    </button>
-                                                    <span className="copy-message">
-                                                      {copyMessage}
-                                                    </span>
-                                                  </div>
-                                                </div>
-                                              </div>
+//                                               <div className="item-property">
+//                                                 <label>Consumer Secret</label>
+//                                                 <div className="secret field__item">
+//                                                   {showKey ? (
+//                                                     <div className="secret__value">
+//                                                       {
+//                                                         credential.consumerSecret
+//                                                       }
+//                                                     </div>
+//                                                   ) : (
+//                                                     <div className="secret__value__hidden">
+//                                                       {hideKey(
+//                                                         credential.consumerSecret
+//                                                       )}
+//                                                     </div>
+//                                                   )}
+//                                                   <br />
+//                                                   <button
+//                                                     className="secret__toggle"
+//                                                     onClick={toggleVisibility2}
+//                                                     // style={{
+//                                                     //   color: "green",
+//                                                     //   height: "20px",
+//                                                     //   width: "20px",
+//                                                     // }}
+//                                                   >
+//                                                     {showKey ? (
+//                                                       <Link className="secret__toggle__hide">
+//                                                         <VisibilityOffOutlinedIcon />
+//                                                       </Link>
+//                                                     ) : (
+//                                                       <Link className="secret__toggle__show">
+//                                                         <RemoveRedEyeOutlinedIcon />
+//                                                       </Link>
+//                                                     )}
+//                                                   </button>
+//                                                   <div className="secret__copy">
+//                                                     <button
+//                                                       className="secret__copy"
+//                                                       onClick={() =>
+//                                                         copyToClipboard(
+//                                                           credential.consumerSecret
+//                                                         )
+//                                                       }
+//                                                       title="Click to copy"
+//                                                     >
+//                                                       <ContentCopyOutlinedIcon />
+//                                                     </button>
+//                                                     <span className="copy-message">
+//                                                       {copyMessage}
+//                                                     </span>
+//                                                   </div>
+//                                                 </div>
+//                                               </div>
 
-                                              <div className="item-property">
-                                                <label> Issued </label>
-                                                {new Date(
-                                                  credential.issuedAt
-                                                ).toString()}
-                                              </div>
-                                              <div className="item-property">
-                                                <label> Expires </label>{" "}
-                                                {new Date(
-                                                  credential.expiresAt
-                                                ).toString()}
-                                              </div>
-                                              <div className="item-property">
-                                                <label> Key Status </label>
-                                                <span className="badge badge-success">
-                                                  {credential.status}
-                                                </span>
-                                              </div>
-                                            </div>
-                                            {/* API Products */}
+//                                               <div className="item-property">
+//                                                 <label> Issued </label>
+//                                                 {new Date(
+//                                                   credential.issuedAt
+//                                                 ).toString()}
+//                                               </div>
+//                                               <div className="item-property">
+//                                                 <label> Expires </label>{" "}
+//                                                 {new Date(
+//                                                   credential.expiresAt
+//                                                 ).toString()}
+//                                               </div>
+//                                               <div className="item-property">
+//                                                 <label> Key Status </label>
+//                                                 <span className="badge badge-success">
+//                                                   {credential.status}
+//                                                 </span>
+//                                               </div>
+//                                             </div>
+//                                             {/* API Products */}
 
-                                            <div
-                                              className="item-property"
-                                              // style={
-                                              //   credential.apiProducts.length >
-                                              //   0
-                                              //     ? { border: "8px solid pink" }
-                                              //     : {}
-                                              // }
-                                            >
-                                              <div className="wrapper--secondary">
-                                                <label>Products</label>
-                                                {credential.apiProducts.length >
-                                                0 ? (
-                                                  <div>
-                                                    {credential.apiProducts.map(
-                                                      (
-                                                        product,
-                                                        productIndex
-                                                      ) => (
-                                                        <div
-                                                          className="api-product-list-row clearfix"
-                                                          key={productIndex}
-                                                        >
-                                                          <div className="api-product-list-row clearfix">
-                                                            <span className="api-product-name">
-                                                              {
-                                                                product.apiproduct
-                                                              }
-                                                            </span>
-                                                            <span className="badge badge-success">
-                                                              {product.status}
-                                                            </span>
-                                                          </div>
-                                                        </div>
-                                                      )
-                                                    )}
-                                                  </div>
-                                                ) : (
-                                                  <p>
-                                                    No API products found for
-                                                    this credential.
-                                                  </p>
-                                                )}
-                                              </div>
-                                            </div>
+//                                             <div
+//                                               className="item-property"
+//                                               // style={
+//                                               //   credential.apiProducts.length >
+//                                               //   0
+//                                               //     ? { border: "8px solid pink" }
+//                                               //     : {}
+//                                               // }
+//                                             >
+//                                               <div className="wrapper--secondary">
+//                                                 <label>Products</label>
+//                                                 {credential.apiProducts.length >
+//                                                 0 ? (
+//                                                   <div>
+//                                                     {credential.apiProducts.map(
+//                                                       (
+//                                                         product,
+//                                                         productIndex
+//                                                       ) => (
+//                                                         <div
+//                                                           className="api-product-list-row clearfix"
+//                                                           key={productIndex}
+//                                                         >
+//                                                           <div className="api-product-list-row clearfix">
+//                                                             <span className="api-product-name">
+//                                                               {
+//                                                                 product.apiproduct
+//                                                               }
+//                                                             </span>
+//                                                             <span className="badge badge-success">
+//                                                               {product.status}
+//                                                             </span>
+//                                                           </div>
+//                                                         </div>
+//                                                       )
+//                                                     )}
+//                                                   </div>
+//                                                 ) : (
+//                                                   <p>
+//                                                     No API products found for
+//                                                     this credential.
+//                                                   </p>
+//                                                 )}
+//                                               </div>
+//                                             </div>
 
-                                            <div
-                                              className="dropbutton-wrapper"
-                                              // style={{
-                                              //   border: "8px solid blue",
-                                              // }}
-                                            >
-                                              <div className="dropbutton-widget">
-                                                <div className="dropbutton">
-                                                  <div>
-                                                    <button
-                                                      className="button btn btn-primary"
-                                                      style={{
-                                                        padding: "5px 10px",
-                                                        width: "10px",
-                                                        fontSize: "12px",
-                                                        marginTop: "10px",
-                                                        marginRight: "20px",
-                                                      }}
-                                                      onClick={() =>
-                                                        handleRemovekey(
-                                                          teamName,
-                                                          appDetailsData.name,
-                                                          credential.consumerKey
-                                                        )
-                                                      }
-                                                    >
-                                                      Delete
-                                                    </button>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </fieldset>
-                                      );
-                                    } else {
-                                      return null; // Don't render credentials with status other than "revoked"
-                                    }
-                                  }
-                                )}
-                              </div>
-                            </details>
-                          </div>
+//                                             <div
+//                                               className="dropbutton-wrapper"
+//                                               // style={{
+//                                               //   border: "8px solid blue",
+//                                               // }}
+//                                             >
+//                                               <div className="dropbutton-widget">
+//                                                 <div className="dropbutton">
+//                                                   <div>
+//                                                     <button
+//                                                       className="button btn btn-primary"
+//                                                       style={{
+//                                                         padding: "5px 10px",
+//                                                         width: "10px",
+//                                                         fontSize: "12px",
+//                                                         marginTop: "10px",
+//                                                         marginRight: "20px",
+//                                                       }}
+//                                                       onClick={() =>
+//                                                         handleRemovekey(
+//                                                           teamName,
+//                                                           appDetailsData.name,
+//                                                           credential.consumerKey
+//                                                         )
+//                                                       }
+//                                                     >
+//                                                       Delete
+//                                                     </button>
+//                                                   </div>
+//                                                 </div>
+//                                               </div>
+//                                             </div>
+//                                           </div>
+//                                         </fieldset>
+//                                       );
+//                                     } else {
+//                                       return null; // Don't render credentials with status other than "revoked"
+//                                     }
+//                                   }
+//                                 )}
+//                               </div>
+//                             </details>
+//                           </div>
                           
                          
-                          <div className="card apigee-entity--app__details">
-                            <h4 className="card-header bg-white">
-                              Custom Attributes
-                            </h4>
-                            <div className="card-body">
-                              <fieldset className="app-custom-attribute">
-                                <div className="fieldset-wrapper" />
-                              </fieldset>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </main>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+//                           <div className="card apigee-entity--app__details">
+//                             <h4 className="card-header bg-white">
+//                               Custom Attributes
+//                             </h4>
+//                             <div className="card-body">
+//                               <fieldset className="app-custom-attribute">
+//                                 <div className="fieldset-wrapper" />
+//                               </fieldset>
+//                             </div>
+//                           </div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </main>
+//           </div>
+//         </div>
+//       </div>
+//     </Layout>
+//   );
+// };
 
-export default ViewApp;
+// export default ViewApp;
 
 
 
@@ -4439,3 +4439,829 @@ export default ViewApp;
 // };
 
 // export default ViewApp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import Layout from "../Layout";
+import AppsButton from "./AppsButton";
+import {
+  fetchTeamDetails,
+  fetchAppDetails,
+  updateAppDetails,
+  appDetails,
+} from "../../redux/store";
+
+import "../../styles/popup.css";
+import { Link } from "gatsby";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
+
+const ViewApp = () => {
+  const dispatch = useDispatch();
+  // const appDetails = useSelector((state) => state.app.appDetails);
+  // console.log("appDetails", appDetails);
+
+  const teamDetails = useSelector((state) => state.teamDetails);
+  console.log("teamDetails",teamDetails)
+
+  const appDetailsData = useSelector(
+    (state) => state.appDetailsData.appDetailsData
+  );
+  console.log("appDetailsData", appDetailsData);
+
+  const teamName = appDetailsData.appGroup;
+  console.log("teamName", teamName);
+  const appName = appDetailsData.name;
+  // console.log("appData",appData)
+
+  console.log("appName", appName);
+
+  // useEffect(() => {
+  //   // Fetch updated app details after the component mounts
+  //   dispatch(fetchAppDetails(teamName, appName));
+  // }, [dispatch, teamName, appName]);
+
+  const [showSecret, setShowSecret] = useState(false);
+  const [showKey, setShowKey] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [copyMessage, setCopyMessage] = useState("");
+  const [copiedIndexes, setCopiedIndexes] = useState([]);
+
+  const copyToClipboard = (text, index) => {
+    navigator.clipboard.writeText(text);
+    setCopyMessage("Copied!");
+    setCopiedIndexes([...copiedIndexes, index]);
+    setTimeout(() => {
+      setCopyMessage("");
+    }, 2000);
+  };
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
+
+  const generateRandomSecret = () => {
+    const characters =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let key = "";
+    for (let i = 0; i < 16; i++) {
+      key += characters[Math.floor(Math.random() * characters.length)];
+    }
+    return key;
+  };
+
+  const generateRandomKey = () => {
+    const characters =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let secret = "";
+    for (let i = 0; i < 32; i++) {
+      secret += characters[Math.floor(Math.random() * characters.length)];
+    }
+    return secret;
+  };
+
+  const togglePopup = async () => {
+    setShowPopup(!showPopup);
+  };
+
+  const handleConfirmClick = async () => {
+    try {
+      const randomKey = generateRandomKey();
+      const randomSecret = generateRandomSecret();
+
+      const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create`;
+      const bearerToken = process.env.BEARER_TOKEN;
+
+      const response = await axios.post(
+        apiUrl,
+        {
+          consumerKey: randomKey,
+          consumerSecret: randomSecret,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(fetchAppDetails(teamName, appName));
+      alert("API key created successfully");
+      setShowPopup(false);
+    } catch (error) {
+      alert("Error creating API key: " + error.message);
+    }
+  };
+
+  const toggleVisibility1 = () => {
+    setShowSecret((prevShowSecret) => !prevShowSecret);
+  };
+
+  const toggleVisibility2 = () => {
+    setShowKey((prevShowKey) => !prevShowKey);
+  };
+
+  const hideKey = (key) => {
+    return "•".repeat(key.length);
+  };
+
+  const handleRemovekey = async (teamName, appName, consumerKey) => {
+    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
+    const bearerToken = process.env.BEARER_TOKEN;
+
+    try {
+      await axios.delete(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
+      dispatch(fetchAppDetails(teamName, appName));
+      alert("Key removed successfully");
+    } catch (error) {
+      alert("Error removing key: " + error);
+    }
+  };
+
+  const handleRevokeKey = async (teamName, appName, consumerKey) => {
+    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
+    const bearerToken = process.env.BEARER_TOKEN;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
+
+      if (response.status === 204) {
+        // Key revoked successfully
+        dispatch(fetchAppDetails(teamName, appName));
+        alert("Key revoked successfully");
+      } else {
+        alert("Key revocation was not successful");
+      }
+    } catch (error) {
+      alert("Error revoking key: " + error.message);
+    }
+  };
+
+  return (
+    <Layout>
+      <AppsButton />
+      <div>
+        <div
+          className="dialog-off-canvas-main-canvas"
+          data-off-canvas-main-canvas=""
+        >
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div
+                    data-contextual-id="block:block=pagetitle:langcode=en"
+                    data-contextual-token="JWbfFvQC8xC4unlMvQKgq1Qc29aLahBItOfax5aiGxo"
+                  />
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      {appDetailsData.name} team app
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <main className="main" role="main">
+              <div className="page-layout-sidebar-default">
+                <div className="container py-5">
+                  <div className="row">
+                    <div className="page__content col-md">
+                      <div className="contextual-region apigee-entity--app apigee-entity--app--view-mode-full">
+                        <div
+                          className="tab-pane show active"
+                          // style={{ border: "1px solid red" }}
+                        >
+                          <div className="card apigee-entity--app__details">
+                            <h4 className="card-header bg-white">Details</h4>
+                            <div className="card-body">
+                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__status">
+                                <div className="field__label">
+                                  Team App status
+                                </div>
+                                <div className="field__item">
+                                  <span className="badge badge-success">
+                                    {appDetailsData.status}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__createdat">
+                                <div className="field__label">Created</div>
+                                <div className="field__item">
+                                  {new Date(
+                                    appDetailsData.createdAt
+                                  ).toString()}
+                                </div>
+                              </div>
+
+                              <div className="field field--inline d-sm-flex align-items-sm-center team-app__lastmodifiedat">
+                                <div className="field__label">Last updated</div>
+                                <div className="field__item">
+                                  {new Date(
+                                    appDetailsData.lastModifiedAt
+                                  ).toString()}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="card apigee-entity--app__credentials">
+                            <h4 className="card-header bg-white">
+                              Credentials
+                              <button
+                                className="use-ajax button btn btn-primary btn-sm"
+                                onClick={togglePopup}
+                              >
+                                Add key
+                              </button>
+                            </h4>
+
+                            {showPopup && (
+                              <div className="popup-overlay">
+                                <div className="popup">
+                                  <span className="close" onClick={togglePopup}>
+                                    &times;
+                                  </span>
+                                  <div className="popup-content">
+                                    <h2>Add Key</h2>
+                                    <p>
+                                      Do you really want to create a new API key
+                                      for this team app?
+                                    </p>
+                                    <label>
+                                      Set an expiry date:
+                                      <select>
+                                        <option>1 Year</option>
+                                        {/* Add other options here */}
+                                      </select>
+                                    </label>
+                                    <div className="popup-buttons">
+                                      <button
+                                        className="popup-button cancel-button"
+                                        onClick={togglePopup}
+                                      >
+                                        Cancel
+                                      </button>
+                                      <button
+                                        className="popup-button confirm-button"
+                                        onClick={handleConfirmClick}
+                                      >
+                                        Confirm
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+
+                            <div
+                              className="card-body pb-0"
+                              // style={{ border: "7px solid green" }}
+                            >
+                              {appDetailsData.credentials.map(
+                                (credential, index) => {
+                                  if (credential.status === "approved") {
+                                    return (
+                                      <fieldset
+                                        className="items--inline app-credential"
+                                        key={index}
+                                        // style={{ border: "1px solid red" }}
+                                      >
+                                        <legend>Credential</legend>
+
+                                        <div className="fieldset-wrapper">
+                                          <div
+                                            className="wrapper--primary app-details-wrapper"
+                                            // style={{
+                                            //   border: "8px solid yellow",
+                                            // }}
+                                          >
+                                            <div className="item-property">
+                                              <label>Consumer Key</label>
+                                              <div className="secret field__item">
+                                                {showSecret ? (
+                                                  <div className="secret__value">
+                                                    {credential.consumerKey}
+                                                  </div>
+                                                ) : (
+                                                  <div className="secret__value__hidden">
+                                                    {hideKey(
+                                                      credential.consumerKey
+                                                    )}
+                                                  </div>
+                                                )}
+                                                <br />
+                                                <button
+                                                  className="secret__toggle"
+                                                  onClick={toggleVisibility1}
+                                                >
+                                                  {showSecret ? (
+                                                    <Link className="secret__toggle__hide">
+                                                      {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
+
+                                                      <VisibilityOffOutlinedIcon />
+                                                    </Link>
+                                                  ) : (
+                                                    <Link className="secret__toggle__show">
+                                                      {/* <i className="fas fa-eye secret__toggle__show" /> */}
+                                                      <RemoveRedEyeOutlinedIcon />
+                                                    </Link>
+                                                  )}
+                                                </button>
+                                                <div className="secret__copy">
+                                                  <button
+                                                    className="secret__copy"
+                                                    onClick={() =>
+                                                      copyToClipboard(
+                                                        credential.consumerKey
+                                                      )
+                                                    }
+                                                    title="Click to copy"
+                                                  >
+                                                    {/* <i className="fas fa-paste" /> */}
+                                                    <ContentCopyOutlinedIcon />
+                                                  </button>
+                                                  <span className="copy-message">
+                                                    {copyMessage}
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div className="item-property">
+                                              <label>Consumer Secret</label>
+                                              <div className="secret field__item">
+                                                {showKey ? (
+                                                  <div className="secret__value">
+                                                    {credential.consumerSecret}
+                                                  </div>
+                                                ) : (
+                                                  <div className="secret__value__hidden">
+                                                    {hideKey(
+                                                      credential.consumerSecret
+                                                    )}
+                                                  </div>
+                                                )}
+                                                <br />
+                                                <button
+                                                  className="secret__toggle"
+                                                  onClick={toggleVisibility2}
+                                                  // style={{
+                                                  //   color: "green",
+                                                  //   height: "20px",
+                                                  //   width: "20px",
+                                                  // }}
+                                                >
+                                                  {showKey ? (
+                                                    <Link className="secret__toggle__hide">
+                                                      <VisibilityOffOutlinedIcon />
+                                                    </Link>
+                                                  ) : (
+                                                    <Link className="secret__toggle__show">
+                                                      <RemoveRedEyeOutlinedIcon />
+                                                    </Link>
+                                                  )}
+                                                </button>
+                                                <div className="secret__copy">
+                                                  <button
+                                                    className="secret__copy"
+                                                    onClick={() =>
+                                                      copyToClipboard(
+                                                        credential.consumerSecret
+                                                      )
+                                                    }
+                                                    title="Click to copy"
+                                                  >
+                                                    <ContentCopyOutlinedIcon />
+                                                  </button>
+                                                  <span className="copy-message">
+                                                    {copyMessage}
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div className="item-property">
+                                              <label> Issued </label>
+                                              {new Date(
+                                                credential.issuedAt
+                                              ).toString()}
+                                            </div>
+                                            <div className="item-property">
+                                              <label> Expires </label>{" "}
+                                              {new Date(
+                                                credential.expiresAt
+                                              ).toString()}
+                                            </div>
+                                            <div className="item-property">
+                                              <label> Key Status </label>
+                                              <span className="badge badge-success">
+                                                {credential.status}
+                                              </span>
+                                            </div>
+                                          </div>
+                                          {/* API Products */}
+
+                                          {/* <div
+                                            className="item-property"
+                                            
+                                          >
+                                            <div className="wrapper--secondary">
+                                              <label>Products</label>
+                                              {credential.apiProducts.length >
+                                              0 ? (
+                                                <div>
+                                                  {credential.apiProducts.map(
+                                                    (product, productIndex) => (
+                                                      <div
+                                                        className="api-product-list-row clearfix"
+                                                        key={productIndex}
+                                                      >
+                                                        <div className="api-product-list-row clearfix">
+                                                          <span className="api-product-name">
+                                                            {product.apiproduct}
+                                                          </span>
+                                                          <span className="badge badge-success">
+                                                            {product.status}
+                                                          </span>
+                                                        </div>
+                                                      </div>
+                                                    )
+                                                  )}
+                                                </div>
+                                              ) : (
+                                                <p>
+                                                  No API products found for this
+                                                  credential.
+                                                </p>
+                                              )}
+                                            </div>
+                                          </div> */}
+
+                                          <div
+                                            className="dropbutton-wrapper"
+                                            // style={{ border: "8px solid blue" }}
+                                          >
+                                            <div className="dropbutton-widget">
+                                              <div className="dropbutton">
+                                                <div>
+                                                  <button
+                                                    className="button btn btn-primary "
+                                                    style={{
+                                                      padding: "5px 10px",
+                                                      fontSize: "12px",
+                                                    }}
+                                                    onClick={() =>
+                                                      handleRevokeKey(
+                                                        teamName,
+                                                        appDetailsData.name,
+                                                        credential.consumerKey
+                                                      )
+                                                    }
+                                                  >
+                                                    Revoke
+                                                  </button>
+                                                </div>
+                                                <div>
+                                                  <button
+                                                    className="button btn btn-primary"
+                                                    style={{
+                                                      padding: "5px 10px",
+                                                      width: "10px",
+                                                      fontSize: "12px",
+                                                      marginTop: "10px",
+                                                      marginRight: "20px",
+                                                    }}
+                                                    onClick={() =>
+                                                      handleRemovekey(
+                                                        teamName,
+                                                        appDetailsData.name,
+                                                        credential.consumerKey
+                                                      )
+                                                    }
+                                                  >
+                                                    Delete
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </fieldset>
+                                    );
+                                  } else {
+                                    return null; 
+                                  }
+                                }
+                              )}
+                            </div>
+                          </div>
+                          <div className="card apigee-entity--app__credentials">
+                            <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
+                              <summary
+                                role="button"
+                                aria-expanded="false"
+                                aria-pressed="false"
+                                className="card-header bg-lighter"
+                              >
+                                Revoked keys (
+                                {
+                                  appDetailsData.credentials.filter(
+                                    (credential) =>
+                                      credential.status === "revoked"
+                                  ).length
+                                }
+                                )
+                              </summary>
+                              <div
+                                className="card-body pb-0"
+                                // style={{ border: "7px solid green" }}
+                              >
+                                {/* Iterate over revoked credentials */}
+                                {appDetailsData.credentials.map(
+                                  (credential, index) => {
+                                    if (credential.status === "revoked") {
+                                      return (
+                                        <fieldset
+                                          className="items--inline app-credential"
+                                          key={index}
+                                          // style={{ border: "1px solid red" }}
+                                        >
+                                          <legend>Credential</legend>
+
+                                          <div className="fieldset-wrapper">
+                                            <div
+                                              className="wrapper--primary app-details-wrapper"
+                                              // style={{
+                                              //   border: "8px solid yellow",
+                                              // }}
+                                            >
+                                              <div className="item-property">
+                                                <label>Consumer Key</label>
+                                                <div className="secret field__item">
+                                                  {showSecret ? (
+                                                    <div className="secret__value">
+                                                      {credential.consumerKey}
+                                                    </div>
+                                                  ) : (
+                                                    <div className="secret__value__hidden">
+                                                      {hideKey(
+                                                        credential.consumerKey
+                                                      )}
+                                                    </div>
+                                                  )}
+                                                  <br />
+                                                  <button
+                                                    className="secret__toggle"
+                                                    onClick={toggleVisibility1}
+                                                  >
+                                                    {showSecret ? (
+                                                      <Link className="secret__toggle__hide">
+                                                        {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
+
+                                                        <VisibilityOffOutlinedIcon />
+                                                      </Link>
+                                                    ) : (
+                                                      <Link className="secret__toggle__show">
+                                                        {/* <i className="fas fa-eye secret__toggle__show" /> */}
+                                                        <RemoveRedEyeOutlinedIcon />
+                                                      </Link>
+                                                    )}
+                                                  </button>
+                                                  <div className="secret__copy">
+                                                    <button
+                                                      className="secret__copy"
+                                                      onClick={() =>
+                                                        copyToClipboard(
+                                                          credential.consumerKey
+                                                        )
+                                                      }
+                                                      title="Click to copy"
+                                                    >
+                                                      {/* <i className="fas fa-paste" /> */}
+                                                      <ContentCopyOutlinedIcon />
+                                                    </button>
+                                                    <span className="copy-message">
+                                                      {copyMessage}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                              <div className="item-property">
+                                                <label>Consumer Secret</label>
+                                                <div className="secret field__item">
+                                                  {showKey ? (
+                                                    <div className="secret__value">
+                                                      {
+                                                        credential.consumerSecret
+                                                      }
+                                                    </div>
+                                                  ) : (
+                                                    <div className="secret__value__hidden">
+                                                      {hideKey(
+                                                        credential.consumerSecret
+                                                      )}
+                                                    </div>
+                                                  )}
+                                                  <br />
+                                                  <button
+                                                    className="secret__toggle"
+                                                    onClick={toggleVisibility2}
+                                                    // style={{
+                                                    //   color: "green",
+                                                    //   height: "20px",
+                                                    //   width: "20px",
+                                                    // }}
+                                                  >
+                                                    {showKey ? (
+                                                      <Link className="secret__toggle__hide">
+                                                        <VisibilityOffOutlinedIcon />
+                                                      </Link>
+                                                    ) : (
+                                                      <Link className="secret__toggle__show">
+                                                        <RemoveRedEyeOutlinedIcon />
+                                                      </Link>
+                                                    )}
+                                                  </button>
+                                                  <div className="secret__copy">
+                                                    <button
+                                                      className="secret__copy"
+                                                      onClick={() =>
+                                                        copyToClipboard(
+                                                          credential.consumerSecret
+                                                        )
+                                                      }
+                                                      title="Click to copy"
+                                                    >
+                                                      <ContentCopyOutlinedIcon />
+                                                    </button>
+                                                    <span className="copy-message">
+                                                      {copyMessage}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                              <div className="item-property">
+                                                <label> Issued </label>
+                                                {new Date(
+                                                  credential.issuedAt
+                                                ).toString()}
+                                              </div>
+                                              <div className="item-property">
+                                                <label> Expires </label>{" "}
+                                                {new Date(
+                                                  credential.expiresAt
+                                                ).toString()}
+                                              </div>
+                                              <div className="item-property">
+                                                <label> Key Status </label>
+                                                <span className="badge badge-success">
+                                                  {credential.status}
+                                                </span>
+                                              </div>
+                                            </div>
+                                            {/* API Products */}
+
+                                            {/* <div
+                                              className="item-property"
+                                              // style={
+                                              //   credential.apiProducts.length >
+                                              //   0
+                                              //     ? { border: "8px solid pink" }
+                                              //     : {}
+                                              // }
+                                            >
+                                              <div className="wrapper--secondary">
+                                                <label>Products</label>
+                                                {credential.apiProducts.length >
+                                                0 ? (
+                                                  <div>
+                                                    {credential.apiProducts.map(
+                                                      (
+                                                        product,
+                                                        productIndex
+                                                      ) => (
+                                                        <div
+                                                          className="api-product-list-row clearfix"
+                                                          key={productIndex}
+                                                        >
+                                                          <div className="api-product-list-row clearfix">
+                                                            <span className="api-product-name">
+                                                              {
+                                                                product.apiproduct
+                                                              }
+                                                            </span>
+                                                            <span className="badge badge-success">
+                                                              {product.status}
+                                                            </span>
+                                                          </div>
+                                                        </div>
+                                                      )
+                                                    )}
+                                                  </div>
+                                                ) : (
+                                                  <p>
+                                                    No API products found for
+                                                    this credential.
+                                                  </p>
+                                                )}
+                                              </div>
+                                            </div> */}
+
+                                            <div
+                                              className="dropbutton-wrapper"
+                                              // style={{
+                                              //   border: "8px solid blue",
+                                              // }}
+                                            >
+                                              <div className="dropbutton-widget">
+                                                <div className="dropbutton">
+                                                  <div>
+                                                    <button
+                                                      className="button btn btn-primary"
+                                                      style={{
+                                                        padding: "5px 10px",
+                                                        width: "10px",
+                                                        fontSize: "12px",
+                                                        marginTop: "10px",
+                                                        marginRight: "20px",
+                                                      }}
+                                                      onClick={() =>
+                                                        handleRemovekey(
+                                                          teamName,
+                                                          appDetailsData.name,
+                                                          credential.consumerKey
+                                                        )
+                                                      }
+                                                    >
+                                                      Delete
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </fieldset>
+                                      );
+                                    } else {
+                                      return null; // Don't render credentials with status other than "revoked"
+                                    }
+                                  }
+                                )}
+                              </div>
+                            </details>
+                          </div>
+                          
+                         
+                          <div className="card apigee-entity--app__details">
+                            <h4 className="card-header bg-white">
+                              Custom Attributes
+                            </h4>
+                            <div className="card-body">
+                              <fieldset className="app-custom-attribute">
+                                <div className="fieldset-wrapper" />
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default ViewApp;

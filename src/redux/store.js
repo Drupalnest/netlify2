@@ -220,7 +220,7 @@ export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
   try {
     const token = process.env.BEARER_TOKEN;
     const response = await axios.get(
-      `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}`,
+      `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}`,
       { headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` } }
     );
 

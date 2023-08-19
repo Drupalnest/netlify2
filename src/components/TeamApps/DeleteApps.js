@@ -380,7 +380,7 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTeamApp } from "../../redux/store"; // Import your deleteTeamApp action from Redux
+import { deleteTeamApp,fetchAppDetails,fetchApps } from "../../redux/store"; // Import your deleteTeamApp action from Redux
 import { Link, navigate } from "gatsby";
 import Layout from "../Layout";
 import AppsButton from "./AppsButton";
@@ -392,32 +392,38 @@ const DeleteApps = () => {
   const dispatch = useDispatch(); // Hook to dispatch actions
 
   // Replace 'teamDetails' with your actual selector for the team details from Redux
-  // const teamDetails = useSelector((state) => state.teamDetails);
-  // const teamName = teamDetails.name;
-  
-  // // const appDetails = useSelector((state) => state.app.appDetails);
-  // const appDetailsData = useSelector((state) => state.appDetailsData.appDetailsData);
-  // console.log("appDetailsData", appDetailsData);
+ const teamDetails = useSelector((state) => state.teamDetails);
+  console.log("teamDetails",teamDetails)
 
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team addapps",selectedTeam)
+  const appDetailsData = useSelector(
+    (state) => state.appDetailsData.appDetailsData
+  );
+  console.log("appDetailsData", appDetailsData);
+
+  const teamName = appDetailsData.appGroup;
+  console.log("teamName", teamName);
+  const appNames = appDetailsData.name;
+  // console.log("appData",appData)
+
+  console.log("appNames", appNames);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (appName !== selectedTeam.name) {
+    if (appNames !== appDetailsData.name) {
       setErrorMessage("Incorrect app name. Please type the correct app name.");
       return;
     }
 
     try {
      
-      await dispatch(deleteTeamApp(selectedTeam, appName));
+      await dispatch(deleteTeamApp(teamName, appName));
      
       setAppName("");
       // setCompanyName("");
       setErrorMessage("");
       alert("Appgroups apps deleted successfully");
+      dispatch(fetchApps(appName));
       navigate("/apps");
     } catch (error) {
       
@@ -449,7 +455,7 @@ const DeleteApps = () => {
                   htmlFor="edit-verification-code"
                   className="js-form-required form-required"
                 >
-                  Type "<em className="placeholder">{selectedTeam.name}</em>" to
+                  Type "<em className="placeholder">{appDetailsData.name}</em>" to
                   proceed
                   <i className="fas fa-asterisk text-danger form-required__indicator" />
                 </label>

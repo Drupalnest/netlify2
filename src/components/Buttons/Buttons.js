@@ -225,7 +225,7 @@ const Buttons = () => {
             Members
           </Link>
         </li> */}
-        <li className="nav-item tabs__tab">
+        {/* <li className="nav-item tabs__tab">
           <Link
             className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
             to="/apps"
@@ -238,7 +238,7 @@ const Buttons = () => {
           >
             Team Apps
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

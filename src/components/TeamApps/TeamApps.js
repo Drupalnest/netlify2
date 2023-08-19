@@ -188,9 +188,10 @@ import Layout from "../Layout";
 import AppsButton from "./AppsButton";
 
 const TeamApps = () => {
-  // const teamDetails = useSelector((state) => state.teamDetails);
-  // const teamName = useSelector((state) => state.teamDetails.name);
-  // console.log("teamNameData", teamName);
+   const dispatch = useDispatch();
+  const teamDetails = useSelector((state) => state.teamDetails);
+  const teamName = useSelector((state) => state.teamDetails.name);
+  console.log("teamNameData", teamName);
 
   const apps = useSelector((state) => state.appsData.appsData);
   console.log("apps", apps);
@@ -228,14 +229,14 @@ const TeamApps = () => {
   // const [appDetails, setAppDetails] = useState(null);
 
   // Get the dispatch function from the Redux store
-  // const dispatch = useDispatch();
+ 
 
   // useEffect(() => {
   //   dispatch(fetchTeamDetails(teamName));
   // }, [dispatch]);
 
   const handleAppClick = (appName) => {
-    // dispatch(fetchAppDetails(teamName, appName));
+     dispatch(fetchAppDetails(teamName, appName));
   };
 
   if (!apps || !appgroupsapp) {
@@ -354,7 +355,7 @@ const TeamApps = () => {
                               <td>
                                 <Link
                                   to="/view-app"
-                                  onClick={() => handleAppClick(appName)}
+                                  onClick={() => handleAppClick(appName.name)}
                                 >
                                   {appName.name}
                                 </Link>
@@ -370,7 +371,7 @@ const TeamApps = () => {
                                         <Link
                                           to="/edit-app"
                                           onClick={() =>
-                                            handleAppClick(appName)
+                                            handleAppClick(appName.name)
                                           }
                                         >
                                           Edit
@@ -385,7 +386,7 @@ const TeamApps = () => {
                                         <Link
                                           to="/delete-app"
                                           onClick={() =>
-                                            handleAppClick(appName)
+                                            handleAppClick(appName.name)
                                           }
                                         >
                                           Delete

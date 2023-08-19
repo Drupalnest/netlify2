@@ -447,10 +447,10 @@ const AddApps = () => {
   // );
   // console.log("appDetailsData", appDetailsData);
 
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team addapps",selectedTeam)
+  const teamDetails = useSelector((state) => state.teamDetails);
+   console.log("edit", teamDetails);
 
-  const appgroupName=selectedTeam.name
+  const appgroupName=teamDetails.name
   console.log("appgroupName",appgroupName)
  
   const handleCompanyNameChange = (e) => {

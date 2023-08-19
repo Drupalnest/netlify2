@@ -809,23 +809,23 @@ const EditApps = () => {
   // const storedData = localStorage.getItem(`selectedAttributes_${teamNameData}`);
   // const selectedAttributes_All = JSON.parse(storedData) || [];
 
-  const selectedDescription = appDetailsData.attributes.find(
-    (attr) => attr.name === "description"
-  )?.value;
-  console.log("selected", selectedDescription);
+  // const selectedDescription = appDetailsData.attributes.find(
+  //   (attr) => attr.name === "description"
+  // )?.value;
+  // console.log("selected", selectedDescription);
 
-  const selectedProducts = teamDetails.attributes.find(
-    (attr) => attr.name === "api_product"
-  )?.value;
-  console.log("selected", selectedProducts);
-  // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
-  // console.log("selectedProducts", selectedAttributes_All);
+  // const selectedProducts = teamDetails.attributes.find(
+  //   (attr) => attr.name === "api_product"
+  // )?.value;
+  // console.log("selected", selectedProducts);
+  // // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
+  // // console.log("selectedProducts", selectedAttributes_All);
 
-  const api_product = ["api_product", selectedProducts];
-  console.log("api_product", api_product);
+  // const api_product = ["api_product", selectedProducts];
+  // console.log("api_product", api_product);
 
-  const array1 = [{ selectedProducts }];
-  console.log("array1", array1);
+  // const array1 = [{ selectedProducts }];
+  // console.log("array1", array1);
 
   // const unserializedData = array1
   //   .map((item) => {
@@ -841,46 +841,46 @@ const EditApps = () => {
   //   .flat();
   // console.log("unserializedData", unserializedData);
 
-  const unserializedData = array1
-    .map((item) => {
-      if (item && item.selectedProducts) {
-        const regex = /s:\d+:\\\"(.*?)\\\"/g;
-        const matches = item.selectedProducts.match(regex);
-        if (matches) {
-          return matches.map((match) =>
-            match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-          );
-        }
-      }
-      return [];
-    })
-    .flat();
-  console.log("unserializedData", unserializedData);
+  // const unserializedData = array1
+  //   .map((item) => {
+  //     if (item && item.selectedProducts) {
+  //       const regex = /s:\d+:\\\"(.*?)\\\"/g;
+  //       const matches = item.selectedProducts.match(regex);
+  //       if (matches) {
+  //         return matches.map((match) =>
+  //           match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
+  //         );
+  //       }
+  //     }
+  //     return [];
+  //   })
+  //   .flat();
+  // console.log("unserializedData", unserializedData);
 
-  const uniqueAttributes = Array.from(new Set(unserializedData));
-  console.log("uniqueAttributes", uniqueAttributes);
+  // const uniqueAttributes = Array.from(new Set(unserializedData));
+  // console.log("uniqueAttributes", uniqueAttributes);
 
-  const findDuplicates = (unserializedData) => {
-    const duplicates = {};
-    const duplicateItems = [];
+  // const findDuplicates = (unserializedData) => {
+  //   const duplicates = {};
+  //   const duplicateItems = [];
 
-    unserializedData.forEach((item) => {
-      if (!duplicates[item]) {
-        duplicates[item] = 1;
-      } else {
-        duplicates[item]++;
-        if (duplicates[item] === 2) {
-          duplicateItems.push(item);
-        }
-      }
-    });
+  //   unserializedData.forEach((item) => {
+  //     if (!duplicates[item]) {
+  //       duplicates[item] = 1;
+  //     } else {
+  //       duplicates[item]++;
+  //       if (duplicates[item] === 2) {
+  //         duplicateItems.push(item);
+  //       }
+  //     }
+  //   });
 
-    return duplicateItems;
-  };
+  //   return duplicateItems;
+  // };
 
-  const duplicateValues = findDuplicates(unserializedData);
-  const filteredData = duplicateValues.filter((attr) => attr !== "0");
-  console.log("filteredData:", filteredData);
+  // const duplicateValues = findDuplicates(unserializedData);
+  // const filteredData = duplicateValues.filter((attr) => attr !== "0");
+  // console.log("filteredData:", filteredData);
 
   return (
     <Layout>
@@ -963,7 +963,7 @@ const EditApps = () => {
                             </small>
                           </div>
                         </div>
-                        <div className="field--type-string-long field--name-description field--widget-string-textarea js-form-wrapper form-wrapper">
+                        {/* <div className="field--type-string-long field--name-description field--widget-string-textarea js-form-wrapper form-wrapper">
                           <div className="js-form-item form-item js-form-type-textarea form-type-textarea form-item-description-0-value js-form-item-description-0-value form-group">
                             <label>Description</label>
                             <textarea
@@ -975,8 +975,8 @@ const EditApps = () => {
                               defaultValue={selectedDescription}
                             />
                           </div>
-                        </div>
-                        {appDetailsData.credentials.map(
+                        </div> */}
+                        {/* {appDetailsData.credentials.map(
                           (credential, credentialIndex) => (
                             <table
                               className="responsive-enabled table"
@@ -991,9 +991,9 @@ const EditApps = () => {
                                   <th>Status</th>
                                   <th>Actions</th>
                                 </tr>
-                              </thead>
+                              </thead> */}
 
-                              <tbody>
+                              {/* <tbody>
                                 {credential.apiProducts.map(
                                   (product, productIndex) => (
                                     <tr className="odd" key={productIndex}>
@@ -1074,7 +1074,7 @@ const EditApps = () => {
                                     </button>
                                   </td>
                                 </tr>
-                              
+                               */}
 
 
 
@@ -1139,11 +1139,11 @@ const EditApps = () => {
 
 
 
-                              
-                              </tbody>
-                            </table>
+{/*                               
+                              </tbody> */}
+                            {/* </table>
                           )
-                        )}
+                        )} */}
                       </form>
                     </div>
                   </div>

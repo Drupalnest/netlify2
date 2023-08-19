@@ -111,7 +111,7 @@ const TeamList = () => {
                                           <Link
                                             to="/apps"
                                             onClick={() =>
-                                              handleClickTeam(appGroup.name)
+                                              handleFetchApps(appGroup.name)
                                             } 
                                           >
                                             Team Apps
