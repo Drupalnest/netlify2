@@ -1,0 +1,258 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTeams } from "../../redux/store";
+import { Link, navigate } from "gatsby";
+import Layout from "../Layout";
+import { selectTeam, fetchApps } from "../../redux/store";
+
+const TeamList = () => {
+  const dispatch = useDispatch();
+  
+  const teams = useSelector((state) => state.teams.data);
+  console.log("teams", teams);
+  const isFetching = teams.isFetching;
+
+  const appgroups = teams.appGroups;
+  console.log("appgroups", appgroups);
+
+  const handleClickTeam = (team) => {
+    // Dispatch an action to store the selected team's data in Redux
+    dispatch(selectTeam(team));
+
+    // Navigate to the "team-details" page
+    // navigate("/team-details");
+  };
+
+  useEffect(() => {
+    dispatch(fetchTeams());
+  }, [dispatch]);
+
+  const handleFetchApps = (appGroup) => {
+    dispatch(fetchApps(appGroup)); // Use the parameter appGroup
+  };
+
+  
+  
+  // if (isFetching) {
+  //   return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
+  // }
+
+  // if (!isFetching && teams.data.length === 0) {
+  //   return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>No Appgroups Found...</p>;
+  // }
+
+  
+
+  return (
+    <Layout>
+      <div>
+        <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
+          <div className="page">
+            <div className="page__tasks">
+              <div className="container">
+                <div className="contextual-region block block--starbucks-actions">
+                  <div className="my-4">
+                    <Link
+                      to="/add-team"
+                      className="button button-action btn btn-sm btn-primary"
+                    >
+                      Add Appgroup
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div></div>
+
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      AppGroups
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <main className="main" role="main">
+              <div className="page-layout-sidebar-default">
+                <div className="container py-5">
+                  <div className="row">
+                    <div className="page__content col-md">
+                      <table className="responsive-enabled table">
+                        <tbody>
+                          {appgroups.length > 0 ? (
+                            appgroups.map((appGroup, index) => (
+                              <tr
+                                key={appGroup.name}
+                                className={index % 2 === 0 ? "even" : "odd"}
+                              >
+                                <td>
+                                  <button
+                                    onClick={() => handleClickTeam(appGroup)}
+                                    style={{
+                                      background: "none",
+                                      border: "none",
+                                      cursor: "pointer",
+                                    }}
+                                  >
+                                    <Link to="/team-details">
+                                      {appGroup.name}
+                                    </Link>
+                                  </button>
+                                </td>
+                                <td>
+                                  <div className="dropbutton-wrapper">
+                                    <div
+                                      className="dropbutton-widget"
+                                      style={{ width: "150px" }}
+                                    >
+                                      <ul className="dropbutton">
+                                        <li style={{ listStyle: "none" }}>
+                                          <Link
+                                            to="/apps"
+                                            onClick={() =>
+                                              handleFetchApps(appGroup.name)
+                                            } 
+                                          >
+                                            Team Apps
+                                          </Link>
+                                        </li>
+                                        <li
+                                          style={{
+                                            listStyle: "none",
+                                            marginTop: "7px",
+                                          }}
+                                        >
+                                          <Link to="/">
+                                          
+                                            Members
+                                          </Link>
+                                        </li>
+                                        <li
+                                          style={{
+                                            listStyle: "none",
+                                            marginTop: "7px",
+                                          }}
+                                        >
+                                          <Link
+                                            to="/edit"
+                                            onClick={() =>
+                                              handleClickTeam(appGroup)
+                                            }
+                                          >
+                                            Edit
+                                          </Link>
+                                        </li>
+                                        <li
+                                          style={{
+                                            listStyle: "none",
+                                            marginTop: "7px",
+                                          }}
+                                        >
+                                          <Link
+                                            to="/team-details/delete"
+                                            onClick={() =>
+                                              handleClickTeam(appGroup)
+                                            }
+                                          >
+                                            Delete
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="2">No app groups found.</td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default TeamList;
+
+// import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { Link, navigate } from "gatsby";
+// import Layout from "../Layout";
+// import { selectTeam } from "../../redux/store"; // Import the action creator
+
+// const TeamList = () => {
+//   const dispatch = useDispatch();
+//   const teams = useSelector((state) => state.teams);
+//   console.log("teams", teams);
+
+//   const handleClickTeam = (team) => {
+//     // Dispatch an action to store the selected team's data in Redux
+//     dispatch(selectTeam(team));
+
+//     // Navigate to the "team-details" page
+//     navigate("/team-details");
+//   };
+
+//   return (
+//     <Layout>
+//       {/* ... (existing JSX) */}
+//       <main className="main" role="main">
+//         <div className="page-layout-sidebar-default">
+//           <div className="container py-5">
+//             <div className="row">
+//               <div className="page__content col-md">
+//                 <table className="responsive-enabled table">
+//                   <tbody>
+//                     {teams.appGroups.map((team, index) => (
+//                       <tr
+//                         key={team.name}
+//                         className={index % 2 === 0 ? "even" : "odd"}
+//                       >
+//                         <td>
+//                           <button
+//                             onClick={() => handleClickTeam(team)}
+//                             style={{
+//                               background: "none",
+//                               border: "none",
+//                               cursor: "pointer",
+//                             }}
+//                           >
+//                             {/* Pass the team details as state */}
+//                             <Link
+//                               to="/team-details"
+//                             >
+//                               {team.name}
+//                             </Link>
+//                           </button>
+//                         </td>
+//                         {/* ... (rest of the code) */}
+//                       </tr>
+//                     ))}
+//                   </tbody>
+//                 </table>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </main>
+//       {/* ... (rest of the JSX) */}
+//     </Layout>
+//   );
+// };
+
+// export default TeamList;
