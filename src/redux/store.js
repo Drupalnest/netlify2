@@ -22,6 +22,7 @@ const UPDATE_TEAM_DISPLAY_NAME_FAILURE = "UPDATE_TEAM_DISPLAY_NAME_FAILURE";
 const ADD_APP_SUCCESS = "ADD_APP_SUCCESS";
 const ADD_APP_FAILURE = "ADD_APP_FAILURE";
 const UPDATE_APP_DETAILS = 'UPDATE_APP_DETAILS';
+
 const FETCH_TEAM_DETAILS_SUCCESS="FETCH_TEAM_DETAILS_SUCCESS"
 
  const FETCH_APP_DETAILS_SUCCESS = "FETCH_APP_DETAILS_SUCCESS";
@@ -190,7 +191,7 @@ const apiProductsReducer = (state = [], action) => {
 // Async action to fetch team details
 export const fetchTeamDetails = (teamname) => async (dispatch) => {
   try {
-    const response = await axiosInstance.get(`/companies/${teamname}`);
+    const response = await axiosInstance.get(`/appgroups/${teamname}`);
     dispatch({ type: FETCH_TEAM_DETAILS_SUCCESS, payload: response.data });
   } catch (error) {
     if (error.response) {

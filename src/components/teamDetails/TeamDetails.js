@@ -352,9 +352,8 @@ import View from "../Teams/View";
 
 
 const TeamDetails = () => {
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team",selectedTeam) // Get selected team data from Redux
- 
+  const teamDetails = useSelector((state) => state.teamDetails);
+   console.log("teamDetails", teamDetails);
 
   // useEffect(() => {
   //   dispatch(fetchTeams());
@@ -365,7 +364,7 @@ const TeamDetails = () => {
  
 
  
-  if (!selectedTeam || Object.keys(selectedTeam).length === 0) {
+  if (!teamDetails || Object.keys(teamDetails).length === 0) {
     return <div>No team details available.</div>;
   }
 

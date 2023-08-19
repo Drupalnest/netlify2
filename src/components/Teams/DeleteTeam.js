@@ -10,8 +10,9 @@ const DeleteTeam = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
   
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team",selectedTeam)
+  const teamDetails = useSelector((state) => state.teamDetails);
+  console.log("delete", teamDetails);
+
 
   // console.log("appGroupName",appGroupView.name)
 
@@ -46,7 +47,7 @@ const DeleteTeam = () => {
               <div className="container">
                 <h1 className="js-quickedit-page-title page__title mb-0">
                   Are you sure you want to delete the
-                  <em className="placeholder">{selectedTeam.name}</em> appgroup?
+                  <em className="placeholder">{teamDetails.name}</em> appgroup?
                 </h1>
               </div>
             </div>
@@ -65,7 +66,7 @@ const DeleteTeam = () => {
               This action cannot be undone.
               <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-verification-code js-form-item-verification-code form-group">
                 <label className="js-form-required form-required">
-                  Type "<em className="placeholder">{selectedTeam.name}</em>" to
+                  Type "<em className="placeholder">{teamDetails.name}</em>" to
                   proceed
                   <i className="fas fa-asterisk text-danger form-required__indicator" />
                 </label>

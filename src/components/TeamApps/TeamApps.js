@@ -194,7 +194,26 @@ const TeamApps = () => {
 
   const apps = useSelector((state) => state.appsData.appsData);
   console.log("apps", apps);
-  const isFetching = apps.loading;
+  // const isFetching = apps.loading;
+
+
+
+  const isFetching = apps ? apps.loading : false; // Add a check for apps before accessing properties
+
+  if (!apps) {
+    return (
+      <p
+        style={{
+          margin: "auto",
+          textAlign: "center",
+          marginTop: "50vh",
+          transform: "translateY(-50%)",
+        }}
+      >
+        Loading appgroups...
+      </p>
+    );
+  }
 
   const appgroupsapp = apps.appGroupApps;
   console.log("appgroupsapp", appgroupsapp);
@@ -206,7 +225,7 @@ const TeamApps = () => {
   // console.log("name",name)
 
   // Define a state to hold the app details
-  const [appDetails, setAppDetails] = useState(null);
+  // const [appDetails, setAppDetails] = useState(null);
 
   // Get the dispatch function from the Redux store
   // const dispatch = useDispatch();

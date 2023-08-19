@@ -38,9 +38,8 @@ import Layout from "../Layout";
 import Buttons from "../Buttons/Buttons";
 
 const View = () => {
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team",selectedTeam)
-
+    const teamDetails = useSelector((state) => state.teamDetails);
+   console.log("view", teamDetails);
 
   return (
     <Layout>
@@ -56,7 +55,7 @@ const View = () => {
                     className="field field--inline d-sm-flex align-items-sm-center team__displayname"
                   >
                     <div className="field__label">Appgroup name</div>
-                    <div className="field__item">{selectedTeam.name}</div>
+                    <div className="field__item">{teamDetails.name}</div>
                   </div>
                 </h1>
               </div>

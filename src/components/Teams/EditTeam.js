@@ -474,13 +474,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout";
 import Buttons from "../Buttons/Buttons";
-import { fetchTeamDetails,apiProducts ,fetchTeams,selectTeam} from "../../redux/store";
+import { fetchTeamDetails,apiProducts ,fetchTeams} from "../../redux/store";
 
 
 const UpdateCompanyName = () => {
-  const selectedTeam = useSelector((state) => state.selectedTeam);
-  console.log("selected team",selectedTeam)
   const dispatch=useDispatch()
+  const teamDetails = useSelector((state) => state.teamDetails);
+   console.log("edit", teamDetails);
+
+
+   const team = teamDetails.name;
+   console.log("team", team);
   // const apiproducts = useSelector((state) => state.apiProducts);
   // console.log("apiproducts",apiproducts)
 
@@ -495,8 +499,8 @@ const UpdateCompanyName = () => {
 
   useEffect(() => {
     dispatch(fetchTeams());
-    console.log("Selected Team new:", selectedTeam);
-  }, [selectTeam]);
+    
+  }, []);
   
   // useEffect(() => {
   //   // Do something with the updated selectedTeam data
@@ -531,7 +535,7 @@ const UpdateCompanyName = () => {
     try {
       // const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
-        `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${selectedTeam.name}`,
+        `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamDetails.name}`,
         {
           method: "PUT",
           headers: {
@@ -558,7 +562,7 @@ const UpdateCompanyName = () => {
       if (response.ok) {
         // alert(serializedApiProduct);
         alert("Display name and description updated successfully!");
-        dispatch(selectTeam(selectedTeam));
+        dispatch(fetchTeamDetails(team));
       } else {
         alert("Failed to update appgroup details.");
       }
@@ -599,7 +603,7 @@ const UpdateCompanyName = () => {
 
 
 
-  const descriptionValue = selectedTeam.attributes.find(
+  const descriptionValue = teamDetails.attributes.find(
     (attr) => attr.name === "description"
   )?.value;
 
@@ -690,15 +694,15 @@ const UpdateCompanyName = () => {
 //   }, [teamDetails, apiproducts]);
 
   useEffect(() => {
-    setCompanyName(selectedTeam.displayName);
+    setCompanyName(teamDetails.displayName);
 
-    const descriptionValue = selectedTeam.attributes.find(
+    const descriptionValue = teamDetails.attributes.find(
       (attr) => attr.name === "description"
     )?.value;
     setDescription(descriptionValue || "");
 
     // Rest of your code...
-  }, [selectedTeam]);
+  }, [teamDetails]);
 
   // const mergedArray = [...selectedAttributes, ...checkedAttributes];
   // const selected_attribute = Array.from(new Set(mergedArray));
@@ -759,7 +763,7 @@ const UpdateCompanyName = () => {
                   <div />
                   <div className="container">
                     <h1 className="js-quickedit-page-title page__title mb-0">
-                      Edit <em className="placeholder">{selectedTeam.name}</em>
+                      Edit <em className="placeholder">{teamDetails.name}</em>
                       &nbsp; appgroup
                     </h1>
                   </div>
@@ -789,7 +793,7 @@ const UpdateCompanyName = () => {
                               onChange={handleCompanyNameChange}
                               size={60}
                               maxLength={255}
-                              placeholder={selectedTeam.displayName}
+                              placeholder={teamDetails.displayName}
                               required="required"
                               aria-required="true"
                             />
@@ -828,7 +832,7 @@ const UpdateCompanyName = () => {
                             dir="ltr"
                             type="text"
                             name="name"
-                            value={selectedTeam.name}
+                            value={teamDetails.name}
                             size={60}
                             maxLength={64}
                             className="required form-control"

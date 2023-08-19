@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../Layout";
-import { selectTeam, fetchApps } from "../../redux/store";
+import {  fetchApps ,fetchTeamDetails} from "../../redux/store";
 
 const TeamList = () => {
   const dispatch = useDispatch();
@@ -15,12 +15,8 @@ const TeamList = () => {
   const appgroups = teams.appGroups;
   console.log("appgroups", appgroups);
 
-  const handleClickTeam = (team) => {
-    // Dispatch an action to store the selected team's data in Redux
-    dispatch(selectTeam(team));
-
-    // Navigate to the "team-details" page
-    // navigate("/team-details");
+  const handleClickTeam = (appGroup) => {
+    dispatch(fetchTeamDetails(appGroup));
   };
 
   useEffect(() => {
@@ -92,7 +88,7 @@ const TeamList = () => {
                               >
                                 <td>
                                   <button
-                                    onClick={() => handleClickTeam(appGroup)}
+                                    onClick={() => handleClickTeam(appGroup.name)}
                                     style={{
                                       background: "none",
                                       border: "none",
@@ -115,7 +111,7 @@ const TeamList = () => {
                                           <Link
                                             to="/apps"
                                             onClick={() =>
-                                              handleFetchApps(appGroup.name)
+                                              handleClickTeam(appGroup.name)
                                             } 
                                           >
                                             Team Apps
