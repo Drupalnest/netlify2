@@ -10,8 +10,9 @@ import axios from "axios";
 const FETCH_TEAMS_SUCCESS = "FETCH_TEAMS_SUCCESS";
 const DELETE_TEAM_SUCCESS = "DELETE_TEAM_SUCCESS";
 
-const FETCH_APPS_SUCCESS= "FETCH_APPS_SUCCESS";
-const FETCH_APPS_FAILURE= "FETCH_APPS_FAILURE"
+const FETCH_APPS_SUCCESS = 'FETCH_APPS_SUCCESS';
+const FETCH_APPS_FAILURE = 'FETCH_APPS_FAILURE';
+const FETCH_APPS_LOADING = 'FETCH_APPS_LOADING';
 const FETCH_TEAMS_LOADING = 'FETCH_TEAMS_LOADING';
 const FETCH_TEAMS_ERROR="FETCH_TEAMS_ERROR"
 
@@ -253,8 +254,43 @@ const appDetailsData = (state = initialStateappdetals, action) => {
 
 
 
+// export const fetchApps = (appgroupname) => async (dispatch) => {
+//   try {
+//     const token = process.env.BEARER_TOKEN;
+//     const response = await axios.get(
+//       `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupname}/apps`,
+//       { headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` } }
+//     );
+
+//     dispatch({
+//       type: FETCH_APPS_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({ type: FETCH_APPS_FAILURE, error: "Error fetching app details" });
+//   }
+// };
+
+
+
+// const initialStateApps = { appsData: null, error: null };
+
+// const appsData = (state = initialStateApps, action) => {
+//   switch (action.type) {
+//     case FETCH_APPS_SUCCESS:
+//       return { ...state, appsData: action.payload, error: null };
+//     case FETCH_APPS_FAILURE:
+//       return { ...state, appsData: null, error: action.error };
+//     default:
+//       return state;
+//   }
+// };
+
+
 export const fetchApps = (appgroupname) => async (dispatch) => {
   try {
+    dispatch({ type: FETCH_APPS_LOADING });
+
     const token = process.env.BEARER_TOKEN;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupname}/apps`,
@@ -270,16 +306,16 @@ export const fetchApps = (appgroupname) => async (dispatch) => {
   }
 };
 
+const initialStateApps = { appsData: null, error: null, loading: false };
 
-
-const initialStateApps = { appsData: null, error: null };
-
-const appsData = (state = initialStateApps, action) => {
+export const appsData = (state = initialStateApps, action) => {
   switch (action.type) {
     case FETCH_APPS_SUCCESS:
-      return { ...state, appsData: action.payload, error: null };
+      return { ...state, appsData: action.payload, error: null, loading: false };
     case FETCH_APPS_FAILURE:
-      return { ...state, appsData: null, error: action.error };
+      return { ...state, appsData: null, error: action.error, loading: false };
+    case FETCH_APPS_LOADING:
+      return { ...state, loading: true };
     default:
       return state;
   }

@@ -154,10 +154,34 @@
 
 
 import { Link } from "gatsby";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { selectTeam, fetchApps,fetchTeams } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 
 const Buttons = () => {
   const [currentPage, setCurrentPage] = useState("");
+
+  const dispatch = useDispatch();
+  
+  const selectedTeam = useSelector((state) => state.selectedTeam);
+  console.log("selected team",selectedTeam)
+
+  const handleClickTeam = (team) => {
+    // Dispatch an action to store the selected team's data in Redux
+    dispatch(selectTeam(team));
+
+    // Navigate to the "team-details" page
+    // navigate("/team-details");
+  };
+
+  useEffect(() => {
+    dispatch(fetchTeams());
+  }, [dispatch]);
+
+  const handleFetchApps = (selectedTeam) => {
+    dispatch(fetchApps(selectedTeam)); // Use the parameter appGroup
+  };
+
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -205,7 +229,12 @@ const Buttons = () => {
           <Link
             className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
             to="/apps"
-            onClick={() => setCurrentPage("/apps")}
+            // onClick={() => setCurrentPage("/apps")
+            // }
+            onClick={() => {
+            setCurrentPage('/apps');
+            handleFetchApps(selectedTeam.selectedTeam);
+          }}
           >
             Team Apps
           </Link>

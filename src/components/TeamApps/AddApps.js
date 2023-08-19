@@ -430,8 +430,10 @@ import { addApp } from "../../redux/store";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
 import Header from "../Header/Header";
+import {  fetchApps } from "../../redux/store";
 
 const AddApps = () => {
+  const dispatch = useDispatch();
   const [appName, setAppName] = useState("");
   const [description, setDescription] = useState("");
   // const [checkedAttributes, setCheckedAttributes] = useState([]);
@@ -470,7 +472,7 @@ const AddApps = () => {
     try {
       // const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
-        `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${appgroupName}/apps`,
+        `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps`,
         {
           method: "POST",
           headers: {
@@ -507,9 +509,10 @@ const AddApps = () => {
       );
 
       if (response.ok) {
-        alert(appName);
-        alert(description);
+        // alert(appName);
+        // alert(description);
         // alert(serializedApiProduct);
+        dispatch(fetchApps(appgroupName));
         alert("Appgroups Created successfully!");
         navigate("/apps");
       } else {

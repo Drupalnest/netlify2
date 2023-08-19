@@ -33,13 +33,13 @@ const TeamList = () => {
 
   
   
-  // if (isFetching) {
-  //   return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
-  // }
+  if (isFetching) {
+    return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
+  }
 
-  // if (!isFetching && teams.data.length === 0) {
-  //   return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>No Appgroups Found...</p>;
-  // }
+  if (!isFetching && teams.length === 0) {
+    return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
+  }
 
   
 
