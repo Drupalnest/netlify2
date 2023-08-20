@@ -724,14 +724,20 @@ const EditApps = () => {
   const dispatch = useDispatch();
   const [selectedApiProduct, setSelectedApiProduct] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState("");
-  // const appDetails = useSelector((state) => state.app.appDetails);
+  
+  
+
   const teamDetails = useSelector((state) => state.teamDetails);
-  const teamName = teamDetails.name;
+  console.log("editApps", teamDetails);
+  const teamName = teamDetails ? teamDetails.name : "";
+  console.log("teamName", teamName);
 
   const appDetailsData = useSelector(
     (state) => state.appDetailsData.appDetailsData
   );
   console.log("appDetailsData", appDetailsData);
+
+  const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -809,10 +815,11 @@ const EditApps = () => {
   // const storedData = localStorage.getItem(`selectedAttributes_${teamNameData}`);
   // const selectedAttributes_All = JSON.parse(storedData) || [];
 
-  // const selectedDescription = appDetailsData.attributes.find(
-  //   (attr) => attr.name === "description"
-  // )?.value;
-  // console.log("selected", selectedDescription);
+  const selectedDescription = appDetailsData?.attributes.find(
+    (attr) => attr.name === "description"
+  )?.value || "";
+  console.log("selected", selectedDescription);
+  
 
   // const selectedProducts = teamDetails.attributes.find(
   //   (attr) => attr.name === "api_product"
@@ -882,6 +889,29 @@ const EditApps = () => {
   // const filteredData = duplicateValues.filter((attr) => attr !== "0");
   // console.log("filteredData:", filteredData);
 
+
+  if (!appDetailsData || (appDetailsData && isFetching)) {
+    return (
+      <Layout>
+        <div>
+        <AppsButton />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      Loading appgroups appdetails...
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <AppsButton />
@@ -963,7 +993,7 @@ const EditApps = () => {
                             </small>
                           </div>
                         </div>
-                        {/* <div className="field--type-string-long field--name-description field--widget-string-textarea js-form-wrapper form-wrapper">
+                        <div className="field--type-string-long field--name-description field--widget-string-textarea js-form-wrapper form-wrapper">
                           <div className="js-form-item form-item js-form-type-textarea form-type-textarea form-item-description-0-value js-form-item-description-0-value form-group">
                             <label>Description</label>
                             <textarea
@@ -975,7 +1005,7 @@ const EditApps = () => {
                               defaultValue={selectedDescription}
                             />
                           </div>
-                        </div> */}
+                        </div>
                         {/* {appDetailsData.credentials.map(
                           (credential, credentialIndex) => (
                             <table
