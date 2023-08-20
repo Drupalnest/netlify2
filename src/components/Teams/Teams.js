@@ -29,10 +29,7 @@ const TeamList = () => {
 
   
   
-  if (isFetching) {
-    return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
-  }
-
+  
   if (!isFetching && teams.length === 0) {
     return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
   }
@@ -110,6 +107,7 @@ const TeamList = () => {
                                         <li style={{ listStyle: "none" }}>
                                           <Link
                                             to="/apps"
+                                            handleFetchApps={handleFetchApps}
                                             onClick={() =>
                                               handleFetchApps(appGroup.name)
                                             } 
@@ -137,7 +135,7 @@ const TeamList = () => {
                                           <Link
                                             to="/edit"
                                             onClick={() =>
-                                              handleClickTeam(appGroup)
+                                              handleClickTeam(appGroup.name)
                                             }
                                           >
                                             Edit
@@ -152,7 +150,7 @@ const TeamList = () => {
                                           <Link
                                             to="/team-details/delete"
                                             onClick={() =>
-                                              handleClickTeam(appGroup)
+                                              handleClickTeam(appGroup.name)
                                             }
                                           >
                                             Delete

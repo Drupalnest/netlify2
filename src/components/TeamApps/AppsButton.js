@@ -112,9 +112,13 @@
 
 import { Link } from "gatsby";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAppDetails, fetchApps } from "../../redux/store";
 
 const AppsButton = () => {
   const [currentPage, setCurrentPage] = useState("");
+  
+
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -158,15 +162,7 @@ const AppsButton = () => {
             Members
           </Link>
         </li> */}
-        {/* <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
-            to="/apps"
-            onClick={() => setCurrentPage("/apps")}
-          >
-            Team Apps
-          </Link>
-        </li> */}
+        
       </ul>
     </div>
   );

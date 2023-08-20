@@ -469,6 +469,8 @@
 
 
 
+
+
 import { Link } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -478,12 +480,16 @@ import { fetchTeamDetails,apiProducts ,fetchTeams} from "../../redux/store";
 
 
 const UpdateCompanyName = () => {
+
   const dispatch=useDispatch()
   const teamDetails = useSelector((state) => state.teamDetails);
    console.log("edit", teamDetails);
 
+   
+   
+   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
-   const team = teamDetails.name;
+   const team = teamDetails ? teamDetails.name : "";
    console.log("team", team);
   // const apiproducts = useSelector((state) => state.apiProducts);
   // console.log("apiproducts",apiproducts)
@@ -603,9 +609,9 @@ const UpdateCompanyName = () => {
 
 
 
-  const descriptionValue = teamDetails.attributes.find(
+  const descriptionValue = teamDetails?teamDetails.attributes.find(
     (attr) => attr.name === "description"
-  )?.value;
+  )?.value:"";
 
   // const filteredData = apiproducts.filter((attr) => attr !== "0");
   // const uniqueAttributes = Array.from(new Set(filteredData));
@@ -693,16 +699,22 @@ const UpdateCompanyName = () => {
 //     setSelectedAttributes(storedSelectedAttributes);
 //   }, [teamDetails, apiproducts]);
 
-  useEffect(() => {
+useEffect(() => {
+  if (teamDetails) {
     setCompanyName(teamDetails.displayName);
 
-    const descriptionValue = teamDetails.attributes.find(
+    const descriptionAttribute = teamDetails.attributes.find(
       (attr) => attr.name === "description"
-    )?.value;
-    setDescription(descriptionValue || "");
+    );
+
+    if (descriptionAttribute) {
+      setDescription(descriptionAttribute.value || "");
+    }
 
     // Rest of your code...
-  }, [teamDetails]);
+  }
+}, [teamDetails]);
+
 
   // const mergedArray = [...selectedAttributes, ...checkedAttributes];
   // const selected_attribute = Array.from(new Set(mergedArray));
@@ -750,6 +762,31 @@ const UpdateCompanyName = () => {
 // console.log("serializeData",serializeData)
 //   const serializedApiProduct22 = serializeData.join(",");
 //   console.log("serializedApiProduct22",serializedApiProduct22)
+
+
+
+if (!teamDetails || (teamDetails && isFetching)) {
+  return (
+    <Layout>
+      <div>
+        <Buttons />
+        <div className="page">
+          <div className="page__content-above">
+            <div className="container-fluid px-0">
+              <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                <div className="container">
+                  <h1 className="js-quickedit-page-title page__title mb-0">
+                    Loading appgroups...
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
   return (
     <Layout>
       <div>
