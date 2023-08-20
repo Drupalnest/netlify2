@@ -4473,20 +4473,25 @@ import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 
 const ViewApp = () => {
   const dispatch = useDispatch();
-  // const appDetails = useSelector((state) => state.app.appDetails);
-  // console.log("appDetails", appDetails);
+  
 
-  const teamDetails = useSelector((state) => state.teamDetails);
-  console.log("teamDetails",teamDetails)
+  // const teamDetails = useSelector((state) => state.teamDetails);
+  // console.log("teamDetails",teamDetails)
 
   const appDetailsData = useSelector(
     (state) => state.appDetailsData.appDetailsData
   );
   console.log("appDetailsData", appDetailsData);
 
-  const teamName = appDetailsData.appGroup;
+  const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
+
+  
+  const teamName = appDetailsData ? appDetailsData.appGroup : "";
   console.log("teamName", teamName);
-  const appName = appDetailsData.name;
+
+
+  const appName = appDetailsData ? appDetailsData.name : "";
+ 
   // console.log("appData",appData)
 
   console.log("appName", appName);
@@ -4621,6 +4626,29 @@ const ViewApp = () => {
       alert("Error revoking key: " + error.message);
     }
   };
+
+  if (!appDetailsData || (appDetailsData && isFetching)) {
+    return (
+      <Layout>
+        <div>
+        <AppsButton />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      Loading appgroups appdetails...
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

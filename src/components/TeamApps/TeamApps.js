@@ -421,7 +421,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppDetails, fetchTeamDetails } from "../../redux/store";
 import Layout from "../Layout";
-import AppsButton from "./AppsButton";
 import { Link } from "gatsby";
 
 const TeamApps = () => {
@@ -429,14 +428,20 @@ const TeamApps = () => {
   const teamDetails = useSelector((state) => state.teamDetails);
   const teamName = teamDetails ? teamDetails.name : "";
   console.log("teamName", teamName);
-  const isFetchingTeam = teamDetails ? teamDetails.loading : true;
+  
+
+  
 
   const apps = useSelector((state) => state.appsData.appsData);
   console.log("apps", apps);
 
   const isFetchingApps = apps ? apps.loading : true;
-  const appgroupsapp = apps ? apps.appGroupApps : []; // Initialize as an empty array if apps is null
+  const appgroupsapp = apps ? apps.appGroupApps : []; 
   console.log("appgroupsapp", appgroupsapp);
+
+  
+  
+
 
   const handleAppClick = (appName) => {
     dispatch(fetchAppDetails(teamName, appName));
@@ -446,7 +451,7 @@ const TeamApps = () => {
     return (
       <Layout>
         <div>
-          <AppsButton />
+          
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -467,7 +472,7 @@ const TeamApps = () => {
 
   return (
     <Layout>
-      <AppsButton />
+     
       <div>
         <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
           <div className="page">

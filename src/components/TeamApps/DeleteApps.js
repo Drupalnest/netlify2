@@ -392,20 +392,41 @@ const DeleteApps = () => {
   const dispatch = useDispatch(); // Hook to dispatch actions
 
   // Replace 'teamDetails' with your actual selector for the team details from Redux
- const teamDetails = useSelector((state) => state.teamDetails);
-  console.log("teamDetails",teamDetails)
+//  const teamDetails = useSelector((state) => state.teamDetails);
+//   console.log("teamDetails",teamDetails)
 
-  const appDetailsData = useSelector(
-    (state) => state.appDetailsData.appDetailsData
-  );
-  console.log("appDetailsData", appDetailsData);
+//   const appDetailsData = useSelector(
+//     (state) => state.appDetailsData.appDetailsData
+//   );
+//   console.log("appDetailsData", appDetailsData);
 
-  const teamName = appDetailsData.appGroup;
-  console.log("teamName", teamName);
-  const appNames = appDetailsData.name;
-  // console.log("appData",appData)
+//   const teamName = appDetailsData.appGroup;
+//   console.log("teamName", teamName);
 
-  console.log("appNames", appNames);
+
+//   const appNames = appDetailsData.name;
+//   console.log("appNames", appNames);
+
+const appDetailsData = useSelector(
+  (state) => state.appDetailsData.appDetailsData
+);
+console.log("appDetailsData", appDetailsData);
+
+const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
+
+
+const teamName = appDetailsData ? appDetailsData.appGroup : "";
+console.log("teamName", teamName);
+
+
+const appNames = appDetailsData ? appDetailsData.name : "";
+
+// console.log("appData",appData)
+
+console.log("appNames", appNames);
+
+
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -423,13 +444,36 @@ const DeleteApps = () => {
       // setCompanyName("");
       setErrorMessage("");
       alert("Appgroups apps deleted successfully");
-      dispatch(fetchApps(appName));
+      dispatch(fetchApps(teamName));
       navigate("/apps");
     } catch (error) {
       
       setErrorMessage(`Error deleting team: ${error.message}`);
     }
   };
+
+  if (!appDetailsData || (appDetailsData && isFetching)) {
+    return (
+      <Layout>
+        <div>
+        <AppsButton />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      Loading appgroups appdetails...
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

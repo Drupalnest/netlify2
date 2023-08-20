@@ -426,7 +426,6 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addApp } from "../../redux/store";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
 import Header from "../Header/Header";
@@ -448,11 +447,13 @@ const AddApps = () => {
   // console.log("appDetailsData", appDetailsData);
 
   const teamDetails = useSelector((state) => state.teamDetails);
-   console.log("edit", teamDetails);
+   console.log("addapps", teamDetails);
 
-  const appgroupName=teamDetails.name
-  console.log("appgroupName",appgroupName)
  
+ 
+  const appgroupName = teamDetails ? teamDetails.name : "";
+  console.log("appgroupName",appgroupName)
+
   const handleCompanyNameChange = (e) => {
     setAppName(e.target.value);
   };

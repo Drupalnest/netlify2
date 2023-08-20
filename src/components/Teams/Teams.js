@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../Layout";
-import {  fetchApps ,fetchTeamDetails} from "../../redux/store";
+import { fetchApps, fetchTeamDetails } from "../../redux/store";
 
 const TeamList = () => {
   const dispatch = useDispatch();
-  
+
   const teams = useSelector((state) => state.teams.data);
   console.log("teams", teams);
   const isFetching = teams.isFetching;
@@ -27,14 +27,20 @@ const TeamList = () => {
     dispatch(fetchApps(appGroup)); // Use the parameter appGroup
   };
 
-  
-  
-  
   if (!isFetching && teams.length === 0) {
-    return <p style={{ margin: "auto", textAlign: "center", marginTop: "50vh", transform: "translateY(-50%)" }}>Loading appgroups...</p>;
+    return (
+      <p
+        style={{
+          margin: "auto",
+          textAlign: "center",
+          marginTop: "50vh",
+          transform: "translateY(-50%)",
+        }}
+      >
+        Loading appgroups...
+      </p>
+    );
   }
-
-  
 
   return (
     <Layout>
@@ -85,7 +91,9 @@ const TeamList = () => {
                               >
                                 <td>
                                   <button
-                                    onClick={() => handleClickTeam(appGroup.name)}
+                                    onClick={() =>
+                                      handleClickTeam(appGroup.name)
+                                    }
                                     style={{
                                       background: "none",
                                       border: "none",
@@ -107,10 +115,10 @@ const TeamList = () => {
                                         <li style={{ listStyle: "none" }}>
                                           <Link
                                             to="/apps"
-                                            handleFetchApps={handleFetchApps}
-                                            onClick={() =>
-                                              handleFetchApps(appGroup.name)
-                                            } 
+                                            onClick={() => {
+                                              handleFetchApps(appGroup.name);
+                                              handleClickTeam(appGroup.name);
+                                            }}
                                           >
                                             Team Apps
                                           </Link>
@@ -121,10 +129,7 @@ const TeamList = () => {
                                             marginTop: "7px",
                                           }}
                                         >
-                                          <Link to="/">
-                                          
-                                            Members
-                                          </Link>
+                                          <Link to="/">Members</Link>
                                         </li>
                                         <li
                                           style={{

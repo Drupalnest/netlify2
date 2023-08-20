@@ -153,15 +153,15 @@ const AppsButton = () => {
             Delete
           </Link>
         </li>
-        {/* <li className="nav-item tabs__tab">
+        <li className="nav-item tabs__tab">
           <Link
-            className={`nav-link ${currentPage === "/members" ? "active" : ""}`}
-            to="/members"
-            onClick={() => setCurrentPage("/members")}
+            className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
+            to="/apps"
+            onClick={() => setCurrentPage("/apps")}
           >
-            Members
+            Back to apps
           </Link>
-        </li> */}
+        </li>
         
       </ul>
     </div>
