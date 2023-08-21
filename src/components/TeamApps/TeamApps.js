@@ -411,37 +411,88 @@
 
 // export default TeamApps;
 
-
-
-
-
-
-
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppDetails, fetchTeamDetails } from "../../redux/store";
 import Layout from "../Layout";
 import { Link } from "gatsby";
+import Buttons from "../Buttons/Buttons";
 
 const TeamApps = () => {
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   const teamName = teamDetails ? teamDetails.name : "";
   console.log("teamName", teamName);
-  
-
-  
 
   const apps = useSelector((state) => state.appsData.appsData);
   console.log("apps", apps);
 
   const isFetchingApps = apps ? apps.loading : true;
-  const appgroupsapp = apps ? apps.appGroupApps : []; 
+
+  const appgroupsapp = apps ? apps.appGroupApps : [];
   console.log("appgroupsapp", appgroupsapp);
 
-  
-  
+  if (isFetchingApps && appgroupsapp.length === 0) {
+    return (
+      <p
+        style={{
+          margin: "auto",
+          textAlign: "center",
+          marginTop: "50vh",
+          transform: "translateY(-50%)",
+        }}
+      >
+        Loading appgroups apps
+      </p>
+    );
+  }
 
+
+
+  if (!apps.appGroupApps || apps.appGroupApps.length === 0) {
+    return (
+      <Layout>
+        <div>
+          <Buttons />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      Loading appgroup apps...
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+  if (!apps.appGroupApps || apps.appGroupApps.length === 0) {
+    return (
+      <Layout>
+        <div>
+          <Buttons />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      No apps found
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   const handleAppClick = (appName) => {
     dispatch(fetchAppDetails(teamName, appName));
@@ -451,7 +502,7 @@ const TeamApps = () => {
     return (
       <Layout>
         <div>
-          
+          <Buttons />
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -472,7 +523,7 @@ const TeamApps = () => {
 
   return (
     <Layout>
-     
+      <Buttons />
       <div>
         <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
           <div className="page">
@@ -524,7 +575,7 @@ const TeamApps = () => {
                     </thead>
 
                     <tbody>
-                      {appgroupsapp.length > 0 ? (
+                      {apps.appGroupApps || apps.appGroupApps.length === 0 ? (
                         appgroupsapp.map((appName, index) => (
                           <tr key={appName.id}>
                             <td>

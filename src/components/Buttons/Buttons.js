@@ -246,7 +246,7 @@ const Buttons = () => {
               handleFetchApps(teamName); // Call the fetch function when Delete button is clicked
             }}
           >
-            Team Apps
+            Appgroups Apps
           </Link>
         </li>
       </ul>

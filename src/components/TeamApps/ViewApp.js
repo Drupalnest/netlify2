@@ -2111,16 +2111,6 @@
 
 // export default ViewApp;
 
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import { useDispatch, useSelector } from "react-redux";
@@ -2177,8 +2167,6 @@
 //       setCopyMessage("");
 //     }, 2000);
 //   };
-
-  
 
 //   const generateRandomSecret = () => {
 //     const characters =
@@ -2643,7 +2631,7 @@
 //                                       </fieldset>
 //                                     );
 //                                   } else {
-//                                     return null; 
+//                                     return null;
 //                                   }
 //                                 }
 //                               )}
@@ -2906,8 +2894,7 @@
 //                               </div>
 //                             </details>
 //                           </div>
-                          
-                         
+
 //                           <div className="card apigee-entity--app__details">
 //                             <h4 className="card-header bg-white">
 //                               Custom Attributes
@@ -2933,23 +2920,6 @@
 // };
 
 // export default ViewApp;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { Link } from "gatsby";
 // import React from "react";
@@ -4440,19 +4410,6 @@
 
 // export default ViewApp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -4473,7 +4430,6 @@ import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 
 const ViewApp = () => {
   const dispatch = useDispatch();
-  
 
   // const teamDetails = useSelector((state) => state.teamDetails);
   // console.log("teamDetails",teamDetails)
@@ -4485,13 +4441,11 @@ const ViewApp = () => {
 
   const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
 
-  
   const teamName = appDetailsData ? appDetailsData.appGroup : "";
   console.log("teamName", teamName);
 
-
   const appName = appDetailsData ? appDetailsData.name : "";
- 
+
   // console.log("appData",appData)
 
   console.log("appName", appName);
@@ -4516,10 +4470,28 @@ const ViewApp = () => {
     }, 2000);
   };
 
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
-  };
+  function formatTimestamp(timestamp) {
+    if (!timestamp) {
+      return "N/A";
+    }
+
+    const dateObject = new Date(parseInt(timestamp));
+    if (!isNaN(dateObject)) {
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      };
+
+      return new Intl.DateTimeFormat("en-US", options).format(dateObject);
+    } else {
+      return "Invalid Date";
+    }
+  }
 
   const generateRandomSecret = () => {
     const characters =
@@ -4550,7 +4522,7 @@ const ViewApp = () => {
       const randomKey = generateRandomKey();
       const randomSecret = generateRandomSecret();
 
-      const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create`;
+      const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys`;
       const bearerToken = process.env.BEARER_TOKEN;
 
       const response = await axios.post(
@@ -4587,7 +4559,7 @@ const ViewApp = () => {
   };
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
+    const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = process.env.BEARER_TOKEN;
 
     try {
@@ -4604,7 +4576,7 @@ const ViewApp = () => {
   };
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
+    const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
     const bearerToken = process.env.BEARER_TOKEN;
 
     try {
@@ -4631,7 +4603,7 @@ const ViewApp = () => {
     return (
       <Layout>
         <div>
-        <AppsButton />
+          <AppsButton />
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -4702,18 +4674,20 @@ const ViewApp = () => {
                               <div className="field field--inline d-sm-flex align-items-sm-center team-app__createdat">
                                 <div className="field__label">Created</div>
                                 <div className="field__item">
-                                  {new Date(
-                                    appDetailsData.createdAt
-                                  ).toString()}
+                                  {appDetailsData.createdAt
+                                    ? formatTimestamp(appDetailsData.createdAt)
+                                    : "N/A"}
                                 </div>
                               </div>
 
                               <div className="field field--inline d-sm-flex align-items-sm-center team-app__lastmodifiedat">
                                 <div className="field__label">Last updated</div>
                                 <div className="field__item">
-                                  {new Date(
-                                    appDetailsData.lastModifiedAt
-                                  ).toString()}
+                                  {appDetailsData.lastModifiedAt
+                                    ? formatTimestamp(
+                                        appDetailsData.lastModifiedAt
+                                      )
+                                    : "N/A"}
                                 </div>
                               </div>
                             </div>
@@ -4896,15 +4870,20 @@ const ViewApp = () => {
 
                                             <div className="item-property">
                                               <label> Issued </label>
-                                              {new Date(
-                                                credential.issuedAt
-                                              ).toString()}
+
+                                              {credential.issuedAt
+                                                ? formatTimestamp(
+                                                    credential.issuedAt
+                                                  )
+                                                : "N/A"}
                                             </div>
                                             <div className="item-property">
                                               <label> Expires </label>{" "}
-                                              {new Date(
-                                                credential.expiresAt
-                                              ).toString()}
+                                              {credential.expiresAt
+                                                ? formatTimestamp(
+                                                    credential.expiresAt
+                                                  )
+                                                : "N/A"}
                                             </div>
                                             <div className="item-property">
                                               <label> Key Status </label>
@@ -5003,7 +4982,7 @@ const ViewApp = () => {
                                       </fieldset>
                                     );
                                   } else {
-                                    return null; 
+                                    return null;
                                   }
                                 }
                               )}
@@ -5158,15 +5137,21 @@ const ViewApp = () => {
 
                                               <div className="item-property">
                                                 <label> Issued </label>
-                                                {new Date(
-                                                  credential.issuedAt
-                                                ).toString()}
+                                               
+                                                {credential.issuedAt
+                                                ? formatTimestamp(
+                                                    credential.issuedAt
+                                                  )
+                                                : "N/A"}
                                               </div>
                                               <div className="item-property">
                                                 <label> Expires </label>{" "}
-                                                {new Date(
-                                                  credential.expiresAt
-                                                ).toString()}
+                                               
+                                                {credential.expiresAt
+                                                ? formatTimestamp(
+                                                    credential.expiresAt
+                                                  )
+                                                : "N/A"}
                                               </div>
                                               <div className="item-property">
                                                 <label> Key Status </label>
@@ -5266,8 +5251,7 @@ const ViewApp = () => {
                               </div>
                             </details>
                           </div>
-                          
-                         
+
                           <div className="card apigee-entity--app__details">
                             <h4 className="card-header bg-white">
                               Custom Attributes
