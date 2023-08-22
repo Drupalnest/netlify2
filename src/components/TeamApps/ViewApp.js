@@ -4586,7 +4586,7 @@ const ViewApp = () => {
   };
 
   const hideKey = (key) => {
-    return "•".repeat(key.length);
+    return "•".repeat(30);
   };
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
@@ -4791,7 +4791,8 @@ const ViewApp = () => {
                                           <div
                                             className="wrapper--primary app-details-wrapper"
                                             // style={{
-                                            //   border: "8px solid yellow",
+                                            //   border: "8px solid blue",
+                                            //   width: "600px",
                                             // }}
                                           >
                                             <div className="item-property">
@@ -4800,7 +4801,12 @@ const ViewApp = () => {
                                                 {showconsumerkey[
                                                   credential.consumerKey
                                                 ] ? (
-                                                  <div className="secret__value">
+                                                  <div
+                                                    className="secret__value"
+                                                    style={{
+                                                      fontSize: "5px",
+                                                    }}
+                                                  >
                                                     {credential.consumerKey}
                                                   </div>
                                                 ) : (
@@ -4858,7 +4864,12 @@ const ViewApp = () => {
                                                 {showSecrets[
                                                   credential.consumerSecret
                                                 ] ? (
-                                                  <div className="secret__value">
+                                                  <div
+                                                    className="secret__value"
+                                                    style={{
+                                                      fontSize: "5px",
+                                                    }}
+                                                  >
                                                     {credential.consumerSecret}
                                                   </div>
                                                 ) : (
@@ -5078,7 +5089,12 @@ const ViewApp = () => {
                                                   {showconsumerkey[
                                                     credential.consumerKey
                                                   ] ? (
-                                                    <div className="secret__value">
+                                                    <div
+                                                      className="secret__value"
+                                                      style={{
+                                                        fontSize: "5px",
+                                                      }}
+                                                    >
                                                       {credential.consumerKey}
                                                     </div>
                                                   ) : (
@@ -5137,7 +5153,12 @@ const ViewApp = () => {
                                                   {showSecrets[
                                                     credential.consumerSecret
                                                   ] ? (
-                                                    <div className="secret__value">
+                                                    <div
+                                                      className="secret__value"
+                                                      style={{
+                                                        fontSize: "5px",
+                                                      }}
+                                                    >
                                                       {
                                                         credential.consumerSecret
                                                       }
