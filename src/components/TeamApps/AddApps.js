@@ -424,6 +424,9 @@
 
 // export default AddApps;
 
+
+
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -435,8 +438,8 @@ const AddApps = () => {
   const dispatch = useDispatch();
   const [appName, setAppName] = useState("");
   const [description, setDescription] = useState("");
-  // const [checkedAttributes, setCheckedAttributes] = useState([]);
-  // const [selectedAttributes, setSelectedAttributes] = useState([]);
+  const [checkedAttributes, setCheckedAttributes] = useState([]);
+  const [selectedAttributes, setSelectedAttributes] = useState([]);
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
   // const teamName = teamDetails?.name || "";
@@ -471,7 +474,7 @@ const AddApps = () => {
     }
 
     try {
-      // const serializedApiProduct = serializeData.join(",");
+       const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps`,
         {
@@ -495,16 +498,16 @@ const AddApps = () => {
               },
             ],
 
-            // credentials: [
-            //   {
-            //     apiProducts: [
-            //       {
-            //         apiproduct: selected_apiProduct,
-            //          status: "approved",
-            //       },
-            //     ],
-            //   },
-            // ],
+            credentials: [
+              {
+                apiProducts: [
+                  {
+                    apiproduct: serializedApiProduct,
+                     
+                  },
+                ],
+              },
+            ],
           }),
         }
       );
@@ -676,32 +679,34 @@ const AddApps = () => {
   //   }
   // };
 
-  // const selectedProducts = teamDetails.attributes.find(
-  //   (attr) => attr.name === "api_product"
-  // )?.value;
-  // console.log("selected", selectedProducts);
+
+
+  const selectedProducts = teamDetails.attributes.find(
+    (attr) => attr.name === "api_product"
+  )?.value;
+  console.log("selected", selectedProducts);
   // // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
   // // console.log("selectedProducts", selectedAttributes_All);
 
-  // const api_product = ["api_product", selectedProducts];
-  // console.log("api_product", api_product);
+  const api_product = ["api_product", selectedProducts];
+  console.log("api_product", api_product);
 
-  // const array1 = [{ selectedProducts }];
-  // console.log("array1", array1);
+  const array1 = [{ selectedProducts }];
+  console.log("array1", array1);
 
-  // const unserializedData = array1
-  //   .map((item) => {
-  //     const regex = /s:\d+:\\\"(.*?)\\\"/g;
-  //     const matches = item.selectedProducts.match(regex);
-  //     if (matches) {
-  //       return matches.map((match) =>
-  //         match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-  //       );
-  //     }
-  //     return [];
-  //   })
-  //   .flat();
-  // console.log("unserializedData", unserializedData);
+  const unserializedData = array1
+    .map((item) => {
+      const regex = /s:\d+:\\\"(.*?)\\\"/g;
+      const matches = item.selectedProducts.match(regex);
+      if (matches) {
+        return matches.map((match) =>
+          match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
+        );
+      }
+      return [];
+    })
+    .flat();
+  console.log("unserializedData", unserializedData);
 
   // const unserializedData = array1
   //   .map((item) => {
@@ -719,30 +724,30 @@ const AddApps = () => {
   //   .flat();
   // console.log("unserializedData", unserializedData);
 
-  // const uniqueAttributes = Array.from(new Set(unserializedData));
-  // console.log("uniqueAttributes", uniqueAttributes);
+  const uniqueAttributes = Array.from(new Set(unserializedData));
+  console.log("uniqueAttributes", uniqueAttributes);
 
-  // const findDuplicates = (unserializedData) => {
-  //   const duplicates = {};
-  //   const duplicateItems = [];
+  const findDuplicates = (unserializedData) => {
+    const duplicates = {};
+    const duplicateItems = [];
 
-  //   unserializedData.forEach((item) => {
-  //     if (!duplicates[item]) {
-  //       duplicates[item] = 1;
-  //     } else {
-  //       duplicates[item]++;
-  //       if (duplicates[item] === 2) {
-  //         duplicateItems.push(item);
-  //       }
-  //     }
-  //   });
+    unserializedData.forEach((item) => {
+      if (!duplicates[item]) {
+        duplicates[item] = 1;
+      } else {
+        duplicates[item]++;
+        if (duplicates[item] === 2) {
+          duplicateItems.push(item);
+        }
+      }
+    });
 
-  //   return duplicateItems;
-  // };
+    return duplicateItems;
+  };
 
-  // const duplicateValues = findDuplicates(unserializedData);
-  // const filteredData = duplicateValues.filter((attr) => attr !== "0");
-  // console.log("filteredData:", filteredData);
+  const duplicateValues = findDuplicates(unserializedData);
+  const filteredData = duplicateValues.filter((attr) => attr !== "0");
+  console.log("filteredData:", filteredData);
 
   // // console.log("description", description);
   // const handleAttributeChange = (attributeValue) => {
@@ -759,56 +764,58 @@ const AddApps = () => {
   //   setSelectedAttributes(updatedAttributes);
   // };
 
-  // const handleCheckboxChange = (attribute) => {
-  //   setCheckedAttributes((prevChecked) => {
-  //     if (prevChecked.includes(attribute)) {
-  //       return prevChecked.filter((attr) => attr !== attribute);
-  //     } else {
-  //       return [...prevChecked, attribute];
-  //     }
-  //   });
-  // };
 
-  // const mergedArray = [...selectedAttributes, ...checkedAttributes];
-  // const selected_attribute = Array.from(new Set(mergedArray));
 
-  // const unselected_attributes = filteredData.filter(
-  //   (attr) => !selected_attribute.includes(attr)
-  // );
-  // console.log("unselected_attributes", unselected_attributes);
+  const handleCheckboxChange = (attribute) => {
+    setCheckedAttributes((prevChecked) => {
+      if (prevChecked.includes(attribute)) {
+        return prevChecked.filter((attr) => attr !== attribute);
+      } else {
+        return [...prevChecked, attribute];
+      }
+    });
+  };
 
-  // const selected_apiProduct = Array.from(new Set(mergedArray));
+  const mergedArray = [...selectedAttributes, ...checkedAttributes];
+  const selected_attribute = Array.from(new Set(mergedArray));
 
-  // console.log("selected_apiProduct", selected_apiProduct);
+  const unselected_attributes = filteredData.filter(
+    (attr) => !selected_attribute.includes(attr)
+  );
+  console.log("unselected_attributes", unselected_attributes);
 
-  // const formatted_selected_attribute = selected_attribute.map((attr) => ({
-  //   [attr]: attr,
-  // }));
-  // console.log("formatted_selected_attribute", formatted_selected_attribute);
-  // const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
-  //   [attr]: "0",
-  // }));
+  const selected_apiProduct = Array.from(new Set(mergedArray));
 
-  // console.log("formatted_unselected_attribute", formatted_unselected_attribute);
-  // const final_Output = [
-  //   ...formatted_selected_attribute,
-  //   ...formatted_unselected_attribute,
-  // ];
+  console.log("selected_apiProduct", selected_apiProduct);
 
-  // const parsed_Final_Output1 = JSON.parse(
-  //   JSON.stringify(final_Output, null, 2)
-  // );
+  const formatted_selected_attribute = selected_attribute.map((attr) => ({
+    [attr]: attr,
+  }));
+  console.log("formatted_selected_attribute", formatted_selected_attribute);
+  const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
+    [attr]: "0",
+  }));
 
-  // const serializeData = parsed_Final_Output1.map((item) => {
-  //   const key = Object.keys(item)[0];
-  //   const value = item[key];
-  //   const serializedKey = `s:${key.length}:\\"${key}\\"`;
-  //   const serializedValue = `s:${value.length}:\\"${value}\\"`;
-  //   return `${serializedKey}:${serializedValue}`;
-  // });
-  // console.log("serializeData", serializeData);
-  // const serializedApiProduct22 = serializeData.join(",");
-  // console.log("serializedApiProduct22", serializedApiProduct22);
+  console.log("formatted_unselected_attribute", formatted_unselected_attribute);
+  const final_Output = [
+    ...formatted_selected_attribute,
+    ...formatted_unselected_attribute,
+  ];
+
+  const parsed_Final_Output1 = JSON.parse(
+    JSON.stringify(final_Output, null, 2)
+  );
+
+  const serializeData = parsed_Final_Output1.map((item) => {
+    const key = Object.keys(item)[0];
+    const value = item[key];
+    const serializedKey = `s:${key.length}:\\"${key}\\"`;
+    const serializedValue = `s:${value.length}:\\"${value}\\"`;
+    return `${serializedKey}:${serializedValue}`;
+  });
+  console.log("serializeData", serializeData);
+  const serializedApiProduct22 = serializeData.join(",");
+  console.log("serializedApiProduct22", serializedApiProduct22);
 
   return (
     <div>
@@ -962,7 +969,7 @@ const AddApps = () => {
                                   className="form-checkbox form-check-input"
                                 />
 
-                                {/* {filteredData && filteredData.length > 0 && (
+                                {filteredData && filteredData.length > 0 && (
                                   <div className="p-4 fieldset-wrapper">
                                     <div className="form-checkboxes">
                                       {filteredData.map((val, valIndex) => (
@@ -993,7 +1000,7 @@ const AddApps = () => {
                                       ))}
                                     </div>
                                   </div>
-                                )} */}
+                                )}
                               </div>
                             </div>
                           </div>

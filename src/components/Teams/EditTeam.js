@@ -1,9 +1,3 @@
-
-
-
-
-
-
 // import { Link } from "gatsby";
 // import React, { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -140,11 +134,6 @@
 //   const uniqueAttributes = Array.from(new Set(filteredData));
 //   console.log("uniqueAttributes", uniqueAttributes);
 
-
-
-
-
-
 //   const products = teamDetails.attributes.find(
 //     (attr) => attr.name === "api_product"
 //   )?.value;
@@ -153,7 +142,6 @@
 //   // //set to localstorage
 //   // const localStorage_products = products;
 //   // localStorage.setItem("localstorage", JSON.stringify(localStorage_products));
-  
 
 //   // const api_product = ["api_product", products];
 //   // console.log("api_product", api_product);
@@ -178,10 +166,6 @@
 //   .flat();
 // console.log("unserializedData", unserializedData);
 
-
-
-
-  
 //   const findDuplicates = (apiData) => {
 //     const duplicates = {};
 //     const duplicateItems = [];
@@ -235,16 +219,10 @@
 //   const mergedArray = [...selectedAttributes, ...checkedAttributes];
 //   const selected_attribute = Array.from(new Set(mergedArray));
 
-
-
-
-
 //   const unselected_attributes = uniqueAttributes.filter(
 //     (attr) => !selected_attribute.includes(attr)
 //   );
 //   console.log("unselected_attributes", unselected_attributes);
-
-  
 
 //   const formatted_selected_attribute = selected_attribute.map((attr) => ({
 //     [attr]: attr,
@@ -253,10 +231,6 @@
 //   const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
 //     [attr]: "0",
 //   }));
-
-
-
-
 
 //   console.log("formatted_unselected_attribute", formatted_unselected_attribute);
 //   const final_Output = [
@@ -446,58 +420,30 @@
 
 // export default UpdateCompanyName;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Link } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout";
 import Buttons from "../Buttons/Buttons";
-import { fetchTeamDetails,apiProducts ,fetchTeams} from "../../redux/store";
-
+import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
 
 const UpdateCompanyName = () => {
-
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
-   console.log("edit", teamDetails);
+  console.log("edit", teamDetails);
 
-   
-   
-   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
+  const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
-   const team = teamDetails ? teamDetails.name : "";
-   console.log("team", team);
-  // const apiproducts = useSelector((state) => state.apiProducts);
-  // console.log("apiproducts",apiproducts)
+  const team = teamDetails ? teamDetails.name : "";
+  console.log("team", team);
 
-  // useEffect(() => {
-  //   dispatch(apiProducts());
-  // }, [dispatch]);
+  const apiproducts = useSelector((state) => state.apiProducts);
+  const apiproduct = apiproducts.apiProduct;
+  console.log("apiproduct", apiproduct);
 
+  useEffect(() => {
+    dispatch(apiProducts());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   dispatch(fetchTeamDetails(team));
@@ -505,22 +451,13 @@ const UpdateCompanyName = () => {
 
   useEffect(() => {
     dispatch(fetchTeams());
-    
   }, []);
-  
-  // useEffect(() => {
-  //   // Do something with the updated selectedTeam data
-  //   console.log("Selected Team:", selectedTeam);
-  // }, [selectTeam]);
-
-
 
   const [companyName, setCompanyName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState([]);
   const [message, setMessage] = useState("");
   const [checkedAttributes, setCheckedAttributes] = useState([]);
-  
 
   const handleCompanyNameChange = (e) => {
     setCompanyName(e.target.value);
@@ -539,7 +476,7 @@ const UpdateCompanyName = () => {
     }
 
     try {
-      // const serializedApiProduct = serializeData.join(",");
+      const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamDetails.name}`,
         {
@@ -551,10 +488,10 @@ const UpdateCompanyName = () => {
           body: JSON.stringify({
             displayName: companyName,
             attributes: [
-              // {
-              //   name: "api_product",
-              //   value: serializedApiProduct,
-              // },
+              {
+                name: "api_product",
+                value: serializedApiProduct,
+              },
 
               {
                 name: "description",
@@ -577,216 +514,208 @@ const UpdateCompanyName = () => {
     }
   };
 
-  // const handleAttributeChange = (attributeValue) => {
-  //   setSelectedAttributes((prevAttributes) => {
-  //     if (prevAttributes.includes(attributeValue)) {
-  //       return prevAttributes.filter((attr) => attr !== attributeValue);
-  //     } else {
-  //       return [...prevAttributes, attributeValue];
-  //     }
-  //   });
-  // };
+  const handleAttributeChange = (attributeValue) => {
+    setSelectedAttributes((prevAttributes) => {
+      if (prevAttributes.includes(attributeValue)) {
+        return prevAttributes.filter((attr) => attr !== attributeValue);
+      } else {
+        return [...prevAttributes, attributeValue];
+      }
+    });
+  };
 
-  // const updateSelectedAttributes = (updatedAttributes) => {
-  //   setSelectedAttributes(updatedAttributes);
-  //   localStorage.setItem(
-  //     `selectedAttributes_${teamDetails.name}`,
-  //     JSON.stringify(updatedAttributes)
-  //   );
-  // };
+  const updateSelectedAttributes = (updatedAttributes) => {
+    setSelectedAttributes(updatedAttributes);
+    localStorage.setItem(
+      `selectedAttributes_${teamDetails.name}`,
+      JSON.stringify(updatedAttributes)
+    );
+  };
 
-  // const handleCheckboxChange = (attribute) => {
-  //   setCheckedAttributes((prevChecked) => {
-  //     if (prevChecked.includes(attribute)) {
-  //       return prevChecked.filter((attr) => attr !== attribute);
-  //     } else {
-  //       return [...prevChecked, attribute];
-  //     }
-  //   });
-  // };
-
-  
+  const handleCheckboxChange = (attribute) => {
+    setCheckedAttributes((prevChecked) => {
+      if (prevChecked.includes(attribute)) {
+        return prevChecked.filter((attr) => attr !== attribute);
+      } else {
+        return [...prevChecked, attribute];
+      }
+    });
+  };
 
 
 
-  const descriptionValue = teamDetails?teamDetails.attributes.find(
-    (attr) => attr.name === "description"
-  )?.value:"";
+  const descriptionValue = teamDetails
+    ? teamDetails.attributes.find((attr) => attr.name === "description")?.value
+    : "";
 
-  // const filteredData = apiproducts.filter((attr) => attr !== "0");
-  // const uniqueAttributes = Array.from(new Set(filteredData));
-  // console.log("uniqueAttributes", uniqueAttributes);
+  const filteredData = apiproduct
+    ? apiproduct.filter((attr) => attr !== "0")
+    : [];
+
+  const uniqueAttributes = Array.from(new Set(filteredData));
+  console.log("uniqueAttributes", uniqueAttributes);
 
 
 
+  const products = teamDetails
+    ? teamDetails.attributes.find((attr) => attr.name === "api_product")?.value
+    : "";
+  console.log("products", products);
 
-
-
-  // const products = teamDetails.attributes.find(
-  //   (attr) => attr.name === "api_product"
-  // )?.value;
-  // console.log("products", products);
-
-  // //set to localstorage
+  //set to localstorage
   // const localStorage_products = products;
   // localStorage.setItem("localstorage", JSON.stringify(localStorage_products));
-  
 
-//   const api_product = ["api_product", products];
-//   // console.log("api_product", api_product);
+  const api_product = ["api_product", products];
+  // console.log("api_product", api_product);
 
-//   const array1 = [{ products }];
-//   // console.log("array1", array1);
+  const array1 = [{ products }];
+  // console.log("array1", array1);
 
-//   //unserializedData Data
-//   const unserializedData = array1
-//   .map((item) => {
-//     if (item && item.products) {
-//       const regex = /s:\d+:\\\"(.*?)\\\"/g;
-//       const matches = item.products.match(regex);
-//       if (matches) {
-//         return matches.map((match) =>
-//           match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-//         );
-//       }
-//     }
-//     return [];
-//   })
-//   .flat();
-// console.log("unserializedData", unserializedData);
+  //unserializedData Data
+  const unserializedData = array1
+    .map((item) => {
+      if (item && item.products) {
+        const regex = /s:\d+:\\\"(.*?)\\\"/g;
+        const matches = item.products.match(regex);
+        if (matches) {
+          return matches.map((match) =>
+            match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
+          );
+        }
+      }
+      return [];
+    })
+    .flat();
+  console.log("unserializedData", unserializedData);
 
+  const findDuplicates = (apiproduct) => {
+    const duplicates = {};
+    const duplicateItems = [];
 
+    apiproduct.forEach((item) => {
+      if (!duplicates[item]) {
+        duplicates[item] = 1;
+      } else {
+        duplicates[item]++;
+      }
+    });
 
+    Object.entries(duplicates).forEach(([item, count]) => {
+      if (count > 1) {
+        duplicateItems.push(item);
+      }
+    });
 
-  
-//   const findDuplicates = (apiproducts) => {
-//     const duplicates = {};
-//     const duplicateItems = [];
+    return duplicateItems;
+  };
 
-//     apiproducts.forEach((item) => {
-//       if (!duplicates[item]) {
-//         duplicates[item] = 1;
-//       } else {
-//         duplicates[item]++;
-//       }
-//     });
+  const duplicateItems = findDuplicates(unserializedData);
+  console.log("duplicateItems", duplicateItems);
 
-//     Object.entries(duplicates).forEach(([item, count]) => {
-//       if (count > 1) {
-//         duplicateItems.push(item);
-//       }
-//     });
+  useEffect(() => {
+    const filteredData = apiproduct
+      ? apiproduct.filter((attr) => attr !== "0")
+      : [];
+    const uniqueAttributes = Array.from(new Set(filteredData));
 
-//     return duplicateItems;
-//   };
-  
-//   const duplicateItems = findDuplicates(unserializedData);
-//   console.log("duplicateItems", duplicateItems);
-
-//   useEffect(() => {
-//     const filteredData = apiproducts.filter((attr) => attr !== "0");
-//     const uniqueAttributes = Array.from(new Set(filteredData));
-
-//     const initialCheckedAttributes = uniqueAttributes.filter((attr) =>
-//       duplicateItems.includes(attr)
-//     );
-//     setCheckedAttributes(initialCheckedAttributes);
-
-//     const storedSelectedAttributes =
-//       JSON.parse(
-//         localStorage.getItem(`selectedAttributes_${teamDetails.name}`)
-//       ) || [];
-//     setSelectedAttributes(storedSelectedAttributes);
-//   }, [teamDetails, apiproducts]);
-
-useEffect(() => {
-  if (teamDetails) {
-    setCompanyName(teamDetails.displayName);
-
-    const descriptionAttribute = teamDetails.attributes.find(
-      (attr) => attr.name === "description"
+    const initialCheckedAttributes = uniqueAttributes.filter((attr) =>
+      duplicateItems.includes(attr)
     );
+    setCheckedAttributes(initialCheckedAttributes);
 
-    if (descriptionAttribute) {
-      setDescription(descriptionAttribute.value || "");
+    const storedSelectedAttributes =
+      JSON.parse(
+        localStorage.getItem(`selectedAttributes_${teamDetails.name}`)
+      ) || [];
+    setSelectedAttributes(storedSelectedAttributes);
+  }, [teamDetails, apiproduct]);
+
+  useEffect(() => {
+    if (teamDetails) {
+      setCompanyName(teamDetails.displayName);
+
+      const descriptionAttribute = teamDetails.attributes.find(
+        (attr) => attr.name === "description"
+      );
+
+      if (descriptionAttribute) {
+        setDescription(descriptionAttribute.value || "");
+      }
+
+      // Rest of your code...
     }
+  }, [teamDetails,apiproduct]);
 
-    // Rest of your code...
-  }
-}, [teamDetails]);
+  const mergedArray = [...selectedAttributes, ...checkedAttributes];
+  //const selected_attribute = Array.from(new Set(mergedArray));
 
+  //   const unselected_attributes = uniqueAttributes.filter(
+  //     (attr) => !selected_attribute.includes(attr)
+  //   );
+  //   console.log("unselected_attributes", unselected_attributes);
+  const selected_attribute_names = Array.from(new Set(mergedArray));
+  console.log("selected_attribute_names", selected_attribute_names);
+  const unselected_attributes = uniqueAttributes.filter(
+    (attr) => !selected_attribute_names.includes(attr.name)
+  );
+  console.log("unselected_attributes", unselected_attributes);
 
-  // const mergedArray = [...selectedAttributes, ...checkedAttributes];
-  // const selected_attribute = Array.from(new Set(mergedArray));
+  const formatted_selected_attribute = selected_attribute_names.map(
+    (attrName) => ({
+      [attrName]: attrName,
+    })
+  );
 
+  const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
+    [attr.name]: "0",
+  }));
 
+  const final_Output = [
+    ...formatted_selected_attribute,
+    ...formatted_unselected_attribute,
+  ];
 
+  console.log("final_Output", final_Output);
 
+  const parsed_Final_Output1 = JSON.parse(
+    JSON.stringify(final_Output, null, 2)
+  );
 
-//   const unselected_attributes = uniqueAttributes.filter(
-//     (attr) => !selected_attribute.includes(attr)
-//   );
-//   console.log("unselected_attributes", unselected_attributes);
+  const serializeData = parsed_Final_Output1.map((item) => {
+    const key = Object.keys(item)[0];
+    const value = item[key];
+    const serializedKey = `s:${key.length}:\\"${key}\\"`;
+    const serializedValue = `s:${value.length}:\\"${value}\\"`;
+    return `${serializedKey}:${serializedValue}`;
+  });
+  console.log("serializeData", serializeData);
 
-  
+  const serializedApiProduct22 = serializeData.join(",");
+  console.log("serializedApiProduct22", serializedApiProduct22);
 
-//   const formatted_selected_attribute = selected_attribute.map((attr) => ({
-//     [attr]: attr,
-//   }));
-//   console.log("formatted_selected_attribute", formatted_selected_attribute);
-//   const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
-//     [attr]: "0",
-//   }));
-
-
-
-
-
-//   console.log("formatted_unselected_attribute", formatted_unselected_attribute);
-//   const final_Output = [
-//     ...formatted_selected_attribute,
-//     ...formatted_unselected_attribute,
-//   ];
-
-//   const parsed_Final_Output1 = JSON.parse(
-//     JSON.stringify(final_Output, null, 2)
-//   );
-
-//   const serializeData = parsed_Final_Output1.map((item) => {
-//     const key = Object.keys(item)[0];
-//     const value = item[key];
-//     const serializedKey = `s:${key.length}:\\"${key}\\"`;
-//     const serializedValue = `s:${value.length}:\\"${value}\\"`;
-//     return `${serializedKey}:${serializedValue}`;
-//   });
-// console.log("serializeData",serializeData)
-//   const serializedApiProduct22 = serializeData.join(",");
-//   console.log("serializedApiProduct22",serializedApiProduct22)
-
-
-
-if (!teamDetails || (teamDetails && isFetching)) {
-  return (
-    <Layout>
-      <div>
-        <Buttons />
-        <div className="page">
-          <div className="page__content-above">
-            <div className="container-fluid px-0">
-              <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                <div className="container">
-                  <h1 className="js-quickedit-page-title page__title mb-0">
-                    Loading appgroups...
-                  </h1>
+  if (!teamDetails || (teamDetails && isFetching)) {
+    return (
+      <Layout>
+        <div>
+          <Buttons />
+          <div className="page">
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                  <div className="container">
+                    <h1 className="js-quickedit-page-title page__title mb-0">
+                      Loading appgroups...
+                    </h1>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Layout>
-  );
-}
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <div>
@@ -820,7 +749,7 @@ if (!teamDetails || (teamDetails && isFetching)) {
                         <div className="field--type-string field--name-displayname field--widget-string-textfield js-form-wrapper form-wrapper">
                           <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-displayname-0-value js-form-item-displayname-0-value form-group">
                             <label className="js-form-required form-required">
-                            Appgroup name
+                              Appgroup name
                               <i className="fas fa-asterisk text-danger form-required__indicator" />
                             </label>
                             <input
@@ -886,7 +815,7 @@ if (!teamDetails || (teamDetails && isFetching)) {
                           <fieldset className="fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper border mb-3">
                             <legend className="float-left py-2 px-4 mb-0 border-bottom">
                               <span className="fieldset-legend">
-                              Appgroup product
+                                Appgroup product
                               </span>
                               <button className="btn-link">
                                 <i className="fas fa-chevron-down d-md-none" />
@@ -925,7 +854,41 @@ if (!teamDetails || (teamDetails && isFetching)) {
                                 </div>
                               </div>
                             )} */}
-                            
+
+                            {apiproduct &&
+                              Array.isArray(apiproduct) &&
+                              apiproduct.length > 0 && (
+                                <div className="p-4 fieldset-wrapper">
+                                  <div className="form-checkboxes">
+                                    {uniqueAttributes.map((item, valIndex) => (
+                                      <div
+                                        key={item.name}
+                                        className="js-form-item form-item js-form-type-checkbox form-item-field-api-product-0-value-corp-iag-code-token js-form-item-field-api-product-0-value-corp-iag-code-token form-check"
+                                      >
+                                        <ul style={{ padding: 0, margin: 0 }}>
+                                          <li
+                                            key={item.name}
+                                            style={{ listStyle: "none" }}
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              value={item.name}
+                                              style={{ marginRight: "0.5em" }}
+                                              checked={checkedAttributes.includes(
+                                                item.name
+                                              )}
+                                              onChange={() =>
+                                                handleCheckboxChange(item.name)
+                                              }
+                                            />
+                                            {item.name}
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
                           </fieldset>
 
                           <div className="form-actions js-form-wrapper form-wrapper">

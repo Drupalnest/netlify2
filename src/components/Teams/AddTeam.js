@@ -1143,15 +1143,6 @@
 
 // export default AddTeam;
 
-
-
-
-
-
-
-
-
-
 // import { Link, navigate } from "gatsby";
 // import React, { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -1160,7 +1151,6 @@
 
 // const AddTeam = () => {
 //   const dispatch = useDispatch();
-  
 
 //   const apiproducts = useSelector((state) => state.apiProducts);
 //   console.log("apiproducts", apiproducts);
@@ -1168,8 +1158,6 @@
 //   useEffect(() => {
 //     dispatch(apiProducts());
 //   }, [dispatch]);
-
-  
 
 //   const [companyName, setCompanyName] = useState("");
 //   const [displayName, setDisplayName] = useState("");
@@ -1262,7 +1250,7 @@
 
 //   const updateSelectedAttributes = (updatedAttributes) => {
 //     setSelectedAttributes(updatedAttributes);
-   
+
 //   };
 
 //   const handleCheckboxChange = (attribute) => {
@@ -1274,8 +1262,6 @@
 //       }
 //     });
 //   };
-
-  
 
 //   const mergedArray = [...selectedAttributes, ...checkedAttributes];
 //   const selected_attribute = Array.from(new Set(mergedArray));
@@ -1444,60 +1430,332 @@
 
 // export default AddTeam;
 
+// import { Link, navigate } from "gatsby";
+// import React, { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import Layout from "../Layout";
+// import { apiProducts } from "../../redux/store";
 
+// const AddTeam = () => {
+//   const dispatch = useDispatch();
 
+//   const apiproducts = useSelector((state) => state.apiProducts);
+//   console.log("apiproducts", apiproducts);
 
+//   const apiproduct = apiproducts.apiProduct;
+//   console.log("apiproduct", apiproduct);
 
+//   useEffect(() => {
+//     dispatch(apiProducts());
+//   }, [dispatch]);
 
+//   const [companyName, setCompanyName] = useState("");
+//   const [displayName, setDisplayName] = useState("");
+//   const [description, setDescription] = useState("");
+//   const [selectedAttributes, setSelectedAttributes] = useState([]);
+//   const [message, setMessage] = useState("");
+//   const [checkedAttributes, setCheckedAttributes] = useState([]);
 
+//   const handleCompanyNameChange = (e) => {
+//     const inputText = e.target.value;
+//     // Convert input text to a suitable company name format
+//     const formattedCompanyName = inputText
+//       .toLowerCase()
+//       .replace(/\s+/g, "-") // Replace spaces with hyphens
+//       .replace(/[^a-z0-9-]/g, ""); // Remove non-alphanumeric characters except hyphens
 
+//     setCompanyName(formattedCompanyName);
+//   };
 
+//   const handleDisplayNameChange = (e) => {
+//     setDisplayName(e.target.value);
+//   };
 
+//   const handleDescriptionChange = (e) => {
+//     setDescription(e.target.value);
+//   };
 
+//   const handleAddTeam = async (e) => {
+//     e.preventDefault();
 
+//     if (!companyName.trim()) {
+//       alert("Please provide a valid company name.");
+//       return;
+//     }
 
+//     try {
+//       //const serializedApiProduct = serializeData.join(",");
+//       const response = await fetch(
+//         "https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           },
+//           body: JSON.stringify({
+//             name: companyName,
+//             displayName: companyName,
+//             attributes: [
+//               // {
+//               //   name: "api_product",
+//               //   value: serializedApiProduct,
+//               // },
 
+//               {
+//                 name: "description",
+//                 value: description,
+//               },
+//             ],
+//           }),
+//         }
+//       );
 
+//       if (response.ok) {
+//         alert(companyName);
+//         alert(description);
+//         // alert(serializedApiProduct);
+//         alert("Appgroup Created successfully!");
+//         navigate("/");
+//       } else {
+//         alert("Failed to create team");
+//       }
+//     } catch (error) {
+//       alert("An error occurred while creating team ");
+//     }
+//   };
+
+//   console.log("team name", companyName);
+
+//   // console.log("description", description);
+//   const handleAttributeChange = (attributeValue) => {
+//     setSelectedAttributes((prevAttributes) => {
+//       if (prevAttributes.includes(attributeValue)) {
+//         return prevAttributes.filter((attr) => attr !== attributeValue);
+//       } else {
+//         return [...prevAttributes, attributeValue];
+//       }
+//     });
+//   };
+
+//   const updateSelectedAttributes = (updatedAttributes) => {
+//     setSelectedAttributes(updatedAttributes);
+//   };
+
+//   const handleCheckboxChange = (attribute) => {
+//     setCheckedAttributes((prevChecked) => {
+//       if (prevChecked.includes(attribute)) {
+//         return prevChecked.filter((attr) => attr !== attribute);
+//       } else {
+//         return [...prevChecked, attribute];
+//       }
+//     });
+//   };
+
+//   const mergedArray = [...selectedAttributes, ...checkedAttributes];
+//   const selected_attribute_names = new Set(mergedArray);
+
+//   const unselected_attributes = apiproduct.filter(
+//     (attr) => !selected_attribute_names.has(attr.name)
+//   );
+
+//   const formatted_selected_attribute = selected_attribute_names.map(
+//     (attrName) => ({
+//       [attrName]: attrName,
+//     })
+//   );
+
+//   const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
+//     [attr.name]: "0",
+//   }));
+
+//   console.log("formatted_selected_attribute", formatted_selected_attribute);
+//   console.log("formatted_unselected_attribute", formatted_unselected_attribute);
+
+//   const final_Output = [
+//     ...formatted_unselected_attribute.map((attr) => ({
+//       [attr]: attr.toString(),
+//     })),
+//     ...formatted_unselected_attribute.map((attr) => ({ [attr.name]: "0" })),
+//   ];
+
+//   const parsed_Final_Output1 = JSON.parse(
+//     JSON.stringify(final_Output, null, 2)
+//   );
+
+//   const serializeData = parsed_Final_Output1.map((item) => {
+//     const key = Object.keys(item)[0];
+//     const value = item[key];
+//     const serializedKey = `s:${key.length}:\\"${key}\\"`;
+//     const serializedValue = `s:${value.length}:\\"${value}\\"`;
+//     return `${serializedKey}:${serializedValue}`;
+//   });
+
+//   console.log("serializeData", serializeData);
+
+//   // const serializedApiProduct22 = serializeData.join(",");
+//   // console.log("serializedApiProduct22", serializedApiProduct22);
+
+//   return (
+//     <Layout>
+//       <div>
+//         <div className="dialog-off-canvas-main-canvas">
+//           <div className="page">
+//             <header className="page__header"></header>
+//             <div className="page__content-above">
+//               <div className="container-fluid px-0">
+//                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
+//                   <div />
+//                   <div className="container">
+//                     <h1 className="js-quickedit-page-title page__title mb-0">
+//                       Add Appgroup
+//                     </h1>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//             <main className="main">
+//               <div className="page-layout-sidebar-default">
+//                 <div className="container py-5">
+//                   <div className="row">
+//                     <div className="page__content col-md">
+//                       <div className="hidden" />
+//                       <form className="team-form" onSubmit={handleAddTeam}>
+//                         <div className="field--type-string field--name-displayname field--widget-string-textfield js-form-wrapper form-wrapper">
+//                           <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-displayname-0-value js-form-item-displayname-0-value form-group">
+//                             <label className="js-form-required form-required">
+//                               Appgroup name
+//                               <i className="fas fa-asterisk text-danger form-required__indicator" />
+//                             </label>
+//                             <input
+//                               className="js-text-full text-full required form-control"
+//                               type="text"
+//                               value={companyName}
+//                               onChange={handleCompanyNameChange}
+//                               size={60}
+//                               maxLength={255}
+//                               required="required"
+//                               aria-required="true"
+//                             />
+//                           </div>
+//                         </div>
+//                         <div className="field--type-string-long field--name-field-description field--widget-string-textarea js-form-wrapper form-wrapper">
+//                           <div className="js-form-item form-item js-form-type-textarea form-type-textarea form-item-field-description-0-value js-form-item-field-description-0-value form-group">
+//                             <label htmlFor="edit-field-description-0-value">
+//                               Description
+//                             </label>
+//                             <textarea
+//                               className="js-text-full text-full form-textarea form-control"
+//                               rows={5}
+//                               cols={60}
+//                               value={description}
+//                               onChange={handleDescriptionChange}
+//                             />
+//                           </div>
+//                         </div>
+
+//                         <div className="field--type-productapi field--name-field-api-product field--widget-productapi js-form-wrapper form-wrapper">
+//                           <fieldset className="fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper border mb-3">
+//                             <legend className="float-left py-2 px-4 mb-0 border-bottom">
+//                               <span className="fieldset-legend">
+//                                 Appgroup product
+//                               </span>
+//                               <button className="btn-link">
+//                                 <i className="fas fa-chevron-down d-md-none" />
+//                               </button>
+//                             </legend>
+
+//                             {apiproduct && apiproduct.length > 0 && (
+//                               <div className="p-4 fieldset-wrapper">
+//                                 <div className="form-checkboxes">
+//                                   {apiproduct.map((item, valIndex) => (
+//                                     <div
+//                                       key={item.name}
+//                                       className="js-form-item form-item js-form-type-checkbox form-item-field-api-product-0-value-corp-iag-code-token js-form-item-field-api-product-0-value-corp-iag-code-token form-check"
+//                                     >
+//                                       <ul style={{ padding: 0, margin: 0 }}>
+//                                         <li
+//                                           key={item.name}
+//                                           style={{ listStyle: "none" }}
+//                                         >
+//                                           <input
+//                                             type="checkbox"
+//                                             value={item.name}
+//                                             style={{ marginRight: "0.5em" }}
+//                                             checked={checkedAttributes.includes(
+//                                               item.name
+//                                             )}
+//                                             onChange={() =>
+//                                               handleCheckboxChange(item.name)
+//                                             }
+//                                           />
+//                                           {item.name}
+//                                         </li>
+//                                       </ul>
+//                                     </div>
+//                                   ))}
+//                                 </div>
+//                               </div>
+//                             )}
+//                           </fieldset>
+
+//                           <div className="form-actions js-form-wrapper form-wrapper">
+//                             <button
+//                               className="js-form-submit-modal-init button button--primary js-form-submit form-submit btn btn-primary"
+//                               onClick={handleAddTeam}
+//                             >
+//                               Add Appgroup
+//                             </button>
+
+//                             <Link to="/" className="btn btn-outline-primary">
+//                               Cancel
+//                             </Link>
+//                           </div>
+//                         </div>
+//                       </form>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </main>
+//           </div>
+//         </div>
+//       </div>
+//     </Layout>
+//   );
+// };
+
+// export default AddTeam;
 
 import { Link, navigate } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout";
-import {  apiProducts } from "../../redux/store";
+import { apiProducts } from "../../redux/store";
 
 const AddTeam = () => {
   const dispatch = useDispatch();
-  
 
-  // const apiproducts = useSelector((state) => state.apiProducts);
-  // console.log("apiproducts", apiproducts);
+  const apiproducts = useSelector((state) => state.apiProducts);
+  const apiproduct = apiproducts.apiProduct;
+  console.log("apiproduct",apiproduct)
 
-  // useEffect(() => {
-  //   dispatch(apiProducts());
-  // }, [dispatch]);
-
-  
+  useEffect(() => {
+    dispatch(apiProducts());
+  }, [dispatch]);
 
   const [companyName, setCompanyName] = useState("");
-  const [displayName, setDisplayName] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedAttributes, setSelectedAttributes] = useState([]);
-  const [message, setMessage] = useState("");
-  const [checkedAttributes, setCheckedAttributes] = useState([]);
+  const [checkedAttributes, setCheckedAttributes] = useState(new Set());
 
   const handleCompanyNameChange = (e) => {
     const inputText = e.target.value;
-    // Convert input text to a suitable company name format
     const formattedCompanyName = inputText
       .toLowerCase()
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[^a-z0-9-]/g, ""); // Remove non-alphanumeric characters except hyphens
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
 
     setCompanyName(formattedCompanyName);
-  };
-
-  const handleDisplayNameChange = (e) => {
-    setDisplayName(e.target.value);
   };
 
   const handleDescriptionChange = (e) => {
@@ -1513,7 +1771,7 @@ const AddTeam = () => {
     }
 
     try {
-      // const serializedApiProduct = serializeData.join(",");
+      const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         "https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups",
         {
@@ -1526,11 +1784,10 @@ const AddTeam = () => {
             name: companyName,
             displayName: companyName,
             attributes: [
-              // {
-              //   name: "api_product",
-              //   value: serializedApiProduct,
-              // },
-
+              {
+                name: "api_product",
+                value: serializedApiProduct,
+              },
               {
                 name: "description",
                 value: description,
@@ -1541,85 +1798,67 @@ const AddTeam = () => {
       );
 
       if (response.ok) {
-        // alert(companyName);
-        // alert(description);
-        // alert(serializedApiProduct);
         alert("Appgroup Created successfully!");
-        navigate("/")
+        navigate("/");
       } else {
         alert("Failed to create team");
       }
     } catch (error) {
-      alert("An error occurred while creating team ");
+      alert("An error occurred while creating team");
     }
   };
 
-  // console.log("team name", companyName);
+  const handleCheckboxChange = (attribute) => {
+    setCheckedAttributes((prevChecked) => {
+      const newChecked = new Set(prevChecked);
+      if (newChecked.has(attribute)) {
+        newChecked.delete(attribute);
+      } else {
+        newChecked.add(attribute);
+      }
+      return newChecked;
+    });
+  };
 
-  // // console.log("description", description);
-  // const handleAttributeChange = (attributeValue) => {
-  //   setSelectedAttributes((prevAttributes) => {
-  //     if (prevAttributes.includes(attributeValue)) {
-  //       return prevAttributes.filter((attr) => attr !== attributeValue);
-  //     } else {
-  //       return [...prevAttributes, attributeValue];
-  //     }
-  //   });
-  // };
+  const selected_attribute_names = [...checkedAttributes];
+  const unselected_attributes = apiproduct
+  ? apiproduct.filter((attr) => !selected_attribute_names.includes(attr.name))
+  : [];
 
-  // const updateSelectedAttributes = (updatedAttributes) => {
-  //   setSelectedAttributes(updatedAttributes);
-   
-  // };
 
-  // const handleCheckboxChange = (attribute) => {
-  //   setCheckedAttributes((prevChecked) => {
-  //     if (prevChecked.includes(attribute)) {
-  //       return prevChecked.filter((attr) => attr !== attribute);
-  //     } else {
-  //       return [...prevChecked, attribute];
-  //     }
-  //   });
-  // };
+  const formatted_selected_attribute = selected_attribute_names.map(
+    (attrName) => ({
+      [attrName]: attrName,
+    })
+  );
 
-  
+  const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
+    [attr.name]: "0",
+  }));
 
-  // const mergedArray = [...selectedAttributes, ...checkedAttributes];
-  // const selected_attribute = Array.from(new Set(mergedArray));
+  const final_Output = [
+    ...formatted_selected_attribute,
+    ...formatted_unselected_attribute,
+  ];
 
-  // const unselected_attributes = apiproducts.filter(
-  //   (attr) => !selected_attribute.includes(attr)
-  // );
-  // console.log("unselected_attributes", unselected_attributes);
+  console.log("final_Output", final_Output);
 
-  // const formatted_selected_attribute = selected_attribute.map((attr) => ({
-  //   [attr]: attr,
-  // }));
-  // console.log("formatted_selected_attribute", formatted_selected_attribute);
-  // const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
-  //   [attr]: "0",
-  // }));
+  const parsed_Final_Output1 = JSON.parse(
+    JSON.stringify(final_Output, null, 2)
+  );
 
-  // console.log("formatted_unselected_attribute", formatted_unselected_attribute);
-  // const final_Output = [
-  //   ...formatted_selected_attribute,
-  //   ...formatted_unselected_attribute,
-  // ];
+  const serializeData = parsed_Final_Output1.map((item) => {
+    const key = Object.keys(item)[0];
+    const value = item[key];
+    const serializedKey = `s:${key.length}:\\"${key}\\"`;
+    const serializedValue = `s:${value.length}:\\"${value}\\"`;
+    return `${serializedKey}:${serializedValue}`;
+  });
+  console.log("serializeData", serializeData);
 
-  // const parsed_Final_Output1 = JSON.parse(
-  //   JSON.stringify(final_Output, null, 2)
-  // );
+   const serializedApiProduct22 = serializeData.join(",");
+   console.log("serializedApiProduct22",serializedApiProduct22)
 
-  // const serializeData = parsed_Final_Output1.map((item) => {
-  //   const key = Object.keys(item)[0];
-  //   const value = item[key];
-  //   const serializedKey = `s:${key.length}:\\"${key}\\"`;
-  //   const serializedValue = `s:${value.length}:\\"${value}\\"`;
-  //   return `${serializedKey}:${serializedValue}`;
-  // });
-  // // console.log("serializeData", serializeData);
-  // // const serializedApiProduct22 = serializeData.join(",");
-  // // console.log("serializedApiProduct22", serializedApiProduct22);
   return (
     <Layout>
       <div>
@@ -1648,7 +1887,7 @@ const AddTeam = () => {
                         <div className="field--type-string field--name-displayname field--widget-string-textfield js-form-wrapper form-wrapper">
                           <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-displayname-0-value js-form-item-displayname-0-value form-group">
                             <label className="js-form-required form-required">
-                            Appgroup name
+                              Appgroup name
                               <i className="fas fa-asterisk text-danger form-required__indicator" />
                             </label>
                             <input
@@ -1682,45 +1921,45 @@ const AddTeam = () => {
                           <fieldset className="fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper border mb-3">
                             <legend className="float-left py-2 px-4 mb-0 border-bottom">
                               <span className="fieldset-legend">
-                              Appgroup product
+                                Appgroup product
                               </span>
                               <button className="btn-link">
                                 <i className="fas fa-chevron-down d-md-none" />
                               </button>
                             </legend>
 
-                            {/* {apiproducts && apiproducts.length > 0 && (
+                            {apiproduct && apiproduct.length > 0 && (
                               <div className="p-4 fieldset-wrapper">
                                 <div className="form-checkboxes">
-                                  {apiproducts.map((val, valIndex) => (
+                                  {apiproduct.map((item, valIndex) => (
                                     <div
-                                      key={valIndex}
+                                      key={item.name}
                                       className="js-form-item form-item js-form-type-checkbox form-item-field-api-product-0-value-corp-iag-code-token js-form-item-field-api-product-0-value-corp-iag-code-token form-check"
                                     >
                                       <ul style={{ padding: 0, margin: 0 }}>
                                         <li
-                                          key={valIndex}
+                                          key={item.name}
                                           style={{ listStyle: "none" }}
                                         >
                                           <input
                                             type="checkbox"
-                                            value={val}
+                                            value={item.name}
                                             style={{ marginRight: "0.5em" }}
-                                            checked={checkedAttributes.includes(
-                                              val
+                                            checked={checkedAttributes.has(
+                                              item.name
                                             )}
                                             onChange={() =>
-                                              handleCheckboxChange(val)
+                                              handleCheckboxChange(item.name)
                                             }
                                           />
-                                          {val}
+                                          {item.name}
                                         </li>
                                       </ul>
                                     </div>
                                   ))}
                                 </div>
                               </div>
-                            )} */}
+                            )}
                           </fieldset>
 
                           <div className="form-actions js-form-wrapper form-wrapper">

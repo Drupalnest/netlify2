@@ -4455,19 +4455,35 @@ const ViewApp = () => {
   //   dispatch(fetchAppDetails(teamName, appName));
   // }, [dispatch, teamName, appName]);
 
-  const [showSecret, setShowSecret] = useState(false);
+  const [showSecrets, setShowSecrets] = useState({});
+  const [showconsumerkey, setshowconsumerkey] = useState({});
   const [showKey, setShowKey] = useState(false);
+  const [showKey1, setShowKey1] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [copyMessage, setCopyMessage] = useState("");
-  const [copiedIndexes, setCopiedIndexes] = useState([]);
+  const [copyMessages, setCopyMessages] = useState({});
 
-  const copyToClipboard = (text, index) => {
-    navigator.clipboard.writeText(text);
-    setCopyMessage("Copied!");
-    setCopiedIndexes([...copiedIndexes, index]);
-    setTimeout(() => {
+  // const copyToClipboard = (text, index) => {
+  //   navigator.clipboard.writeText(text);
+  //   setCopyMessage("Copied!");
+  //   setCopiedIndexes([...copiedIndexes, index]);
+  //   setTimeout(() => {
+  //     setCopyMessage("");
+  //   }, 2000);
+  // };
+
+  const copyToClipboard = async (text, index) => {
+    try {
+      await navigator.clipboard.writeText(text);
       setCopyMessage("");
-    }, 2000);
+
+      setTimeout(() => {
+        setCopyMessage("");
+      }, 2000);
+    } catch (error) {
+      console.error("Error copying to clipboard:", error);
+      // Handle the error here if needed
+    }
   };
 
   function formatTimestamp(timestamp) {
@@ -4497,7 +4513,7 @@ const ViewApp = () => {
     const characters =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let key = "";
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 48; i++) {
       key += characters[Math.floor(Math.random() * characters.length)];
     }
     return key;
@@ -4507,7 +4523,7 @@ const ViewApp = () => {
     const characters =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let secret = "";
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 64; i++) {
       secret += characters[Math.floor(Math.random() * characters.length)];
     }
     return secret;
@@ -4546,12 +4562,27 @@ const ViewApp = () => {
     }
   };
 
-  const toggleVisibility1 = () => {
-    setShowSecret((prevShowSecret) => !prevShowSecret);
+  const toggleVisibility = (key) => {
+    setShowSecrets((prevShowSecrets) => ({
+      ...prevShowSecrets,
+      [key]: !prevShowSecrets[key],
+    }));
+
+    setShowKey((prevShowKey) => ({
+      ...prevShowKey,
+      [key]: !prevShowKey[key],
+    }));
   };
 
-  const toggleVisibility2 = () => {
-    setShowKey((prevShowKey) => !prevShowKey);
+  const toggleVisibility2 = (key) => {
+    setshowconsumerkey((prevShowConsumer) => ({
+      ...prevShowConsumer,
+      [key]: !prevShowConsumer[key],
+    }));
+    setShowKey1((prevShowkey) => ({
+      ...prevShowkey,
+      [key]: !prevShowkey[key],
+    }));
   };
 
   const hideKey = (key) => {
@@ -4766,7 +4797,9 @@ const ViewApp = () => {
                                             <div className="item-property">
                                               <label>Consumer Key</label>
                                               <div className="secret field__item">
-                                                {showSecret ? (
+                                                {showconsumerkey[
+                                                  credential.consumerKey
+                                                ] ? (
                                                   <div className="secret__value">
                                                     {credential.consumerKey}
                                                   </div>
@@ -4780,9 +4813,13 @@ const ViewApp = () => {
                                                 <br />
                                                 <button
                                                   className="secret__toggle"
-                                                  onClick={toggleVisibility1}
+                                                  onClick={() =>
+                                                    toggleVisibility2(
+                                                      credential.consumerKey
+                                                    )
+                                                  }
                                                 >
-                                                  {showSecret ? (
+                                                  {showKey1 ? (
                                                     <Link className="secret__toggle__hide">
                                                       {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
 
@@ -4818,7 +4855,9 @@ const ViewApp = () => {
                                             <div className="item-property">
                                               <label>Consumer Secret</label>
                                               <div className="secret field__item">
-                                                {showKey ? (
+                                                {showSecrets[
+                                                  credential.consumerSecret
+                                                ] ? (
                                                   <div className="secret__value">
                                                     {credential.consumerSecret}
                                                   </div>
@@ -4832,7 +4871,11 @@ const ViewApp = () => {
                                                 <br />
                                                 <button
                                                   className="secret__toggle"
-                                                  onClick={toggleVisibility2}
+                                                  onClick={() =>
+                                                    toggleVisibility(
+                                                      credential.consumerSecret
+                                                    )
+                                                  }
                                                   // style={{
                                                   //   color: "green",
                                                   //   height: "20px",
@@ -4861,6 +4904,7 @@ const ViewApp = () => {
                                                   >
                                                     <ContentCopyOutlinedIcon />
                                                   </button>
+
                                                   <span className="copy-message">
                                                     {copyMessage}
                                                   </span>
@@ -4894,14 +4938,13 @@ const ViewApp = () => {
                                           </div>
                                           {/* API Products */}
 
-                                          {/* <div
-                                            className="item-property"
-                                            
-                                          >
+                                          <div className="item-property">
                                             <div className="wrapper--secondary">
                                               <label>Products</label>
-                                              {credential.apiProducts.length >
-                                              0 ? (
+                                              {credential &&
+                                              credential.apiProducts &&
+                                              credential.apiProducts.length >
+                                                0 ? (
                                                 <div>
                                                   {credential.apiProducts.map(
                                                     (product, productIndex) => (
@@ -4928,7 +4971,7 @@ const ViewApp = () => {
                                                 </p>
                                               )}
                                             </div>
-                                          </div> */}
+                                          </div>
 
                                           <div
                                             className="dropbutton-wrapper"
@@ -4988,6 +5031,7 @@ const ViewApp = () => {
                               )}
                             </div>
                           </div>
+
                           <div className="card apigee-entity--app__credentials">
                             <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
                               <summary
@@ -5031,7 +5075,9 @@ const ViewApp = () => {
                                               <div className="item-property">
                                                 <label>Consumer Key</label>
                                                 <div className="secret field__item">
-                                                  {showSecret ? (
+                                                  {showconsumerkey[
+                                                    credential.consumerKey
+                                                  ] ? (
                                                     <div className="secret__value">
                                                       {credential.consumerKey}
                                                     </div>
@@ -5042,12 +5088,17 @@ const ViewApp = () => {
                                                       )}
                                                     </div>
                                                   )}
+
                                                   <br />
                                                   <button
                                                     className="secret__toggle"
-                                                    onClick={toggleVisibility1}
+                                                    onClick={() =>
+                                                      toggleVisibility2(
+                                                        credential.consumerKey
+                                                      )
+                                                    }
                                                   >
-                                                    {showSecret ? (
+                                                    {showKey1 ? (
                                                       <Link className="secret__toggle__hide">
                                                         {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
 
@@ -5083,7 +5134,9 @@ const ViewApp = () => {
                                               <div className="item-property">
                                                 <label>Consumer Secret</label>
                                                 <div className="secret field__item">
-                                                  {showKey ? (
+                                                  {showSecrets[
+                                                    credential.consumerSecret
+                                                  ] ? (
                                                     <div className="secret__value">
                                                       {
                                                         credential.consumerSecret
@@ -5096,10 +5149,15 @@ const ViewApp = () => {
                                                       )}
                                                     </div>
                                                   )}
+
                                                   <br />
                                                   <button
                                                     className="secret__toggle"
-                                                    onClick={toggleVisibility2}
+                                                    onClick={() =>
+                                                      toggleVisibility(
+                                                        credential.consumerSecret
+                                                      )
+                                                    }
                                                     // style={{
                                                     //   color: "green",
                                                     //   height: "20px",
@@ -5137,21 +5195,20 @@ const ViewApp = () => {
 
                                               <div className="item-property">
                                                 <label> Issued </label>
-                                               
+
                                                 {credential.issuedAt
-                                                ? formatTimestamp(
-                                                    credential.issuedAt
-                                                  )
-                                                : "N/A"}
+                                                  ? formatTimestamp(
+                                                      credential.issuedAt
+                                                    )
+                                                  : "N/A"}
                                               </div>
                                               <div className="item-property">
                                                 <label> Expires </label>{" "}
-                                               
                                                 {credential.expiresAt
-                                                ? formatTimestamp(
-                                                    credential.expiresAt
-                                                  )
-                                                : "N/A"}
+                                                  ? formatTimestamp(
+                                                      credential.expiresAt
+                                                    )
+                                                  : "N/A"}
                                               </div>
                                               <div className="item-property">
                                                 <label> Key Status </label>
@@ -5162,19 +5219,13 @@ const ViewApp = () => {
                                             </div>
                                             {/* API Products */}
 
-                                            {/* <div
-                                              className="item-property"
-                                              // style={
-                                              //   credential.apiProducts.length >
-                                              //   0
-                                              //     ? { border: "8px solid pink" }
-                                              //     : {}
-                                              // }
-                                            >
+                                            <div className="item-property">
                                               <div className="wrapper--secondary">
                                                 <label>Products</label>
-                                                {credential.apiProducts.length >
-                                                0 ? (
+                                                {credential &&
+                                                credential.apiProducts &&
+                                                credential.apiProducts.length >
+                                                  0 ? (
                                                   <div>
                                                     {credential.apiProducts.map(
                                                       (
@@ -5206,7 +5257,7 @@ const ViewApp = () => {
                                                   </p>
                                                 )}
                                               </div>
-                                            </div> */}
+                                            </div>
 
                                             <div
                                               className="dropbutton-wrapper"

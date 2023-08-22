@@ -319,10 +319,6 @@
 
 // export default EditApps;
 
-
-
-
-
 // import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
@@ -349,8 +345,6 @@
 //     return date.toLocaleString();
 //   };
 
-
-
 //   const handleRemoveAPIProduct = async (
 //     teamName,
 //     appName,
@@ -375,10 +369,6 @@
 //       // Handle error, show a message to the user, etc.
 //     }
 //   };
-
-
-
-
 
 //   const handleAddAPIProduct = async (
 //     appName,
@@ -645,10 +635,8 @@
 //                                   )
 //                                 )}
 
-
-
 //                                 <tr className="empty-row">
-                                
+
 //                                   <td></td>
 //                                   <td></td>
 //                                   <td></td>
@@ -685,8 +673,7 @@
 //                                     </button>
 //                                   </td>
 //                                 </tr>
-                              
-                              
+
 //                               </tbody>
 //                             </table>
 //                           )
@@ -706,12 +693,6 @@
 
 // export default EditApps;
 
-
-
-
-
-
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -724,8 +705,6 @@ const EditApps = () => {
   const dispatch = useDispatch();
   const [selectedApiProduct, setSelectedApiProduct] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState("");
-  
-  
 
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
@@ -739,12 +718,28 @@ const EditApps = () => {
 
   const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
 
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
-  };
+  function formatTimestamp(timestamp) {
+    if (!timestamp) {
+      return "N/A";
+    }
 
+    const dateObject = new Date(parseInt(timestamp));
+    if (!isNaN(dateObject)) {
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        // timeZoneName: "short",
+      };
 
+      return new Intl.DateTimeFormat("en-US", options).format(dateObject);
+    } else {
+      return "Invalid Date";
+    }
+  }
 
   const handleRemoveAPIProduct = async (
     teamName,
@@ -752,7 +747,7 @@ const EditApps = () => {
     consumerKey,
     apiProductName
   ) => {
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
+    const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
 
     try {
@@ -771,10 +766,6 @@ const EditApps = () => {
     }
   };
 
-
-
-
-
   const handleAddAPIProduct = async (
     appName,
     consumerKey,
@@ -785,7 +776,7 @@ const EditApps = () => {
       return;
     }
 
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
+    const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
     //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 
@@ -809,30 +800,29 @@ const EditApps = () => {
   };
 
   const teamNameData = teamName;
-  console.log("selectedApiProduct",selectedApiProduct)
+  console.log("selectedApiProduct", selectedApiProduct);
 
   // Retrieving data from localStorage for the specific team
   // const storedData = localStorage.getItem(`selectedAttributes_${teamNameData}`);
   // const selectedAttributes_All = JSON.parse(storedData) || [];
 
-  const selectedDescription = appDetailsData?.attributes.find(
-    (attr) => attr.name === "description"
-  )?.value || "";
+  const selectedDescription =
+    appDetailsData?.attributes.find((attr) => attr.name === "description")
+      ?.value || "";
   console.log("selected", selectedDescription);
-  
 
-  // const selectedProducts = teamDetails.attributes.find(
-  //   (attr) => attr.name === "api_product"
-  // )?.value;
-  // console.log("selected", selectedProducts);
-  // // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
-  // // console.log("selectedProducts", selectedAttributes_All);
+  const selectedProducts = teamDetails.attributes.find(
+    (attr) => attr.name === "api_product"
+  )?.value;
+  console.log("selected", selectedProducts);
+  // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
+  // console.log("selectedProducts", selectedAttributes_All);
 
-  // const api_product = ["api_product", selectedProducts];
-  // console.log("api_product", api_product);
+  const api_product = ["api_product", selectedProducts];
+  console.log("api_product", api_product);
 
-  // const array1 = [{ selectedProducts }];
-  // console.log("array1", array1);
+  const array1 = [{ selectedProducts }];
+  console.log("array1", array1);
 
   // const unserializedData = array1
   //   .map((item) => {
@@ -848,53 +838,52 @@ const EditApps = () => {
   //   .flat();
   // console.log("unserializedData", unserializedData);
 
-  // const unserializedData = array1
-  //   .map((item) => {
-  //     if (item && item.selectedProducts) {
-  //       const regex = /s:\d+:\\\"(.*?)\\\"/g;
-  //       const matches = item.selectedProducts.match(regex);
-  //       if (matches) {
-  //         return matches.map((match) =>
-  //           match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-  //         );
-  //       }
-  //     }
-  //     return [];
-  //   })
-  //   .flat();
-  // console.log("unserializedData", unserializedData);
+  const unserializedData = array1
+    .map((item) => {
+      if (item && item.selectedProducts) {
+        const regex = /s:\d+:\\\"(.*?)\\\"/g;
+        const matches = item.selectedProducts.match(regex);
+        if (matches) {
+          return matches.map((match) =>
+            match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
+          );
+        }
+      }
+      return [];
+    })
+    .flat();
+  console.log("unserializedData", unserializedData);
 
-  // const uniqueAttributes = Array.from(new Set(unserializedData));
-  // console.log("uniqueAttributes", uniqueAttributes);
+  const uniqueAttributes = Array.from(new Set(unserializedData));
+  console.log("uniqueAttributes", uniqueAttributes);
 
-  // const findDuplicates = (unserializedData) => {
-  //   const duplicates = {};
-  //   const duplicateItems = [];
+  const findDuplicates = (unserializedData) => {
+    const duplicates = {};
+    const duplicateItems = [];
 
-  //   unserializedData.forEach((item) => {
-  //     if (!duplicates[item]) {
-  //       duplicates[item] = 1;
-  //     } else {
-  //       duplicates[item]++;
-  //       if (duplicates[item] === 2) {
-  //         duplicateItems.push(item);
-  //       }
-  //     }
-  //   });
+    unserializedData.forEach((item) => {
+      if (!duplicates[item]) {
+        duplicates[item] = 1;
+      } else {
+        duplicates[item]++;
+        if (duplicates[item] === 2) {
+          duplicateItems.push(item);
+        }
+      }
+    });
 
-  //   return duplicateItems;
-  // };
+    return duplicateItems;
+  };
 
-  // const duplicateValues = findDuplicates(unserializedData);
-  // const filteredData = duplicateValues.filter((attr) => attr !== "0");
-  // console.log("filteredData:", filteredData);
-
+  const duplicateValues = findDuplicates(unserializedData);
+  const filteredData = duplicateValues.filter((attr) => attr !== "0");
+  console.log("filteredData:", filteredData);
 
   if (!appDetailsData || (appDetailsData && isFetching)) {
     return (
       <Layout>
         <div>
-        <AppsButton />
+          <AppsButton />
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -1006,7 +995,7 @@ const EditApps = () => {
                             />
                           </div>
                         </div>
-                        {/* {appDetailsData.credentials.map(
+                        {appDetailsData.credentials.map(
                           (credential, credentialIndex) => (
                             <table
                               className="responsive-enabled table"
@@ -1021,53 +1010,63 @@ const EditApps = () => {
                                   <th>Status</th>
                                   <th>Actions</th>
                                 </tr>
-                              </thead> */}
+                              </thead>
 
-                              {/* <tbody>
-                                {credential.apiProducts.map(
-                                  (product, productIndex) => (
-                                    <tr className="odd" key={productIndex}>
-                                      <td>
-                                        {productIndex === 0
-                                          ? formatDate(credential.issuedAt)
-                                          : ""}
-                                      </td>
-                                      <td>
-                                        {productIndex === 0
-                                          ? credential.consumerKey
-                                          : ""}
-                                      </td>
-                                      <td>
-                                        {productIndex === 0
-                                          ? formatDate(credential.expiresAt)
-                                          : ""}
-                                      </td>
-                                      <td>{product.apiproduct}</td>
-                                      <td>{product.status}</td>
-                                      <td>
-                                        <button
-                                          className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
-                                          type="button"
-                                          onClick={() =>
-                                            handleRemoveAPIProduct(
-                                              teamName,
-                                              appDetailsData.name,
-                                              credential.consumerKey,
-                                              product.apiproduct
-                                            )
-                                          }
-                                        >
-                                          Remove
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  )
-                                )}
+                              <tbody>
+                                {credential &&
+                                  credential.apiProducts &&
+                                  credential.apiProducts.map(
+                                    (product, productIndex) => (
+                                      <tr className="odd" key={productIndex}>
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.issuedAt
+                                              ? formatTimestamp(
+                                                  credential.issuedAt
+                                                )
+                                              : "N/A"
+                                            : ""}
+                                        </td>
 
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.consumerKey
+                                            : ""}
+                                        </td>
 
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.expiresAt
+                                              ? formatTimestamp(
+                                                  credential.expiresAt
+                                                )
+                                              : "N/A"
+                                            : ""}
+                                        </td>
+
+                                        <td>{product.apiproduct}</td>
+                                        <td>{product.status}</td>
+                                        <td>
+                                          <button
+                                            className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+                                            type="button"
+                                            onClick={() =>
+                                              handleRemoveAPIProduct(
+                                                teamName,
+                                                appDetailsData.name,
+                                                credential.consumerKey,
+                                                product.apiproduct
+                                              )
+                                            }
+                                          >
+                                            Remove
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    )
+                                  )}
 
                                 <tr className="empty-row">
-                                
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -1086,7 +1085,7 @@ const EditApps = () => {
                                         </option>
                                       ))}
                                     </select>
-                                    </td>
+                                  </td>
                                   <td></td>
                                   <td>
                                     <button
@@ -1104,76 +1103,85 @@ const EditApps = () => {
                                     </button>
                                   </td>
                                 </tr>
-                               */}
 
-
-
-
-
-{/* 
-                                {credential.apiProducts.map(
-                                  (product, productIndex) => (
-                                    <tr className="empty-row" key={productIndex}>
-                                      <td>
-                                        {productIndex === 0
-                                          ? formatDate(credential.issuedAt)
-                                          : ""}
-                                      </td>
-                                      <td>
-                                        {productIndex === 0
-                                          ? credential.consumerKey
-                                          : ""}
-                                      </td>
-                                      <td>
-                                        {productIndex === 0
-                                          ? formatDate(credential.expiresAt)
-                                          : ""}
-                                      </td>
-                                      <td>{product.apiproduct}</td>
-                                      <td>{product.status}</td>
-                                      <td>
-                                      <select
-                                      value={selectedApiProduct}
-                                      onChange={(e) =>
-                                        setSelectedApiProduct(e.target.value)
-                                      }
-                                    >
-                                      <option value="">- Select -</option>
-                                      {filteredData.map((attribute, index) => (
-                                        <option key={index} value={attribute}>
-                                          {attribute}
-                                        </option>
-                                      ))}
-                                    </select>
-                                    </td>
-                                  <td></td>
-                                  <td>
-                                    <button
-                                      className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
-                                      type="button"
-                                      onClick={() =>
-                                        handleAddAPIProduct(
-                                          appDetailsData.name,
-                                          credential.consumerKey,
-                                          selectedApiProduct
-                                        )
-                                      }
-                                    >
-                                      Add
-                                    </button>
-                                  </td>
-                                     
-                                    </tr>
-                                  )
-                                )} */}
-
-
-
-{/*                               
-                              </tbody> */}
-                            {/* </table>
+                                {/* {credential &&
+                                  credential.apiProducts &&
+                                  credential.apiProducts.map(
+                                    (product, productIndex) => (
+                                      <tr
+                                        className="empty-row"
+                                        key={productIndex}
+                                      >
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.issuedAt
+                                              ? formatTimestamp(
+                                                  credential.issuedAt
+                                                )
+                                              : "N/A"
+                                            : ""}
+                                        </td>
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.consumerKey
+                                            : ""}
+                                        </td>
+                                        <td>
+                                          {productIndex === 0
+                                            ? credential.issuedAt
+                                              ? formatTimestamp(
+                                                  credential.expiresAt
+                                                )
+                                              : "N/A"
+                                            : ""}
+                                        </td>
+                                        <td>{product.apiproduct}</td>
+                                        <td>{product.status}</td>
+                                        <td>
+                                          <select
+                                            value={selectedApiProduct}
+                                            onChange={(e) =>
+                                              setSelectedApiProduct(
+                                                e.target.value
+                                              )
+                                            }
+                                          >
+                                            <option value="">- Select -</option>
+                                            {filteredData.map(
+                                              (attribute, index) => (
+                                                <option
+                                                  key={index}
+                                                  value={attribute}
+                                                >
+                                                  {attribute}
+                                                </option>
+                                              )
+                                            )}
+                                          </select>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                          <button
+                                            className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+                                            type="button"
+                                            onClick={() =>
+                                              handleAddAPIProduct(
+                                                appDetailsData.name,
+                                                credential.consumerKey,
+                                                selectedApiProduct
+                                              )
+                                            }
+                                          >
+                                            Add
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    )
+                                  )} */}
+                              </tbody>
+                            </table>
                           )
-                        )} */}
+                        )}
                       </form>
                     </div>
                   </div>

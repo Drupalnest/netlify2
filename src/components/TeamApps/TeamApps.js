@@ -454,6 +454,20 @@ const TeamApps = () => {
       <Layout>
         <div>
           <Buttons />
+          <div className="page__tasks">
+              <div className="container">
+                <div className="contextual-region block block--starbucks-actions">
+                  <div className="my-4">
+                    <Link
+                      to="/add-apps"
+                      className="button button-action btn btn-sm btn-primary"
+                    >
+                      Add appgroups app
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -476,6 +490,7 @@ const TeamApps = () => {
       <Layout>
         <div>
           <Buttons />
+         
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -503,6 +518,7 @@ const TeamApps = () => {
       <Layout>
         <div>
           <Buttons />
+         
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
