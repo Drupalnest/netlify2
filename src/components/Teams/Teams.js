@@ -120,7 +120,7 @@ const TeamList = () => {
                                               handleClickTeam(appGroup.name);
                                             }}
                                           >
-                                            Team Apps
+                                            Appgroup Apps
                                           </Link>
                                         </li>
                                         <li

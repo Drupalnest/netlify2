@@ -4949,9 +4949,16 @@ const ViewApp = () => {
                                           </div>
                                           {/* API Products */}
 
-                                          <div className="item-property">
+                                          <div
+                                            className="item-property"
+                                            style={{ marginLeft: "45px" }}
+                                          >
                                             <div className="wrapper--secondary">
-                                              <label>Products</label>
+                                              <label
+                                                style={{ marginLeft: "32px" }}
+                                              >
+                                                Products
+                                              </label>
                                               {credential &&
                                               credential.apiProducts &&
                                               credential.apiProducts.length >
@@ -4976,7 +4983,9 @@ const ViewApp = () => {
                                                   )}
                                                 </div>
                                               ) : (
-                                                <p>
+                                                <p
+                                                  style={{ marginLeft: "32px" }}
+                                                >
                                                   No API products found for this
                                                   credential.
                                                 </p>
@@ -5240,9 +5249,26 @@ const ViewApp = () => {
                                             </div>
                                             {/* API Products */}
 
-                                            <div className="item-property">
-                                              <div className="wrapper--secondary">
-                                                <label>Products</label>
+                                            <div
+                                              className="item-property"
+                                              // style={{
+                                              //   border: "1px solid blue",
+                                              // }}
+                                            >
+                                              <div
+                                                className="wrapper--secondary"
+                                                style={{
+                                                  // border: "1px solid red",
+                                                  marginLeft: "45px",
+                                                }}
+                                              >
+                                                <label
+                                                  style={{
+                                                    marginLeft: "32px",
+                                                  }}
+                                                >
+                                                  Products
+                                                </label>
                                                 {credential &&
                                                 credential.apiProducts &&
                                                 credential.apiProducts.length >
@@ -5272,7 +5298,11 @@ const ViewApp = () => {
                                                     )}
                                                   </div>
                                                 ) : (
-                                                  <p>
+                                                  <p
+                                                    style={{
+                                                      marginLeft: "32px",
+                                                    }}
+                                                  >
                                                     No API products found for
                                                     this credential.
                                                   </p>

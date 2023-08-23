@@ -421,13 +421,20 @@
 // export default UpdateCompanyName;
 
 import { Link } from "gatsby";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout";
 import Buttons from "../Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
 
 const UpdateCompanyName = () => {
+  const [companyName, setCompanyName] = useState("");
+  const [description, setDescription] = useState("");
+  const [selectedAttributes, setSelectedAttributes] = useState([]);
+  const [message, setMessage] = useState("");
+  const [checkedAttributes, setCheckedAttributes] = useState([]);
+  const [isFetch, setIsFetch] = useState(true);
+
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
@@ -441,23 +448,30 @@ const UpdateCompanyName = () => {
   const apiproduct = apiproducts.apiProduct;
   console.log("apiproduct", apiproduct);
 
+  const namesArray = apiproduct ? apiproduct.map((item) => item.name) : [];
+  console.log("namesArray", namesArray);
+
   useEffect(() => {
     dispatch(apiProducts());
   }, [dispatch]);
 
   // useEffect(() => {
+  //   // Fetch API products
+  //   dispatch(apiProducts())
+  //     .then(() => setIsFetch(false))
+  //     .catch((error) => {
+  //       console.error("Error fetching API products:", error);
+  //       setIsFetch(false);
+  //     });
+  // }, [dispatch]);
+
+  // useEffect(() => {
   //   dispatch(fetchTeamDetails(team));
   // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchTeams());
-  }, []);
-
-  const [companyName, setCompanyName] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedAttributes, setSelectedAttributes] = useState([]);
-  const [message, setMessage] = useState("");
-  const [checkedAttributes, setCheckedAttributes] = useState([]);
+  // useEffect(() => {
+  //   dispatch(fetchTeams());
+  // }, []);
 
   const handleCompanyNameChange = (e) => {
     setCompanyName(e.target.value);
@@ -542,20 +556,18 @@ const UpdateCompanyName = () => {
     });
   };
 
-
-
   const descriptionValue = teamDetails
     ? teamDetails.attributes.find((attr) => attr.name === "description")?.value
     : "";
 
-  const filteredData = apiproduct
-    ? apiproduct.filter((attr) => attr !== "0")
+  const filteredData = namesArray
+    ? namesArray.filter((attr) => attr !== "0")
     : [];
+
+  console.log("filteredData", filteredData);
 
   const uniqueAttributes = Array.from(new Set(filteredData));
   console.log("uniqueAttributes", uniqueAttributes);
-
-
 
   const products = teamDetails
     ? teamDetails.attributes.find((attr) => attr.name === "api_product")?.value
@@ -589,11 +601,12 @@ const UpdateCompanyName = () => {
     .flat();
   console.log("unserializedData", unserializedData);
 
-  const findDuplicates = (apiproduct) => {
+  const findDuplicates = (namesArray) => {
     const duplicates = {};
     const duplicateItems = [];
 
-    apiproduct.forEach((item) => {
+    // Count occurrences of each item in the array
+    namesArray.forEach((item) => {
       if (!duplicates[item]) {
         duplicates[item] = 1;
       } else {
@@ -601,6 +614,7 @@ const UpdateCompanyName = () => {
       }
     });
 
+    // Identify items with counts greater than 1 as duplicates
     Object.entries(duplicates).forEach(([item, count]) => {
       if (count > 1) {
         duplicateItems.push(item);
@@ -614,62 +628,56 @@ const UpdateCompanyName = () => {
   console.log("duplicateItems", duplicateItems);
 
   useEffect(() => {
-    const filteredData = apiproduct
-      ? apiproduct.filter((attr) => attr !== "0")
-      : [];
+    const filteredData = namesArray.filter((attr) => attr !== "0");
     const uniqueAttributes = Array.from(new Set(filteredData));
-
+    const duplicateItems = findDuplicates(unserializedData);
     const initialCheckedAttributes = uniqueAttributes.filter((attr) =>
       duplicateItems.includes(attr)
     );
-    setCheckedAttributes(initialCheckedAttributes);
-
-    const storedSelectedAttributes =
-      JSON.parse(
-        localStorage.getItem(`selectedAttributes_${teamDetails.name}`)
-      ) || [];
-    setSelectedAttributes(storedSelectedAttributes);
-  }, [teamDetails, apiproduct]);
+  }, [teamDetails, namesArray]);
 
   useEffect(() => {
-    if (teamDetails) {
-      setCompanyName(teamDetails.displayName);
+    const filteredData = namesArray.filter((attr) => attr !== "0");
+    const uniqueAttributes = Array.from(new Set(filteredData));
+    const initialCheckedAttributes = uniqueAttributes.filter((attr) =>
+      duplicateItems.includes(attr)
+    );
 
-      const descriptionAttribute = teamDetails.attributes.find(
-        (attr) => attr.name === "description"
-      );
+    setCheckedAttributes(initialCheckedAttributes);
+  }, [teamDetails]);
 
-      if (descriptionAttribute) {
-        setDescription(descriptionAttribute.value || "");
-      }
+  useEffect(() => {
+    setCompanyName(teamDetails?.displayName || "");
 
-      // Rest of your code...
-    }
-  }, [teamDetails,apiproduct]);
+    const descriptionValue = teamDetails
+      ? teamDetails.attributes.find((attr) => attr.name === "description")
+      : null;
+
+    setDescription(descriptionValue ? descriptionValue.value || "" : "");
+  }, [teamDetails]);
+
+
 
   const mergedArray = [...selectedAttributes, ...checkedAttributes];
-  //const selected_attribute = Array.from(new Set(mergedArray));
+  console.log("mergedArray", mergedArray);
 
-  //   const unselected_attributes = uniqueAttributes.filter(
-  //     (attr) => !selected_attribute.includes(attr)
-  //   );
-  //   console.log("unselected_attributes", unselected_attributes);
-  const selected_attribute_names = Array.from(new Set(mergedArray));
-  console.log("selected_attribute_names", selected_attribute_names);
+  const selected_attribute = Array.from(new Set(mergedArray));
+  console.log("selected_attribute", selected_attribute);
+
   const unselected_attributes = uniqueAttributes.filter(
-    (attr) => !selected_attribute_names.includes(attr.name)
+    (attr) => !selected_attribute.includes(attr)
   );
   console.log("unselected_attributes", unselected_attributes);
 
-  const formatted_selected_attribute = selected_attribute_names.map(
-    (attrName) => ({
-      [attrName]: attrName,
-    })
-  );
+  const formatted_selected_attribute = selected_attribute.map((attrName) => ({
+    [attrName]: attrName,
+  }));
+  console.log("formatted_selected_attribute", formatted_selected_attribute);
 
   const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
-    [attr.name]: "0",
+    [attr]: "0",
   }));
+  console.log("formatted_unselected_attribute", formatted_unselected_attribute);
 
   const final_Output = [
     ...formatted_selected_attribute,
@@ -783,6 +791,7 @@ const UpdateCompanyName = () => {
                               cols={60}
                               value={description}
                               placeholder={descriptionValue}
+                              // defaultValue={descriptionValue}
                               onChange={handleDescriptionChange}
                             />
                           </div>
@@ -822,7 +831,7 @@ const UpdateCompanyName = () => {
                               </button>
                             </legend>
 
-                            {/* {apiproducts && apiproducts.length > 0 && (
+                            {namesArray && namesArray.length > 0 && (
                               <div className="p-4 fieldset-wrapper">
                                 <div className="form-checkboxes">
                                   {uniqueAttributes.map((val, valIndex) => (
@@ -853,42 +862,7 @@ const UpdateCompanyName = () => {
                                   ))}
                                 </div>
                               </div>
-                            )} */}
-
-                            {apiproduct &&
-                              Array.isArray(apiproduct) &&
-                              apiproduct.length > 0 && (
-                                <div className="p-4 fieldset-wrapper">
-                                  <div className="form-checkboxes">
-                                    {uniqueAttributes.map((item, valIndex) => (
-                                      <div
-                                        key={item.name}
-                                        className="js-form-item form-item js-form-type-checkbox form-item-field-api-product-0-value-corp-iag-code-token js-form-item-field-api-product-0-value-corp-iag-code-token form-check"
-                                      >
-                                        <ul style={{ padding: 0, margin: 0 }}>
-                                          <li
-                                            key={item.name}
-                                            style={{ listStyle: "none" }}
-                                          >
-                                            <input
-                                              type="checkbox"
-                                              value={item.name}
-                                              style={{ marginRight: "0.5em" }}
-                                              checked={checkedAttributes.includes(
-                                                item.name
-                                              )}
-                                              onChange={() =>
-                                                handleCheckboxChange(item.name)
-                                              }
-                                            />
-                                            {item.name}
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
+                            )}
                           </fieldset>
 
                           <div className="form-actions js-form-wrapper form-wrapper">

@@ -1745,8 +1745,10 @@ const AddTeam = () => {
   }, [dispatch]);
 
   const [companyName, setCompanyName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [description, setDescription] = useState("");
-  const [checkedAttributes, setCheckedAttributes] = useState(new Set());
+  const [selectedAttributes, setSelectedAttributes] = useState([]);
+  const [checkedAttributes, setCheckedAttributes] = useState([]);
 
   const handleCompanyNameChange = (e) => {
     const inputText = e.target.value;
@@ -1758,6 +1760,9 @@ const AddTeam = () => {
     setCompanyName(formattedCompanyName);
   };
 
+  const handleDisplayNameChange = (e) => {
+    setDisplayName(e.target.value);
+  };
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -1767,6 +1772,11 @@ const AddTeam = () => {
 
     if (!companyName.trim()) {
       alert("Please provide a valid company name.");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("Please provide a description.");
       return;
     }
 
@@ -1808,25 +1818,53 @@ const AddTeam = () => {
     }
   };
 
-  const handleCheckboxChange = (attribute) => {
-    setCheckedAttributes((prevChecked) => {
-      const newChecked = new Set(prevChecked);
-      if (newChecked.has(attribute)) {
-        newChecked.delete(attribute);
+
+  const handleAttributeChange = (attributeValue) => {
+    setSelectedAttributes((prevAttributes) => {
+      if (prevAttributes.includes(attributeValue)) {
+        return prevAttributes.filter((attr) => attr !== attributeValue);
       } else {
-        newChecked.add(attribute);
+        return [...prevAttributes, attributeValue];
       }
-      return newChecked;
     });
   };
 
-  const selected_attribute_names = [...checkedAttributes];
+  const updateSelectedAttributes = (updatedAttributes) => {
+    setSelectedAttributes(updatedAttributes);
+   
+  };
+
+  // const handleCheckboxChange = (attribute) => {
+  //   setCheckedAttributes((prevChecked) => {
+  //     const newChecked = new Set(prevChecked);
+  //     if (newChecked.has(attribute)) {
+  //       newChecked.delete(attribute);
+  //     } else {
+  //       newChecked.add(attribute);
+  //     }
+  //     return newChecked;
+  //   });
+  // };
+
+  const handleCheckboxChange = (attribute) => {
+    setCheckedAttributes((prevChecked) => {
+      if (prevChecked.includes(attribute)) {
+        return prevChecked.filter((attr) => attr !== attribute);
+      } else {
+        return [...prevChecked, attribute];
+      }
+    });
+  };
+  const mergedArray = [...selectedAttributes, ...checkedAttributes];
+  
+  const selected_attribute = Array.from(new Set(mergedArray));
+  
   const unselected_attributes = apiproduct
-  ? apiproduct.filter((attr) => !selected_attribute_names.includes(attr.name))
+  ? apiproduct.filter((attr) => !selected_attribute.includes(attr.name))
   : [];
 
 
-  const formatted_selected_attribute = selected_attribute_names.map(
+  const formatted_selected_attribute = selected_attribute.map(
     (attrName) => ({
       [attrName]: attrName,
     })
@@ -1911,7 +1949,10 @@ const AddTeam = () => {
                               className="js-text-full text-full form-textarea form-control"
                               rows={5}
                               cols={60}
+                              placeholder=""
                               value={description}
+                              required="required"
+                              aria-required="true"
                               onChange={handleDescriptionChange}
                             />
                           </div>
@@ -1945,7 +1986,7 @@ const AddTeam = () => {
                                             type="checkbox"
                                             value={item.name}
                                             style={{ marginRight: "0.5em" }}
-                                            checked={checkedAttributes.has(
+                                            checked={checkedAttributes.includes(
                                               item.name
                                             )}
                                             onChange={() =>

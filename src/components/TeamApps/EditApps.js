@@ -706,6 +706,8 @@ const EditApps = () => {
   const [selectedApiProduct, setSelectedApiProduct] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState("");
 
+  const [selectedApiProducts, setSelectedApiProducts] = useState([]);
+
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
   const teamName = teamDetails ? teamDetails.name : "";
@@ -879,6 +881,15 @@ const EditApps = () => {
   const filteredData = duplicateValues.filter((attr) => attr !== "0");
   console.log("filteredData:", filteredData);
 
+  const handleApiProductSelect = (e, credentialIndex) => {
+    const newValue = e.target.value;
+    setSelectedApiProducts((prevSelected) => {
+      const updatedSelected = [...prevSelected];
+      updatedSelected[credentialIndex] = newValue;
+      return updatedSelected;
+    });
+  };
+
   if (!appDetailsData || (appDetailsData && isFetching)) {
     return (
       <Layout>
@@ -1013,8 +1024,8 @@ const EditApps = () => {
                               </thead>
 
                               <tbody>
-                                {credential &&
-                                  credential.apiProducts &&
+                                {appDetailsData.credentials && credential &&
+                                  credential.apiProducts && 
                                   credential.apiProducts.map(
                                     (product, productIndex) => (
                                       <tr className="odd" key={productIndex}>
@@ -1073,9 +1084,15 @@ const EditApps = () => {
 
                                   <td>
                                     <select
-                                      value={selectedApiProduct}
+                                      value={
+                                        selectedApiProducts[credentialIndex] ||
+                                        ""
+                                      }
                                       onChange={(e) =>
-                                        setSelectedApiProduct(e.target.value)
+                                        handleApiProductSelect(
+                                          e,
+                                          credentialIndex
+                                        )
                                       }
                                     >
                                       <option value="">- Select -</option>
@@ -1095,7 +1112,7 @@ const EditApps = () => {
                                         handleAddAPIProduct(
                                           appDetailsData.name,
                                           credential.consumerKey,
-                                          selectedApiProduct
+                                          selectedApiProducts
                                         )
                                       }
                                     >
@@ -1103,81 +1120,6 @@ const EditApps = () => {
                                     </button>
                                   </td>
                                 </tr>
-
-                                {/* {credential &&
-                                  credential.apiProducts &&
-                                  credential.apiProducts.map(
-                                    (product, productIndex) => (
-                                      <tr
-                                        className="empty-row"
-                                        key={productIndex}
-                                      >
-                                        <td>
-                                          {productIndex === 0
-                                            ? credential.issuedAt
-                                              ? formatTimestamp(
-                                                  credential.issuedAt
-                                                )
-                                              : "N/A"
-                                            : ""}
-                                        </td>
-                                        <td>
-                                          {productIndex === 0
-                                            ? credential.consumerKey
-                                            : ""}
-                                        </td>
-                                        <td>
-                                          {productIndex === 0
-                                            ? credential.issuedAt
-                                              ? formatTimestamp(
-                                                  credential.expiresAt
-                                                )
-                                              : "N/A"
-                                            : ""}
-                                        </td>
-                                        <td>{product.apiproduct}</td>
-                                        <td>{product.status}</td>
-                                        <td>
-                                          <select
-                                            value={selectedApiProduct}
-                                            onChange={(e) =>
-                                              setSelectedApiProduct(
-                                                e.target.value
-                                              )
-                                            }
-                                          >
-                                            <option value="">- Select -</option>
-                                            {filteredData.map(
-                                              (attribute, index) => (
-                                                <option
-                                                  key={index}
-                                                  value={attribute}
-                                                >
-                                                  {attribute}
-                                                </option>
-                                              )
-                                            )}
-                                          </select>
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                          <button
-                                            className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
-                                            type="button"
-                                            onClick={() =>
-                                              handleAddAPIProduct(
-                                                appDetailsData.name,
-                                                credential.consumerKey,
-                                                selectedApiProduct
-                                              )
-                                            }
-                                          >
-                                            Add
-                                          </button>
-                                        </td>
-                                      </tr>
-                                    )
-                                  )} */}
                               </tbody>
                             </table>
                           )
@@ -1196,3 +1138,113 @@ const EditApps = () => {
 };
 
 export default EditApps;
+
+// <table className="responsive-enabled table">
+// <thead>
+//   <tr>
+//     <th>Issued*</th>
+//     <th>Credentials</th>
+//     <th>Expires*</th>
+//     <th>API Product</th>
+//     <th>Status</th>
+//     <th>Actions</th>
+//   </tr>
+// </thead>
+// <tbody>
+//   {appDetailsData.credentials.map(
+//     (credential, credentialIndex) => (
+//       <React.Fragment key={credentialIndex}>
+//         <tr className="odd">
+//           <td>
+//             {formatTimestamp(credential.issuedAt)}
+//           </td>
+//           <td>{credential.consumerKey}</td>
+//           <td>
+//             {formatTimestamp(credential.expiresAt)}
+//           </td>
+//           {credential.apiProducts ? (
+//             credential.apiProducts.map(
+//               (product, productIndex) => (
+//                 <tr
+//                   className="odd"
+//                   key={`${credentialIndex}-${productIndex}`}
+//                 >
+//                   <td></td>
+//                   <td></td>
+//                   <td></td>
+//                   <tr> <td>{product.apiproduct}</td></tr>
+//                   <tr> <td>{product.status}</td></tr>
+
+//                   <td>
+//                     <button
+//                       className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+//                       type="button"
+//                       onClick={() =>
+//                         handleRemoveAPIProduct(
+//                           teamName,
+//                           appDetailsData.name,
+//                           credential.consumerKey,
+//                           product.apiproduct
+//                         )
+//                       }
+//                     >
+//                       Remove
+//                     </button>
+//                   </td>
+//                 </tr>
+//               )
+//             )
+//           ) : (
+//             <tr
+//               className="odd"
+//               key={`${credentialIndex}-no-products`}
+//             >
+//               <td colSpan="3">No API Products</td>
+//             </tr>
+//           )}
+//           <tr className="empty-row">
+//     <td></td>
+//     <td></td>
+//     <td></td>
+//     <td>
+//       <select
+//         value={selectedApiProduct}
+//         onChange={(e) =>
+//           setSelectedApiProduct(e.target.value)
+//         }
+//       >
+//         <option value="">- Select -</option>
+//         {filteredData.map((attribute, index) => (
+//           <option key={index} value={attribute}>
+//             {attribute}
+//           </option>
+//         ))}
+//       </select>
+//     </td>
+//     <td></td>
+//     <td>
+//       <button
+//         className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+//         type="button"
+//         onClick={() =>
+//           handleAddAPIProduct(
+//             appDetailsData.name,
+//             appDetailsData.consumerKey,
+//             selectedApiProduct
+//           )
+//         }
+//       >
+//         Add
+//       </button>
+//     </td>
+//   </tr>
+//         </tr>
+
+//       </React.Fragment>
+//     )
+//   )}
+
+//   {/* Empty row for adding new API products */}
+
+// </tbody>
+// </table>

@@ -424,15 +424,12 @@
 
 // export default AddApps;
 
-
-
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
 import Header from "../Header/Header";
-import {  fetchApps } from "../../redux/store";
+import { fetchApps, fetchAppDetails } from "../../redux/store";
 
 const AddApps = () => {
   const dispatch = useDispatch();
@@ -444,18 +441,24 @@ const AddApps = () => {
   // const teamDetails = useSelector((state) => state.teamDetails);
   // const teamName = teamDetails?.name || "";
 
-  // const appDetailsData = useSelector(
-  //   (state) => state.appDetailsData.appDetailsData
-  // );
-  // console.log("appDetailsData", appDetailsData);
+  const appDetailsData = useSelector(
+    (state) => state.appDetailsData.appDetailsData
+  );
+  console.log("appDetailsData", appDetailsData);
 
   const teamDetails = useSelector((state) => state.teamDetails);
-   console.log("addapps", teamDetails);
+  console.log("addapps", teamDetails);
 
- 
- 
   const appgroupName = teamDetails ? teamDetails.name : "";
-  console.log("appgroupName",appgroupName)
+  console.log("appgroupName", appgroupName);
+
+
+  const teamName = appDetailsData ? appDetailsData.appGroup : "";
+  console.log("teamName", teamName);
+
+  const appNamee = appDetailsData ? appDetailsData.name : "";
+
+  console.log("appNamee", appNamee);
 
   const handleCompanyNameChange = (e) => {
     setAppName(e.target.value);
@@ -465,16 +468,14 @@ const AddApps = () => {
     setDescription(e.target.value);
   };
 
-  const handleAddApp = async (e) => {
-    e.preventDefault();
-
-    if (!appName.trim()) {
+  const handleAddApp = async () => {
+        if (!appName.trim()) {
       alert("Please provide a valid company name.");
       return;
     }
 
     try {
-       const serializedApiProduct = serializeData.join(",");
+      const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps`,
         {
@@ -503,7 +504,6 @@ const AddApps = () => {
                 apiProducts: [
                   {
                     apiproduct: serializedApiProduct,
-                     
                   },
                 ],
               },
@@ -513,7 +513,8 @@ const AddApps = () => {
       );
 
       if (response.ok) {
-        // alert(appName);
+        //  alert(appName);
+
         // alert(description);
         // alert(serializedApiProduct);
         dispatch(fetchApps(appgroupName));
@@ -527,118 +528,128 @@ const AddApps = () => {
     }
   };
 
+  const newAppName = appName;
+
+  const generateRandomSecret = () => {
+    const characters =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let key = "";
+    for (let i = 0; i < 48; i++) {
+      key += characters[Math.floor(Math.random() * characters.length)];
+    }
+    return key;
+  };
+
+  const generateRandomKey = () => {
+    const characters =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let secret = "";
+    for (let i = 0; i < 64; i++) {
+      secret += characters[Math.floor(Math.random() * characters.length)];
+    }
+    return secret;
+  };
+
+  const handleConfirmClick = async () => {
+    try {
+      const randomKey = generateRandomKey();
+      const randomSecret = generateRandomSecret();
+
+      const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps/${newAppName}/keys`;
+      const bearerToken = process.env.BEARER_TOKEN;
+
+      const response = await axios.post(
+        apiUrl,
+        {
+          consumerKey: randomKey,
+          consumerSecret: randomSecret,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(fetchAppDetails(appgroupName, appName));
+      alert("API key created successfully");
+    } catch (error) {
+      alert("Error creating API key: " + error.message);
+    }
+  };
+
   // console.log("team name", companyName);
 
   // console.log("description", description);
 
+  const handleAddAPIProduct = async (
+    appName,
+    consumerKey,
+    selected_apiProduct
+  ) => {
+    if (!selected_apiProduct) {
+      alert("Please select an API product.");
+      return;
+    }
 
+    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${appgroupName}/apps/${appName}/keys/${consumerKey}`;
+    const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+    //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 
+    const requestBody = {
+      apiProducts: [selected_apiProduct],
+    };
 
+    try {
+      await axios.post(apiUrl, requestBody, {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
 
+      // Perform any additional actions after successful addition
+      alert(selected_apiProduct);
 
-  // const handleAddAPIProduct = async (
-  //   appName,
-  //   consumerKey,
-  //   selected_apiProduct
-  // ) => {
-  //   if (!selected_apiProduct) {
-  //     alert("Please select an API product.");
-  //     return;
-  //   }
+      alert("API product added successfully");
+    } catch (error) {
+      alert("Error adding API product:", error);
+    }
+  };
 
-  //   const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
-  //   const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
-  //   //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
+  const handleCombinedSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
 
-  //   const requestBody = {
-  //     apiProducts: [selected_apiProduct],
-  //   };
+    // Call both functions
+    handleAddApp();
+    // handleConfirmClick();
+  };
 
-  //   try {
-  //     await axios.post(apiUrl, requestBody, {
-  //       headers: {
-  //         Authorization: `Bearer ${bearerToken}`,
-  //       },
-  //     });
-
-  //     // Perform any additional actions after successful addition
-  //     alert(selected_apiProduct);
-
-  //     alert("API product added successfully");
-  //   } catch (error) {
-  //     alert("Error adding API product:", error);
-  //   }
-  // };
-
-
-
-
-
-
-
-
-  // const handleAddAppAndAPIProduct = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!appName.trim()) {
-  //     alert("Please provide a valid company name.");
-  //     return;
-  //   }
-
-  //   try {
-  //     // Add the logic from handleAddApp here
-  //     const appResponse = await fetch(
-  //       `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps`,
+  //   // Add the logic from handleAddAPIProduct here
+  //   const apiProductResponse = await axios.post(
+  //     `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`,
+  //     // {
+  //     //   apiProducts: selected_apiProduct,
+  //     // },
+  //     body: JSON.stringify({
+  //     credentials: [
   //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-  //         },
-  //         body: JSON.stringify({
-  //           name: appName,
-  //           attributes: [
-  //             {
-  //               name: "description",
-  //               value: description,
-  //             },
-  //           ],
-  //         }),
+  //           apiProducts: [selected_apiProduct],
+  //           attributes: [],
+  //           consumerKey: "uQPdbCyeh7SbGNFFV9oACdXfrqdAxlbt",
+  //           consumerSecret: "W59PehcBGB1PbJAm",
+  //           expiresAt: -1,
+  //           issuedAt: 1692189620392,
+  //           scopes: [],
+  //           status: approved
   //       }
-  //     );
-
-  //     if (!appResponse.ok) {
-  //       alert("Failed to create team");
-  //       return;
+  //   ],
+  // })
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+  //       },
   //     }
-
-    //   // Add the logic from handleAddAPIProduct here
-    //   const apiProductResponse = await axios.post(
-    //     `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`,
-    //     // {
-    //     //   apiProducts: selected_apiProduct,
-    //     // },
-    //     body: JSON.stringify({
-    //     credentials: [
-    //       {
-    //           apiProducts: [selected_apiProduct],
-    //           attributes: [],
-    //           consumerKey: "uQPdbCyeh7SbGNFFV9oACdXfrqdAxlbt",
-    //           consumerSecret: "W59PehcBGB1PbJAm",
-    //           expiresAt: -1,
-    //           issuedAt: 1692189620392,
-    //           scopes: [],
-    //           status: approved
-    //       }
-    //   ],
-    // })
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-    //       },
-    //     }
-    //   );
-
+  //   );
 
   //   const apiProductResponse = await fetch(
   //     `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}`,
@@ -678,8 +689,6 @@ const AddApps = () => {
   //     alert("An error occurred while creating team or adding API product");
   //   }
   // };
-
-
 
   const selectedProducts = teamDetails.attributes.find(
     (attr) => attr.name === "api_product"
@@ -763,8 +772,6 @@ const AddApps = () => {
   // const updateSelectedAttributes = (updatedAttributes) => {
   //   setSelectedAttributes(updatedAttributes);
   // };
-
-
 
   const handleCheckboxChange = (attribute) => {
     setCheckedAttributes((prevChecked) => {
@@ -857,8 +864,9 @@ const AddApps = () => {
                       <form
                         className="team-app-add-for-team-form team-app-form apigee-edge--form"
                         //onSubmit={{handleAddApp,handleAddAPIProduct}}
-                        onSubmit={handleAddApp}
+                        // onSubmit={handleAddApp,handleConfirmClick}
                         //onSubmit={handleAddApp}
+                        onSubmit={handleCombinedSubmit}
                       >
                         <div
                           className="field--type-string field--name-displayname field--widget-string-textfield js-form-wrapper form-wrapper"
@@ -941,6 +949,7 @@ const AddApps = () => {
                               placeholder=""
                               defaultValue={""}
                               value={description}
+                              required="required"
                               onChange={handleDescriptionChange}
                             />
                           </div>
