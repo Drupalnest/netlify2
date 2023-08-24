@@ -878,6 +878,7 @@ const EditApps = () => {
   };
 
   const duplicateValues = findDuplicates(unserializedData);
+
   const filteredData = duplicateValues.filter((attr) => attr !== "0");
   console.log("filteredData:", filteredData);
 
@@ -1024,8 +1025,9 @@ const EditApps = () => {
                               </thead>
 
                               <tbody>
-                                {appDetailsData.credentials && credential &&
-                                  credential.apiProducts && 
+                                {appDetailsData.credentials &&
+                                  credential &&
+                                  credential.apiProducts &&
                                   credential.apiProducts.map(
                                     (product, productIndex) => (
                                       <tr className="odd" key={productIndex}>
@@ -1081,6 +1083,61 @@ const EditApps = () => {
                                   <td></td>
                                   <td></td>
                                   <td></td>
+                                  <td>
+                                    <select
+                                      value={
+                                        selectedApiProducts[credentialIndex] ||
+                                        ""
+                                      }
+                                      onChange={(e) =>
+                                        handleApiProductSelect(
+                                          e,
+                                          credentialIndex
+                                        )
+                                      }
+                                    >
+                                      <option value="">- Select -</option>
+                                      {filteredData.map(
+                                        (attribute, index) =>
+                                          // Check if the attribute is already added to the credential
+                                          !appDetailsData.credentials[
+                                            credentialIndex
+                                          ]?.apiProducts?.some(
+                                            (product) =>
+                                              product.apiproduct === attribute
+                                          ) && (
+                                            <option
+                                              key={index}
+                                              value={attribute}
+                                            >
+                                              {attribute}
+                                            </option>
+                                          )
+                                      )}
+                                    </select>
+                                  </td>
+                                  <td></td>
+                                  <td>
+                                    <button
+                                      className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+                                      type="button"
+                                      onClick={() =>
+                                        handleAddAPIProduct(
+                                          appDetailsData.name,
+                                          credential.consumerKey,
+                                          selectedApiProducts
+                                        )
+                                      }
+                                    >
+                                      Add
+                                    </button>
+                                  </td>
+                                </tr>
+
+                                {/* <tr className="empty-row">
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
 
                                   <td>
                                     <select
@@ -1119,7 +1176,7 @@ const EditApps = () => {
                                       Add
                                     </button>
                                   </td>
-                                </tr>
+                                </tr> */}
                               </tbody>
                             </table>
                           )

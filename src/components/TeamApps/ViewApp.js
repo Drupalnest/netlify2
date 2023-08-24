@@ -4776,307 +4776,10 @@ const ViewApp = () => {
                               className="card-body pb-0"
                               // style={{ border: "7px solid green" }}
                             >
-                              {appDetailsData.credentials.map(
-                                (credential, index) => {
-                                  if (credential.status === "approved") {
-                                    return (
-                                      <fieldset
-                                        className="items--inline app-credential"
-                                        key={index}
-                                        // style={{ border: "1px solid red" }}
-                                      >
-                                        <legend>Credential</legend>
-
-                                        <div className="fieldset-wrapper">
-                                          <div
-                                            className="wrapper--primary app-details-wrapper"
-                                            // style={{
-                                            //   border: "8px solid blue",
-                                            //   width: "600px",
-                                            // }}
-                                          >
-                                            <div className="item-property">
-                                              <label>Consumer Key</label>
-                                              <div className="secret field__item">
-                                                {showconsumerkey[
-                                                  credential.consumerKey
-                                                ] ? (
-                                                  <div
-                                                    className="secret__value"
-                                                    style={{
-                                                      fontSize: "5px",
-                                                    }}
-                                                  >
-                                                    {credential.consumerKey}
-                                                  </div>
-                                                ) : (
-                                                  <div className="secret__value__hidden">
-                                                    {hideKey(
-                                                      credential.consumerKey
-                                                    )}
-                                                  </div>
-                                                )}
-                                                <br />
-                                                <button
-                                                  className="secret__toggle"
-                                                  onClick={() =>
-                                                    toggleVisibility2(
-                                                      credential.consumerKey
-                                                    )
-                                                  }
-                                                >
-                                                  {showKey1 ? (
-                                                    <Link className="secret__toggle__hide">
-                                                      {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
-
-                                                      <VisibilityOffOutlinedIcon />
-                                                    </Link>
-                                                  ) : (
-                                                    <Link className="secret__toggle__show">
-                                                      {/* <i className="fas fa-eye secret__toggle__show" /> */}
-                                                      <RemoveRedEyeOutlinedIcon />
-                                                    </Link>
-                                                  )}
-                                                </button>
-                                                <div className="secret__copy">
-                                                  <button
-                                                    className="secret__copy"
-                                                    onClick={() =>
-                                                      copyToClipboard(
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                    title="Click to copy"
-                                                  >
-                                                    {/* <i className="fas fa-paste" /> */}
-                                                    <ContentCopyOutlinedIcon />
-                                                  </button>
-                                                  <span className="copy-message">
-                                                    {copyMessage}
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                            <div className="item-property">
-                                              <label>Consumer Secret</label>
-                                              <div className="secret field__item">
-                                                {showSecrets[
-                                                  credential.consumerSecret
-                                                ] ? (
-                                                  <div
-                                                    className="secret__value"
-                                                    style={{
-                                                      fontSize: "5px",
-                                                    }}
-                                                  >
-                                                    {credential.consumerSecret}
-                                                  </div>
-                                                ) : (
-                                                  <div className="secret__value__hidden">
-                                                    {hideKey(
-                                                      credential.consumerSecret
-                                                    )}
-                                                  </div>
-                                                )}
-                                                <br />
-                                                <button
-                                                  className="secret__toggle"
-                                                  onClick={() =>
-                                                    toggleVisibility(
-                                                      credential.consumerSecret
-                                                    )
-                                                  }
-                                                  // style={{
-                                                  //   color: "green",
-                                                  //   height: "20px",
-                                                  //   width: "20px",
-                                                  // }}
-                                                >
-                                                  {showKey ? (
-                                                    <Link className="secret__toggle__hide">
-                                                      <VisibilityOffOutlinedIcon />
-                                                    </Link>
-                                                  ) : (
-                                                    <Link className="secret__toggle__show">
-                                                      <RemoveRedEyeOutlinedIcon />
-                                                    </Link>
-                                                  )}
-                                                </button>
-                                                <div className="secret__copy">
-                                                  <button
-                                                    className="secret__copy"
-                                                    onClick={() =>
-                                                      copyToClipboard(
-                                                        credential.consumerSecret
-                                                      )
-                                                    }
-                                                    title="Click to copy"
-                                                  >
-                                                    <ContentCopyOutlinedIcon />
-                                                  </button>
-
-                                                  <span className="copy-message">
-                                                    {copyMessage}
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                            <div className="item-property">
-                                              <label> Issued </label>
-
-                                              {credential.issuedAt
-                                                ? formatTimestamp(
-                                                    credential.issuedAt
-                                                  )
-                                                : "N/A"}
-                                            </div>
-                                            <div className="item-property">
-                                              <label> Expires </label>{" "}
-                                              {credential.expiresAt
-                                                ? formatTimestamp(
-                                                    credential.expiresAt
-                                                  )
-                                                : "N/A"}
-                                            </div>
-                                            <div className="item-property">
-                                              <label> Key Status </label>
-                                              <span className="badge badge-success">
-                                                {credential.status}
-                                              </span>
-                                            </div>
-                                          </div>
-                                          {/* API Products */}
-
-                                          <div
-                                            className="item-property"
-                                            style={{ marginLeft: "45px" }}
-                                          >
-                                            <div className="wrapper--secondary">
-                                              <label
-                                                style={{ marginLeft: "32px" }}
-                                              >
-                                                Products
-                                              </label>
-                                              {credential &&
-                                              credential.apiProducts &&
-                                              credential.apiProducts.length >
-                                                0 ? (
-                                                <div>
-                                                  {credential.apiProducts.map(
-                                                    (product, productIndex) => (
-                                                      <div
-                                                        className="api-product-list-row clearfix"
-                                                        key={productIndex}
-                                                      >
-                                                        <div className="api-product-list-row clearfix">
-                                                          <span className="api-product-name">
-                                                            {product.apiproduct}
-                                                          </span>
-                                                          <span className="badge badge-success">
-                                                            {product.status}
-                                                          </span>
-                                                        </div>
-                                                      </div>
-                                                    )
-                                                  )}
-                                                </div>
-                                              ) : (
-                                                <p
-                                                  style={{ marginLeft: "32px" }}
-                                                >
-                                                  No API products found for this
-                                                  credential.
-                                                </p>
-                                              )}
-                                            </div>
-                                          </div>
-
-                                          <div
-                                            className="dropbutton-wrapper"
-                                            // style={{ border: "8px solid blue" }}
-                                          >
-                                            <div className="dropbutton-widget">
-                                              <div className="dropbutton">
-                                                <div>
-                                                  <button
-                                                    className="button btn btn-primary "
-                                                    style={{
-                                                      padding: "5px 10px",
-                                                      fontSize: "12px",
-                                                    }}
-                                                    onClick={() =>
-                                                      handleRevokeKey(
-                                                        teamName,
-                                                        appDetailsData.name,
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    Revoke
-                                                  </button>
-                                                </div>
-                                                <div>
-                                                  <button
-                                                    className="button btn btn-primary"
-                                                    style={{
-                                                      padding: "5px 10px",
-                                                      width: "10px",
-                                                      fontSize: "12px",
-                                                      marginTop: "10px",
-                                                      marginRight: "20px",
-                                                    }}
-                                                    onClick={() =>
-                                                      handleRemovekey(
-                                                        teamName,
-                                                        appDetailsData.name,
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    Delete
-                                                  </button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </fieldset>
-                                    );
-                                  } else {
-                                    return null;
-                                  }
-                                }
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="card apigee-entity--app__credentials">
-                            <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
-                              <summary
-                                role="button"
-                                aria-expanded="false"
-                                aria-pressed="false"
-                                className="card-header bg-lighter"
-                              >
-                                Revoked keys (
-                                {
-                                  appDetailsData.credentials.filter(
-                                    (credential) =>
-                                      credential.status === "revoked"
-                                  ).length
-                                }
-                                )
-                              </summary>
-                              <div
-                                className="card-body pb-0"
-                                // style={{ border: "7px solid green" }}
-                              >
-                                {/* Iterate over revoked credentials */}
-                                {appDetailsData.credentials.map(
+                              {appDetailsData.credentials?.length > 0 ? (
+                                appDetailsData.credentials.map(
                                   (credential, index) => {
-                                    if (credential.status === "revoked") {
+                                    if (credential.status === "approved") {
                                       return (
                                         <fieldset
                                           className="items--inline app-credential"
@@ -5089,7 +4792,8 @@ const ViewApp = () => {
                                             <div
                                               className="wrapper--primary app-details-wrapper"
                                               // style={{
-                                              //   border: "8px solid yellow",
+                                              //   border: "8px solid blue",
+                                              //   width: "600px",
                                               // }}
                                             >
                                               <div className="item-property">
@@ -5113,7 +4817,6 @@ const ViewApp = () => {
                                                       )}
                                                     </div>
                                                   )}
-
                                                   <br />
                                                   <button
                                                     className="secret__toggle"
@@ -5179,7 +4882,6 @@ const ViewApp = () => {
                                                       )}
                                                     </div>
                                                   )}
-
                                                   <br />
                                                   <button
                                                     className="secret__toggle"
@@ -5216,6 +4918,7 @@ const ViewApp = () => {
                                                     >
                                                       <ContentCopyOutlinedIcon />
                                                     </button>
+
                                                     <span className="copy-message">
                                                       {copyMessage}
                                                     </span>
@@ -5251,21 +4954,11 @@ const ViewApp = () => {
 
                                             <div
                                               className="item-property"
-                                              // style={{
-                                              //   border: "1px solid blue",
-                                              // }}
+                                              style={{ marginLeft: "45px" }}
                                             >
-                                              <div
-                                                className="wrapper--secondary"
-                                                style={{
-                                                  // border: "1px solid red",
-                                                  marginLeft: "45px",
-                                                }}
-                                              >
+                                              <div className="wrapper--secondary">
                                                 <label
-                                                  style={{
-                                                    marginLeft: "32px",
-                                                  }}
+                                                  style={{ marginLeft: "32px" }}
                                                 >
                                                   Products
                                                 </label>
@@ -5312,12 +5005,28 @@ const ViewApp = () => {
 
                                             <div
                                               className="dropbutton-wrapper"
-                                              // style={{
-                                              //   border: "8px solid blue",
-                                              // }}
+                                              // style={{ border: "8px solid blue" }}
                                             >
                                               <div className="dropbutton-widget">
                                                 <div className="dropbutton">
+                                                  <div>
+                                                    <button
+                                                      className="button btn btn-primary "
+                                                      style={{
+                                                        padding: "5px 10px",
+                                                        fontSize: "12px",
+                                                      }}
+                                                      onClick={() =>
+                                                        handleRevokeKey(
+                                                          teamName,
+                                                          appDetailsData.name,
+                                                          credential.consumerKey
+                                                        )
+                                                      }
+                                                    >
+                                                      Revoke
+                                                    </button>
+                                                  </div>
                                                   <div>
                                                     <button
                                                       className="button btn btn-primary"
@@ -5345,10 +5054,318 @@ const ViewApp = () => {
                                           </div>
                                         </fieldset>
                                       );
-                                    } else {
-                                      return null; // Don't render credentials with status other than "revoked"
                                     }
                                   }
+                                )
+                              ) : (
+                                <p style={{ marginLeft: "32px" }}>
+                                  No credentials found for this app.
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="card apigee-entity--app__credentials">
+                            <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
+                              <summary
+                                role="button"
+                                aria-expanded="false"
+                                aria-pressed="false"
+                                className="card-header bg-lighter"
+                              >
+                                Revoked keys (
+                                {
+                                  appDetailsData.credentials.filter(
+                                    (credential) =>
+                                      credential.status === "revoked"
+                                  ).length
+                                }
+                                )
+                              </summary>
+                              <div
+                                className="card-body pb-0"
+                                // style={{ border: "7px solid green" }}
+                              >
+                                {/* Iterate over revoked credentials */}
+                                {appDetailsData.credentials?.length > 0 ? (
+                                  appDetailsData.credentials.map(
+                                    (credential, index) => {
+                                      if (credential.status === "revoked") {
+                                        return (
+                                          <fieldset
+                                            className="items--inline app-credential"
+                                            key={index}
+                                            // style={{ border: "1px solid red" }}
+                                          >
+                                            <legend>Credential</legend>
+
+                                            <div className="fieldset-wrapper">
+                                              <div
+                                                className="wrapper--primary app-details-wrapper"
+                                                // style={{
+                                                //   border: "8px solid yellow",
+                                                // }}
+                                              >
+                                                <div className="item-property">
+                                                  <label>Consumer Key</label>
+                                                  <div className="secret field__item">
+                                                    {showconsumerkey[
+                                                      credential.consumerKey
+                                                    ] ? (
+                                                      <div
+                                                        className="secret__value"
+                                                        style={{
+                                                          fontSize: "5px",
+                                                        }}
+                                                      >
+                                                        {credential.consumerKey}
+                                                      </div>
+                                                    ) : (
+                                                      <div className="secret__value__hidden">
+                                                        {hideKey(
+                                                          credential.consumerKey
+                                                        )}
+                                                      </div>
+                                                    )}
+
+                                                    <br />
+                                                    <button
+                                                      className="secret__toggle"
+                                                      onClick={() =>
+                                                        toggleVisibility2(
+                                                          credential.consumerKey
+                                                        )
+                                                      }
+                                                    >
+                                                      {showKey1 ? (
+                                                        <Link className="secret__toggle__hide">
+                                                          {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
+
+                                                          <VisibilityOffOutlinedIcon />
+                                                        </Link>
+                                                      ) : (
+                                                        <Link className="secret__toggle__show">
+                                                          {/* <i className="fas fa-eye secret__toggle__show" /> */}
+                                                          <RemoveRedEyeOutlinedIcon />
+                                                        </Link>
+                                                      )}
+                                                    </button>
+                                                    <div className="secret__copy">
+                                                      <button
+                                                        className="secret__copy"
+                                                        onClick={() =>
+                                                          copyToClipboard(
+                                                            credential.consumerKey
+                                                          )
+                                                        }
+                                                        title="Click to copy"
+                                                      >
+                                                        {/* <i className="fas fa-paste" /> */}
+                                                        <ContentCopyOutlinedIcon />
+                                                      </button>
+                                                      <span className="copy-message">
+                                                        {copyMessage}
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div className="item-property">
+                                                  <label>Consumer Secret</label>
+                                                  <div className="secret field__item">
+                                                    {showSecrets[
+                                                      credential.consumerSecret
+                                                    ] ? (
+                                                      <div
+                                                        className="secret__value"
+                                                        style={{
+                                                          fontSize: "5px",
+                                                        }}
+                                                      >
+                                                        {
+                                                          credential.consumerSecret
+                                                        }
+                                                      </div>
+                                                    ) : (
+                                                      <div className="secret__value__hidden">
+                                                        {hideKey(
+                                                          credential.consumerSecret
+                                                        )}
+                                                      </div>
+                                                    )}
+
+                                                    <br />
+                                                    <button
+                                                      className="secret__toggle"
+                                                      onClick={() =>
+                                                        toggleVisibility(
+                                                          credential.consumerSecret
+                                                        )
+                                                      }
+                                                      // style={{
+                                                      //   color: "green",
+                                                      //   height: "20px",
+                                                      //   width: "20px",
+                                                      // }}
+                                                    >
+                                                      {showKey ? (
+                                                        <Link className="secret__toggle__hide">
+                                                          <VisibilityOffOutlinedIcon />
+                                                        </Link>
+                                                      ) : (
+                                                        <Link className="secret__toggle__show">
+                                                          <RemoveRedEyeOutlinedIcon />
+                                                        </Link>
+                                                      )}
+                                                    </button>
+                                                    <div className="secret__copy">
+                                                      <button
+                                                        className="secret__copy"
+                                                        onClick={() =>
+                                                          copyToClipboard(
+                                                            credential.consumerSecret
+                                                          )
+                                                        }
+                                                        title="Click to copy"
+                                                      >
+                                                        <ContentCopyOutlinedIcon />
+                                                      </button>
+                                                      <span className="copy-message">
+                                                        {copyMessage}
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div className="item-property">
+                                                  <label> Issued </label>
+
+                                                  {credential.issuedAt
+                                                    ? formatTimestamp(
+                                                        credential.issuedAt
+                                                      )
+                                                    : "N/A"}
+                                                </div>
+                                                <div className="item-property">
+                                                  <label> Expires </label>{" "}
+                                                  {credential.expiresAt
+                                                    ? formatTimestamp(
+                                                        credential.expiresAt
+                                                      )
+                                                    : "N/A"}
+                                                </div>
+                                                <div className="item-property">
+                                                  <label> Key Status </label>
+                                                  <span className="badge badge-success">
+                                                    {credential.status}
+                                                  </span>
+                                                </div>
+                                              </div>
+                                              {/* API Products */}
+
+                                              <div
+                                                className="item-property"
+                                                // style={{
+                                                //   border: "1px solid blue",
+                                                // }}
+                                              >
+                                                <div
+                                                  className="wrapper--secondary"
+                                                  style={{
+                                                    // border: "1px solid red",
+                                                    marginLeft: "45px",
+                                                  }}
+                                                >
+                                                  <label
+                                                    style={{
+                                                      marginLeft: "32px",
+                                                    }}
+                                                  >
+                                                    Products
+                                                  </label>
+                                                  {credential &&
+                                                  credential.apiProducts &&
+                                                  credential.apiProducts
+                                                    .length > 0 ? (
+                                                    <div>
+                                                      {credential.apiProducts.map(
+                                                        (
+                                                          product,
+                                                          productIndex
+                                                        ) => (
+                                                          <div
+                                                            className="api-product-list-row clearfix"
+                                                            key={productIndex}
+                                                          >
+                                                            <div className="api-product-list-row clearfix">
+                                                              <span className="api-product-name">
+                                                                {
+                                                                  product.apiproduct
+                                                                }
+                                                              </span>
+                                                              <span className="badge badge-success">
+                                                                {product.status}
+                                                              </span>
+                                                            </div>
+                                                          </div>
+                                                        )
+                                                      )}
+                                                    </div>
+                                                  ) : (
+                                                    <p
+                                                      style={{
+                                                        marginLeft: "32px",
+                                                      }}
+                                                    >
+                                                      No API products found for
+                                                      this credential.
+                                                    </p>
+                                                  )}
+                                                </div>
+                                              </div>
+
+                                              <div
+                                                className="dropbutton-wrapper"
+                                                // style={{
+                                                //   border: "8px solid blue",
+                                                // }}
+                                              >
+                                                <div className="dropbutton-widget">
+                                                  <div className="dropbutton">
+                                                    <div>
+                                                      <button
+                                                        className="button btn btn-primary"
+                                                        style={{
+                                                          padding: "5px 10px",
+                                                          width: "10px",
+                                                          fontSize: "12px",
+                                                          marginTop: "10px",
+                                                          marginRight: "20px",
+                                                        }}
+                                                        onClick={() =>
+                                                          handleRemovekey(
+                                                            teamName,
+                                                            appDetailsData.name,
+                                                            credential.consumerKey
+                                                          )
+                                                        }
+                                                      >
+                                                        Delete
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </fieldset>
+                                        );
+                                      }
+                                    }
+                                  )
+                                ) : (
+                                  <p style={{ marginLeft: "32px" }}>
+                                    No credentials found for this app.
+                                  </p>
                                 )}
                               </div>
                             </details>

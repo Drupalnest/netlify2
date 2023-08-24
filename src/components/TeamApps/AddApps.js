@@ -424,7 +424,7 @@
 
 // export default AddApps;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
@@ -437,6 +437,8 @@ const AddApps = () => {
   const [description, setDescription] = useState("");
   const [checkedAttributes, setCheckedAttributes] = useState([]);
   const [selectedAttributes, setSelectedAttributes] = useState([]);
+  const [consumerKey, setConsumerKey] = useState(null);
+  const [selected_apiProduct, setSelectedApiProduct] = useState([]);
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
   // const teamName = teamDetails?.name || "";
@@ -452,13 +454,12 @@ const AddApps = () => {
   const appgroupName = teamDetails ? teamDetails.name : "";
   console.log("appgroupName", appgroupName);
 
-
   const teamName = appDetailsData ? appDetailsData.appGroup : "";
   console.log("teamName", teamName);
 
-  const appNamee = appDetailsData ? appDetailsData.name : "";
+  // const appNamee = appDetailsData ? appDetailsData.name : "";
 
-  console.log("appNamee", appNamee);
+  // console.log("appNamee", appNamee);
 
   const handleCompanyNameChange = (e) => {
     setAppName(e.target.value);
@@ -468,14 +469,16 @@ const AddApps = () => {
     setDescription(e.target.value);
   };
 
+
+  let fetchedConsumerKey = null; 
   const handleAddApp = async () => {
-        if (!appName.trim()) {
+    if (!appName.trim()) {
       alert("Please provide a valid company name.");
       return;
     }
 
     try {
-      const serializedApiProduct = serializeData.join(",");
+      // const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps`,
         {
@@ -488,24 +491,9 @@ const AddApps = () => {
             name: appName,
 
             attributes: [
-              // {
-              //   name: "api_product",
-              //   value: serializedApiProduct,
-              // },
-
               {
                 name: "description",
                 value: description,
-              },
-            ],
-
-            credentials: [
-              {
-                apiProducts: [
-                  {
-                    apiproduct: serializedApiProduct,
-                  },
-                ],
               },
             ],
           }),
@@ -518,8 +506,8 @@ const AddApps = () => {
         // alert(description);
         // alert(serializedApiProduct);
         dispatch(fetchApps(appgroupName));
-        alert("Appgroups Created successfully!");
-        navigate("/apps");
+        alert("Appgroup app Created successfully!");
+         //navigate("/apps");
       } else {
         alert("Failed to create team");
       }
@@ -529,166 +517,91 @@ const AddApps = () => {
   };
 
   const newAppName = appName;
+console.log("newAppName", newAppName);
 
-  const generateRandomSecret = () => {
-    const characters =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let key = "";
-    for (let i = 0; i < 48; i++) {
-      key += characters[Math.floor(Math.random() * characters.length)];
+const url = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps/${newAppName}`;
+
+const headers = {
+  Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+};
+
+async function fetchData() {
+  try {
+    const response = await fetch(url, { headers });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("NewAppData:", responseData);
+      fetchedConsumerKey = responseData.credentials[0].consumerKey; // Assign value here
+      setConsumerKey(fetchedConsumerKey);
+      console.log(fetchedConsumerKey);
+      navigate("/apps");
+    } else {
+      console.error("Error:", response.statusText);
     }
-    return key;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+const handleAddAPIProduct = async (
+  newAppName,
+  selected_apiProduct
+) => {
+  if (!selected_apiProduct) {
+    alert("Please select an API product.");
+    return;
+  }
+
+  const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
+  const bearerToken = process.env.BEARER_TOKEN;
+
+  const requestBody = {
+    apiProducts: selected_apiProduct,
   };
 
-  const generateRandomKey = () => {
-    const characters =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let secret = "";
-    for (let i = 0; i < 64; i++) {
-      secret += characters[Math.floor(Math.random() * characters.length)];
-    }
-    return secret;
-  };
+  try {
+    await axios.post(apiUrl, requestBody, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
 
-  const handleConfirmClick = async () => {
-    try {
-      const randomKey = generateRandomKey();
-      const randomSecret = generateRandomSecret();
+    console.log(selected_apiProduct);
+    console.log("API product added successfully");
+   
+  } catch (error) {
+    alert("Error adding API product: " + error);
+  }
+};
 
-      const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${appgroupName}/apps/${newAppName}/keys`;
-      const bearerToken = process.env.BEARER_TOKEN;
+const handleCombinedSubmit = async (event) => {
+  event.preventDefault();
 
-      const response = await axios.post(
-        apiUrl,
-        {
-          consumerKey: randomKey,
-          consumerSecret: randomSecret,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      dispatch(fetchAppDetails(appgroupName, appName));
-      alert("API key created successfully");
-    } catch (error) {
-      alert("Error creating API key: " + error.message);
-    }
-  };
+  try {
+    await handleAddApp();
 
-  // console.log("team name", companyName);
+    setTimeout(async () => {
+      await fetchData();
+    }, 2000);
 
-  // console.log("description", description);
+    setTimeout(async () => {
+      if (fetchedConsumerKey !== null) {
+        await handleAddAPIProduct(newAppName, selected_apiProduct);
+      } else {
+        console.log("Consumer key is not available");
+      }
+    }, 3000);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 
-  const handleAddAPIProduct = async (
-    appName,
-    consumerKey,
-    selected_apiProduct
-  ) => {
-    if (!selected_apiProduct) {
-      alert("Please select an API product.");
-      return;
-    }
+  
 
-    const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${appgroupName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
-    //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
+};
 
-    const requestBody = {
-      apiProducts: [selected_apiProduct],
-    };
 
-    try {
-      await axios.post(apiUrl, requestBody, {
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
-
-      // Perform any additional actions after successful addition
-      alert(selected_apiProduct);
-
-      alert("API product added successfully");
-    } catch (error) {
-      alert("Error adding API product:", error);
-    }
-  };
-
-  const handleCombinedSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    // Call both functions
-    handleAddApp();
-    // handleConfirmClick();
-  };
-
-  //   // Add the logic from handleAddAPIProduct here
-  //   const apiProductResponse = await axios.post(
-  //     `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`,
-  //     // {
-  //     //   apiProducts: selected_apiProduct,
-  //     // },
-  //     body: JSON.stringify({
-  //     credentials: [
-  //       {
-  //           apiProducts: [selected_apiProduct],
-  //           attributes: [],
-  //           consumerKey: "uQPdbCyeh7SbGNFFV9oACdXfrqdAxlbt",
-  //           consumerSecret: "W59PehcBGB1PbJAm",
-  //           expiresAt: -1,
-  //           issuedAt: 1692189620392,
-  //           scopes: [],
-  //           status: approved
-  //       }
-  //   ],
-  // })
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-  //       },
-  //     }
-  //   );
-
-  //   const apiProductResponse = await fetch(
-  //     `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-  //       },
-  //       body: JSON.stringify({
-  //              credentials: [
-  //         {
-  //             apiProducts: [selected_apiProduct],
-  //             attributes: [],
-  //             consumerKey: "",
-  //             consumerSecret: "",
-  //             expiresAt: -1,
-  //             issuedAt: 1692189620392,
-  //             scopes: [],
-  //             status: ""
-  //         }
-  //     ],
-  //       }),
-  //     }
-  //   );
-
-  //     if (apiProductResponse.status === 201) {
-  //       alert(appName);
-  //       alert(description);
-  //       alert(selected_apiProduct);
-  //       alert("Team Created and API product added successfully!");
-  //       navigate("/apps");
-  //     } else {
-  //       alert("Failed to add API product");
-  //     }
-  //   } catch (error) {
-  //     alert("An error occurred while creating team or adding API product");
-  //   }
-  // };
+console.log("selected_apiProduct",selected_apiProduct)
 
   const selectedProducts = teamDetails.attributes.find(
     (attr) => attr.name === "api_product"
@@ -717,22 +630,6 @@ const AddApps = () => {
     .flat();
   console.log("unserializedData", unserializedData);
 
-  // const unserializedData = array1
-  //   .map((item) => {
-  //     if (item && item.selectedProducts) {
-  //       const regex = /s:\d+:\\\"(.*?)\\\"/g;
-  //       const matches = item.selectedProducts.match(regex);
-  //       if (matches) {
-  //         return matches.map((match) =>
-  //           match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-  //         );
-  //       }
-  //     }
-  //     return [];
-  //   })
-  //   .flat();
-  // console.log("unserializedData", unserializedData);
-
   const uniqueAttributes = Array.from(new Set(unserializedData));
   console.log("uniqueAttributes", uniqueAttributes);
 
@@ -758,30 +655,7 @@ const AddApps = () => {
   const filteredData = duplicateValues.filter((attr) => attr !== "0");
   console.log("filteredData:", filteredData);
 
-  // // console.log("description", description);
-  // const handleAttributeChange = (attributeValue) => {
-  //   setSelectedAttributes((prevAttributes) => {
-  //     if (prevAttributes.includes(attributeValue)) {
-  //       return prevAttributes.filter((attr) => attr !== attributeValue);
-  //     } else {
-  //       return [...prevAttributes, attributeValue];
-  //     }
-  //   });
-  // };
-
-  // const updateSelectedAttributes = (updatedAttributes) => {
-  //   setSelectedAttributes(updatedAttributes);
-  // };
-
-  const handleCheckboxChange = (attribute) => {
-    setCheckedAttributes((prevChecked) => {
-      if (prevChecked.includes(attribute)) {
-        return prevChecked.filter((attr) => attr !== attribute);
-      } else {
-        return [...prevChecked, attribute];
-      }
-    });
-  };
+  
 
   const mergedArray = [...selectedAttributes, ...checkedAttributes];
   const selected_attribute = Array.from(new Set(mergedArray));
@@ -791,38 +665,46 @@ const AddApps = () => {
   );
   console.log("unselected_attributes", unselected_attributes);
 
-  const selected_apiProduct = Array.from(new Set(mergedArray));
+  // const selected_apiProduct = Array.from(new Set(mergedArray));
 
-  console.log("selected_apiProduct", selected_apiProduct);
+  // console.log("selected_apiProduct", selected_apiProduct);
 
-  const formatted_selected_attribute = selected_attribute.map((attr) => ({
-    [attr]: attr,
-  }));
-  console.log("formatted_selected_attribute", formatted_selected_attribute);
-  const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
-    [attr]: "0",
-  }));
 
-  console.log("formatted_unselected_attribute", formatted_unselected_attribute);
-  const final_Output = [
-    ...formatted_selected_attribute,
-    ...formatted_unselected_attribute,
-  ];
+  const handleCheckboxChange = (val) => {
+    const updatedSelection = selected_apiProduct.includes(val)
+      ? selected_apiProduct.filter(item => item !== val)
+      : [...selected_apiProduct, val];
+    setSelectedApiProduct(updatedSelection);
+  };
 
-  const parsed_Final_Output1 = JSON.parse(
-    JSON.stringify(final_Output, null, 2)
-  );
+  // const formatted_selected_attribute = selected_attribute.map((attr) => ({
+  //   [attr]: attr,
+  // }));
+  // console.log("formatted_selected_attribute", formatted_selected_attribute);
+  // const formatted_unselected_attribute = unselected_attributes.map((attr) => ({
+  //   [attr]: "0",
+  // }));
 
-  const serializeData = parsed_Final_Output1.map((item) => {
-    const key = Object.keys(item)[0];
-    const value = item[key];
-    const serializedKey = `s:${key.length}:\\"${key}\\"`;
-    const serializedValue = `s:${value.length}:\\"${value}\\"`;
-    return `${serializedKey}:${serializedValue}`;
-  });
-  console.log("serializeData", serializeData);
-  const serializedApiProduct22 = serializeData.join(",");
-  console.log("serializedApiProduct22", serializedApiProduct22);
+  // console.log("formatted_unselected_attribute", formatted_unselected_attribute);
+  // const final_Output = [
+  //   ...formatted_selected_attribute,
+  //   ...formatted_unselected_attribute,
+  // ];
+
+  // const parsed_Final_Output1 = JSON.parse(
+  //   JSON.stringify(final_Output, null, 2)
+  // );
+
+  // const serializeData = parsed_Final_Output1.map((item) => {
+  //   const key = Object.keys(item)[0];
+  //   const value = item[key];
+  //   const serializedKey = `s:${key.length}:\\"${key}\\"`;
+  //   const serializedValue = `s:${value.length}:\\"${value}\\"`;
+  //   return `${serializedKey}:${serializedValue}`;
+  // });
+  // console.log("serializeData", serializeData);
+  // const serializedApiProduct22 = serializeData.join(",");
+  // console.log("serializedApiProduct22", serializedApiProduct22);
 
   return (
     <div>
@@ -995,7 +877,7 @@ const AddApps = () => {
                                                 type="checkbox"
                                                 value={val}
                                                 style={{ marginRight: "0.5em" }}
-                                                checked={checkedAttributes.includes(
+                                                checked={selected_apiProduct.includes(
                                                   val
                                                 )}
                                                 onChange={() =>
