@@ -1079,7 +1079,8 @@ const EditApps = () => {
                                     )
                                   )}
 
-                                <tr className="empty-row">
+
+                                  <tr className="empty-row">
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -1134,11 +1135,12 @@ const EditApps = () => {
                                   </td>
                                 </tr>
 
+
+
                                 {/* <tr className="empty-row">
                                   <td></td>
                                   <td></td>
                                   <td></td>
-
                                   <td>
                                     <select
                                       value={
@@ -1153,11 +1155,23 @@ const EditApps = () => {
                                       }
                                     >
                                       <option value="">- Select -</option>
-                                      {filteredData.map((attribute, index) => (
-                                        <option key={index} value={attribute}>
-                                          {attribute}
-                                        </option>
-                                      ))}
+                                      {filteredData.map(
+                                        (attribute, index) =>
+                                          // Check if the attribute is already added to the credential
+                                          !appDetailsData.credentials[
+                                            credentialIndex
+                                          ]?.apiProducts?.some(
+                                            (product) =>
+                                              product.apiproduct === attribute
+                                          ) && (
+                                            <option
+                                              key={index}
+                                              value={attribute}
+                                            >
+                                              {attribute}
+                                            </option>
+                                          )
+                                      )}
                                     </select>
                                   </td>
                                   <td></td>
@@ -1177,6 +1191,8 @@ const EditApps = () => {
                                     </button>
                                   </td>
                                 </tr> */}
+
+                               
                               </tbody>
                             </table>
                           )

@@ -5065,6 +5065,9 @@ const ViewApp = () => {
                             </div>
                           </div>
 
+                          
+                          
+                          
                           <div className="card apigee-entity--app__credentials">
                             <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
                               <summary
