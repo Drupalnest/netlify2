@@ -129,7 +129,7 @@ const TeamList = () => {
                                             marginTop: "7px",
                                           }}
                                         >
-                                          <Link to="/">Members</Link>
+                                          <Link to="/members">Members</Link>
                                         </li>
                                         <li
                                           style={{

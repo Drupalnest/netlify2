@@ -213,7 +213,7 @@ const Buttons = () => {
             Delete
           </Link>
         </li>
-        {/* <li className="nav-item tabs__tab">
+        <li className="nav-item tabs__tab">
           <Link
             className={`nav-link ${currentPage === "/members" ? "active" : ""}`}
             to="/members"
@@ -221,7 +221,7 @@ const Buttons = () => {
           >
             Members
           </Link>
-        </li> */}
+        </li>
         {/* <li className="nav-item tabs__tab">
           <Link
             className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}

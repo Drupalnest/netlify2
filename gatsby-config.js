@@ -19,36 +19,12 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-plugin-mdx",
-    "gatsby-transformer-remark",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-json",
+   
+    
 
-    "gatsby-transformer-sharp",
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: "./src/images/",
-      },
-      __key: "images",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: "./src/pages/",
-      },
-      __key: "pages",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "data",
-        path: "./src/pages/",
-        ignore: [`**/\.*`], // Ignore files starting with a dot
-      },
-    },
+    
+
+
 
     // {
     //   resolve: "gatsby-source-graphql",
@@ -68,6 +44,8 @@ module.exports = {
     //     schemaName: "ApigeeDataSchema",
     //   },
     // },
+
+
 
     // {
     //   resolve: `gatsby-source-graphql`,
@@ -136,6 +114,37 @@ module.exports = {
         allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN"],
       },
     },
+
+
+    
+      // {
+      //   resolve: `gatsby-source-drupal`,
+      //   options: {
+      //     baseUrl: `https://live-contentacms.pantheonsite.io/`,
+      //     apiBase: `api`
+      //   },
+      // },
+
+      {
+        resolve: `gatsby-source-drupal`,
+        options: {
+          baseUrl: `https://dev-starbucks-developer-portal.pantheonsite.io/`,
+          apiBase: `jsonapi`
+        },
+      },
+
+      // {
+      //   resolve: `gatsby-source-drupal`,
+      //   options: {
+      //     baseUrl: `https://live-contentacms.pantheonsite.io/`,
+      //     apiBase: jsonapi,
+      //     headers: {
+      //       Authorization: `Bearer ${process.env.DRUPAL_AUTH_TOKEN}`,
+      //     },
+      //   },
+      // },
+
+
     // {
     //   resolve: "gatsby-source-rest-api",
     //   options: {

@@ -705,8 +705,8 @@ const EditApps = () => {
   const dispatch = useDispatch();
   const [selectedApiProduct, setSelectedApiProduct] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState("");
-
   const [selectedApiProducts, setSelectedApiProducts] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
@@ -743,6 +743,47 @@ const EditApps = () => {
     }
   }
 
+
+  // const openPopup = () => {
+  //   setShowPopup(true);
+  // };
+
+  // const closePopup = () => {
+  //   setShowPopup(false);
+  // };
+
+  // const handleRemoveClick = (teamName, appName, consumerKey, apiProduct) => {
+  //   // Open the popup dialog when the "Remove" button is clicked
+  //   openPopup();
+  // };
+
+//   const handleConfirmRemove = async (teamName, appName, consumerKey, apiProduct) => {
+//   const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
+//   const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+
+//   try {
+//     await axios.delete(apiUrl, {
+//       headers: {
+//         Authorization: `Bearer ${bearerToken}`,
+//       },
+//     });
+
+//     // Perform any additional actions after successful removal
+//     dispatch(fetchAppDetails(teamName, appName));
+//     alert("API product removed successfully");
+//   } catch (error) {
+//     alert("Error removing API product: " + error.message);
+//     // Handle error, show a message to the user, etc.
+//   }
+//   // Close the popup dialog after removing
+//   closePopup();
+// };
+
+
+
+
+
+
   const handleRemoveAPIProduct = async (
     teamName,
     appName,
@@ -767,6 +808,14 @@ const EditApps = () => {
       // Handle error, show a message to the user, etc.
     }
   };
+
+
+
+
+
+
+
+
 
   const handleAddAPIProduct = async (
     appName,
@@ -825,20 +874,6 @@ const EditApps = () => {
 
   const array1 = [{ selectedProducts }];
   console.log("array1", array1);
-
-  // const unserializedData = array1
-  //   .map((item) => {
-  //     const regex = /s:\d+:\\\"(.*?)\\\"/g;
-  //     const matches = item.selectedProducts.match(regex);
-  //     if (matches) {
-  //       return matches.map((match) =>
-  //         match.replace(/\\\\/g, "\\").replace(/s:\d+:\\\"(.*?)\\\"/, "$1")
-  //       );
-  //     }
-  //     return [];
-  //   })
-  //   .flat();
-  // console.log("unserializedData", unserializedData);
 
   const unserializedData = array1
     .map((item) => {
@@ -1064,7 +1099,7 @@ const EditApps = () => {
                                             className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
                                             type="button"
                                             onClick={() =>
-                                              handleRemoveAPIProduct(
+                                              handleAddAPIProduct(
                                                 teamName,
                                                 appDetailsData.name,
                                                 credential.consumerKey,
@@ -1079,8 +1114,116 @@ const EditApps = () => {
                                     )
                                   )}
 
+                                {/* {showPopup && (
+                                  <div className="popup">
+                                    <div className="popup-content">
+                                      <span
+                                        className="popup-close"
+                                        onClick={closePopup}
+                                      >
+                                        &times;
+                                      </span>
+                                      <p>
+                                        Are you sure you want to remove this API
+                                        product?
+                                      </p>
+                                      <button
+                                        className="btn btn-primary"
+                                        onClick={() =>
+                                          handleConfirmRemove(
+                                            teamName,
+                                            appDetailsData.name,
+                                            credential.consumerKey,
+                                            product.apiproduct
+                                          )
+                                        }
+                                      >
+                                        Confirm
+                                      </button>
+                                      <button
+                                        className="btn btn-secondary"
+                                        onClick={closePopup}
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                )}
+                                 */}
+                                
+                                
+                                
+                                {/* 
+                                       {appDetailsData.credentials ? (
+                                  appDetailsData.credentials.map(
+                                    (credential, credentialIndex) => {
+                                      const hasApiProducts =
+                                        credential?.apiProducts?.length === 0;
 
-                                  <tr className="empty-row">
+                                      if (!hasApiProducts) {
+                                        return (
+                                          <tr key={credentialIndex}>
+                                            <td>{credential.consumerKey}</td>
+                                            <td>{credential.consumerSecret}</td>
+                                            <td>{credential.consumerType}</td>
+                                            <td colSpan="3">
+                                              <select
+                                                value={
+                                                  selectedApiProducts[
+                                                    credentialIndex
+                                                  ] || ""
+                                                }
+                                                onChange={(e) =>
+                                                  handleApiProductSelect(
+                                                    e,
+                                                    credentialIndex
+                                                  )
+                                                }
+                                              >
+                                                <option value="">
+                                                  - Select -
+                                                </option>
+                                                {filteredData.map(
+                                                  (attribute, index) => (
+                                                    <option
+                                                      key={index}
+                                                      value={attribute}
+                                                    >
+                                                      {attribute}
+                                                    </option>
+                                                  )
+                                                )}
+                                              </select>
+                                              <button
+                                                className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
+                                                type="button"
+                                                onClick={() =>
+                                                  handleAddAPIProduct(
+                                                    appDetailsData.name,
+                                                    credential.consumerKey,
+                                                    selectedApiProducts
+                                                  )
+                                                }
+                                              >
+                                                Add
+                                              </button>
+                                            </td>
+                                          </tr>
+                                        );
+                                      } else {
+                                        return null;
+                                      }
+                                    }
+                                  )
+                                ) : (
+                                  <tr>
+                                    <td colSpan="6">
+                                      No credentials available
+                                    </td>
+                                  </tr>
+                                )} */}
+
+                                <tr className="empty-row">
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -1134,65 +1277,6 @@ const EditApps = () => {
                                     </button>
                                   </td>
                                 </tr>
-
-
-
-                                {/* <tr className="empty-row">
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td>
-                                    <select
-                                      value={
-                                        selectedApiProducts[credentialIndex] ||
-                                        ""
-                                      }
-                                      onChange={(e) =>
-                                        handleApiProductSelect(
-                                          e,
-                                          credentialIndex
-                                        )
-                                      }
-                                    >
-                                      <option value="">- Select -</option>
-                                      {filteredData.map(
-                                        (attribute, index) =>
-                                          // Check if the attribute is already added to the credential
-                                          !appDetailsData.credentials[
-                                            credentialIndex
-                                          ]?.apiProducts?.some(
-                                            (product) =>
-                                              product.apiproduct === attribute
-                                          ) && (
-                                            <option
-                                              key={index}
-                                              value={attribute}
-                                            >
-                                              {attribute}
-                                            </option>
-                                          )
-                                      )}
-                                    </select>
-                                  </td>
-                                  <td></td>
-                                  <td>
-                                    <button
-                                      className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
-                                      type="button"
-                                      onClick={() =>
-                                        handleAddAPIProduct(
-                                          appDetailsData.name,
-                                          credential.consumerKey,
-                                          selectedApiProducts
-                                        )
-                                      }
-                                    >
-                                      Add
-                                    </button>
-                                  </td>
-                                </tr> */}
-
-                               
                               </tbody>
                             </table>
                           )

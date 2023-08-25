@@ -4513,7 +4513,7 @@ const ViewApp = () => {
     const characters =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let key = "";
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 64; i++) {
       key += characters[Math.floor(Math.random() * characters.length)];
     }
     return key;
@@ -4523,7 +4523,7 @@ const ViewApp = () => {
     const characters =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let secret = "";
-    for (let i = 0; i < 64; i++) {
+    for (let i = 0; i < 48; i++) {
       secret += characters[Math.floor(Math.random() * characters.length)];
     }
     return secret;

@@ -309,8 +309,37 @@ exports.createPages = ({ actions }) => {
     path: "/app-buttons",
     component: path.resolve("./src/components/TeamApps/AppsButton.js"),
   });
+  
+  createPage({
+    path: "/members",
+    component: path.resolve("./src/components/Members/Members.js"),
+  });
+  createPage({
+    path: "/add-member",
+    component: path.resolve("./src/components/Members/AddMember.js"),
+  });
+  createPage({
+    path: "/edit-member",
+    component: path.resolve("./src/components/Members/EditMember.js"),
+  });
+
+  createPage({
+    path: "/delete-member",
+    component: path.resolve("./src/components/Members/DeleteMember.js"),
+  });
+
+  createPage({
+    path: "/profile",
+    component: path.resolve("./src/components/Members/Profile.js"),
+  });
+  createPage({
+    path: "/edit-profile",
+    component: path.resolve("./src/components/Members/EditProfile.js"),
+  });
   console.log("Pages created!");
 };
+
+
 
 
 
