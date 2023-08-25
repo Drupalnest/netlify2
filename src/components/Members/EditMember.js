@@ -76,7 +76,7 @@ const EditMember = () => {
         alert("Failed to update members.");
       }
     } catch (error) {
-      alert("An error occurred while updating appgroup details.");
+      alert("An error occurred while adding members.");
     }
   };
 

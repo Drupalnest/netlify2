@@ -523,13 +523,13 @@ const UpdateCompanyName = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Display name and description updated successfully!");
+        alert("member role updated successfully!");
         dispatch(fetchTeamDetails(team));
       } else {
-        alert("Failed to update appgroup details.");
+        alert("member role updating failed .");
       }
     } catch (error) {
-      alert("An error occurred while updating appgroup details.");
+      alert("An error occurred while member role updating.");
     }
   };
 
