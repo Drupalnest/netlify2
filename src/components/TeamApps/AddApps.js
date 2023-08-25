@@ -535,7 +535,7 @@ async function fetchData() {
       fetchedConsumerKey = responseData.credentials[0].consumerKey; // Assign value here
       setConsumerKey(fetchedConsumerKey);
       console.log(fetchedConsumerKey);
-      navigate("/apps");
+     
     } else {
       console.error("Error:", response.statusText);
     }
@@ -569,6 +569,7 @@ const handleAddAPIProduct = async (
 
     console.log(selected_apiProduct);
     console.log("API product added successfully");
+    navigate("/apps");
    
   } catch (error) {
     alert("Error adding API product: " + error);
