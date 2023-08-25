@@ -117,10 +117,10 @@ const AddMembers = () => {
         dispatch(fetchTeamDetails(team));
         navigate("/members");
       } else {
-        alert("Failed to update members.");
+        alert("Failed to add members.");
       }
     } catch (error) {
-      alert("An error occurred while updating appgroup details.");
+      alert("An error occurred while adding member");
     }
   };
 
