@@ -2,8 +2,30 @@ import { Link } from "gatsby";
 import React from "react";
 import Layout from "../Layout";
 import Buttons from "../Buttons/Buttons";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTeamDetails, fetchTeams, setDeveloper } from "../../redux/store";
 
-const Members = () => {
+const Members = ({}) => {
+  const dispatch = useDispatch();
+  const teamDetails = useSelector((state) => state.teamDetails);
+  console.log("members", teamDetails);
+  const isFetching = teamDetails ? teamDetails.loading : true;
+  const team = teamDetails ? teamDetails.name : "";
+  console.log("team", team);
+
+  const membersAttribute = teamDetails?.attributes.find(
+    (attr) => attr.name === "__apigee_reserved__developer_details"
+  );
+
+  // Deserialize the members data
+  const membersSerialized = membersAttribute?.value || "[]"; // Default to an empty array if value is not present
+  const members = JSON.parse(membersSerialized);
+  console.log("members Unserialized", members);
+
+  const handleEditClick = (developer) => {
+    dispatch(setDeveloper(developer));
+  };
+
   return (
     <Layout>
       <Buttons />
@@ -52,30 +74,58 @@ const Members = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr id="kpatelstarbuckscom" className="odd">
-                            <td>
-                              <Link to="">kpatel@starbucks.com</Link>
-                            </td>
-                            <td>
-                              <ul>
-                                <li>Member</li>
-                              </ul>
-                            </td>
-                            <td>
-                              <div className="dropbutton-wrapper">
-                                <div className="dropbutton-widget">
-                                  <ul className="dropbutton">
-                                    <li>
-                                      <Link to="/edit-member">Edit</Link>
-                                    </li>
-                                    <li>
-                                      <Link to="/delete-member">Remove</Link>
-                                    </li>
+                          {members.length > 0 ? (
+                            members.map((member, index) => (
+                              <tr
+                                key={index}
+                                id={member.developer}
+                                className={index % 2 === 0 ? "even" : "odd"}
+                              >
+                                <td>
+                                  <Link to="">{member.developer}</Link>
+                                </td>
+                                <td>
+                                  <ul>
+                                    {member.roles.map((role, roleIndex) => (
+                                      <li key={roleIndex}>{role}</li>
+                                    ))}
                                   </ul>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                                </td>
+                                <td>
+                                  <div className="dropbutton-wrapper">
+                                    <div className="dropbutton-widget">
+                                      <ul className="dropbutton">
+                                        <li>
+                                          <Link
+                                            to="/edit-member"
+                                            onClick={() =>
+                                              handleEditClick(member.developer)
+                                            }
+                                          >
+                                            Edit
+                                          </Link>
+                                        </li>
+                                        <li>
+                                          <Link
+                                            to="/delete-member"
+                                            onClick={() =>
+                                              handleEditClick(member.developer)
+                                            }
+                                          >
+                                            Remove
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="3">No members available</td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
                     </div>

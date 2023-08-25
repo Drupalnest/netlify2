@@ -511,6 +511,11 @@ const UpdateCompanyName = () => {
                 name: "description",
                 value: description,
               },
+
+              {
+                name: "__apigee_reserved__developer_details",
+                value: members,
+              },
             ],
           }),
         }
@@ -559,6 +564,13 @@ const UpdateCompanyName = () => {
   const descriptionValue = teamDetails
     ? teamDetails.attributes.find((attr) => attr.name === "description")?.value
     : "";
+
+    const members = teamDetails
+    ? teamDetails.attributes.find(
+        (attr) => attr.name === "__apigee_reserved__developer_details"
+      )?.value
+    : "";
+  console.log("members", members);
 
   const filteredData = namesArray
     ? namesArray.filter((attr) => attr !== "0")

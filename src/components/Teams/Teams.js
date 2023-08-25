@@ -129,7 +129,14 @@ const TeamList = () => {
                                             marginTop: "7px",
                                           }}
                                         >
-                                          <Link to="/members">Members</Link>
+                                          <Link
+                                            to="/members"
+                                            onClick={() =>
+                                              handleClickTeam(appGroup.name)
+                                            }
+                                          >
+                                            Members
+                                          </Link>
                                         </li>
                                         <li
                                           style={{

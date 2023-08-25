@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../Layout";
-import Buttons from "../Buttons/Buttons";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql, Link, navigate } from "gatsby";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTeamDetails, fetchTeams } from "../../redux/store";
 
 const AddMembers = () => {
   const data = useStaticQuery(graphql`
@@ -19,6 +20,7 @@ const AddMembers = () => {
   `);
 
   const [username, setUsername] = useState("");
+  const [selectedRoles, setSelectedRoles] = useState(["member"]);
   const [suggestions, setSuggestions] = useState([]);
 
   const handleInputChange = (event) => {
@@ -36,9 +38,126 @@ const AddMembers = () => {
     setUsername(suggestion.display_name);
     setSuggestions([]); // Clear suggestions after selecting one
   };
+
+  const dispatch = useDispatch();
+  const teamDetails = useSelector((state) => state.teamDetails);
+  console.log("edit", teamDetails);
+
+  const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
+
+  const team = teamDetails ? teamDetails.name : "";
+  console.log("team", team);
+
+  const descriptionValue = teamDetails
+    ? teamDetails.attributes.find((attr) => attr.name === "description")?.value
+    : "";
+
+  const products = teamDetails
+    ? teamDetails.attributes.find((attr) => attr.name === "api_product")?.value
+    : "";
+  console.log("products", products);
+
+  const members = teamDetails
+    ? teamDetails.attributes.find(
+        (attr) => attr.name === "__apigee_reserved__developer_details"
+      )?.value
+    : "";
+  console.log("members", members);
+
+  const handleAddMember = async (e) => {
+    e.preventDefault();
+    const membersSerialized = members ? JSON.parse(members) : [];
+    
+    // Check if the developer already exists in the membersSerialized array
+    const isDuplicate = membersSerialized.some(
+      (member) => member.developer === developer
+    );
+
+    if (!isDuplicate) {
+      // Add the new member if it's not a duplicate
+      membersSerialized.push(newMember);
+      console.log("Member added successfully.");
+    } else {
+      console.log("Duplicate entry found. Not adding the member.");
+    }
+
+    const serializedMergedData = JSON.stringify(membersSerialized);
+    try {
+      // const serializedApiProduct = serializeData.join(",");
+      const response = await fetch(
+        `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamDetails.name}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+          },
+          body: JSON.stringify({
+            attributes: [
+              {
+                name: "api_product",
+                value: products,
+              },
+              {
+                name: "description",
+                value: descriptionValue,
+              },
+              {
+                name: "__apigee_reserved__developer_details",
+                value: serializedMergedData,
+              },
+            ],
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // alert(serializedApiProduct);
+        alert("Member added Successfully!");
+        dispatch(fetchTeamDetails(team));
+        navigate("/members");
+      } else {
+        alert("Failed to update members.");
+      }
+    } catch (error) {
+      alert("An error occurred while updating appgroup details.");
+    }
+  };
+
+  const handleRoleSelection = (role) => {
+    setSelectedRoles((prevRoles) => {
+      if (prevRoles.includes(role)) {
+        return prevRoles.filter((r) => r !== role);
+      } else {
+        return [...prevRoles, role];
+      }
+    });
+  };
+
+  console.log("selectedRoles", selectedRoles);
+
+  console.log("username", username);
+
+ const  membersSerialized = members ? JSON.parse(members) : [];
+  
+
+  const developer = username;
+  const roles = selectedRoles;
+  const newMember = { developer, roles };
+
+  const mergedData = [...membersSerialized, newMember];
+
+  const serializedMergedData = JSON.stringify(mergedData);
+  console.log("serializedMergedData",serializedMergedData)
+
+
+
+  
+
+ 
+
   return (
     <Layout>
-      
       <div
         id="toolbar-administration"
         role="group"
@@ -50,16 +169,10 @@ const AddMembers = () => {
         data-off-canvas-main-canvas=""
       >
         <div className="page">
-          <header className="page__header">
-            <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=starbucks_tabs&args%5B1%5D=full&args%5B2%5D&token=MEkI12DtyJlNIxuOGvgD3VFvH_cZWONfyjuDDe873eY" />
-          </header>
           <div className="page__content-above">
             <div className="container-fluid px-0">
               <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                <div
-                  data-contextual-id="block:block=pagetitle:langcode=en"
-                  data-contextual-token="JWbfFvQC8xC4unlMvQKgq1Qc29aLahBItOfax5aiGxo"
-                />
+                <div />
                 <div className="container">
                   <h1 className="js-quickedit-page-title page__title mb-0">
                     Add Member
@@ -69,93 +182,72 @@ const AddMembers = () => {
             </div>
           </div>
           <main className="main" role="main">
-            <a id="main-content" tabIndex={-1} />
             <div className="page-layout-sidebar-default">
               <div className="container py-5">
                 <div className="row">
                   <div className="page__content col-md">
-                    <div data-drupal-messages-fallback="" className="hidden" />
                     
                     <form
+                      onSubmit={handleAddMember}
                       className="apigee-edge-teams-add-team-member-form team-member-form"
-                      data-drupal-selector="apigee-edge-teams-add-team-member-form"
-                      action="/teams/ken-june15-1/add-members"
-                      method="post"
-                      id="apigee-edge-teams-add-team-member-form"
-                      acceptCharset="UTF-8"
                     >
-                      <fieldset
-                        data-drupal-selector="edit-team-roles"
-                        id="edit-team-roles--wrapper"
-                        className="fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper border mb-3"
-                      >
+                      <fieldset className="fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper border mb-3">
                         <legend className="float-left py-2 px-4 mb-0 border-bottom">
                           <span className="fieldset-legend"> Roles </span>
                           <button className="btn-link">
                             <i className="fas fa-chevron-down d-md-none" />
                           </button>
                         </legend>
+
                         <div className="p-4 fieldset-wrapper">
                           <div id="edit-team-roles" className="form-checkboxes">
                             <small className="form-text">
                               Assign one or more roles to
                               <em>all developers</em> that you selected in
-                              <em className="placeholder">ken-june15-1</em>
-                              team.
+                              <em className="placeholder">{team}</em>
+                              appgroup.
                             </small>
+
                             <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-admin js-form-item-team-roles-admin form-check">
                               <input
-                                data-drupal-selector="edit-team-roles-admin"
                                 type="checkbox"
-                               
+                                checked={selectedRoles.includes("admin")}
+                                onChange={() => handleRoleSelection("admin")}
                                 name="team_roles[admin]"
                                 defaultValue="admin"
-                                className="form-checkbox form-check-input"
+                                // className="form-checkbox form-check-input"
                               />
-                              <i className="fas fa-check-square" />
-                              <i className="far fa-square" />
-                              <label
-                                className="form-check-label option"
-                                htmlFor="edit-team-roles-admin"
-                              >
+
+                              <label className="form-check-label option">
                                 Administrator
                               </label>
                             </div>
-                            <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-member js-form-item-team-roles-member form-disabled form-check">
+
+                            <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-member js-form-item-team-roles-member form-check">
                               <input
-                                data-drupal-selector="edit-team-roles-member"
-                                // disabled="disabled"
                                 type="checkbox"
-                                id="edit-team-roles-member"
-                                name="team_roles[member]"
+                                checked={selectedRoles.includes("member")}
+                                onChange={() => handleRoleSelection("member")}
                                 defaultValue="member"
-                                // defaultChecked="checked"
-                                className="form-checkbox form-check-input"
+                                // className="form-checkbox form-check-input"
                               />
-                              <i className="fas fa-check-square" />
-                              <i className="far fa-square" />
-                              <label
-                                className="form-check-label option"
-                                htmlFor="edit-team-roles-member"
-                              >
+
+                              <label className="form-check-label option">
                                 Member
                               </label>
                             </div>
                           </div>
                         </div>
                       </fieldset>
+                      
+                      
                       <div className="js-form-item form-item js-form-type-entity-autocomplete form-type-entity-autocomplete form-item-username js-form-item-username form-group">
-                        <label
-                          htmlFor="edit-username"
-                          className="js-form-required form-required"
-                        >
+                        <label className="js-form-required form-required">
                           Username
                           <i className="fas fa-asterisk text-danger form-required__indicator" />
                         </label>
-                       
 
                         <input
-                          data-drupal-selector="edit-username"
                           className="form-autocomplete required form-control"
                           type="text"
                           id="edit-username"

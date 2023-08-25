@@ -217,7 +217,10 @@ const Buttons = () => {
           <Link
             className={`nav-link ${currentPage === "/members" ? "active" : ""}`}
             to="/members"
-            onClick={() => setCurrentPage("/members")}
+            onClick={() => {
+              setCurrentPage("/members");
+              handleFetchApps(teamName); // Call the fetch function when Delete button is clicked
+            }}
           >
             Members
           </Link>

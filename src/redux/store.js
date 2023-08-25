@@ -549,7 +549,26 @@ const attributeReducer = (state = initialState, action) => {
 // Create and export the Redux store
 
 
+export const setDeveloper = (developer) => ({
+  type: 'SET_DEVELOPER',
+  payload: developer,
+});
 
+const initialStatee = {
+  developer: '',
+};
+
+const memberreducer = (state = initialStatee, action) => {
+  switch (action.type) {
+    case 'SET_DEVELOPER':
+      return {
+        ...state,
+        developer: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 
 
@@ -566,7 +585,8 @@ const rootReducer = combineReducers({
   appDetailsData:appDetailsData,
   apiProducts:apiProductsReducer,
   selectedTeam: selectedTeamReducer,
-  appsData:appsData
+  appsData:appsData,
+  memberName:memberreducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
