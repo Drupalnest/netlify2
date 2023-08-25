@@ -117,7 +117,7 @@ const AddMembers = () => {
         dispatch(fetchTeamDetails(team));
         navigate("/members");
       } else {
-        alert("Failed to add members.");
+        alert("Failed to add member.");
       }
     } catch (error) {
       alert("An error occurred while adding member");
