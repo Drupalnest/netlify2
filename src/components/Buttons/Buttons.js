@@ -219,7 +219,7 @@ const Buttons = () => {
             to="/members"
             onClick={() => {
               setCurrentPage("/members");
-              handleFetchApps(teamName); // Call the fetch function when Delete button is clicked
+              handleFetchApps(teamName); 
             }}
           >
             Members
