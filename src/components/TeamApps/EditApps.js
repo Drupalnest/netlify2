@@ -1099,7 +1099,7 @@ const EditApps = () => {
                                             className="js-form-submit-remove button js-form-submit form-submit btn btn-primary"
                                             type="button"
                                             onClick={() =>
-                                              handleAddAPIProduct(
+                                              handleRemoveAPIProduct(
                                                 teamName,
                                                 appDetailsData.name,
                                                 credential.consumerKey,
