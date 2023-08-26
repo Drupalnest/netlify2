@@ -120,7 +120,7 @@ const AddMembers = () => {
         alert("Failed to add member.");
       }
     } catch (error) {
-      alert("An error occurred while adding member");
+      alert("An error occurred while adding the member");
     }
   };
 
