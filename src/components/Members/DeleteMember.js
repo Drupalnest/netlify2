@@ -67,14 +67,14 @@ const DeleteMember = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Member added Successfully!");
+        alert("Member remove Successfully!");
         dispatch(fetchTeamDetails(team));
         navigate("/members");
       } else {
-        alert("Failed to update members.");
+        alert("Failed to remove members.");
       }
     } catch (error) {
-      alert("An error occurred while updating appgroup details.");
+      alert("An error occurred while remove member.");
     }
   };
 
