@@ -700,6 +700,7 @@ import { navigate } from "gatsby";
 import Layout from "../Layout";
 import AppsButton from "./AppsButton";
 import { fetchAppDetails } from "../../redux/store";
+import { toast } from 'react-toastify';
 
 const EditApps = () => {
   const dispatch = useDispatch();
@@ -822,8 +823,9 @@ const EditApps = () => {
     consumerKey,
     selectedApiProduct
   ) => {
-    if (!selectedApiProduct) {
-      alert("Please select an API product.");
+    console.log("selectedApiProduct:", selectedApiProduct);
+    if (!selectedApiProduct || selectedApiProduct.length === 0) {
+      alert("Please select API product.");
       return;
     }
 
@@ -845,10 +847,13 @@ const EditApps = () => {
       // Perform any additional actions after successful addition
       dispatch(fetchAppDetails(teamName, appName));
       alert("API product added successfully");
+      setSelectedApiProducts([]);
     } catch (error) {
       alert("Error adding API product:", error);
     }
   };
+
+
 
   const teamNameData = teamName;
   console.log("selectedApiProduct", selectedApiProduct);

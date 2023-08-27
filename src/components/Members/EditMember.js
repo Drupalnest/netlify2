@@ -69,14 +69,14 @@ const EditMember = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Member added Successfully!");
+        alert("Member updated Successfully!");
         dispatch(fetchTeamDetails(team));
         navigate("/members");
       } else {
         alert("Failed to update members.");
       }
     } catch (error) {
-      alert("An error occurred while adding members.");
+      alert("An error occurred while updated members.");
     }
   };
 
@@ -118,7 +118,7 @@ const EditMember = () => {
       console.log("Member updated successfully.");
     } else {
       membersSerialized.push(updatedMember);
-      console.log("Member added successfully.");
+      console.log("Member updated successfully.");
     }
   } else {
     console.log("Duplicate entry found. Not adding the updated member.");
