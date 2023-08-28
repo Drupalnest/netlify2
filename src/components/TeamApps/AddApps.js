@@ -509,7 +509,7 @@ const AddApps = () => {
         alert("Appgroup app Created successfully!");
          //navigate("/apps");
       } else {
-        alert("Failed to create team");
+        alert("Failed to create app");
       }
     } catch (error) {
       alert("An error occurred while creating team ");

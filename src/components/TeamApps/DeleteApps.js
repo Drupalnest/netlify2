@@ -385,6 +385,8 @@ import { Link, navigate } from "gatsby";
 import Layout from "../Layout";
 import AppsButton from "./AppsButton";
 
+
+
 const DeleteApps = () => {
   // const [companyName, setCompanyName] = useState("");
   const [appName, setAppName] = useState("");
@@ -448,7 +450,7 @@ console.log("appNames", appNames);
       navigate("/apps");
     } catch (error) {
       
-      setErrorMessage(`Error deleting team: ${error.message}`);
+      setErrorMessage(`Error deleting appgroup app: ${error.message}`);
     }
   };
 
