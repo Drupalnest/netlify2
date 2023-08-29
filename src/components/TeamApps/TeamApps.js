@@ -491,7 +491,7 @@ const TeamApps = () => {
                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
                   <div className="container">
                     <h1 className="js-quickedit-page-title page__title mb-0">
-                      Loading appgroup apps...
+                      Loading appgroup apps..
                     </h1>
                   </div>
                 </div>
