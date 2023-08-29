@@ -4805,7 +4805,10 @@ const ViewApp = () => {
                                                     <div
                                                       className="secret__value"
                                                       style={{
-                                                        fontSize: "5px",
+                                                        fontSize: "12px",
+                                                        overflow: "scroll",
+                                                        width: "220px", // or "scroll"
+                                                        // Adjust the height according to your design
                                                       }}
                                                     >
                                                       {credential.consumerKey}
@@ -4868,7 +4871,10 @@ const ViewApp = () => {
                                                     <div
                                                       className="secret__value"
                                                       style={{
-                                                        fontSize: "5px",
+                                                        fontSize: "12px",
+                                                        overflow: "scroll",
+                                                        width: "220px", // or "scroll"
+                                                        // Adjust the height according to your design
                                                       }}
                                                     >
                                                       {
@@ -5065,9 +5071,6 @@ const ViewApp = () => {
                             </div>
                           </div>
 
-                          
-                          
-                          
                           <div className="card apigee-entity--app__credentials">
                             <details className="js-form-wrapper form-wrapper card bg-lighter mb-3">
                               <summary
@@ -5118,7 +5121,10 @@ const ViewApp = () => {
                                                       <div
                                                         className="secret__value"
                                                         style={{
-                                                          fontSize: "5px",
+                                                          fontSize: "12px",
+                                                          overflow: "scroll",
+                                                          width: "220px", // or "scroll"
+                                                          // Adjust the height according to your design
                                                         }}
                                                       >
                                                         {credential.consumerKey}
@@ -5182,7 +5188,10 @@ const ViewApp = () => {
                                                       <div
                                                         className="secret__value"
                                                         style={{
-                                                          fontSize: "5px",
+                                                          fontSize: "12px",
+                                                          overflow: "scroll",
+                                                          width: "220px", // or "scroll"
+                                                          // Adjust the height according to your design
                                                         }}
                                                       >
                                                         {

@@ -261,6 +261,7 @@
 // };
 
 
+const axios = require('axios');
 
 
 // gatsby-node.js
@@ -336,6 +337,40 @@ exports.createPages = ({ actions }) => {
     path: "/edit-profile",
     component: path.resolve("./src/components/Members/EditProfile.js"),
   });
+
+  
+  
+  // try {
+  //   // Fetch data for appgroups from the API
+  //   const response =  axios.get(
+  //     'https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups',
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     }
+  //   );
+
+  //   const appgroupsData = response.data.appGroups;
+  //   console.log("appgroupsData",appgroupsData)
+
+  //   // Create dynamic pages for each appgroup
+  //   appgroupsData.forEach(appgroup => {
+  //     createPage({
+  //       path: `/appgroups/${appgroup.name}`,
+  //       component: path.resolve('./src/components/Teams/View.js'),
+  //       context: {
+  //         slug: appgroup.name,
+  //       },
+  //     });
+  //   });
+
+  //   console.log('Dynamic pages for appgroups created!');
+  // } catch (error) {
+  //   console.error('Error fetching appgroups data:', error);
+  // }
+
   console.log("Pages created!");
 };
 

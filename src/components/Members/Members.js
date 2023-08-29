@@ -87,7 +87,15 @@ const Members = ({}) => {
                                 <td>
                                   <ul>
                                     {member.roles.map((role, roleIndex) => (
-                                      <li key={roleIndex}>{role}</li>
+                                      <li
+                                        style={{ listStyle: "none" }}
+                                        key={roleIndex}
+                                      >
+                                        {role === "admin"
+                                          ? "Administrator"
+                                          : role.charAt(0).toUpperCase() +
+                                            role.slice(1)}
+                                      </li>
                                     ))}
                                   </ul>
                                 </td>
@@ -95,7 +103,7 @@ const Members = ({}) => {
                                   <div className="dropbutton-wrapper">
                                     <div className="dropbutton-widget">
                                       <ul className="dropbutton">
-                                        <li>
+                                        <li style={{ listStyle: "none" }}>
                                           <Link
                                             to="/edit-member"
                                             onClick={() =>
@@ -105,7 +113,7 @@ const Members = ({}) => {
                                             Edit
                                           </Link>
                                         </li>
-                                        <li>
+                                        <li style={{ listStyle: "none" }}>
                                           <Link
                                             to="/delete-member"
                                             onClick={() =>

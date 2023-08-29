@@ -1771,7 +1771,7 @@ const AddTeam = () => {
     e.preventDefault();
 
     if (!companyName.trim()) {
-      alert("Please provide a valid company name.");
+      alert("Please provide a valid appgroup name.");
       return;
     }
 
@@ -1811,10 +1811,10 @@ const AddTeam = () => {
         alert("Appgroup Created successfully!");
         navigate("/");
       } else {
-        alert("Failed to create team");
+        alert("Failed to create appgroup");
       }
     } catch (error) {
-      alert("An error occurred while creating team");
+      alert("An error occurred while creating appgroup");
     }
   };
 

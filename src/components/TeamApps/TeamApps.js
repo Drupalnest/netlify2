@@ -411,6 +411,21 @@
 
 // export default TeamApps;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppDetails, fetchTeamDetails } from "../../redux/store";
@@ -447,27 +462,29 @@ const TeamApps = () => {
     );
   }
 
-
-
   if (!apps.appGroupApps || apps.appGroupApps.length === 0) {
     return (
       <Layout>
         <div>
           <Buttons />
-          <div className="page__tasks">
-              <div className="container">
-                <div className="contextual-region block block--starbucks-actions">
-                  <div className="my-4">
-                    <Link
-                      to="/add-apps"
-                      className="button button-action btn btn-sm btn-primary"
-                    >
-                      Add appgroups app
-                    </Link>
+          <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
+            <div className="page">
+              <div className="page__tasks">
+                <div className="container">
+                  <div className="contextual-region block block--starbucks-actions">
+                    <div className="my-4">
+                      <Link
+                        to="/add-apps"
+                        className="button button-action btn btn-sm btn-primary"
+                      >
+                        Add appgroups app
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -490,15 +507,17 @@ const TeamApps = () => {
       <Layout>
         <div>
           <Buttons />
-         
-          <div className="page">
-            <div className="page__content-above">
-              <div className="container-fluid px-0">
-                <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                  <div className="container">
-                    <h1 className="js-quickedit-page-title page__title mb-0">
-                      No apps found
-                    </h1>
+
+          <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
+            <div className="page">
+              <div className="page__content-above">
+                <div className="container-fluid px-0">
+                  <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                    <div className="container">
+                      <h1 className="js-quickedit-page-title page__title mb-0">
+                        No apps found
+                      </h1>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -518,15 +537,16 @@ const TeamApps = () => {
       <Layout>
         <div>
           <Buttons />
-         
-          <div className="page">
-            <div className="page__content-above">
-              <div className="container-fluid px-0">
-                <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                  <div className="container">
-                    <h1 className="js-quickedit-page-title page__title mb-0">
-                      Loading appgroup apps...
-                    </h1>
+          <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
+            <div className="page">
+              <div className="page__content-above">
+                <div className="container-fluid px-0">
+                  <div className="contextual-region block block--pagetitle bg-lighter py-4">
+                    <div className="container">
+                      <h1 className="js-quickedit-page-title page__title mb-0">
+                        Loading appgroup apps...
+                      </h1>
+                    </div>
                   </div>
                 </div>
               </div>
