@@ -4413,16 +4413,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../Layout";
+import Layout from "../../../components/Layout";
 import AppsButton from "./AppsButton";
 import {
   fetchTeamDetails,
   fetchAppDetails,
   updateAppDetails,
   appDetails,
-} from "../../redux/store";
+} from "../../../redux/store";
 
-import "../../styles/popup.css";
+import "../../../styles/popup.css";
 import { Link } from "gatsby";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
@@ -5122,7 +5122,7 @@ console.log(
                                                     </button>
                                                   </div>
                                                   <div>
-                                                    <button
+                                                    {/* <button
                                                       className="button btn btn-primary"
                                                       style={{
                                                         padding: "5px 10px",
@@ -5140,7 +5140,8 @@ console.log(
                                                       }
                                                     >
                                                       Delete
-                                                    </button>
+                                                    </button> */}
+                                                    
                                                   </div>
                                                 </div>
                                               </div>

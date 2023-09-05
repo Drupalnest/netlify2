@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../redux/store";
-import { Link } from "gatsby";
-import Layout from "../Layout";
+import { Link, navigate } from "gatsby";
+import Layout from "../../components/Layout";
 import { fetchApps, fetchTeamDetails } from "../../redux/store";
 import { useLocation } from "@reach/router";
 
@@ -31,6 +31,36 @@ const TeamList = () => {
   const handleFetchApps = (appGroup) => {
     dispatch(fetchApps(appGroup)); // Use the parameter appGroup
   };
+
+
+
+  // const handleViewClick = () => {
+  //   navigate(`/${teamName}`);
+  //   setCurrentPage(`/${teamName}`);
+  // };
+
+  // const handleEditClick = () => {
+  //   navigate(`/${teamName}/edit`);
+   
+  // };
+
+  // const handleDeleteClick = () => {
+    
+  //   navigate(`/${teamName}/delete`);
+   
+  // };
+
+  // const handleMemberClick = () => {
+    
+  //   navigate(`/${teamName}/members`);
+    
+  // };
+  // const handleAppsClick = () => {
+    
+  //   navigate(`/${teamName}/apps`);
+    
+  // };
+
 
   if (!isFetching && teams.length === 0) {
     return (
@@ -126,7 +156,7 @@ const TeamList = () => {
                                       {appGroup.name}
                                     </Link>
                                      */}
-                                    <Link to={`/${appGroup.name}`}>
+                                    <Link to={`/${appGroup.name}/view`}>
                                       {appGroup.name}
                                     </Link>
                                   </button>
@@ -148,7 +178,7 @@ const TeamList = () => {
                                           }}
                                         >
                                           <Link
-                                            to="/apps"
+                                            to={`/${appGroup.name}/apps`}
                                             onClick={() => {
                                               handleFetchApps(appGroup.name);
                                               handleClickTeam(appGroup.name);
@@ -167,7 +197,7 @@ const TeamList = () => {
                                           }}
                                         >
                                           <Link
-                                            to="/members"
+                                           to={`/${appGroup.name}/members`}
                                             onClick={() =>
                                               handleClickTeam(appGroup.name)
                                             }
@@ -185,7 +215,7 @@ const TeamList = () => {
                                           }}
                                         >
                                           <Link
-                                            to={`/edit`}
+                                           to={`/${appGroup.name}/edit`}
                                             onClick={() =>
                                               handleClickTeam(appGroup.name)
                                             }
@@ -203,7 +233,7 @@ const TeamList = () => {
                                           }}
                                         >
                                           <Link
-                                            to="/team-details/delete"
+                                            to={`/${appGroup.name}/delete`}
                                             onClick={() =>
                                               handleClickTeam(appGroup.name)
                                             }

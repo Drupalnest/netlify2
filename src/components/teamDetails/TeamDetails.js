@@ -346,42 +346,187 @@
 
 
 
-import React from "react";
-import { useSelector } from "react-redux";
-import View from "../Teams/View";
+// import React from "react";
+// import { useSelector } from "react-redux";
+// import View from "../Teams/view";
 
 
-const TeamDetails = () => {
-  const teamDetails = useSelector((state) => state.teamDetails);
-   console.log("teamDetails", teamDetails);
 
-  // useEffect(() => {
-  //   dispatch(fetchTeams());
-  // }, [dispatch]);
+// const TeamDetails = () => {
+  
+  
+//   const teamDetails = useSelector((state) => state.teamDetails);
+//    console.log("teamDetails", teamDetails);
 
+//   // useEffect(() => {
+//   //   dispatch(fetchTeams());
+//   // }, [dispatch]);
+//   // const teamname=teamDetails.name
+//   // console.log("teamName",teamname)
  
   
  
 
  
+//   if (!teamDetails || Object.keys(teamDetails).length === 0) {
+//     return <div>No team details available.</div>;
+//   }
+
+//   return (
+   
+//       <div>
+        
+      
+//       {/* <Buttons /> */}
+//       <View/>
+//       </div>
+   
+//   );
+// };
+
+// export default TeamDetails;
+
+
+
+
+
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchTeamDetails } from "../../redux/store";
+import View from "../Teams/view";
+
+const TeamDetails = () => {
+  const { slug } = useParams();
+  console.log("Slug:", slug);
+
+  const dispatch = useDispatch();
+  const teamDetails = useSelector((state) => state.teamDetails);
+
+  useEffect(() => {
+    // Fetch team details using the slug
+    dispatch(fetchTeamDetails(slug));
+  }, [dispatch, slug]);
+
   if (!teamDetails || Object.keys(teamDetails).length === 0) {
-    return <div>No team details available.</div>;
+    return <div>No team details available for {slug}.</div>;
   }
 
   return (
-   
-      <div>
-        
-      
-      {/* <Buttons /> */}
-      <View/>
-      </div>
-   
+    <div>
+      {/* <h1>Team Name: {teamDetails.name}</h1> */}
+      {/* Display other team details here */}
+      <View />
+    </div>
   );
 };
 
 export default TeamDetails;
 
+
+
+
+
+
+
+
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchTeamDetails } from "../../redux/store"; // Import the action to fetch team details
+// import View from "../Teams/View";
+
+
+// const TeamDetails = ({location}) => {
+//   const dispatch = useDispatch();
+//   const teamDetails = useSelector((state) => state.teamDetails);
+
+//   const teamName = teamDetails ? teamDetails.name : "";
+//   console.log("teamName", teamName);
+//   const teamNames = new URLSearchParams(location.search).get("name");
+//   //Fetch team details when the component mounts
+//   useEffect(() => {
+//     dispatch(fetchTeamDetails()); // Make sure to pass the appropriate parameters if needed
+//   }, [dispatch]);
+
+//   useEffect(() => {
+//     if (teamNames) {
+//       dispatch(fetchTeamDetails(teamNames));
+//     }
+//   }, [dispatch, teamName]);
+
+
+//   if (!teamDetails || Object.keys(teamDetails).length === 0) {
+//     return <div>No team details available.</div>;
+//   }
+
+//   // Render the team details here
+
+//   return (
+//     <div>
+//       {/* Render team details */}
+//       <View/>
+//     </div>
+//   );
+// };
+
+// export default TeamDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchTeams } from "../../redux/store";
+// import { useLocation } from "@reach/router";
+// import View from "../Teams/View";
+
+// const TeamDetails = () => {
+//   const dispatch = useDispatch();
+//   const location = useLocation();
+
+//   // Extract appGroup name from URL
+//   const appGroupName = location.pathname.split("/")[1];
+
+//   // Fetch teams using the appGroup name
+//   useEffect(() => {
+//     dispatch(fetchTeams(appGroupName));
+//   }, [dispatch, appGroupName]);
+
+//   // Get teams data from Redux store
+//   const teams = useSelector((state) => state.teams.data);
+//   const isFetching = teams.isFetching;
+//   const appgroups = teams.appGroups;
+
+//   if (!teams || isFetching) {
+//     return <div>Loading teams...</div>;
+//   }
+
+//   // Find the specific appGroup using the appGroupName
+//   const selectedAppGroup = appgroups.find((appGroup) => appGroup.name === appGroupName);
+
+//   if (!selectedAppGroup) {
+//     return <div>AppGroup not found.</div>;
+//   }
+
+//   return (
+//     <div>
+//       <h2>{selectedAppGroup.name}</h2>
+//       <p>{selectedAppGroup.description}</p>
+//       {/* Render other details of the selected appGroup */}
+//       <View />
+//     </div>
+//   );
+// };
+
+//export default TeamDetails;
 
 
 

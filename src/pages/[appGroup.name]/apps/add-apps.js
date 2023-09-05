@@ -915,8 +915,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
-import Header from "../Header/Header";
-import { fetchApps, fetchAppDetails } from "../../redux/store";
+import Header from "../../../components/Header/Header";
+import { fetchApps, fetchAppDetails } from "../../../redux/store";
 
 const AddApps = () => {
   const dispatch = useDispatch();
@@ -1095,7 +1095,7 @@ const AddApps = () => {
 
       console.log(selected_apiProduct);
       console.log("API product added successfully");
-      navigate("/apps");
+     navigate(`/${teamName}/apps`);
     } catch (error) {
       alert("Error adding API product: " + error);
     }

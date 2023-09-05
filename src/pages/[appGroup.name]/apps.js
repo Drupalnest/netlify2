@@ -429,9 +429,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppDetails, fetchTeamDetails } from "../../redux/store";
-import Layout from "../Layout";
+import Layout from "../../components/Layout";
 import { Link } from "gatsby";
-import Buttons from "../Buttons/Buttons";
+import Buttons from "../../components/Buttons/Buttons";
 
 const TeamApps = () => {
   const dispatch = useDispatch();
@@ -474,7 +474,7 @@ const TeamApps = () => {
                   <div className="contextual-region block block--starbucks-actions">
                     <div className="my-4">
                       <Link
-                        to="/add-apps"
+                       to={`/${teamName}/apps/add-apps`} 
                         className="button button-action btn btn-sm btn-primary"
                       >
                         Add appgroups app
@@ -491,7 +491,7 @@ const TeamApps = () => {
                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
                   <div className="container">
                     <h1 className="js-quickedit-page-title page__title mb-0">
-                      Loading appgroup apps..
+                      {/* Loading appgroup apps.. */}
                     </h1>
                   </div>
                 </div>
@@ -568,7 +568,7 @@ const TeamApps = () => {
                 <div className="contextual-region block block--starbucks-actions">
                   <div className="my-4">
                     <Link
-                      to="/add-apps"
+                      to={`/${teamName}/apps/add-apps`} 
                       className="button button-action btn btn-sm btn-primary"
                     >
                       Add appgroups app
@@ -616,7 +616,7 @@ const TeamApps = () => {
                           <tr key={appName.id}>
                             <td>
                               <Link
-                                to="/view-app"
+                                 to={`/${teamName}/apps/${appName.name}`} 
                                 onClick={() => handleAppClick(appName.name)}
                               >
                                 {appName.name}
@@ -631,7 +631,7 @@ const TeamApps = () => {
                                   <ul className="dropbutton">
                                     <li style={{ listStyle: "none" }}>
                                       <Link
-                                        to="/edit-app"
+                                        to={`/${teamName}/apps/${appName.name}/edit`} 
                                         onClick={() =>
                                           handleAppClick(appName.name)
                                         }
@@ -646,7 +646,7 @@ const TeamApps = () => {
                                       }}
                                     >
                                       <Link
-                                        to="/delete-app"
+                                        to={`/${teamName}/apps/${appName.name}/delete`} 
                                         onClick={() =>
                                           handleAppClick(appName.name)
                                         }

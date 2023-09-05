@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
-import Layout from "../Layout";
-import Buttons from "../Buttons/Buttons";
+import Layout from "../../components/Layout";
+import Buttons from "../../components/Buttons/Buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamDetails, fetchTeams, setDeveloper } from "../../redux/store";
 
@@ -37,7 +37,7 @@ const Members = ({}) => {
                 <div className="contextual-region block block--starbucks-actions">
                   <div className="my-4">
                     <Link
-                      to="/add-member"
+                      to="/members/add-member/"
                       className="button button-action btn btn-sm btn-primary"
                     >
                       Add Members
@@ -71,7 +71,6 @@ const Members = ({}) => {
                             <th>Member</th>
                             <th>Roles</th>
                             <th>Operations</th>
-                            
                           </tr>
                         </thead>
                         <tbody>
@@ -106,7 +105,7 @@ const Members = ({}) => {
                                       <ul className="dropbutton">
                                         <li style={{ listStyle: "none" }}>
                                           <Link
-                                            to="/edit-member"
+                                            to={`/members/${member.developer}/edit`}
                                             onClick={() =>
                                               handleEditClick(member.developer)
                                             }
@@ -116,7 +115,7 @@ const Members = ({}) => {
                                         </li>
                                         <li style={{ listStyle: "none" }}>
                                           <Link
-                                            to="/delete-member"
+                                            to={`/members/${member.developer}/remove`}
                                             onClick={() =>
                                               handleEditClick(member.developer)
                                             }

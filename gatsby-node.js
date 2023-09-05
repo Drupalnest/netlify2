@@ -261,84 +261,158 @@
 // };
 
 
+
 const axios = require('axios');
+// const { createStore } = require("./src/redux/store"); // Import your Redux store configuration
+// const { fetchTeams } = require("./src/redux/store"); // Import your fetchTeams action
+
 
 
 // gatsby-node.js
 const path = require("path");
-exports.createPages = ({ actions }) => {
+//const { createPage } = actions;
+//const store = require('./src/redux/store').store; // Make sure to adjust the path to your Redux store
+
+exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
+  // const state = store.getState(); 
+  // const teamDetails = state.teamDetails; 
+
+  // const teamNames = Object.keys(teamDetails);
+  // teamNames.forEach((teamName) => {
+  //   createPage({
+  //     path: `/${teamName}`,
+  //     component: require.resolve('./src/templates/appgroups.js'),
+  //     context: {
+  //       teamName,
+  //     },
+  //   });
+  // });
+
+
+
+
+  
   console.log("Creating pages...");
-  createPage({
-    path: "/add-team",
-    component: path.resolve("./src/components/Teams/AddTeam.js"),
-  });
+  // createPage({
+  //   path: "/add-team",
+  //   component: path.resolve("./src/components/Teams/AddTeam.js"),
+  // });
 
-  createPage({
-    path: "/edit",
-    component: path.resolve("./src/components/Teams/EditTeam.js"),
-  });
-  createPage({
-    path: "/team-details/delete",
-    component: path.resolve("./src/components/Teams/DeleteTeam.js"),
-  });
-  createPage({
-    path: "/apps",
-    component: path.resolve("./src/components/TeamApps/TeamApps.js"),
-  });
-  createPage({
-    path: "/view",
-    component: path.resolve("./src/components/Teams/View.js"),
-  });
-  createPage({
-    path: "/add-apps",
-    component: path.resolve("./src/components/TeamApps/AddApps.js"),
-  });
-  createPage({
-    path: "/edit-app",
-    component: path.resolve("./src/components/TeamApps/EditApps.js"),
-  });
-  createPage({
-    path: "/delete-app",
-    component: path.resolve("./src/components/TeamApps/DeleteApps.js"),
-  });
-  createPage({
-    path: "/view-app",
-    component: path.resolve("./src/components/TeamApps/ViewApp.js"),
-  });
-  createPage({
-    path: "/app-buttons",
-    component: path.resolve("./src/components/TeamApps/AppsButton.js"),
-  });
+  // createPage({
+  //   path: "/edit",
+  //   component: path.resolve("./src/components/Teams/EditTeam.js"),
+  // });
+  // createPage({
+  //   path: "/team-details/delete",
+  //   component: path.resolve("./src/components/Teams/DeleteTeam.js"),
+  // });
+
+  // createPage({
+  //   path: "/view",
+  //   component: path.resolve("./src/components/Teams/View.js"),
+  // });
+
+  // createPage({
+  //   path: "/apps",
+  //   component: path.resolve("./src/components/TeamApps/TeamApps.js"),
+  // });
+ 
+  // createPage({
+  //   path: "/add-apps",
+  //   component: path.resolve("./src/components/TeamApps/AddApps.js"),
+  // });
+  // createPage({
+  //   path: "/edit-app",
+  //   component: path.resolve("./src/components/TeamApps/EditApps.js"),
+  // });
+  // createPage({
+  //   path: "/delete-app",
+  //   component: path.resolve("./src/components/TeamApps/DeleteApps.js"),
+  // });
+  // createPage({
+  //   path: "/view-app",
+  //   component: path.resolve("./src/components/TeamApps/ViewApp.js"),
+  // });
+  // createPage({
+  //   path: "/app-buttons",
+  //   component: path.resolve("./src/components/TeamApps/AppsButton.js"),
+  // });
   
-  createPage({
-    path: "/members",
-    component: path.resolve("./src/components/Members/Members.js"),
-  });
-  createPage({
-    path: "/add-member",
-    component: path.resolve("./src/components/Members/AddMember.js"),
-  });
-  createPage({
-    path: "/edit-member",
-    component: path.resolve("./src/components/Members/EditMember.js"),
-  });
+  // createPage({
+  //   path: "/members",
+  //   component: path.resolve("./src/components/Members/Members.js"),
+  // });
+  // createPage({
+  //   path: "/add-member",
+  //   component: path.resolve("./src/components/Members/AddMember.js"),
+  // });
+  // createPage({
+  //   path: "/edit-member",
+  //   component: path.resolve("./src/components/Members/EditMember.js"),
+  // });
 
-  createPage({
-    path: "/delete-member",
-    component: path.resolve("./src/components/Members/DeleteMember.js"),
-  });
+  // createPage({
+  //   path: "/delete-member",
+  //   component: path.resolve("./src/components/Members/DeleteMember.js"),
+  // });
 
-  createPage({
-    path: "/profile",
-    component: path.resolve("./src/components/Members/Profile.js"),
-  });
-  createPage({
-    path: "/edit-profile",
-    component: path.resolve("./src/components/Members/EditProfile.js"),
-  });
+  // createPage({
+  //   path: "/profile",
+  //   component: path.resolve("./src/components/Members/Profile.js"),
+  // });
+  // createPage({
+  //   path: "/edit-profile",
+  //   component: path.resolve("./src/components/Members/EditProfile.js"),
+  // });
 
-  
+ 
+
+  // try {
+  //   const response = await axios.get("https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups");
+  //   const teams = response.data.teams; // Adjust the data structure based on your API response
+
+  //   // Iterate through the teams and create pages
+  //   for (const team of teams) {
+  //     const slug = team.slug; // Assuming you have a slug property in your team data
+  //     const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${slug}`;
+
+  //     // Fetch data from the API
+  //     try {
+  //       const teamResponse = await axios.get(apiUrl);
+  //       const teamData = teamResponse.data; // Use this data to render the page
+
+  //       createPage({
+  //         path: `/teams/${slug}`,
+  //         component: path.resolve("./src/templates/team-details.js"),
+  //         context: {
+  //           teamData: teamData,
+  //         },
+  //       });
+  //     } catch (error) {
+  //       console.error("Error fetching team data:", error);
+  //     }
+  //   }
+  // } catch (error) {
+  //   console.error("Error fetching teams:", error);
+  // }
+
+  // const store = createStore(); // Create your Redux store
+
+  // // Fetch teams data using Redux action
+  //  store.dispatch(fetchTeams());
+
+  // // Get the fetched teams data from the store's state
+  // const teamsData = store.getState().teams.data;
+
+  // // Create pages with context
+  // createPage({
+  //   path: "/teams",
+  //   component: path.resolve("src/components/Teams.js"),
+  //   context: {
+  //     teamsData, // Pass your Redux data as context
+  //   },
+  // });
   
   // try {
   //   // Fetch data for appgroups from the API
