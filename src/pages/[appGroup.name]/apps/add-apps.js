@@ -949,14 +949,67 @@ const AddApps = () => {
 
   // console.log("appNamee", appNamee);
 
-  const handleCompanyNameChange = (e) => {
-    setAppName(e.target.value);
-  };
+  // const handleCompanyNameChange = (e) => {
+  //   setAppName(e.target.value);
+  // };
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
 
+  const [error, setError] = useState("");
+
+  // const handleCompanyNameChange = (e) => {
+  //   const inputAppName = e.target.value;
+
+  //   // Define a regular expression pattern for validation
+  //   //const pattern = /^[a-z0-9]+-[a-z0-9]+-app$/;
+
+  //   const pattern = new RegExp(`^${teamName}-[a-z0-9]+-[a-z0-9]+-app$`);
+
+  //   if (!pattern.test(inputAppName)) {
+  //     setError(
+  //       'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
+  //         'For Starbucks use group name: "ucpc-digitalorder-app". ' +
+  //         'For Non Starbucks use company name: "yourcompanyname-helpdesk-app". ' +
+  //         "Only lowercase alphanumeric and dashes are allowed."
+  //     );
+  //   } else {
+  //     setError("");
+  //   }
+
+  //   setAppName(inputAppName);
+  // };
+
+  const handleCompanyNameChange = (e) => {
+    const inputAppName = e.target.value;
+    console.log("handleCompanyNameChange", inputAppName);
+
+    // Define a regular expression pattern for validation
+
+    const appgroupName = teamDetails ? teamDetails.name : "";
+    console.log("teamName", appgroupName);
+    const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
+
+    if (!pattern.test(inputAppName)) {
+      setError(
+        'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
+          'For Starbucks use group name: "ucpc-digitalorder-app". ' +
+          'For Non Starbucks use company name: "yourcompanyname-helpdesk-app". ' +
+          "Only lowercase alphanumeric and dashes are allowed."
+      );
+    } else {
+      setError("");
+    }
+
+    setAppName(inputAppName);
+  };
+
+  const clearError = () => {
+    setError("");
+  };
+
+  
   let fetchedConsumerKey = null;
   // const handleAddApp = async () => {
   //   if (!appName.trim()) {
@@ -1005,7 +1058,7 @@ const AddApps = () => {
   // };
 
   const handleAddApp = async () => {
-    if (!appName.trim()) {
+    if (!appName.trim() || error) {
       alert("Please provide a valid company name.");
       return;
     }
@@ -1030,7 +1083,6 @@ const AddApps = () => {
               },
             ],
             keyExpiresIn: oneYearInMilliseconds,
-            
           }),
         }
       );
@@ -1095,7 +1147,7 @@ const AddApps = () => {
 
       console.log(selected_apiProduct);
       console.log("API product added successfully");
-     navigate(`/${teamName}/apps`);
+      navigate(`/${teamName}/apps`);
     } catch (error) {
       alert("Error adding API product: " + error);
     }
@@ -1255,6 +1307,34 @@ const AddApps = () => {
                 </div>
               </div>
             </div>
+
+            {error && (
+              <div
+                className="error-message"
+                style={{
+                  height: "50px",
+                  width: "40%",
+                  marginLeft: "190px",
+                  color: "#FF6B6B",
+                  position: "relative",
+                }}
+              >
+                {error}
+                <button
+                  className="close-button"
+                  onClick={clearError}
+                  style={{
+                    position: "absolute",
+                    top: "5px",
+                    right: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  &#x2716; {/* Unicode character for a close symbol */}
+                </button>
+              </div>
+            )}
+
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">
                 <div className="container py-5">
@@ -1288,7 +1368,9 @@ const AddApps = () => {
                                 <i className="fas fa-asterisk text-danger form-required__indicator" />
                               </label>
                               <input
-                                className="js-text-full text-full required form-control"
+                                className={`js-text-full text-full required form-control ${
+                                  error ? "is-invalid" : ""
+                                }`}
                                 type="text"
                                 id="appName"
                                 value={appName}
@@ -1299,6 +1381,9 @@ const AddApps = () => {
                                 required="required"
                                 aria-required="true"
                               />
+                              {error && (
+                                <div className="invalid-feedback">{error}</div>
+                              )}
                               <span className="field-suffix">
                                 <small id="edit-displayname-0-value-machine-name-suffix">
                                   &nbsp;

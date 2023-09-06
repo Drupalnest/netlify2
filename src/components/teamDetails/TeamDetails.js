@@ -390,39 +390,161 @@
 
 
 
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchTeamDetails } from "../../redux/store";
-import View from "../Teams/view";
+// import React, { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { fetchTeamDetails } from "../../redux/store";
+// import View from "../Teams/view";
 
-const TeamDetails = () => {
-  const { slug } = useParams();
-  console.log("Slug:", slug);
+// const TeamDetails = () => {
+//   const { slug } = useParams();
+//   console.log("Slug:", slug);
+
+//   const dispatch = useDispatch();
+//   const teamDetails = useSelector((state) => state.teamDetails);
+
+//   useEffect(() => {
+//     // Fetch team details using the slug
+//     dispatch(fetchTeamDetails(slug));
+//   }, [dispatch, slug]);
+
+//   if (!teamDetails || Object.keys(teamDetails).length === 0) {
+//     return <div>No team details available for {slug}.</div>;
+//   }
+
+//   return (
+//     <div>
+//       {/* <h1>Team Name: {teamDetails.name}</h1> */}
+//       {/* Display other team details here */}
+//       <View />
+//     </div>
+//   );
+// };
+
+// export default TeamDetails;
+
+
+// import React, { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+
+// import { fetchTeamDetails } from "../../redux/store";
+// import View from "../../pages/[appGroup.name]/view";
+
+// const TeamDetails = () => {
+ 
+// const dispatch = useDispatch();
+//   const teamDetails = useSelector((state) => state.teamDetails);
+  
+//   // Use the useLocation hook to access query parameters
+//   // const location = useLocation();
+//   // const searchParams = new URLSearchParams(location.search);
+//   // const queryParamValue = searchParams.get("queryParamName"); // Replace with your query parameter name
+
+//   useEffect(() => {
+//     // Fetch team details using the slug
+//     dispatch(fetchTeamDetails());
+//   }, [dispatch]);
+
+//   if (!teamDetails || Object.keys(teamDetails).length === 0) {
+//     return <div>No team details available for .</div>;
+//   }
+
+//   return (
+//     <div>
+//       {/* <h1>Team Name: {teamDetails.name}</h1> */}
+//       {/* Display other team details here */}
+//       {/* <p>Query Parameter Value: {queryParamValue}</p> 
+//       Use the query parameter value */}
+//       <View />
+//     </div>
+//   );
+// };
+
+// export default TeamDetails;
+
+
+
+
+// import React, { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+
+// import { fetchTeamDetails } from "../../redux/store";
+// import View from "../../pages/[appGroup.name]/view";
+
+// const TeamDetails = () => {
+//   const appDetails = useSelector((state) => state.teams);
+//   // console.log("view",teamDetails)
+//    const dispatch = useDispatch();
+//   // const teams = useSelector((state) => state.teams);
+ 
+
+//   const teamDetails = useSelector((state) => state.teamDetails);
+//   console.log("teamDetails",teamDetails)
+//   const teamname=teamDetails.name
+//   console.log("teamname",teamname)
+
+ 
+//   useEffect((teamname)=>{
+//     dispatch(fetchTeamDetails(teamname));
+//   },[])
+ 
+
+ 
+//   if (!appDetails || Object.keys(appDetails).length === 0) {
+//     return <div>No team details available.</div>;
+//   }
+
+//   return (
+   
+//       <div>
+        
+      
+//       {/* <Buttons /> */}
+//       <View/>
+//       </div>
+   
+//   );
+// };
+
+// export default TeamDetails;
+
+
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "@reach/router";
+import { fetchTeamDetails } from "../../redux/store";
+import View from "../../pages/[appGroup.name]/view";
+
+const TeamsPage = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const teamname = searchParams.get("teamname");
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
 
   useEffect(() => {
-    // Fetch team details using the slug
-    dispatch(fetchTeamDetails(slug));
-  }, [dispatch, slug]);
+    if (teamname) {
+      // Fetch team details using the team name from the query parameter
+      dispatch(fetchTeamDetails(teamname));
+    }
+  }, [dispatch, teamname]);
 
   if (!teamDetails || Object.keys(teamDetails).length === 0) {
-    return <div>No team details available for {slug}.</div>;
+    return <div>No team details available for {teamname}.</div>;
   }
 
   return (
     <div>
+      {/* Display team details and other content here */}
       {/* <h1>Team Name: {teamDetails.name}</h1> */}
-      {/* Display other team details here */}
       <View />
     </div>
   );
 };
 
-export default TeamDetails;
-
+export default TeamsPage;
 
 
 

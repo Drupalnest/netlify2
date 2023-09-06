@@ -33,15 +33,44 @@
 // export default View;
 
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
-
+import { fetchTeamDetails } from "../../redux/store";
+import { useLocation } from "@reach/router";
 
 const View = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("view", teamDetails);
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  
+  const teamname = searchParams.get("teamname") || "defaultTeamName";
+
+  console.log("teamNameNew", teamname);
+
+  console.log("Current URL:", location.href);
+console.log("Query Parameters:", searchParams.toString());
+
+
+console.log("Before dispatch: teamname =", teamname);
+dispatch(fetchTeamDetails(teamname))
+  .then(() => {
+    console.log("Team details fetched successfully");
+    setLoading(false);
+  })
+  .catch((error) => {
+    console.error("Error fetching team details:", error);
+    setLoading(false);
+  });
+console.log("After dispatch",teamname);
+
+ 
+
+
 
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 

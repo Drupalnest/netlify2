@@ -4423,13 +4423,23 @@ import {
 } from "../../../redux/store";
 
 import "../../../styles/popup.css";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
+import "./viewstyle.css";
 
 const ViewApp = () => {
   const dispatch = useDispatch();
+
+  const [showDropdown, setShowDropdown] = useState({});
+
+  const toggleDropdown = (credentialKey) => {
+    setShowDropdown((prevState) => ({
+      ...prevState,
+      [credentialKey]: !prevState[credentialKey],
+    }));
+  };
 
   // const teamDetails = useSelector((state) => state.teamDetails);
   // console.log("teamDetails",teamDetails)
@@ -4539,7 +4549,7 @@ const ViewApp = () => {
 
   const handleConfirmClick = async () => {
     try {
-      const oneYearInMilliseconds = 365 * 24 * 60 * 60; ;
+      const oneYearInMilliseconds = 365 * 24 * 60 * 60;
       const randomKey = generateRandomKey();
       const randomSecret = generateRandomSecret();
 
@@ -4572,18 +4582,15 @@ const ViewApp = () => {
       (credential) =>
         !credential.apiProducts ? true : credential.apiProducts.length === 0
     );
-    
-  
 
     // Sort credentials by their createdAt timestamp in descending order
-    
 
     credentialsWithNoApiProducts?.sort(
       (cred1, cred2) => parseInt(cred2.createdAt) - parseInt(cred1.createdAt)
     );
-  
+
     const latestCredential = credentialsWithNoApiProducts?.[0];
-  const latestConsumerKey = latestCredential?.consumerKey || null;
+    const latestConsumerKey = latestCredential?.consumerKey || null;
 
     console.log("Latest Consumer Key without apiProducts:", latestConsumerKey);
   }, [appDetailsData]);
@@ -4592,7 +4599,6 @@ const ViewApp = () => {
     (credential) =>
       !credential.apiProducts ? true : credential.apiProducts.length === 0
   );
-  
 
   // Sort credentials by their createdAt timestamp in descending order
   credentialsWithNoApiProducts?.sort(
@@ -4600,28 +4606,27 @@ const ViewApp = () => {
   );
 
   const latestCredential = credentialsWithNoApiProducts?.[0];
-const latestConsumerKey = latestCredential?.consumerKey || null;
+  const latestConsumerKey = latestCredential?.consumerKey || null;
 
-console.log("Latest Consumer Key without apiProducts:", latestConsumerKey);
+  console.log("Latest Consumer Key without apiProducts:", latestConsumerKey);
 
-let apiProducts = [];
+  let apiProducts = [];
 
-for (let i = 0; i < (appDetailsData?.credentials?.length ?? 0); i++) {
-  const credential = appDetailsData.credentials[i];
-  apiProducts = credential?.apiProducts
-    ? credential.apiProducts.map((product) => product.apiproduct)
-    : [];
+  for (let i = 0; i < (appDetailsData?.credentials?.length ?? 0); i++) {
+    const credential = appDetailsData.credentials[i];
+    apiProducts = credential?.apiProducts
+      ? credential.apiProducts.map((product) => product.apiproduct)
+      : [];
 
-  if (apiProducts.length > 0) {
-    break; // Stop the loop if apiProducts are found
+    if (apiProducts.length > 0) {
+      break; // Stop the loop if apiProducts are found
+    }
   }
-}
 
-console.log(
-  "API Products from First Credential with apiProducts:",
-  apiProducts
-);
-
+  console.log(
+    "API Products from First Credential with apiProducts:",
+    apiProducts
+  );
 
   const handleAddAPIProduct = async () => {
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/sbux-portal-dev/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
@@ -4868,6 +4873,7 @@ console.log(
                                 appDetailsData.credentials.map(
                                   (credential, index) => {
                                     if (credential.status === "approved") {
+                                      const credentialKey = credential.consumerKey;
                                       return (
                                         <fieldset
                                           className="items--inline app-credential"
@@ -5097,6 +5103,7 @@ console.log(
                                               </div>
                                             </div>
 
+                                            {/*                                          
                                             <div
                                               className="dropbutton-wrapper"
                                               // style={{ border: "8px solid blue" }}
@@ -5106,10 +5113,10 @@ console.log(
                                                   <div>
                                                     <button
                                                       className="button btn btn-primary "
-                                                      style={{
-                                                        padding: "5px 10px",
-                                                        fontSize: "12px",
-                                                      }}
+                                                      // style={{
+                                                      //   padding: "5px 10px",
+                                                      //   fontSize: "12px",
+                                                      // }}
                                                       onClick={() =>
                                                         handleRevokeKey(
                                                           teamName,
@@ -5122,30 +5129,87 @@ console.log(
                                                     </button>
                                                   </div>
                                                   <div>
-                                                    {/* <button
+                                                    <button
                                                       className="button btn btn-primary"
-                                                      style={{
-                                                        padding: "5px 10px",
-                                                        width: "10px",
-                                                        fontSize: "12px",
-                                                        marginTop: "10px",
-                                                        marginRight: "20px",
+                                                      // style={{
+                                                      //   padding: "5px 10px",
+                                                      //   width: "10px",
+                                                      //   fontSize: "12px",
+                                                      //   marginTop: "10px",
+                                                      //   marginRight: "20px",
+                                                      // }}
+                                                      onClick={() => {
+                                                        const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
+                                                        navigate(removePath);
                                                       }}
-                                                      onClick={() =>
-                                                        handleRemovekey(
-                                                          teamName,
-                                                          appDetailsData.name,
-                                                          credential.consumerKey
-                                                        )
-                                                      }
                                                     >
                                                       Delete
-                                                    </button> */}
-                                                    
+                                                    </button>
                                                   </div>
                                                 </div>
                                               </div>
+                                            </div> */}
+
+                                            <div className="dropbutton-widget">
+                                              <div
+                                                style={{
+                                                  display: "flex",
+                                                  alignItems: "center",
+                                                  marginLeft: "40px",
+                                                  marginTop: "5px",
+                                                }}
+                                              >
+                                                <button
+                                                  className="custom-button "
+                                                  onClick={() =>
+                                                    handleRevokeKey(
+                                                      teamName,
+                                                      appDetailsData.name,
+                                                      credential.consumerKey
+                                                    )
+                                                  }
+                                                >
+                                                  Revoke
+                                                </button>
+
+                                                <div>
+                                                  <button
+                                                    // className="dropdown-toggle"
+                                                    
+                                                    onClick={() => toggleDropdown(credentialKey)}
+                                                    className="custom-button"
+                                                  >
+                                                    &#9660;
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                              {showDropdown[credentialKey] && (
+                      <div
+                        className="dropdown-content"
+                        style={{ marginLeft: '40px' }}
+                      >
+                                                  <button
+                                                    className="custom-button"
+                                                    style={{
+                                                      width: "114px",
+                                                      textAlign: "left",
+                                                    }}
+                                                    onClick={() => {
+                                                      const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
+                                                      setShowDropdown(false);
+                                                      navigate(removePath);
+                                                      
+                                                    }}
+                                                  >
+                                                    Delete
+                                                  </button>
+                                                </div>
+                                              )}
                                             </div>
+                                          
+                                          
+                                          
                                           </div>
                                         </fieldset>
                                       );
