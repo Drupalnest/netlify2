@@ -927,6 +927,7 @@ const AddApps = () => {
   const [consumerKey, setConsumerKey] = useState(null);
   const [selected_apiProduct, setSelectedApiProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
   // const teamName = teamDetails?.name || "";
@@ -958,6 +959,7 @@ const AddApps = () => {
   };
 
   const [error, setError] = useState("");
+  const [isErrorVisible, setIsErrorVisible] = useState("");
 
   // const handleCompanyNameChange = (e) => {
   //   const inputAppName = e.target.value;
@@ -981,6 +983,8 @@ const AddApps = () => {
   //   setAppName(inputAppName);
   // };
 
+
+  const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
   const handleCompanyNameChange = (e) => {
     const inputAppName = e.target.value;
     console.log("handleCompanyNameChange", inputAppName);
@@ -991,6 +995,7 @@ const AddApps = () => {
     console.log("teamName", appgroupName);
     const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
 
+   
     if (!pattern.test(inputAppName)) {
       setError(
         'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
@@ -998,17 +1003,17 @@ const AddApps = () => {
           'For Non Starbucks use company name: "yourcompanyname-helpdesk-app". ' +
           "Only lowercase alphanumeric and dashes are allowed."
       );
+      setIsErrorVisible(true); // Show the error message
     } else {
       setError("");
+      setIsErrorVisible(false); // Hide the error message
     }
-
     setAppName(inputAppName);
   };
 
   const clearError = () => {
     setError("");
   };
-
   
   let fetchedConsumerKey = null;
   // const handleAddApp = async () => {
@@ -1308,32 +1313,24 @@ const AddApps = () => {
               </div>
             </div>
 
-            {error && (
-              <div
-                className="error-message"
-                style={{
-                  height: "50px",
-                  width: "40%",
-                  marginLeft: "190px",
-                  color: "#FF6B6B",
-                  position: "relative",
-                }}
-              >
-                {error}
-                <button
-                  className="close-button"
-                  onClick={clearError}
-                  style={{
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  &#x2716; {/* Unicode character for a close symbol */}
-                </button>
-              </div>
-            )}
+            {isErrorVisible && (
+  <div className="error-message" style={{ height: '50px', width: '40%', marginLeft: '190px', color: '#FF6B6B', position: 'relative' }}>
+    {error}
+    <button
+      className="close-button"
+      onClick={() => setIsErrorVisible(false)}
+      style={{
+        position: 'absolute',
+        top: '5px',
+        right: '5px',
+        cursor: 'pointer',
+      }}
+    >
+      &#x2716; {/* Unicode character for a close symbol */}
+    </button>
+  </div>
+)}
+
 
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">
