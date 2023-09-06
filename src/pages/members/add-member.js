@@ -106,6 +106,11 @@ const AddMembers = () => {
                 name: "__apigee_reserved__developer_details",
                 value: serializedMergedData,
               },
+              {
+                name: "ADMIN_EMAIL",
+                value: "kpatolia@starbucks.com"
+            },
+
             ],
           }),
         }
@@ -151,9 +156,9 @@ const AddMembers = () => {
   const serializedMergedData = JSON.stringify(mergedData);
   console.log("serializedMergedData",serializedMergedData)
 
+// const allAdmin=
 
-
-  
+//   console.log("allAdmin",)
 
  
 

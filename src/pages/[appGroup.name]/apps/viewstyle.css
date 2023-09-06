@@ -50,8 +50,8 @@
 
   /* Dropdown.css */
 .custom-button {
-    background-color: lightgrey; /* Set the default background color to light grey */
-    color: #333; /* Set the text color */
+    background-color: #F5F5F5; /* Set the default background color to light grey */
+    color:#00A862; /* Set the text color */
     border: none; /* Remove the border */
   
     padding: 10px 15px; /* Adjust padding as needed */

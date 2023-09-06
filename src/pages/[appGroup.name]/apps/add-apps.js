@@ -983,7 +983,6 @@ const AddApps = () => {
   //   setAppName(inputAppName);
   // };
 
-
   const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
   const handleCompanyNameChange = (e) => {
     const inputAppName = e.target.value;
@@ -995,7 +994,6 @@ const AddApps = () => {
     console.log("teamName", appgroupName);
     const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
 
-   
     if (!pattern.test(inputAppName)) {
       setError(
         'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
@@ -1014,7 +1012,7 @@ const AddApps = () => {
   const clearError = () => {
     setError("");
   };
-  
+
   let fetchedConsumerKey = null;
   // const handleAddApp = async () => {
   //   if (!appName.trim()) {
@@ -1152,7 +1150,7 @@ const AddApps = () => {
 
       console.log(selected_apiProduct);
       console.log("API product added successfully");
-      navigate(`/${teamName}/apps`);
+      navigate(`/${appgroupName}/apps`);
     } catch (error) {
       alert("Error adding API product: " + error);
     }
@@ -1314,23 +1312,31 @@ const AddApps = () => {
             </div>
 
             {isErrorVisible && (
-  <div className="error-message" style={{ height: '50px', width: '40%', marginLeft: '190px', color: '#FF6B6B', position: 'relative' }}>
-    {error}
-    <button
-      className="close-button"
-      onClick={() => setIsErrorVisible(false)}
-      style={{
-        position: 'absolute',
-        top: '5px',
-        right: '5px',
-        cursor: 'pointer',
-      }}
-    >
-      &#x2716; {/* Unicode character for a close symbol */}
-    </button>
-  </div>
-)}
-
+              <div
+                className="error-message"
+                style={{
+                  height: "50px",
+                  width: "40%",
+                  marginLeft: "190px",
+                  color: "#FF6B6B",
+                  position: "relative",
+                }}
+              >
+                {error}
+                <button
+                  className="close-button"
+                  onClick={() => setIsErrorVisible(false)}
+                  style={{
+                    position: "absolute",
+                    top: "5px",
+                    right: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  &#x2716; {/* Unicode character for a close symbol */}
+                </button>
+              </div>
+            )}
 
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">

@@ -4429,6 +4429,8 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import "./viewstyle.css";
 
+import DropDownDark from "../../../images/DropDownDark.svg";
+
 const ViewApp = () => {
   const dispatch = useDispatch();
 
@@ -4439,6 +4441,17 @@ const ViewApp = () => {
       ...prevState,
       [credentialKey]: !prevState[credentialKey],
     }));
+  };
+
+  const getImageSource = () => {
+    if (showDropdown) {
+      // Use the open dropdown icon (reversed)
+      return "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%3Ctitle%3E03_Iconography%2FDefault%2FDrop_Down_Dark%3C%2Ftitle%3E%0A%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%3Cdefs%3E%3C%2Fdefs%3E%0A%20%20%3Cg%20id%3D%2203_Iconography%2FDefault%2FDrop_Down_Dark%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%3Crect%20id%3D%22Bounds%22%20fill%3D%22%23FF0000%22%20opacity%3D%220%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2224%22%20height%3D%2224%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Cpolyline%20id%3D%22Path-5%22%20stroke%3D%22%23666666%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20transform%3D%22translate(12.078668%2C%2011.959429)%20rotate(-90.000000)%20translate(-12.078668%2C%20-11.959429)%22%20points%3D%2214.5577155%206.88076112%209.5192385%2011.9192381%2014.6380971%2017.0380967%22%3E%3C%2Fpolyline%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"; // Replace with your open dropdown SVG data
+    } else {
+      // Use the closed dropdown icon
+
+      return "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%3Ctitle%3E03_Iconography%2FDefault%2FDrop_Down_Dark%3C%2Ftitle%3E%0A%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%3Cdefs%3E%3C%2Fdefs%3E%0A%20%20%3Cg%20id%3D%2203_Iconography%2FDefault%2FDrop_Down_Dark%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%3Crect%20id%3D%22Bounds%22%20fill%3D%22%23FF0000%22%20opacity%3D%220%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2224%22%20height%3D%2224%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Cpolyline%20id%3D%22Path-5%22%20stroke%3D%22%23666666%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20transform%3D%22translate(12.078668%2C%2011.959429)%20rotate(-90.000000)%20translate(-12.078668%2C%20-11.959429)%22%20points%3D%2214.5577155%206.88076112%209.5192385%2011.9192381%2014.6380971%2017.0380967%22%3E%3C%2Fpolyline%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"; // Replace with your closed dropdown SVG data
+    }
   };
 
   // const teamDetails = useSelector((state) => state.teamDetails);
@@ -4873,7 +4886,8 @@ const ViewApp = () => {
                                 appDetailsData.credentials.map(
                                   (credential, index) => {
                                     if (credential.status === "approved") {
-                                      const credentialKey = credential.consumerKey;
+                                      const credentialKey =
+                                        credential.consumerKey;
                                       return (
                                         <fieldset
                                           className="items--inline app-credential"
@@ -5054,9 +5068,120 @@ const ViewApp = () => {
 
                                             <div
                                               className="item-property"
-                                              style={{ marginLeft: "45px" }}
+                                              // style={{ marginLeft: "45px" }}
+                                              style={{
+                                                // border: "1px solid blue",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                              }}
                                             >
-                                              <div className="wrapper--secondary">
+                                              <div
+                                                className="dropbutton-widget"
+                                                style={{
+                                                  marginLeft: "270px",
+                                                  // border: "1px solid red",
+                                                }}
+                                              >
+                                                <div
+                                                  style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                  }}
+                                                >
+                                                  <button
+                                                    className="custom-button "
+                                                    onClick={() =>
+                                                      handleRevokeKey(
+                                                        teamName,
+                                                        appDetailsData.name,
+                                                        credential.consumerKey
+                                                      )
+                                                    }
+                                                  >
+                                                    Revoke
+                                                  </button>
+
+                                                  <div
+                                                    style={{
+                                                      position: "relative",
+                                                    }}
+                                                  >
+                                                    <button
+                                                      // className="dropdown-toggle"
+
+                                                      onClick={() =>
+                                                        toggleDropdown(
+                                                          credentialKey
+                                                        )
+                                                      }
+                                                      className="custom-button"
+                                                      style={{
+                                                        width: "40px",
+                                                        height: "35px",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent:
+                                                          "center",
+                                                      }}
+                                                    >
+                                                      {/* &#9660; */}
+                                                      {/* {DropDownDark} */}
+                                                      <img
+                                                        src={getImageSource()}
+                                                        alt={
+                                                          showDropdown
+                                                            ? "Open Dropdown"
+                                                            : "Closed Dropdown"
+                                                        }
+                                                        style={{
+                                                          Width: "100%",
+                                                          Height: "100%",
+                                                        }}
+                                                      />
+                                                    </button>
+                                                  </div>
+                                                </div>
+
+                                                {showDropdown[
+                                                  credentialKey
+                                                ] && (
+                                                  <div
+                                                    className="dropdown-content"
+                                                    style={{
+                                                      position: "absolute",
+
+                                                      width: "114px",
+                                                      textAlign: "left",
+                                                      // border: "1px solid blue",
+                                                      overflow: "auto",
+                                                      zIndex: 1, // Ensure the dropdown appears above other content
+                                                    }}
+                                                  >
+                                                    <button
+                                                      className="custom-button"
+                                                      style={{
+                                                        width: "114px",
+                                                        textAlign: "left",
+                                                      }}
+                                                      onClick={() => {
+                                                        const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
+                                                        setShowDropdown(false);
+                                                        navigate(removePath);
+                                                      }}
+                                                    >
+                                                      Delete
+                                                    </button>
+                                                  </div>
+                                                )}
+                                              </div>
+                                              <div
+                                                className="wrapper--secondary"
+                                                style={{
+                                                  marginRight: "200px",
+                                                 // border: "1px solid red",
+                                                  width: "600px",
+                                                }}
+                                              >
                                                 <label
                                                   style={{ marginLeft: "32px" }}
                                                 >
@@ -5082,8 +5207,19 @@ const ViewApp = () => {
                                                                 product.apiproduct
                                                               }
                                                             </span>
-                                                            <span className="badge badge-success">
-                                                              {product.status}
+
+                                                            <span
+                                                              className="badge badge-success"
+                                                              style={{
+                                                                backgroundColor:
+                                                                  "#C5C5C5",
+                                                                marginLeft:
+                                                                  "300px",
+                                                              }}
+                                                            >
+                                                              {product.status
+                                                                ? "Enabled"
+                                                                : "Disabled"}
                                                             </span>
                                                           </div>
                                                         </div>
@@ -5149,67 +5285,6 @@ const ViewApp = () => {
                                                 </div>
                                               </div>
                                             </div> */}
-
-                                            <div className="dropbutton-widget">
-                                              <div
-                                                style={{
-                                                  display: "flex",
-                                                  alignItems: "center",
-                                                  marginLeft: "40px",
-                                                  marginTop: "5px",
-                                                }}
-                                              >
-                                                <button
-                                                  className="custom-button "
-                                                  onClick={() =>
-                                                    handleRevokeKey(
-                                                      teamName,
-                                                      appDetailsData.name,
-                                                      credential.consumerKey
-                                                    )
-                                                  }
-                                                >
-                                                  Revoke
-                                                </button>
-
-                                                <div>
-                                                  <button
-                                                    // className="dropdown-toggle"
-                                                    
-                                                    onClick={() => toggleDropdown(credentialKey)}
-                                                    className="custom-button"
-                                                  >
-                                                    &#9660;
-                                                  </button>
-                                                </div>
-                                              </div>
-
-                                              {showDropdown[credentialKey] && (
-                      <div
-                        className="dropdown-content"
-                        style={{ marginLeft: '40px' }}
-                      >
-                                                  <button
-                                                    className="custom-button"
-                                                    style={{
-                                                      width: "114px",
-                                                      textAlign: "left",
-                                                    }}
-                                                    onClick={() => {
-                                                      const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
-                                                      setShowDropdown(false);
-                                                      navigate(removePath);
-                                                      
-                                                    }}
-                                                  >
-                                                    Delete
-                                                  </button>
-                                                </div>
-                                              )}
-                                            </div>
-                                          
-                                          
-                                          
                                           </div>
                                         </fieldset>
                                       );
@@ -5540,6 +5615,7 @@ const ViewApp = () => {
                             <h4 className="card-header bg-white">
                               Custom Attributes
                             </h4>
+
                             <div className="card-body">
                               <fieldset className="app-custom-attribute">
                                 <div className="fieldset-wrapper" />
