@@ -1318,7 +1318,7 @@ const AddApps = () => {
                   height: "50px",
                   width: "40%",
                   marginLeft: "190px",
-                  color: "#FF6B6B",
+                  color: "#DC3545",
                   position: "relative",
                 }}
               >

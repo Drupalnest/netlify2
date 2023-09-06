@@ -5178,7 +5178,7 @@ const ViewApp = () => {
                                                 className="wrapper--secondary"
                                                 style={{
                                                   marginRight: "200px",
-                                                 // border: "1px solid red",
+                                                  // border: "1px solid red",
                                                   width: "600px",
                                                 }}
                                               >
