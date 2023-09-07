@@ -1,6 +1,9 @@
-body{
-  font-family: "Sodo Sans, sans-serif";
- 
+
+
+body {
+  
+  font-family: "Sodo Sans", "sans-serif";
+  
 }
 
 header#navbar {
@@ -305,8 +308,6 @@ body.admin-menu.navbar-is-fixed-top {
 #navbar .navbar__global .flex-container {
   width: 100%;
 }
-
-
 
 .navbar {
   position: relative;
@@ -5896,7 +5897,6 @@ input[type="button"].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  
 }
 
 ul li .nav-link {
@@ -5904,9 +5904,6 @@ ul li .nav-link {
   font-style: normal;
   font-weight: 600;
 }
-
-
-
 
 .nav-link:hover,
 .nav-link:focus {
@@ -26975,14 +26972,12 @@ nav#toolbar-bar,
 .nav-tabs .nav-item .nav-link:hover {
   text-decoration: none;
   background-color: #d8d8d8;
-  
 }
 /* .nav-link:active {
   background: #007bff; 
   border-color: #007bff; 
 } */
-.nav-tabs .nav-item .nav-link.active{
-
+.nav-tabs .nav-item .nav-link.active {
   color: #fff;
   background-color: red;
   border: none;

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/style.css";
+import "../../styles/style1.css";
 
 import { Link } from "gatsby";
 import logo from "../../images/logo.png";
@@ -17,7 +17,7 @@ const Header = () => {
                     <img src={logo} alt="Starbucks Developer Portal" />
                   </Link>
                   <span className="brand__line"></span>
-                  <span className="brand__slogan">
+                  <span className="brand__slogan" style={{fontSize:"18px",fontFamily:"Sodo Sans ,sans-serif",fontWeight: "normal" }}>
                     Starbucks Developer Portal - Dev
                   </span>
                 </div>
@@ -40,7 +40,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                            fontStyle: "ligth",
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}

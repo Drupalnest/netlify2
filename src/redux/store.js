@@ -612,3 +612,5 @@ export default store;
 
 //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create
 //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}
+
+//https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups
