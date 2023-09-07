@@ -62,6 +62,10 @@ const EditMember = () => {
                 name: "__apigee_reserved__developer_details",
                  value: serializedMergedData,
               },
+              {
+                name: "ADMIN_EMAIL",
+                value: "kpatolia@starbucks.com"
+            },
             ],
           }),
         }

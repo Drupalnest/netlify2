@@ -420,7 +420,7 @@
 
 // export default UpdateCompanyName;
 
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
@@ -516,6 +516,10 @@ const UpdateCompanyName = () => {
                 name: "__apigee_reserved__developer_details",
                 value: members,
               },
+              {
+                name: "ADMIN_EMAIL",
+                value: "kpatolia@starbucks.com"
+            },
             ],
           }),
         }
@@ -525,6 +529,7 @@ const UpdateCompanyName = () => {
         // alert(serializedApiProduct);
         alert("Appgroups  updated successfully!");
         dispatch(fetchTeamDetails(team));
+        navigate("/")
       } else {
         alert("Appgroups updating failed .");
       }
