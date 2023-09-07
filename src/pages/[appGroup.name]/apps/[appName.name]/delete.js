@@ -380,10 +380,10 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTeamApp,fetchAppDetails,fetchApps } from "../../redux/store"; // Import your deleteTeamApp action from Redux
+import { deleteTeamApp,fetchAppDetails,fetchApps } from "../../../../redux/store"; // Import your deleteTeamApp action from Redux
 import { Link, navigate } from "gatsby";
-import Layout from "../Layout";
-import AppsButton from "./AppsButton";
+import Layout from "../../../../components/Layout";
+import AppsButton from "../AppsButton";
 
 
 
@@ -447,7 +447,7 @@ console.log("appNames", appNames);
       setErrorMessage("");
       alert("Appgroups apps deleted successfully");
       dispatch(fetchApps(teamName));
-      navigate("/apps");
+      navigate(`/${teamName}/apps`);
     } catch (error) {
       
       setErrorMessage(`Error deleting appgroup app: ${error.message}`);

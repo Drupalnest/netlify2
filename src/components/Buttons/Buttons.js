@@ -1,4 +1,3 @@
-
 // import React, { useState } from "react";
 // import View from "../Teams/View";
 // import EditTeam from "../Teams/EditTeam";
@@ -56,7 +55,7 @@
 //           </button>
 //         </li>
 //       </ul>
-     
+
 //       {currentPage === "view" && "./view"}
 //       {currentPage === "edit" && "./edit"}
 //       {currentPage === "delete" && "./delete"}
@@ -68,15 +67,11 @@
 
 // export default Buttons;
 
-
-
 // import { Link } from "gatsby";
 // import React from "react";
 
-
-
 // const Buttons = () => {
-  
+
 //   return (
 //     <div style={{ marginTop: "20px" }}>
 //       <ul
@@ -105,12 +100,11 @@
 
 // export default Buttons;
 
-
 // import { Link } from "gatsby";
 // import React, { useState } from "react";
 
 // const Buttons = () => {
-  
+
 //   const [currentPage, setCurrentPage] = useState("");
 
 //   return (
@@ -151,34 +145,199 @@
 
 // export default Buttons;
 
+// import { Link } from "gatsby";
+// import React, { useEffect, useState } from "react";
+// import { fetchApps, fetchTeams } from "../../redux/store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { navigate } from "gatsby";
 
+// const Buttons = () => {
+//   const [currentPage, setCurrentPage] = useState("");
 
-import { Link } from "gatsby";
+//   const dispatch = useDispatch();
+//   const teamDetails = useSelector((state) => state.teamDetails);
+//   const teamName = teamDetails ? teamDetails.name : "";
+//   console.log("teamButtonName", teamName);
+
+//   const handleViewClick = () => {
+//     navigate("/teams/view");
+//   };
+
+//   const handleEditClick = () => {
+//     navigate("/teams/EditTeam");
+//   };
+
+//   const handleDeleteClick = () => {
+//     navigate("/teams/DeleteTeam");
+//   };
+
+//   const handleFetchApps = (teamName) => {
+//     dispatch(fetchApps(teamName)); // Use the parameter appGroup
+//   };
+
+//   useEffect(() => {
+//     dispatch(fetchTeams());
+//   }, [dispatch]);
+
+//   const handleLinkClick = (page) => {
+//     setCurrentPage(page); // Update currentPage when a link is clicked
+//   };
+
+//   useEffect(() => {
+//     console.log("Updated currentPage:", currentPage);
+//   }, [currentPage]);
+
+//   // <button onClick={handleViewClick}>View</button>
+//   // <button onClick={handleEditClick}>EditTeams</button>
+
+//   return (
+//     <div style={{ marginTop: "20px" }}>
+//       <ul
+//         className="tabs nav-tabs nav-tabs--primary clearfix"
+//         style={{ marginLeft: "150px" }}
+//       >
+//         <li className="nav-item tabs__tab ">
+//           <button
+//             className={`nav-link ${currentPage === `/${teamName}/view` ? "active" : ""}`}
+//             //to={`/${teamName}/view`}
+//             onClick={handleViewClick}
+
+//             style={{
+//               fontWeight: "400",
+//               fontSize: "14px",
+//             }}
+//           >
+//             View
+//           </button>
+//         </li>
+//         <li className="nav-item tabs__tab">
+//           <button
+//             className={`nav-link  ${currentPage === "/edit" ? "active" : ""}`}
+//            // to="/edit"
+//             onClick={() => handleLinkClick("/edit")}
+//             //onClick={() => setCurrentPage("/edit")}
+//             style={{ fontWeight: "400", fontSize: "14px" }}
+//           >
+
+//             Edit
+//           </button>
+//         </li>
+//         <li className="nav-item tabs__tab">
+//           <button
+//             className={`nav-link  ${
+//               currentPage === "/teams/delete" ? "active" : ""
+//             }`}
+//            // to="/team-details/delete"
+//             onClick={() => handleLinkClick("/teams/delete")}
+//            // onClick={() => setCurrentPage("/team-details/delete")}
+//             style={{ fontWeight: "400", fontSize: "14px" }}
+//           >
+//             Delete
+//           </button>
+//         </li>
+//         <li className="nav-item tabs__tab">
+//           <button
+//             className={`nav-link  ${
+//               currentPage === "/members" ? "active" : ""
+//             }`}
+//            // to="/members"
+//             onClick={() => {
+//               setCurrentPage("/members");
+//               handleFetchApps(teamName);
+//             }}
+//             style={{ fontWeight: "400", fontSize: "14px" }}
+//           >
+//             Members
+//           </button>
+//         </li>
+//         {/* <li className="nav-item tabs__tab">
+//           <Link
+//             className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
+//             to="/apps"
+//             // onClick={() => setCurrentPage("/apps")
+//             // }
+//             onClick={() => {
+//             setCurrentPage('/apps');
+//             handleFetchApps(selectedTeam.selectedTeam);
+//           }}
+//           >
+//             Team Apps
+//           </Link>
+//         </li> */}
+//         <li className="nav-item tabs__tab">
+//           <button
+//             className={`nav-link${currentPage === "/apps" ? " active" : ""}`}
+//            // to="/apps"
+
+//             onClick={() => {
+//               handleLinkClick("/apps")
+//               //setCurrentPage("/apps");
+//               handleFetchApps(teamName); // Call the fetch function when Delete button is clicked
+//             }}
+//             style={{ fontWeight: "400", fontSize: "14px" }}
+//           >
+//             Appgroups Apps
+//           </button>
+//         </li>
+
+//         <button to="/teams/view">view</button>
+//         <button to="/teams/EditTeam">EditTeams</button>
+
+//         <button onClick={handleViewClick}>View</button>
+//       <button onClick={handleEditClick}>EditTeams</button>
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default Buttons;
+
 import React, { useEffect, useState } from "react";
-import {  fetchApps,fetchTeams } from "../../redux/store";
+import { fetchApps, fetchTeams } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { navigate } from "gatsby";
 
 const Buttons = () => {
   const [currentPage, setCurrentPage] = useState("");
 
- 
-  
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   const teamName = teamDetails ? teamDetails.name : "";
-  console.log("teamButtonName", teamName);
 
+  const handleViewClick = () => {
+    navigate(`/${teamName}`);
+    setCurrentPage(`/${teamName}`);
+  };
+
+  const handleEditClick = () => {
+    navigate(`/${teamName}/edit`);
+    setCurrentPage(`/${teamName}/edit`);
+  };
+
+  const handleDeleteClick = () => {
+    
+    navigate(`/${teamName}/delete`);
+    setCurrentPage(`/${teamName}/delete`);
+  };
+
+  const handleMemberClick = () => {
+    
+    navigate(`/${teamName}/members`);
+    setCurrentPage(`/${teamName}/members`);
+  };
+  const handleAppsClick = () => {
+    
+    navigate(`/${teamName}/apps`);
+    setCurrentPage(`/${teamName}/apps`);
+  };
 
   const handleFetchApps = (teamName) => {
-    dispatch(fetchApps(teamName)); // Use the parameter appGroup
+    dispatch(fetchApps(teamName));
   };
 
   useEffect(() => {
     dispatch(fetchTeams());
   }, [dispatch]);
-
-  
-
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -186,71 +345,64 @@ const Buttons = () => {
         className="tabs nav-tabs nav-tabs--primary clearfix"
         style={{ marginLeft: "150px" }}
       >
-        <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/view" ? "active" : ""}`}
-            to="/view"
-            onClick={() => setCurrentPage("/view")}
+        <li className="nav-item tabs__tab ">
+          <button
+            className={`nav-link ${
+              currentPage === `/${teamName}` ? "active" : ""
+            }`}
+            onClick={handleViewClick}
+            style={{ fontWeight: "400", fontSize: "14px" }}
           >
             View
-          </Link>
+          </button>
         </li>
         <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/edit" ? "active" : ""}`}
-            to="/edit"
-            onClick={() => setCurrentPage("/edit")}
+          <button
+            className={`nav-link ${
+              currentPage === `/${teamName}/edit` ? "active" : ""
+            }`}
+            onClick={handleEditClick}
+            style={{ fontWeight: "400", fontSize: "14px" }}
           >
             Edit
-          </Link>
+          </button>
         </li>
         <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/team-details/delete" ? "active" : ""}`}
-            to="/team-details/delete"
-            onClick={() => setCurrentPage("/team-details/delete")}
+          <button
+            className={`nav-link ${
+              currentPage === `/${teamName}/delete`  ? "active" : ""
+            }`}
+            onClick={handleDeleteClick}
+            style={{ fontWeight: "400", fontSize: "14px" }}
           >
             Delete
-          </Link>
+          </button>
         </li>
         <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/members" ? "active" : ""}`}
-            to="/members"
-            onClick={() => {
-              setCurrentPage("/members");
-              handleFetchApps(teamName); 
-            }}
+          <button
+            className={`nav-link ${currentPage === `/${teamName}/members` ? "active" : ""}`}
+            // onClick={() => {
+            //   // setCurrentPage("/members");
+            //   // handleFetchApps(teamName);
+            //   onClick={handleMemberClick}
+            // }}
+            onClick={handleMemberClick}
+            style={{ fontWeight: "400", fontSize: "14px" }}
           >
             Members
-          </Link>
+          </button>
         </li>
-        {/* <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
-            to="/apps"
-            // onClick={() => setCurrentPage("/apps")
-            // }
-            onClick={() => {
-            setCurrentPage('/apps');
-            handleFetchApps(selectedTeam.selectedTeam);
-          }}
-          >
-            Team Apps
-          </Link>
-        </li> */}
         <li className="nav-item tabs__tab">
-          <Link
-            className={`nav-link ${currentPage === "/apps" ? "active" : ""}`}
-            to="/apps"
-           
+          <button
+            className={`nav-link ${currentPage === `/${teamName}/apps` ? "active" : ""}`}
             onClick={() => {
-              setCurrentPage("/apps");
-              handleFetchApps(teamName); // Call the fetch function when Delete button is clicked
+              handleAppsClick()
+              handleFetchApps(teamName);
             }}
+            style={{ fontWeight: "400", fontSize: "14px" }}
           >
             Appgroups Apps
-          </Link>
+          </button>
         </li>
       </ul>
     </div>

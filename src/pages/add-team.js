@@ -1730,8 +1730,8 @@
 import { Link, navigate } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../Layout";
-import { apiProducts } from "../../redux/store";
+import Layout from "../components/Layout";
+import { apiProducts } from "../redux/store";
 
 const AddTeam = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Layout from "../Layout";
+import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
-import { fetchTeamDetails, fetchTeams } from "../../redux/store";
+import { fetchTeamDetails, fetchTeams } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
 const EditMember = () => {
@@ -62,6 +62,10 @@ const EditMember = () => {
                 name: "__apigee_reserved__developer_details",
                  value: serializedMergedData,
               },
+              {
+                name: "ADMIN_EMAIL",
+                value: "kpatolia@starbucks.com"
+            },
             ],
           }),
         }
@@ -71,7 +75,7 @@ const EditMember = () => {
         // alert(serializedApiProduct);
         alert("Member updated Successfully!");
         dispatch(fetchTeamDetails(team));
-        navigate("/members");
+        navigate(`/${team}/members`);
       } else {
         alert("Failed to update members.");
       }

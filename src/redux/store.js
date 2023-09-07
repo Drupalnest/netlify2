@@ -1,5 +1,4 @@
 
-
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createStore, applyMiddleware, combineReducers } from "redux";
@@ -35,21 +34,21 @@ const SELECT_TEAM = "SELECT_TEAM";
 
 
 
-export const selectTeam = (team) => {
-  return {
-    type: SELECT_TEAM,
-    payload: team,
-  };
-};
+// export const selectTeam = (team) => {
+//   return {
+//     type: SELECT_TEAM,
+//     payload: team,
+//   };
+// };
 
-const selectedTeamReducer = (state = null, action) => {
-  switch (action.type) {
-    case SELECT_TEAM:
-      return action.payload;
-    default:
-      return state;
-  }
-};
+// const selectedTeamReducer = (state = null, action) => {
+//   switch (action.type) {
+//     case SELECT_TEAM:
+//       return action.payload;
+//     default:
+//       return state;
+//   }
+// };
 
 
 
@@ -584,7 +583,7 @@ const rootReducer = combineReducers({
   // updateAppDetails:updateAppDetails,
   appDetailsData:appDetailsData,
   apiProducts:apiProductsReducer,
-  selectedTeam: selectedTeamReducer,
+  //selectedTeam: selectedTeamReducer,
   appsData:appsData,
   memberName:memberreducer
 });
@@ -613,3 +612,5 @@ export default store;
 
 //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/create
 //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}
+
+//https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups

@@ -1,3 +1,11 @@
+
+
+body {
+  
+  font-family: "Sodo Sans", "sans-serif";
+  
+}
+
 header#navbar {
   background-color: #fff !important;
 }
@@ -134,7 +142,7 @@ body.admin-menu.navbar-is-fixed-top {
 
 #navbar .user-menu .dropdown-toggle:after {
   /* background: url(/themes/custom/starbucks/images/icons/Drop_Down_Dark.svg) */
-    /* center center no-repeat; */
+  /* center center no-repeat; */
   background-size: 21px;
   display: inline-block;
   height: 21px;
@@ -1328,8 +1336,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-color: transparent;
 }
 
-
-
 .navbar-light .navbar-text {
   color: rgba(0, 0, 0, 0.85);
 }
@@ -1376,8 +1382,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: rgba(255, 255, 255, 0.85);
   border-color: transparent;
 }
-
-
 
 .navbar-dark .navbar-text {
   color: rgba(255, 255, 255, 0.85);
@@ -3720,7 +3724,7 @@ textarea.form-control {
 .form-control.is-valid {
   border-color: #53be6d;
   padding-right: calc(1.75em + 1rem);
- 
+
   background-repeat: no-repeat;
   background-position: right calc(0.4375em + 0.25rem) center;
   background-size: calc(0.875em + 0.5rem) calc(0.875em + 0.5rem);
@@ -3743,10 +3747,6 @@ textarea.form-control.is-valid {
 .custom-select.is-valid {
   border-color: #53be6d;
   padding-right: calc((1em + 0.75rem) * 3 / 4 + 1.75rem);
- 
-      
-   
-      
 }
 
 .was-validated .custom-select:valid:focus,
@@ -3851,7 +3851,7 @@ textarea.form-control.is-valid {
 .form-control.is-invalid {
   border-color: #dc3545;
   padding-right: calc(1.75em + 1rem);
- 
+
   background-repeat: no-repeat;
   background-position: right calc(0.4375em + 0.25rem) center;
   background-size: calc(0.875em + 0.5rem) calc(0.875em + 0.5rem);
@@ -3874,7 +3874,6 @@ textarea.form-control.is-invalid {
 .custom-select.is-invalid {
   border-color: #dc3545;
   padding-right: calc((1em + 0.75rem) * 3 / 4 + 1.75rem);
-  
 }
 
 .was-validated .custom-select:invalid:focus,
@@ -5499,16 +5498,12 @@ input[type="button"].btn-block {
   border-radius: 2px;
 }
 
-
-
 .custom-checkbox
   .custom-control-input:indeterminate
   ~ .custom-control-label::before {
   border-color: #2196f3;
   background-color: #2196f3;
 }
-
-
 
 .custom-checkbox
   .custom-control-input:disabled:checked
@@ -5525,7 +5520,6 @@ input[type="button"].btn-block {
 .custom-radio .custom-control-label::before {
   border-radius: 50%;
 }
-
 
 .custom-radio
   .custom-control-input:disabled:checked
@@ -5582,9 +5576,7 @@ input[type="button"].btn-block {
   line-height: 1.75;
   color: #495057;
   vertical-align: middle;
-  background: #fff
-   
-    no-repeat right 0.75rem center/8px 10px;
+  background: #fff no-repeat right 0.75rem center/8px 10px;
   border: 1px solid #c8c8c8;
   border-radius: 2px;
   -webkit-appearance: none;
@@ -5905,6 +5897,12 @@ input[type="button"].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+}
+
+ul li .nav-link {
+  font-size: 12.25px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .nav-link:hover,
@@ -7826,9 +7824,6 @@ a.close.disabled {
   height: 20px;
   background: 50%/100% 100% no-repeat;
 }
-
-
-
 
 .carousel-indicators {
   position: absolute;
@@ -12798,7 +12793,7 @@ blockquote::after {
 
 blockquote::before {
   content: " ";
- 
+
   left: 15px;
   top: 15px;
 }
@@ -12812,7 +12807,7 @@ blockquote::before {
 
 blockquote::after {
   content: " ";
-  
+
   bottom: 15px;
   right: 15px;
 }
@@ -13455,8 +13450,7 @@ li.dropbutton-toggle {
   display: block;
   height: 100%;
   left: 0;
- 
-   
+
   -webkit-mask-size: 13px auto;
   mask-size: 13px auto;
   right: 0;
@@ -13556,8 +13550,6 @@ details .form-select {
   line-height: 20px;
   background-color: #f0f0f0;
 }
-
-
 
 .form-item--error > label {
   color: #dc3545;
@@ -13959,28 +13951,25 @@ ul.social-links li a {
 
 @media (min-width: 768px) {
   .text-image__wrapper {
-    grid-template-columns: [gutter-left] minmax(15px, 1fr) [main] minmax(
-        0,
-        345px
-      ) [media] minmax(0, 345px) [gutter-right] minmax(15px, 1fr);
+    grid-template-columns:
+      [gutter-left] minmax(15px, 1fr) [main] minmax(0, 345px)
+      [media] minmax(0, 345px) [gutter-right] minmax(15px, 1fr);
   }
 }
 
 @media (min-width: 992px) {
   .text-image__wrapper {
-    grid-template-columns: [gutter-left] minmax(15px, 1fr) [main] minmax(
-        0,
-        465px
-      ) [media] minmax(0, 465px) [gutter-right] minmax(15px, 1fr);
+    grid-template-columns:
+      [gutter-left] minmax(15px, 1fr) [main] minmax(0, 465px)
+      [media] minmax(0, 465px) [gutter-right] minmax(15px, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
   .text-image__wrapper {
-    grid-template-columns: [gutter-left] minmax(15px, 1fr) [main] minmax(
-        0,
-        555px
-      ) [media] minmax(0, 555px) [gutter-right] minmax(15px, 1fr);
+    grid-template-columns:
+      [gutter-left] minmax(15px, 1fr) [main] minmax(0, 555px)
+      [media] minmax(0, 555px) [gutter-right] minmax(15px, 1fr);
   }
 }
 
@@ -15353,19 +15342,17 @@ div.forum__add {
 
 @media (min-width: 992px) {
   .page--search main {
-    grid-template-columns: [gutter-left] minmax(15px, 1fr) [main] minmax(
-        0,
-        930px
-      ) [gutter-right] minmax(15px, 1fr);
+    grid-template-columns:
+      [gutter-left] minmax(15px, 1fr) [main] minmax(0, 930px)
+      [gutter-right] minmax(15px, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
   .page--search main {
-    grid-template-columns: [gutter-left] minmax(15px, 1fr) [main] minmax(
-        0,
-        1110px
-      ) [gutter-right] minmax(15px, 1fr);
+    grid-template-columns:
+      [gutter-left] minmax(15px, 1fr) [main] minmax(0, 1110px)
+      [gutter-right] minmax(15px, 1fr);
   }
 }
 
@@ -26986,11 +26973,13 @@ nav#toolbar-bar,
   text-decoration: none;
   background-color: #d8d8d8;
 }
-
-.nav-tabs .nav-item .nav-link.active,
-.nav-tabs .nav-item .nav-tabs .nav-link.active:hover {
+/* .nav-link:active {
+  background: #007bff; 
+  border-color: #007bff; 
+} */
+.nav-tabs .nav-item .nav-link.active {
   color: #fff;
-  background-color: #00a862;
+  background-color: red;
   border: none;
 }
 

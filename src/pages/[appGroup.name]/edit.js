@@ -420,14 +420,14 @@
 
 // export default UpdateCompanyName;
 
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../Layout";
-import Buttons from "../Buttons/Buttons";
+import Layout from "../../components/Layout";
+import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
 
-const EditTeam = () => {
+const UpdateCompanyName = () => {
   const [companyName, setCompanyName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedAttributes, setSelectedAttributes] = useState([]);
@@ -516,6 +516,10 @@ const EditTeam = () => {
                 name: "__apigee_reserved__developer_details",
                 value: members,
               },
+              {
+                name: "ADMIN_EMAIL",
+                value: "kpatolia@starbucks.com"
+            },
             ],
           }),
         }
@@ -525,6 +529,7 @@ const EditTeam = () => {
         // alert(serializedApiProduct);
         alert("Appgroups  updated successfully!");
         dispatch(fetchTeamDetails(team));
+        navigate("/")
       } else {
         alert("Appgroups updating failed .");
       }
@@ -903,4 +908,4 @@ const EditTeam = () => {
   );
 };
 
-export default EditTeam;
+export default UpdateCompanyName;
