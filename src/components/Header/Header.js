@@ -40,9 +40,9 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "ligth",
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
+                            fontColor:"#939393",
+                             fontWeight: "600",
+                            fontFamily: "SoDo Sans, sans-serif",
                           }}
                         >
                           My Apps
@@ -54,7 +54,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                            
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}
@@ -67,7 +67,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                            
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}
@@ -80,7 +80,7 @@ const Header = () => {
                           className="nav-link dropdown-toggle"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                            
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}
@@ -93,7 +93,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                          
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}
@@ -106,7 +106,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                           
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}
@@ -120,7 +120,7 @@ const Header = () => {
                           className="nav-link"
                           style={{
                             fontSize: "12.25px",
-                            fontStyle: "normal",
+                            fontColor:"#B8B8B8",
                             fontWeight: "600",
                             fontFamily: "Sodo Sans, sans-serif",
                           }}

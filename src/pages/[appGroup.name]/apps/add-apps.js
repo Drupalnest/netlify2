@@ -1316,8 +1316,8 @@ const AddApps = () => {
                 className="error-message"
                 style={{
                   height: "50px",
-                  width: "40%",
-                  marginLeft: "190px",
+                  width: "32%",
+                  marginLeft: "380px",
                   color: "#DC3545",
                   position: "relative",
                 }}
@@ -1328,7 +1328,7 @@ const AddApps = () => {
                   onClick={() => setIsErrorVisible(false)}
                   style={{
                     position: "absolute",
-                    top: "5px",
+                    top: "60px",
                     right: "5px",
                     cursor: "pointer",
                   }}
