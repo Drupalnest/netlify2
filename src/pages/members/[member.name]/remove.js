@@ -137,7 +137,7 @@ const DeleteMember = () => {
                           Remove
                         </button>
                         <Link
-                          to="/members"
+                          to={`/${team}/members`}
                           className="button btn btn-outline-primary"
                         >
                           Cancel

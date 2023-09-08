@@ -22,6 +22,17 @@ const Members = ({}) => {
   const members = JSON.parse(membersSerialized);
   console.log("members Unserialized", members);
 
+
+
+  const admins = members
+  .filter(item => item.roles.includes("admin"))
+  .map(item => item.developer)
+  .join(", ");
+
+console.log("admins",admins);
+   
+
+
   const handleEditClick = (developer) => {
     dispatch(setDeveloper(developer));
   };

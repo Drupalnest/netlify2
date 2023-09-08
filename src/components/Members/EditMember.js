@@ -8,13 +8,23 @@ const EditMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
   console.log("developer", developer);
 
-  const [selectedRoles, setSelectedRoles] = useState(["member"]);
+  const [selectedRoles, setSelectedRoles] = useState(["admin"]);
+
+  // useEffect(() => {
+  //   if (teamDetails) {
+  //     setSelectedRoles(teamDetails.roles);
+  //   } else if (developer) {
+  //     setSelectedRoles(["member", "admin"]); 
+  //   }
+  // }, [teamDetails, developer]);
+
+
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
 
-  const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
+  const isFetching = teamDetails ? teamDetails.loading : true; 
 
   const team = teamDetails ? teamDetails.name : "";
   console.log("team", team);
@@ -28,12 +38,17 @@ const EditMember = () => {
     : "";
   console.log("products", products);
 
+
+
   const members = teamDetails
     ? teamDetails.attributes.find(
         (attr) => attr.name === "__apigee_reserved__developer_details"
       )?.value
     : "";
   console.log("members", members);
+
+
+
 
   const handleUpdateMember = async (e) => {
     e.preventDefault();
@@ -217,6 +232,11 @@ const EditMember = () => {
 };
 
 export default EditMember;
+
+
+
+
+
 
 
 

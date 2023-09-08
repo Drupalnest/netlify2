@@ -1295,13 +1295,10 @@ const AddApps = () => {
             <header className="page__header">
               <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=starbucks_tabs&args%5B1%5D=full&args%5B2%5D&token=MEkI12DtyJlNIxuOGvgD3VFvH_cZWONfyjuDDe873eY" />
             </header>
+
             <div className="page__content-above">
               <div className="container-fluid px-0">
                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
-                  <div
-                    data-contextual-id="block:block=pagetitle:langcode=en"
-                    data-contextual-token="JWbfFvQC8xC4unlMvQKgq1Qc29aLahBItOfax5aiGxo"
-                  />
                   <div className="container">
                     <h1 className="js-quickedit-page-title page__title mb-0">
                       Add appgroups app
@@ -1311,32 +1308,40 @@ const AddApps = () => {
               </div>
             </div>
 
-            {isErrorVisible && (
-              <div
-                className="error-message"
-                style={{
-                  height: "50px",
-                  width: "32%",
-                  marginLeft: "380px",
-                  color: "#DC3545",
-                  position: "relative",
-                }}
-              >
-                {error}
-                <button
-                  className="close-button"
-                  onClick={() => setIsErrorVisible(false)}
-                  style={{
-                    position: "absolute",
-                    top: "60px",
-                    right: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  &#x2716; {/* Unicode character for a close symbol */}
-                </button>
+            <div className="page__content-above">
+              <div className="container-fluid px-0">
+                <div className="container">
+                  {isErrorVisible && (
+                    <div
+                      className="error-message"
+                      style={{
+                        height: "50px",
+                        width: "500px",
+
+                        color: "#DC3545",
+                        position: "relative",
+                        textAlign: "center", // Centered text
+                      }}
+                    >
+                      {error}
+                      <button
+                        className="close-button"
+                        onClick={() => setIsErrorVisible(false)}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "5px",
+                          transform: "translateY(-50%)", // Centered vertically
+                          cursor: "pointer",
+                        }}
+                      >
+                        &#x2716; {/* Unicode character for a close symbol */}
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
+            </div>
 
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">

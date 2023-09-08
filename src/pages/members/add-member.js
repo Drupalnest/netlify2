@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { useStaticQuery, graphql, Link, navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamDetails, fetchTeams } from "../../redux/store";
+import { json } from "react-router-dom";
 
 const AddMembers = () => {
   const data = useStaticQuery(graphql`
@@ -67,7 +68,7 @@ const AddMembers = () => {
   const handleAddMember = async (e) => {
     e.preventDefault();
     const membersSerialized = members ? JSON.parse(members) : [];
-    
+
     // Check if the developer already exists in the membersSerialized array
     const isDuplicate = membersSerialized.some(
       (member) => member.developer === developer
@@ -108,9 +109,12 @@ const AddMembers = () => {
               },
               {
                 name: "ADMIN_EMAIL",
-                value: "kpatolia@starbucks.com"
-            },
-
+                value: "kpatolia@starbucks.com",
+              },
+              {
+                name: "DP_AdminEmails",
+                value:  admins,
+              },
             ],
           }),
         }
@@ -121,7 +125,6 @@ const AddMembers = () => {
         alert("Member added Successfully!");
         dispatch(fetchTeamDetails(team));
         navigate(`/${team}/members`);
-
       } else {
         alert("Failed to add member.");
       }
@@ -144,8 +147,7 @@ const AddMembers = () => {
 
   console.log("username", username);
 
- const  membersSerialized = members ? JSON.parse(members) : [];
-  
+  const membersSerialized = members ? JSON.parse(members) : [];
 
   const developer = username;
   const roles = selectedRoles;
@@ -154,13 +156,34 @@ const AddMembers = () => {
   const mergedData = [...membersSerialized, newMember];
 
   const serializedMergedData = JSON.stringify(mergedData);
-  console.log("serializedMergedData",serializedMergedData)
-
-// const allAdmin=
-
-//   console.log("allAdmin",)
+  console.log("serializedMergedData", serializedMergedData);
 
  
+  // const admin = JSON.parse(serializedMergedData);
+
+  // if (Array.isArray(admin)) {
+  //   const admins = admin
+  //     .filter((item) => item.roles.includes("admin"))
+  //     .map((item) => item.developer)
+  //     .join(", ");
+  
+  //   console.log(admins);
+  // } else {
+  //   console.error("admin is not a valid array.");
+  // }
+  
+
+  const adminData = JSON.parse(serializedMergedData);
+
+const admins = adminData
+  .filter(item => item.roles.includes("admin"))
+  .map(item => item.developer)
+  .join(", ");
+
+console.log("admins",admins);
+   
+  
+  
 
   return (
     <Layout>
@@ -192,7 +215,6 @@ const AddMembers = () => {
               <div className="container py-5">
                 <div className="row">
                   <div className="page__content col-md">
-                    
                     <form
                       onSubmit={handleAddMember}
                       className="apigee-edge-teams-add-team-member-form team-member-form"
@@ -245,8 +267,7 @@ const AddMembers = () => {
                           </div>
                         </div>
                       </fieldset>
-                      
-                      
+
                       <div className="js-form-item form-item js-form-type-entity-autocomplete form-type-entity-autocomplete form-item-username js-form-item-username form-group">
                         <label className="js-form-required form-required">
                           Username

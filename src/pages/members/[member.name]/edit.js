@@ -8,7 +8,13 @@ const EditMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
   console.log("developer", developer);
 
-  const [selectedRoles, setSelectedRoles] = useState(["member"]);
+
+
+
+ 
+
+
+  
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
@@ -35,6 +41,27 @@ const EditMember = () => {
     : "";
   console.log("members", members);
 
+
+  const allMembers = JSON.parse(members);
+  console.log("All Members", allMembers);
+  
+  const developerName = developer;
+  console.log("Developer Name:", developerName);
+  
+
+
+
+  const rolesOfSelectedDeveloper = allMembers
+  .filter((member) => member.developer === developerName)
+  .map((member) => member.roles)
+  .flat();
+
+console.log("Roles of Selected Developer:", rolesOfSelectedDeveloper);
+
+
+
+const [selectedRoles, setSelectedRoles] = useState(rolesOfSelectedDeveloper);
+
   const handleUpdateMember = async (e) => {
     e.preventDefault();
 
@@ -60,12 +87,16 @@ const EditMember = () => {
               },
               {
                 name: "__apigee_reserved__developer_details",
-                 value: serializedMergedData,
+                value: serializedMergedData,
               },
               {
                 name: "ADMIN_EMAIL",
-                value: "kpatolia@starbucks.com"
-            },
+                value: "kpatolia@starbucks.com",
+              },
+              {
+                name: "DP_AdminEmails",
+                value: admins,
+              },
             ],
           }),
         }
@@ -84,39 +115,34 @@ const EditMember = () => {
     }
   };
 
-  const handleRoleSelection = (role) => {
-    setSelectedRoles((prevRoles) => {
-      if (prevRoles.includes(role)) {
-        return prevRoles.filter((r) => r !== role);
-      } else {
-        return [...prevRoles, role];
-      }
-    });
-  };
+ 
+  
+  
 
   const updatedMember = {
     developer,
     roles: selectedRoles,
   };
-  
+
   // Logic for PUT request or other actions
   console.log("Updated Member Data:", updatedMember);
-  
+
   const membersSerialized = JSON.parse(members);
   console.log("membersSerialized", membersSerialized);
-  
+
   // Check for duplicate before adding the updated member
-  const isDuplicate = membersSerialized.some(member => (
-    member.developer === updatedMember.developer &&
-    JSON.stringify(member.roles) === JSON.stringify(updatedMember.roles)
-  ));
-  
+  const isDuplicate = membersSerialized.some(
+    (member) =>
+      member.developer === updatedMember.developer &&
+      JSON.stringify(member.roles) === JSON.stringify(updatedMember.roles)
+  );
+
   if (!isDuplicate) {
     // Replace the existing member with the updated data if it already exists
     const existingIndex = membersSerialized.findIndex(
-      member => member.developer === updatedMember.developer
+      (member) => member.developer === updatedMember.developer
     );
-  
+
     if (existingIndex !== -1) {
       membersSerialized.splice(existingIndex, 1, updatedMember);
       console.log("Member updated successfully.");
@@ -127,10 +153,41 @@ const EditMember = () => {
   } else {
     console.log("Duplicate entry found. Not adding the updated member.");
   }
-  
+
   console.log("Updated membersSerialized", membersSerialized);
   const serializedMergedData = JSON.stringify(membersSerialized);
-  console.log("serializedMergedData",serializedMergedData)
+  console.log("serializedMergedData", serializedMergedData);
+
+  const adminData = JSON.parse(serializedMergedData);
+
+  const admins = adminData
+    .filter((item) => (item.roles ? item.roles.includes("admin") : false))
+    .map((item) => item.developer)
+    .join(", ");
+
+  
+
+
+
+
+  const handleRoleSelection = (role) => {
+    setSelectedRoles((prevRoles) => {
+      if (prevRoles && prevRoles.includes(role)) {
+        return prevRoles.filter((r) => r !== role);
+      } else {
+        return [...(prevRoles || []), role];
+      }
+    });
+  };
+  
+ 
+
+
+
+ 
+   
+
+
 
   return (
     <Layout>
@@ -172,7 +229,7 @@ const EditMember = () => {
                             <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-admin js-form-item-team-roles-admin form-check">
                               <input
                                 type="checkbox"
-                                checked={selectedRoles.includes("admin")}
+                                checked={selectedRoles ? selectedRoles.includes("admin") : false}
                                 onChange={() => handleRoleSelection("admin")}
                                 name="team_roles[admin]"
                               />
@@ -184,7 +241,7 @@ const EditMember = () => {
                             <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-member js-form-item-team-roles-member form-check">
                               <input
                                 type="checkbox"
-                                checked={selectedRoles.includes("member")}
+                                checked={selectedRoles ? selectedRoles.includes("member") : false}
                                 onChange={() => handleRoleSelection("member")}
                                 name="team_roles[member]"
                               />
@@ -202,7 +259,7 @@ const EditMember = () => {
                         </button>
 
                         <Link
-                          to="/members"
+                          to={`/${team}/members`}
                           className="btn js-form-submit btn-outline-primary"
                         >
                           Cancel
@@ -221,12 +278,6 @@ const EditMember = () => {
 };
 
 export default EditMember;
-
-
-
-
-
-
 
 // import React, { useEffect, useRef, useState } from "react";
 // import Layout from "../Layout";
@@ -329,7 +380,6 @@ export default EditMember;
 //     developer,
 //     roles: selectedRoles,
 //   };
-
 
 //   // Logic for PUT request or other actions
 //   console.log("Updated Member Data:", updatedMember);
