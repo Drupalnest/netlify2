@@ -524,7 +524,7 @@ console.log("appNames", appNames);
                 >
                   Delete appgroups App
                 </button>
-                <Link to="/apps" className="button">
+                <Link to={`/${teamName}/apps/`} className="button">
                   Cancel
                 </Link>
               </div>
