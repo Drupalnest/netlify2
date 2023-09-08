@@ -4532,6 +4532,116 @@ const ViewApp = () => {
     }
   }
 
+  function customFormatTimestamp(timestamp) {
+    if (!timestamp) {
+      return "N/A";
+    }
+
+    const customDate = new Date(parseInt(timestamp));
+    if (!isNaN(customDate)) {
+      const now = new Date();
+      const diff = now - customDate;
+
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30); // Approximation, not precise
+
+      if (months >= 1) {
+        return `${months} months ago `;
+      } else if (weeks >= 1) {
+        const remainingDays = days % 7;
+        return `${weeks} weeks ${remainingDays} days ago `;
+      } else {
+        return `${days} days ago `;
+      }
+    } else {
+      return "Invalid Date";
+    }
+  }
+
+  function customFormatTDate(timestamp) {
+    if (!timestamp) {
+      return "N/A";
+    }
+
+    const customDateObject = new Date(parseInt(timestamp));
+    if (!isNaN(customDateObject)) {
+      const options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+        timeZone: "UTC",
+      };
+
+      const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+        customDateObject
+      );
+      return `${formattedDate} (UTC)`;
+    } else {
+      return "Invalid Date";
+    }
+  }
+
+  const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
+  const formattedTimestamp = customFormatTDate(timestamp);
+
+  console.log(formattedTimestamp); // Output: "Aug 21, 2023, 12:11:00 PM (UTC)"
+
+  function customFormatDateTimetamp(timestamp) {
+    const customDate = new Date(parseInt(timestamp));
+
+    if (isNaN(customDate)) {
+      return "Invalid Date";
+    }
+
+    const now = new Date();
+    const diff = now - customDate;
+
+    const seconds = Math.floor(Math.abs(diff) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30); // Approximation, not precise
+
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZone: "UTC", // Specify the timeZone as 'UTC'
+    };
+    const dateObject = customDate;
+
+    if (months >= 1) {
+      return `${new Intl.DateTimeFormat("en-US", options).format(
+        dateObject
+      )} in ${months} months (UTC)`;
+    } else if (weeks >= 1) {
+      const remainingDays = days % 7;
+      return `${new Intl.DateTimeFormat("en-US", options).format(
+        dateObject
+      )} in ${weeks} weeks and ${remainingDays} days (UTC)`;
+    } else {
+      return `${new Intl.DateTimeFormat("en-US", options).format(
+        dateObject
+      )} in ${days} days (UTC)`;
+    }
+  }
+
+  const timestamp1 = 74263536543464; // Assuming it's a valid timestamp
+  const result2 = customFormatDateTimetamp(timestamp1);
+  console.log("result2", result2);
+
   const generateRandomSecret = () => {
     const characters =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -4807,7 +4917,9 @@ const ViewApp = () => {
                                 <div className="field__label">Created</div>
                                 <div className="field__item">
                                   {appDetailsData.createdAt
-                                    ? formatTimestamp(appDetailsData.createdAt)
+                                    ? customFormatTimestamp(
+                                        appDetailsData.createdAt
+                                      )
                                     : "N/A"}
                                 </div>
                               </div>
@@ -4816,7 +4928,7 @@ const ViewApp = () => {
                                 <div className="field__label">Last updated</div>
                                 <div className="field__item">
                                   {appDetailsData.lastModifiedAt
-                                    ? formatTimestamp(
+                                    ? customFormatTimestamp(
                                         appDetailsData.lastModifiedAt
                                       )
                                     : "N/A"}
@@ -5044,7 +5156,7 @@ const ViewApp = () => {
                                                 <label> Issued </label>
 
                                                 {credential.issuedAt
-                                                  ? formatTimestamp(
+                                                  ? customFormatTDate(
                                                       credential.issuedAt
                                                     )
                                                   : "N/A"}
@@ -5052,7 +5164,7 @@ const ViewApp = () => {
                                               <div className="item-property">
                                                 <label> Expires </label>{" "}
                                                 {credential.expiresAt
-                                                  ? formatTimestamp(
+                                                  ? customFormatDateTimetamp(
                                                       credential.expiresAt
                                                     )
                                                   : "N/A"}
@@ -5316,6 +5428,7 @@ const ViewApp = () => {
                                 }
                                 )
                               </summary>
+
                               <div
                                 className="card-body pb-0"
                                 // style={{ border: "7px solid green" }}
@@ -5481,7 +5594,7 @@ const ViewApp = () => {
                                                   <label> Issued </label>
 
                                                   {credential.issuedAt
-                                                    ? formatTimestamp(
+                                                    ? customFormatTDate(
                                                         credential.issuedAt
                                                       )
                                                     : "N/A"}
@@ -5489,7 +5602,7 @@ const ViewApp = () => {
                                                 <div className="item-property">
                                                   <label> Expires </label>{" "}
                                                   {credential.expiresAt
-                                                    ? formatTimestamp(
+                                                    ? customFormatDateTimetamp(
                                                         credential.expiresAt
                                                       )
                                                     : "N/A"}
@@ -5508,13 +5621,54 @@ const ViewApp = () => {
                                                 // style={{
                                                 //   border: "1px solid blue",
                                                 // }}
+                                                style={{
+                                                  // border: "1px solid blue",
+                                                  display: "flex",
+                                                  flexDirection: "column",
+                                                  // border: "1px solid blue",
+                                                  //marginRight: "70px",
+                                                }}
                                               >
                                                 <div
+                                                  className="dropbutton-wrapper"
+                                                  // style={{
+                                                  //   border: "8px solid blue",
+                                                  // }}
+                                                >
+                                                  <div className="dropbutton-widget">
+                                                    <div className="dropbutton">
+                                                      <div>
+                                                        <button
+                                                          className="button btn btn-primary"
+                                                          style={{
+                                                            padding: "5px 10px",
+                                                            width: "10px",
+                                                            fontSize: "12px",
+
+                                                            marginLeft: "450px",
+                                                          }}
+                                                          onClick={() =>
+                                                            handleRemovekey(
+                                                              teamName,
+                                                              appDetailsData.name,
+                                                              credential.consumerKey
+                                                            )
+                                                          }
+                                                        >
+                                                          Delete
+                                                        </button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div
                                                   className="wrapper--secondary"
-                                                  style={{
-                                                    // border: "1px solid red",
-                                                    marginLeft: "45px",
-                                                  }}
+                                                  style={
+                                                    {
+                                                      ///  border: "1px solid red",
+                                                      //marginLeft: "45px",
+                                                    }
+                                                  }
                                                 >
                                                   <label
                                                     style={{
@@ -5543,8 +5697,18 @@ const ViewApp = () => {
                                                                   product.apiproduct
                                                                 }
                                                               </span>
-                                                              <span className="badge badge-success">
-                                                                {product.status}
+                                                              <span
+                                                                className="badge badge-success"
+                                                                style={{
+                                                                  backgroundColor:
+                                                                    "#C5C5C5",
+                                                                  marginLeft:
+                                                                    "300px",
+                                                                }}
+                                                              >
+                                                                {product.status
+                                                                  ? "Enabled"
+                                                                  : "Disabled"}
                                                               </span>
                                                             </div>
                                                           </div>
@@ -5564,7 +5728,7 @@ const ViewApp = () => {
                                                 </div>
                                               </div>
 
-                                              <div
+                                              {/* <div
                                                 className="dropbutton-wrapper"
                                                 // style={{
                                                 //   border: "8px solid blue",
@@ -5595,7 +5759,7 @@ const ViewApp = () => {
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div>
+                                              </div> */}
                                             </div>
                                           </fieldset>
                                         );

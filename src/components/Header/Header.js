@@ -4,6 +4,20 @@ import "../../styles/style.css";
 import { Link } from "gatsby";
 import logo from "../../images/logo.png";
 
+
+<link href="https://db.onlinewebfonts.com/c/d7e8a95865396cddca89b00080d2cba6?family=SoDo+Sans+SemiBold" rel="stylesheet" type="text/css"/>
+const textStyle = {
+  fontFamily: 'SoDo SoDoSans',
+  fontWeight: 100,
+  fontStyle: 'SemiBoldItalic', 
+  fontDisplay: 'swap' 
+};
+
+
+
+
+
+
 const Header = () => {
   return (
     <header id="navbar" className="navbar navbar-static-top navbar-default">
@@ -17,7 +31,7 @@ const Header = () => {
                     <img src={logo} alt="Starbucks Developer Portal" />
                   </Link>
                   <span className="brand__line"></span>
-                  <span className="brand__slogan" style={{fontSize:"18px",fontFamily:"Sodo Sans ,sans-serif",fontWeight: "normal" }}>
+                  <span className="brand__slogan" style={{fontFamily: "SoDo Sans SemiBold"}}>
                     Starbucks Developer Portal - Dev
                   </span>
                 </div>

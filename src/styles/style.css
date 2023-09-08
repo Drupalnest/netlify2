@@ -1,9 +1,12 @@
-
+body {
+  font-family: "SoDo Sans";
+  font-size: 14px;
+}
 
 body {
-  
-  font-family: "Sodo Sans", "sans-serif";
-  
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: normal;
 }
 
 header#navbar {
@@ -141,7 +144,7 @@ body.admin-menu.navbar-is-fixed-top {
 }
 
 #navbar .user-menu .dropdown-toggle:after {
-  /* background: url(/themes/custom/starbucks/images/icons/Drop_Down_Dark.svg) */
+  /* background: url(/images/icons/Drop_Down_Dark.svg) */
   /* center center no-repeat; */
   background-size: 21px;
   display: inline-block;
@@ -256,7 +259,7 @@ body.admin-menu.navbar-is-fixed-top {
 #navbar .navbar__collapse ul.nav.navbar-nav .menu-item a.dropdown-toggle:after,
 #navbar .navbar__collapse ul.menu .nav-item a.dropdown-toggle:after,
 #navbar .navbar__collapse ul.menu .menu-item a.dropdown-toggle:after {
-  /* background: url(/themes/custom/starbucks/images/icons/Drop_Down_Dark.svg)
+  /* background: url(/images/icons/Drop_Down_Dark.svg)
     center center no-repeat; */
   background-size: 21px;
   display: inline-block;
@@ -15557,14 +15560,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-bold.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-bold.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-bold.eot");
+  src: url("/styles/fonts/avenirnext-bold.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bold.woff2") format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bold.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bold.ttf") format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bold.svg#AvenirNext-Bold")
-      format("svg");
+    url("/styles/fonts/avenirnext-bold.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-bold.woff") format("woff"),
+    url("/styles/fonts/avenirnext-bold.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-bold.svg#AvenirNext-Bold") format("svg");
   font-weight: 700;
   font-style: normal;
   font-stretch: normal;
@@ -15572,16 +15574,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-bolditalic.eot");
+  src: url("/styles/fonts/avenirnext-bolditalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-bolditalic.svg#AvenirNext-BoldItalic")
+    url("/styles/fonts/avenirnext-bolditalic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-bolditalic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-bolditalic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-bolditalic.svg#AvenirNext-BoldItalic")
       format("svg");
   font-weight: 700;
   font-style: italic;
@@ -15590,16 +15589,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-demibold.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-demibold.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-demibold.eot");
+  src: url("/styles/fonts/avenirnext-demibold.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibold.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibold.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibold.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibold.svg#AvenirNext-DemiBold")
+    url("/styles/fonts/avenirnext-demibold.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-demibold.woff") format("woff"),
+    url("/styles/fonts/avenirnext-demibold.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-demibold.svg#AvenirNext-DemiBold")
       format("svg");
   font-weight: 600;
   font-style: normal;
@@ -15608,16 +15604,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-demibolditalic.eot");
+  src: url("/styles/fonts/avenirnext-demibolditalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-demibolditalic.svg#AvenirNext-DemiBoldItalic")
+    url("/styles/fonts/avenirnext-demibolditalic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-demibolditalic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-demibolditalic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-demibolditalic.svg#AvenirNext-DemiBoldItalic")
       format("svg");
   font-weight: 600;
   font-style: italic;
@@ -15626,15 +15619,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-heavy.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-heavy.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-heavy.eot");
+  src: url("/styles/fonts/avenirnext-heavy.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavy.woff2") format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavy.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavy.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavy.svg#AvenirNext-Heavy")
-      format("svg");
+    url("/styles/fonts/avenirnext-heavy.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-heavy.woff") format("woff"),
+    url("/styles/fonts/avenirnext-heavy.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-heavy.svg#AvenirNext-Heavy") format("svg");
   font-weight: 900;
   font-style: normal;
   font-stretch: normal;
@@ -15642,16 +15633,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-heavyitalic.eot");
+  src: url("/styles/fonts/avenirnext-heavyitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-heavyitalic.svg#AvenirNext-HeavyItalic")
+    url("/styles/fonts/avenirnext-heavyitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-heavyitalic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-heavyitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-heavyitalic.svg#AvenirNext-HeavyItalic")
       format("svg");
   font-weight: 900;
   font-style: italic;
@@ -15660,16 +15648,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-italic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-italic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-italic.eot");
+  src: url("/styles/fonts/avenirnext-italic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-italic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-italic.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-italic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-italic.svg#AvenirNext-Italic")
-      format("svg");
+    url("/styles/fonts/avenirnext-italic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-italic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-italic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-italic.svg#AvenirNext-Italic") format("svg");
   font-weight: 400;
   font-style: italic;
   font-stretch: normal;
@@ -15677,16 +15662,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-medium.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-medium.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-medium.eot");
+  src: url("/styles/fonts/avenirnext-medium.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-medium.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-medium.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-medium.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-medium.svg#AvenirNext-Medium")
-      format("svg");
+    url("/styles/fonts/avenirnext-medium.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-medium.woff") format("woff"),
+    url("/styles/fonts/avenirnext-medium.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-medium.svg#AvenirNext-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
@@ -15694,16 +15676,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-mediumitalic.eot");
+  src: url("/styles/fonts/avenirnext-mediumitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-mediumitalic.svg#AvenirNext-MediumItalic")
+    url("/styles/fonts/avenirnext-mediumitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-mediumitalic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-mediumitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-mediumitalic.svg#AvenirNext-MediumItalic")
       format("svg");
   font-weight: 500;
   font-style: italic;
@@ -15712,16 +15691,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-regular.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-regular.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-regular.eot");
+  src: url("/styles/fonts/avenirnext-regular.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-regular.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-regular.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-regular.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-regular.svg#AvenirNext-Regular")
-      format("svg");
+    url("/styles/fonts/avenirnext-regular.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-regular.woff") format("woff"),
+    url("/styles/fonts/avenirnext-regular.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-regular.svg#AvenirNext-Regular") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -15729,16 +15705,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-ultralight.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-ultralight.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-ultralight.eot");
+  src: url("/styles/fonts/avenirnext-ultralight.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralight.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralight.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralight.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralight.svg#AvenirNext-UltraLight")
+    url("/styles/fonts/avenirnext-ultralight.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-ultralight.woff") format("woff"),
+    url("/styles/fonts/avenirnext-ultralight.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-ultralight.svg#AvenirNext-UltraLight")
       format("svg");
   font-weight: 275;
   font-style: normal;
@@ -15747,16 +15720,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.eot?#iefix")
+  src: url("/styles/fonts/avenirnext-ultralightitalic.eot");
+  src: url("/styles/fonts/avenirnext-ultralightitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenirnext-ultralightitalic.svg#AvenirNext-UltraLightItalic")
+    url("/styles/fonts/avenirnext-ultralightitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenirnext-ultralightitalic.woff") format("woff"),
+    url("/styles/fonts/avenirnext-ultralightitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenirnext-ultralightitalic.svg#AvenirNext-UltraLightItalic")
       format("svg");
   font-weight: 275;
   font-style: italic;
@@ -15765,16 +15735,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-bold.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-bold.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-bold.eot");
+  src: url("/styles/fonts/avenircondensed-bold.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bold.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bold.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bold.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bold.svg#AvenirCondensed-Bold")
+    url("/styles/fonts/avenircondensed-bold.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-bold.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-bold.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-bold.svg#AvenirCondensed-Bold")
       format("svg");
   font-weight: 700;
   font-style: normal;
@@ -15783,16 +15750,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-bolditalic.eot");
+  src: url("/styles/fonts/avenircondensed-bolditalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-bolditalic.svg#AvenirCondensed-BoldItalic")
+    url("/styles/fonts/avenircondensed-bolditalic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-bolditalic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-bolditalic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-bolditalic.svg#AvenirCondensed-BoldItalic")
       format("svg");
   font-weight: 700;
   font-style: italic;
@@ -15801,16 +15765,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-demibold.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-demibold.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-demibold.eot");
+  src: url("/styles/fonts/avenircondensed-demibold.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibold.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibold.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibold.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibold.svg#AvenirCondensed-DemiBold")
+    url("/styles/fonts/avenircondensed-demibold.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-demibold.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-demibold.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-demibold.svg#AvenirCondensed-DemiBold")
       format("svg");
   font-weight: 600;
   font-style: normal;
@@ -15819,16 +15780,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-demibolditalic.eot");
+  src: url("/styles/fonts/avenircondensed-demibolditalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-demibolditalic.svg#AvenirCondensed-DemiBoldItalic")
+    url("/styles/fonts/avenircondensed-demibolditalic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-demibolditalic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-demibolditalic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-demibolditalic.svg#AvenirCondensed-DemiBoldItalic")
       format("svg");
   font-weight: 600;
   font-style: italic;
@@ -15837,16 +15795,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-heavy.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-heavy.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-heavy.eot");
+  src: url("/styles/fonts/avenircondensed-heavy.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavy.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavy.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavy.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavy.svg#AvenirCondensed-Heavy")
+    url("/styles/fonts/avenircondensed-heavy.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-heavy.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-heavy.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-heavy.svg#AvenirCondensed-Heavy")
       format("svg");
   font-weight: 900;
   font-style: normal;
@@ -15855,16 +15810,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-heavyitalic.eot");
+  src: url("/styles/fonts/avenircondensed-heavyitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-heavyitalic.svg#AvenirCondensed-HeavyItalic")
+    url("/styles/fonts/avenircondensed-heavyitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-heavyitalic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-heavyitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-heavyitalic.svg#AvenirCondensed-HeavyItalic")
       format("svg");
   font-weight: 900;
   font-style: italic;
@@ -15873,16 +15825,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-italic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-italic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-italic.eot");
+  src: url("/styles/fonts/avenircondensed-italic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-italic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-italic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-italic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-italic.svg#AvenirCondensed-Italic")
+    url("/styles/fonts/avenircondensed-italic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-italic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-italic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-italic.svg#AvenirCondensed-Italic")
       format("svg");
   font-weight: 400;
   font-style: italic;
@@ -15891,16 +15840,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-medium.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-medium.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-medium.eot");
+  src: url("/styles/fonts/avenircondensed-medium.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-medium.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-medium.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-medium.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-medium.svg#AvenirCondensed-Medium")
+    url("/styles/fonts/avenircondensed-medium.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-medium.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-medium.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-medium.svg#AvenirCondensed-Medium")
       format("svg");
   font-weight: 500;
   font-style: normal;
@@ -15909,16 +15855,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-mediumitalic.eot");
+  src: url("/styles/fonts/avenircondensed-mediumitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-mediumitalic.svg#AvenirCondensed-MediumItalic")
+    url("/styles/fonts/avenircondensed-mediumitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-mediumitalic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-mediumitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-mediumitalic.svg#AvenirCondensed-MediumItalic")
       format("svg");
   font-weight: 500;
   font-style: italic;
@@ -15927,16 +15870,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-regular.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-regular.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-regular.eot");
+  src: url("/styles/fonts/avenircondensed-regular.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-regular.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-regular.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-regular.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-regular.svg#AvenirCondensed-Regular")
+    url("/styles/fonts/avenircondensed-regular.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-regular.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-regular.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-regular.svg#AvenirCondensed-Regular")
       format("svg");
   font-weight: 400;
   font-style: normal;
@@ -15945,16 +15885,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-ultralight.eot");
+  src: url("/styles/fonts/avenircondensed-ultralight.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralight.svg#AvenirCondensed-UltraLight")
+    url("/styles/fonts/avenircondensed-ultralight.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-ultralight.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-ultralight.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-ultralight.svg#AvenirCondensed-UltraLight")
       format("svg");
   font-weight: 275;
   font-style: normal;
@@ -15963,16 +15900,13 @@ div.forum__add {
 
 @font-face {
   font-family: "Avenir";
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.eot");
-  src: url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.eot?#iefix")
+  src: url("/styles/fonts/avenircondensed-ultralightitalic.eot");
+  src: url("/styles/fonts/avenircondensed-ultralightitalic.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.woff2")
-      format("woff2"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.woff")
-      format("woff"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.ttf")
-      format("truetype"),
-    url("/themes/custom/starbucks/fonts/avenircondensed-ultralightitalic.svg#AvenirCondensed-UltraLightItalic")
+    url("/styles/fonts/avenircondensed-ultralightitalic.woff2") format("woff2"),
+    url("/styles/fonts/avenircondensed-ultralightitalic.woff") format("woff"),
+    url("/styles/fonts/avenircondensed-ultralightitalic.ttf") format("truetype"),
+    url("/styles/fonts/avenircondensed-ultralightitalic.svg#AvenirCondensed-UltraLightItalic")
       format("svg");
   font-weight: 275;
   font-style: italic;
@@ -15981,12 +15915,11 @@ div.forum__add {
 
 @font-face {
   font-family: "feather";
-  src: url("/themes/custom/starbucks/fonts/feather.eot");
-  src: url("/themes/custom/starbucks/fonts/feather.eot?#iefix")
-      format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/feather.woff") format("woff"),
-    url("/themes/custom/starbucks/fonts/feather.ttf") format("truetype"),
-    url("/themes/custom/starbucks/fonts/feather.svg#feather") format("svg");
+  src: url("/styles/fonts/feather.eot");
+  src: url("/styles/fonts/feather.eot?#iefix") format("embedded-opentype"),
+    url("/styles/fonts/feather.woff") format("woff"),
+    url("/styles/fonts/feather.ttf") format("truetype"),
+    url("/styles/fonts/feather.svg#feather") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -16286,16 +16219,16 @@ th {
 
 @font-face {
   font-family: "Glyphicons Halflings";
-  src: url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.eot?#iefix")
+  src: url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.eot?#iefix")
       format("embedded-opentype"),
-    url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.woff2")
+    url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.woff2")
       format("woff2"),
-    url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.woff")
+    url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.woff")
       format("woff"),
-    url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.ttf")
+    url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.ttf")
       format("truetype"),
-    url("/themes/custom/starbucks/fonts/vendor/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular")
+    url("/styles/fonts/vendor/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular")
       format("svg");
 }
 
@@ -25150,16 +25083,14 @@ body.footer-is-fixed-bottom html.js #module-filter-submit {
 
 .homepage-block {
   position: relative;
-  background: #fff
-    url(/themes/custom/starbucks/images/starbucks_background_hero_image.png) 66%
+  background: #fff url(/images/starbucks_background_hero_image.png) 66%
     bottom/cover no-repeat;
   height: 100vh;
 }
 
 @media screen and (min-width: 992px) {
   .homepage-block {
-    background: #fff
-      url(/themes/custom/starbucks/images/starbucks_background_hero_image.png)
+    background: #fff url(/images/starbucks_background_hero_image.png)
       center/cover no-repeat;
   }
 }
@@ -25340,8 +25271,7 @@ body.footer-is-fixed-bottom html.js #module-filter-submit {
   display: none;
   height: 18px;
   width: 18px;
-  background: url("/themes/custom/starbucks/images/smart_method/empty.png")
-    no-repeat;
+  background: url("/images/smart_method/empty.png") no-repeat;
   background-color: #f2f2f2;
   border-radius: 0 4px 4px 0;
   border: 1px solid #bdbdbd;
@@ -25352,27 +25282,24 @@ body.footer-is-fixed-bottom html.js #module-filter-submit {
 
 .node-smart-method #method_content.edit-mode a.allow_edit.hover {
   border-radius: 0 4px 4px 0;
-  background: url("/themes/custom/starbucks/images/smart_method/pencil_small_hover.png")
-    no-repeat 5px 4px;
+  background: url("/images/smart_method/pencil_small_hover.png") no-repeat 5px
+    4px;
 }
 
 .node-smart-method #method_content.edit-mode a.allow_edit.ok {
   border-radius: 0;
-  background: url("/themes/custom/starbucks/images/smart_method/ok.png")
-    no-repeat 5px 4px;
+  background: url("/images/smart_method/ok.png") no-repeat 5px 4px;
 }
 
 .node-smart-method #method_content.edit-mode a.allow_edit.cancel {
   border-radius: 0 4px 4px 0;
-  background: url("/themes/custom/starbucks/images/smart_method/cancel.png")
-    no-repeat 5px 4px;
+  background: url("/images/smart_method/cancel.png") no-repeat 5px 4px;
 }
 
 .node-smart-method #method_content .icon-remove {
   height: 10px;
   width: 10px;
-  background: url(/themes/custom/starbucks/images/smart_method/icon_cancel.png)
-    no-repeat;
+  background: url(/images/smart_method/icon_cancel.png) no-repeat;
   display: none;
 }
 
@@ -26997,8 +26924,7 @@ nav#toolbar-bar,
 .adminimal-admin-toolbar .toolbar-icon-admin-toolbar-tools-help:active:before,
 .adminimal-admin-toolbar
   .toolbar-icon-admin-toolbar-tools-help.is-active:before {
-  background: url(/themes/custom/starbucks/images/home.svg) center center
-    no-repeat;
+  background: url(/images/home.svg) center center no-repeat;
 }
 
 button.close {
@@ -27198,198 +27124,222 @@ button.close {
 .view-user-management-user- table.table-bordered thead {
   border-top: 1px solid #ccc;
 }
-/* 
+
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Black.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Black.woff2") format("woff2"),
+    url("/styles/styles/fonts/sodo/SoDoSans-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Black.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Black.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BlackItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BlackItalic.woff') format('woff');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Bold.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Bold.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BlackItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BlackItalic.woff') format('woff');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Bold.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Bold.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BoldItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BoldItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Italic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Italic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Italic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Italic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Light.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Light.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Light.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Light.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-LightItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-LightItalic.woff') format('woff');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-LightItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-LightItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-LightItalic.woff') format('woff');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-LightItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Regular.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Regular.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Regular.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Regular.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBold.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-SemiBold.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBoldItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBoldItalic.woff') format('woff');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBold.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-SemiBold.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBoldItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-SemiBoldItalic.woff') format('woff');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Thin.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Thin.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-ThinItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-ThinItalic.woff') format('woff');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Thin.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-Thin.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'SoDo Sans';
-    src: url('/themes/custom/starbucks/fonts/sodo/SoDoSans-ThinItalic.woff2') format('woff2'), url('/themes/custom/starbucks/fonts/sodo/SoDoSans-ThinItalic.woff') format('woff');
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
-} */
+  font-family: "SoDo Sans";
+  src: url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
+    url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
 
 body {
   font-family: "SoDo Sans";
