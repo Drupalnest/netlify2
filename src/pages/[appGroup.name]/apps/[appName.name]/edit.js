@@ -723,28 +723,37 @@ const EditApps = () => {
 
   const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
 
+  
   function formatTimestamp(timestamp) {
     if (!timestamp) {
       return "N/A";
     }
-
+  
     const dateObject = new Date(parseInt(timestamp));
     if (!isNaN(dateObject)) {
       const options = {
         year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        // timeZoneName: "short",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "UTC",
+        //timeZoneName: "short",
       };
-
+  
       return new Intl.DateTimeFormat("en-US", options).format(dateObject);
     } else {
       return "Invalid Date";
     }
   }
+  
+  const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
+  const formattedTimestamp = formatTimestamp(timestamp);
+  
+  console.log(formattedTimestamp); // Output: "08/21/2023, 12:11 PM UTC"
+  
+    
 
   // const handleRemoveAPIProduct = async (
   //   teamName,

@@ -4523,7 +4523,7 @@ const ViewApp = () => {
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
-        timeZoneName: "short",
+        timeZoneName: "UTC",
       };
 
       return new Intl.DateTimeFormat("en-US", options).format(dateObject);
