@@ -43,7 +43,7 @@ const EditMember = () => {
 
 
   const allMembers = JSON.parse(members);
-  console.log("All Members", allMembers);
+  console.log("All Members:", allMembers);
   
   const developerName = developer;
   console.log("Developer Name:", developerName);
