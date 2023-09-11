@@ -90,7 +90,7 @@ const View = () => {
                         // cursor: "pointer",
                         // fontWeight: 600,
                         // fontSize: "26px",
-                        fontFamily: "Sodo Sans, sans-serif", // Adding the font family
+                        //fontFamily: "Sodo Sans, sans-serif", // Adding the font family
                       }}
                     >
                       {teamDetails.name}

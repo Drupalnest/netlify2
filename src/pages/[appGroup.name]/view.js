@@ -119,7 +119,7 @@ console.log("After dispatch",teamname);
                         // cursor: "pointer",
                         // fontWeight: 600,
                         // fontSize: "26px",
-                        fontFamily: "Sodo Sans, sans-serif", // Adding the font family
+                        fontFamily: "Sodo Sans", // Adding the font family
                       }}
                     >
                       {teamDetails.name}

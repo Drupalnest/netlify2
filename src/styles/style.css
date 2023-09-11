@@ -3,6 +3,81 @@ body {
   font-size: 14px;
 }
 
+/* 
+#00a862; */
+
+/* YourComponent.css */
+/* input[type="checkbox"]{
+  background-color: #07cc7a;
+} */
+
+/* 
+/* globalStyles.css */
+/* Apply the background color to all checkboxes */
+
+
+
+
+
+input[type="checkbox"] {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 0.5px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+}
+
+
+
+
+
+
+input[type="checkbox"]::before {
+  content: "\2713";
+  font-size: 20px; 
+  font-weight: 800;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: transparent; /* Make the checkmark color transparent */
+}
+
+input[type="checkbox"]:checked::before {
+  color: white; /* Set the checkmark color when checked */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00a862;
+  border: 2px solid #00a862;
+}
+
+
+/* .custom-checkbox:checked {
+  background-color: #00a862; 
+} */
+
+
+/* Optional: You can also style the unchecked state */
+/* input[type="checkbox"]:not(:checked) {
+  background-color: #ffffff; /
+} */
+
+@font-face {
+  font-family: "SoDo Sans";
+  src: url("./sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
 body {
   font-family: "Lato";
   font-style: normal;
@@ -27127,8 +27202,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Black.woff2") format("woff2"),
-    url("/styles/styles/fonts/sodo/SoDoSans-Black.woff") format("woff");
+  src: url("./sodo/SoDoSans-Black.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -27136,8 +27211,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Black.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Black.woff") format("woff");
+  src: url("./sodo/SoDoSans-Black.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -27145,8 +27220,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-BlackItalic.woff") format("woff");
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -27154,8 +27229,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Bold.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Bold.woff") format("woff");
+  src: url("./sodo/SoDoSans-Bold.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -27163,8 +27238,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-BlackItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-BlackItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-BlackItalic.woff") format("woff");
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -27172,8 +27247,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Bold.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Bold.woff") format("woff");
+  src: url("./sodo/SoDoSans-Bold.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -27181,8 +27256,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -27190,8 +27265,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-BoldItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-BoldItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -27199,8 +27274,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Italic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Italic.woff") format("woff");
+  src: url("./sodo/SoDoSans-Italic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Italic.woff") format("woff");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -27208,8 +27283,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Italic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Italic.woff") format("woff");
+  src: url("./sodo/SoDoSans-Italic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Italic.woff") format("woff");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -27217,8 +27292,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Light.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Light.woff") format("woff");
+  src: url("./sodo/SoDoSans-Light.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -27226,8 +27301,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Light.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Light.woff") format("woff");
+  src: url("./sodo/SoDoSans-Light.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -27235,8 +27310,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-LightItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-LightItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-LightItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-LightItalic.woff") format("woff");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -27244,8 +27319,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-LightItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-LightItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-LightItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-LightItalic.woff") format("woff");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -27253,8 +27328,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Regular.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Regular.woff") format("woff");
+  src: url("./sodo/SoDoSans-Regular.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -27262,8 +27337,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Regular.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Regular.woff") format("woff");
+  src: url("./sodo/SoDoSans-Regular.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -27271,8 +27346,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-SemiBold.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-SemiBold.woff") format("woff");
+  src: url("./sodo/SoDoSans-SemiBold.woff2") format("woff2"),
+    url("./sodo/SoDoSans-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -27280,8 +27355,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -27289,8 +27364,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-SemiBold.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-SemiBold.woff") format("woff");
+  src: url("./sodo/SoDoSans-SemiBold.woff2") format("woff2"),
+    url("./sodo/SoDoSans-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -27298,8 +27373,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-SemiBoldItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-SemiBoldItalic.woff") format("woff");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -27307,8 +27382,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Thin.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Thin.woff") format("woff");
+  src: url("./sodo/SoDoSans-Thin.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -27316,8 +27391,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-ThinItalic.woff") format("woff");
   font-weight: 100;
   font-style: italic;
   font-display: swap;
@@ -27325,8 +27400,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-Thin.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-Thin.woff") format("woff");
+  src: url("./sodo/SoDoSans-Thin.woff2") format("woff2"),
+    url("./sodo/SoDoSans-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -27334,8 +27409,8 @@ button.close {
 
 @font-face {
   font-family: "SoDo Sans";
-  src: url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
-    url("/styles/fonts/sodo/SoDoSans-ThinItalic.woff") format("woff");
+  src: url("./sodo/SoDoSans-ThinItalic.woff2") format("woff2"),
+    url("./sodo/SoDoSans-ThinItalic.woff") format("woff");
   font-weight: 100;
   font-style: italic;
   font-display: swap;

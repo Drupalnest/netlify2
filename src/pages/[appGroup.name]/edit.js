@@ -876,6 +876,7 @@ console.log("admins", admins);
                                           style={{ listStyle: "none" }}
                                         >
                                           <input
+                                            className="custom-checkbox"
                                             type="checkbox"
                                             value={val}
                                             style={{ marginRight: "0.5em" }}

@@ -968,7 +968,7 @@ const EditApps = () => {
                   <div />
                   <div className="container">
                     <h1 className="js-quickedit-page-title page__title mb-0">
-                      Edit{" "}
+                      Edit
                       <em className="placeholder">{appDetailsData.name}</em>{" "}
                       team app
                     </h1>

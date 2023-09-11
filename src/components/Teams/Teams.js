@@ -59,12 +59,6 @@ const TeamList = () => {
                     <Link
                       to="/add-team"
                       className="button button-action btn btn-sm btn-primary"
-                      style={{
-                        cursor: "pointer",
-                        fontWeight: 400,
-                        fontSize: "14px",
-                        fontFamily: "Sodo Sans, sans-serif",
-                      }}
                     >
                       Add Appgroup
                     </Link>
@@ -79,15 +73,7 @@ const TeamList = () => {
                   <div></div>
 
                   <div className="container">
-                    <h1
-                      className="js-quickedit-page-title page__title mb-0"
-                      style={{
-                        fontSize: "24px",
-                        fontStyle: "normal",
-                        fontWeight: "600",
-                        fontFamily: "Sodo Sans, sans-serif",
-                      }}
-                    >
+                    <h1 className="js-quickedit-page-title page__title mb-0">
                       AppGroups
                     </h1>
                   </div>
@@ -113,14 +99,14 @@ const TeamList = () => {
                                     onClick={() =>
                                       handleClickTeam(appGroup.name)
                                     }
-                                    style={{
-                                      background: "none",
-                                      border: "none",
-                                      cursor: "pointer",
-                                      fontWeight: 500,
-                                      fontSize: "14px",
-                                      fontFamily: "Sodo Sans, sans-serif", // Adding the font family
-                                    }}
+                                    // style={{
+                                    //   background: "none",
+                                    //   border: "none",
+                                    //   cursor: "pointer",
+                                    //   fontWeight: 500,
+                                    //   fontSize: "14px",
+                                    //   fontFamily: "Sodo Sans, sans-serif", // Adding the font family
+                                    // }}
                                   >
                                     {/* <Link to="/team-details">
                                       {appGroup.name}
@@ -139,13 +125,13 @@ const TeamList = () => {
                                     >
                                       <ul className="dropbutton">
                                         <li
-                                          style={{
-                                            listStyle: "none",
-                                            cursor: "pointer",
-                                            fontWeight: 500,
-                                            fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
-                                          }}
+                                        // style={{
+                                        //   listStyle: "none",
+                                        //   cursor: "pointer",
+                                        //   fontWeight: 500,
+                                        //   fontSize: "12.25px",
+                                        //   fontFamily: "Sodo Sans, sans-serif",
+                                        // }}
                                         >
                                           <Link
                                             to="/apps"
@@ -158,13 +144,13 @@ const TeamList = () => {
                                           </Link>
                                         </li>
                                         <li
-                                          style={{
-                                            listStyle: "none",
-                                            marginTop: "7px",
-                                            fontWeight: 500,
-                                            fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
-                                          }}
+                                        // style={{
+                                        //   listStyle: "none",
+                                        //   marginTop: "7px",
+                                        //   fontWeight: 500,
+                                        //   fontSize: "12.25px",
+                                        //   fontFamily: "Sodo Sans, sans-serif",
+                                        // }}
                                         >
                                           <Link
                                             to="/members"
@@ -176,13 +162,13 @@ const TeamList = () => {
                                           </Link>
                                         </li>
                                         <li
-                                          style={{
-                                            listStyle: "none",
-                                            marginTop: "7px",
-                                            fontWeight: 500,
-                                            fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
-                                          }}
+                                        // style={{
+                                        //   listStyle: "none",
+                                        //   marginTop: "7px",
+                                        //   fontWeight: 500,
+                                        //   fontSize: "12.25px",
+                                        //   fontFamily: "Sodo Sans, sans-serif",
+                                        // }}
                                         >
                                           <Link
                                             to={`/edit`}
@@ -194,13 +180,13 @@ const TeamList = () => {
                                           </Link>
                                         </li>
                                         <li
-                                          style={{
-                                            listStyle: "none",
-                                            marginTop: "7px",
-                                            fontWeight: 500,
-                                            fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
-                                          }}
+                                        // style={{
+                                        //   listStyle: "none",
+                                        //   marginTop: "7px",
+                                        //   fontWeight: 500,
+                                        //   fontSize: "12.25px",
+                                        //   fontFamily: "Sodo Sans, sans-serif",
+                                        // }}
                                         >
                                           <Link
                                             to="/team-details/delete"

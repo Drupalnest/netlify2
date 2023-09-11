@@ -31644,7 +31644,7 @@ table>thead>tr>th,
 
 
 
-
+/* 
 body { font-family: 'Lato'; font-style: normal; font-weight: normal; }
 
 
@@ -31862,7 +31862,7 @@ body { font-family: 'Lato'; font-style: normal; font-weight: normal; }
     font-weight: 100;
     font-style: italic;
     font-display: swap;
-}
+} */
 
 body{
     font-family: 'SoDo Sans';

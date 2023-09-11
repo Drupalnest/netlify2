@@ -2,11 +2,230 @@
 @tailwind components;
 @tailwind utilities;
 
-/* src/styles/global.css
-@import url('https://fonts.googleapis.com/css2?family=Sodo+Sans:wght@400;700;500;600;800&display=swap');
+ /* src/styles/global.css
+@import url('https://fonts.googleapis.com/css2?family=Sodo+Sans:wght@400;700;500;600;800&display=swap'); */
+
+
+
+/* @font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Black.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Black.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-BlackItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Bold.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-BlackItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Bold.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-BoldItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-BoldItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Italic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Italic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Light.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Light.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-LightItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-LightItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Regular.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Regular.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-SemiBold.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-SemiBoldItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-SemiBold.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-SemiBoldItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Thin.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-ThinItalic.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /sodo/SoDoSans-Thin.woff2') format('woff2'),
+      url(' /sodo/SoDoSans-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+} */
+
+/* @font-face {
+  font-family: 'SoDo Sans';
+  src:url(' /src/styles/sodo/SoDoSans-ThinItalic.woff2') format('woff2'),
+      url(' /src/styles/sodo/SoDoSans-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
 
 body {
   font-family: "Sodo Sans", sans-serif;
  
-} */
+}  */
 

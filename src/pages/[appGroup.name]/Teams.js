@@ -89,12 +89,12 @@ const TeamList = () => {
                     <Link
                       to="/add-team"
                       className="button button-action btn btn-sm btn-primary"
-                      style={{
-                        cursor: "pointer",
-                        fontWeight: 400,
-                        fontSize: "14px",
-                        fontFamily: "Sodo Sans, sans-serif",
-                      }}
+                      // style={{
+                      //   cursor: "pointer",
+                      //   fontWeight: 400,
+                      //   fontSize: "14px",
+                      //   fontFamily: "Sodo Sans, sans-serif",
+                      // }}
                     >
                       Add Appgroup
                     </Link>
@@ -111,12 +111,12 @@ const TeamList = () => {
                   <div className="container">
                     <h1
                       className="js-quickedit-page-title page__title mb-0"
-                      style={{
-                        fontSize: "24px",
-                        fontStyle: "normal",
-                        fontWeight: "600",
-                        fontFamily: "Sodo Sans, sans-serif",
-                      }}
+                      // style={{
+                      //   fontSize: "24px",
+                      //   fontStyle: "normal",
+                      //   fontWeight: "600",
+                      //   fontFamily: "Sodo Sans, sans-serif",
+                      // }}
                     >
                       AppGroups
                     </h1>
@@ -149,7 +149,7 @@ const TeamList = () => {
                                       cursor: "pointer",
                                       fontWeight: 500,
                                       fontSize: "14px",
-                                      fontFamily: "Sodo Sans, sans-serif", // Adding the font family
+                                      fontFamily: "Sodo Sans", // Adding the font family
                                     }}
                                   >
                                     {/* <Link to="/team-details">
@@ -174,7 +174,7 @@ const TeamList = () => {
                                             cursor: "pointer",
                                             fontWeight: 500,
                                             fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
+                                            fontFamily: "Sodo Sans",
                                           }}
                                         >
                                           <Link
@@ -193,7 +193,7 @@ const TeamList = () => {
                                             marginTop: "7px",
                                             fontWeight: 500,
                                             fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
+                                            fontFamily: "Sodo Sans",
                                           }}
                                         >
                                           <Link
@@ -211,7 +211,7 @@ const TeamList = () => {
                                             marginTop: "7px",
                                             fontWeight: 500,
                                             fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
+                                            fontFamily: "Sodo Sans",
                                           }}
                                         >
                                           <Link
@@ -229,7 +229,7 @@ const TeamList = () => {
                                             marginTop: "7px",
                                             fontWeight: 500,
                                             fontSize: "12.25px",
-                                            fontFamily: "Sodo Sans, sans-serif",
+                                            fontFamily: "Sodo Sans",
                                           }}
                                         >
                                           <Link

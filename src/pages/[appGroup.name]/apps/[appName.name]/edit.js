@@ -723,12 +723,11 @@ const EditApps = () => {
 
   const isFetching = appDetailsData ? appDetailsData.loading : true; // Handle null value
 
-  
   function formatTimestamp(timestamp) {
     if (!timestamp) {
       return "N/A";
     }
-  
+
     const dateObject = new Date(parseInt(timestamp));
     if (!isNaN(dateObject)) {
       const options = {
@@ -741,19 +740,17 @@ const EditApps = () => {
         timeZone: "UTC",
         //timeZoneName: "short",
       };
-  
+
       return new Intl.DateTimeFormat("en-US", options).format(dateObject);
     } else {
       return "Invalid Date";
     }
   }
-  
+
   const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
   const formattedTimestamp = formatTimestamp(timestamp);
-  
+
   console.log(formattedTimestamp); // Output: "08/21/2023, 12:11 PM UTC"
-  
-    
 
   // const handleRemoveAPIProduct = async (
   //   teamName,
@@ -1012,6 +1009,9 @@ const EditApps = () => {
                 </div>
               </div>
             </div>
+
+          
+
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">
                 <div className="container py-5">
@@ -1204,6 +1204,58 @@ const EditApps = () => {
                                     </button>
                                   </div>
                                 </Modal> */}
+
+
+                                <div
+              // style={{
+              //   position: "fixed",
+              //   height: "auto",
+              //   width: "50%",
+              //   top: "388.95px",
+              //   left: 294
+              // }}
+              classname="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable"
+            >
+              <div classname="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+                <span classname="ui-dialog-title">Confirmation</span>
+                <button
+                  type="button"
+                  classname="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+                  title="Close"
+                >
+                  <span classname="ui-button-icon ui-icon ui-icon-closethick" />
+                  <span classname="ui-button-icon-space"></span>
+                  Close
+                </button>
+              </div>
+              <div
+                classname="ui-dialog-content ui-widget-content"
+                // style={{
+                //   width: "auto",
+                //   minHeight: "21.4px",
+                //   maxHeight: "none",
+                //   height: "auto"
+                // }}
+              >
+                Are you sure you would like to remove this API product?
+              </div>
+              <div classname="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div classname="ui-dialog-buttonset">
+                  <button
+                    type="button"
+                    classname="js-form-submit form-submit btn btn-primary ui-button ui-corner-all ui-widget button"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    classname="custom-button-cancel ui-button ui-corner-all ui-widget button"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
 
                                 <Modal
                                   isOpen={isRemoveModalOpen}

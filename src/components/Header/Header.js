@@ -4,20 +4,6 @@ import "../../styles/style.css";
 import { Link } from "gatsby";
 import logo from "../../images/logo.png";
 
-
-<link href="https://db.onlinewebfonts.com/c/d7e8a95865396cddca89b00080d2cba6?family=SoDo+Sans+SemiBold" rel="stylesheet" type="text/css"/>
-const textStyle = {
-  fontFamily: 'SoDo SoDoSans',
-  fontWeight: 100,
-  fontStyle: 'SemiBoldItalic', 
-  fontDisplay: 'swap' 
-};
-
-
-
-
-
-
 const Header = () => {
   return (
     <header id="navbar" className="navbar navbar-static-top navbar-default">
@@ -31,7 +17,7 @@ const Header = () => {
                     <img src={logo} alt="Starbucks Developer Portal" />
                   </Link>
                   <span className="brand__line"></span>
-                  <span className="brand__slogan" style={{fontFamily: "SoDo Sans SemiBold"}}>
+                  <span className="brand__slogan">
                     Starbucks Developer Portal - Dev
                   </span>
                 </div>
@@ -50,95 +36,29 @@ const Header = () => {
                   <div className="contextual-region block block--starbucks-main-menu">
                     <ul className="nav navbar-nav">
                       <li className="nav-item dropdown">
-                        <Link
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                            fontColor:"#939393",
-                             fontWeight: "600",
-                            fontFamily: "SoDo Sans, sans-serif",
-                          }}
-                        >
-                          My Apps
-                        </Link>
+                        <Link className="nav-link">My Apps</Link>
                       </li>
                       <li className="nav-item active dropdown">
-                        <Link
-                          to="/"
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                            
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
+                        <Link to="/" className="nav-link">
                           My Appgroups
                         </Link>
                       </li>
                       <li className="nav-item dropdown">
-                        <Link
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                            
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
-                          API Catalog
-                        </Link>
+                        <Link className="nav-link">API Catalog</Link>
                       </li>
                       <li className="nav-item dropdown">
-                        <Link
-                          className="nav-link dropdown-toggle"
-                          style={{
-                            fontSize: "12.25px",
-                            
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
+                        <Link className="nav-link dropdown-toggle">
                           Get Started
                         </Link>
                       </li>
                       <li className="nav-item dropdown">
-                        <Link
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                          
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
-                          App Dashboard
-                        </Link>
+                        <Link className="nav-link">App Dashboard</Link>
                       </li>
                       <li className="nav-item dropdown">
-                        <Link
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                           
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
-                          User Mgmt
-                        </Link>
+                        <Link className="nav-link">User Mgmt</Link>
                       </li>
                       <li className="nav-item dropdown">
-                        <Link
-                          title="Self-Service Utility"
-                          className="nav-link"
-                          style={{
-                            fontSize: "12.25px",
-                            fontColor:"#B8B8B8",
-                            fontWeight: "600",
-                            fontFamily: "Sodo Sans, sans-serif",
-                          }}
-                        >
+                        <Link title="Self-Service Utility" className="nav-link">
                           Self-Service Utility
                         </Link>
                       </li>
