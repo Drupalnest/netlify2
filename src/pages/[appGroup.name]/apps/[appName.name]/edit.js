@@ -1010,8 +1010,6 @@ const EditApps = () => {
               </div>
             </div>
 
-          
-
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">
                 <div className="container py-5">
@@ -1205,58 +1203,88 @@ const EditApps = () => {
                                   </div>
                                 </Modal> */}
 
+                                {/*                               
+                              
+                                <Modal
+                                  isOpen={isRemoveModalOpen}
+                                  onRequestClose={() =>
+                                    setIsRemoveModalOpen(false)
+                                  }
+                                  
+                                >
+                                <div id="drupal-modal"
+                                  className="ui-front"
+                                  style={{ display: "none" }}>
+                                  <div
+                                    tabIndex="-1"
+                                   
+                                    className="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable"
+                                    
+                                    style={{
+                                      position: "fixed",
+                                      height: "auto",
+                                      width: "50%",
+                                      top: "369.25px",
+                                      left: "419.572px",
+                                    }}
+                                  >
+                                    <div className="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+                                      <span
+                                       
+                                        className="ui-dialog-title"
+                                      >
+                                        Confirmation
+                                      </span>
+                                      <button
+                                        type="button"
+                                        className="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+                                        title="Close"
+                                      >
+                                        <span className="ui-button-icon ui-icon ui-icon-closethick"></span>
+                                        <span className="ui-button-icon-space">
+                                          {" "}
+                                        </span>
+                                        Close
+                                      </button>
+                                    </div>
+                                    <div
+                                      
+                                      className="ui-dialog-content ui-widget-content"
+                                      style={{
+                                        width: "auto",
+                                        minHeight: "22px",
+                                        maxHeight: "none",
+                                        height: "auto",
+                                      }}
+                                    >
+                                      Are you sure you would like to remove this
+                                      API product?
+                                    </div>
+                                    <div className="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                      <div className="ui-dialog-buttonset">
+                                        <button
+                                          type="button"
+                                          className="js-form-submit form-submit btn btn-primary ui-button ui-corner-all ui-widget button"
+                                        >
+                                          Confirm
+                                        </button>
+                                        <button
+                                          type="button"
+                                          className="custom-button-cancel ui-button ui-corner-all ui-widget button"
+                                        >
+                                          Cancel
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="ui-widget-overlay ui-front"
+                                    style={{ zIndex: "9998" }}
+                                  ></div>
+                                  </div>
+                                </Modal> */}
 
-                                <div
-              // style={{
-              //   position: "fixed",
-              //   height: "auto",
-              //   width: "50%",
-              //   top: "388.95px",
-              //   left: 294
-              // }}
-              classname="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable"
-            >
-              <div classname="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
-                <span classname="ui-dialog-title">Confirmation</span>
-                <button
-                  type="button"
-                  classname="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
-                  title="Close"
-                >
-                  <span classname="ui-button-icon ui-icon ui-icon-closethick" />
-                  <span classname="ui-button-icon-space"></span>
-                  Close
-                </button>
-              </div>
-              <div
-                classname="ui-dialog-content ui-widget-content"
-                // style={{
-                //   width: "auto",
-                //   minHeight: "21.4px",
-                //   maxHeight: "none",
-                //   height: "auto"
-                // }}
-              >
-                Are you sure you would like to remove this API product?
-              </div>
-              <div classname="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <div classname="ui-dialog-buttonset">
-                  <button
-                    type="button"
-                    classname="js-form-submit form-submit btn btn-primary ui-button ui-corner-all ui-widget button"
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    type="button"
-                    classname="custom-button-cancel ui-button ui-corner-all ui-widget button"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-
+                                {/*                               
                                 <Modal
                                   isOpen={isRemoveModalOpen}
                                   onRequestClose={() =>
@@ -1327,6 +1355,79 @@ const EditApps = () => {
                                         Cancel
                                       </button>
                                     </div>
+                                  </div>
+                                </Modal> */}
+
+                                <Modal
+                                  isOpen={isRemoveModalOpen}
+                                  onRequestClose={() =>
+                                    setIsRemoveModalOpen(false)
+                                  }
+                                >
+                                  <div className="ui-front">
+                                    <div
+                                      className="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable"
+                                      style={{
+                                        position: "fixed",
+                                        height: "auto",
+                                        width: "50%",
+                                        top: "369.25px",
+                                        left: "419.572px",
+                                      }}
+                                    >
+                                      <div className="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+                                        <span className="ui-dialog-title">
+                                          Confirmation
+                                        </span>
+                                        <button
+                                          type="button"
+                                          className="ui-button ui-corner-all ui-widget  ui-dialog-titlebar-close"
+                                          title="Close"
+                                          onClick={() =>
+                                            setIsRemoveModalOpen(false)
+                                          }
+                                        >
+                                          &times;
+                                          <span className="ui-icon ui-icon-closethick"></span>
+                                        </button>
+                                      </div>
+                                      <div
+                                        className="ui-dialog-content ui-widget-content"
+                                        style={{
+                                          width: "auto",
+                                          minHeight: "22px",
+                                          maxHeight: "none",
+                                          height: "auto",
+                                        }}
+                                      >
+                                        Are you sure you would like to remove
+                                        this API product?
+                                      </div>
+                                      <div className="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                        <div className="ui-dialog-buttonset">
+                                          <button
+                                            type="button"
+                                            onClick={handleRemoveConfirmation}
+                                            className="js-form-submit form-submit btn btn-primary ui-button ui-corner-all ui-widget button"
+                                          >
+                                            Confirm
+                                          </button>
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              setIsRemoveModalOpen(false)
+                                            }
+                                            className="custom-button-cancel ui-button ui-corner-all ui-widget button"
+                                          >
+                                            Cancel
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      className="ui-widget-overlay ui-front"
+                                      style={{ zIndex: "9998" }}
+                                    ></div>
                                   </div>
                                 </Modal>
 

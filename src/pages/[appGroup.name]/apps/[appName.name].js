@@ -4509,59 +4509,137 @@ const ViewApp = () => {
     }
   };
 
-  function formatTimestamp(timestamp) {
-    if (!timestamp) {
-      return "N/A";
-    }
+  
 
-    const dateObject = new Date(parseInt(timestamp));
-    if (!isNaN(dateObject)) {
-      const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        timeZoneName: "UTC",
-      };
+  // function customFormatTimestamp(timestamp) {
+  //   if (!timestamp) {
+  //     return "N/A";
+  //   }
 
-      return new Intl.DateTimeFormat("en-US", options).format(dateObject);
-    } else {
-      return "Invalid Date";
-    }
-  }
+  //   const customDate = new Date(parseInt(timestamp));
+  //   if (!isNaN(customDate)) {
+  //     const now = new Date();
+  //     const diff = now - customDate;
+
+  //     const seconds = Math.floor(diff / 1000);
+  //     const minutes = Math.floor(seconds / 60);
+  //     const hours = Math.floor(minutes / 60);
+  //     const days = Math.floor(hours / 24);
+  //     const weeks = Math.floor(days / 7);
+  //     const months = Math.floor(days / 30); // Approximation, not precise
+
+  //     if (months >= 1) {
+  //       return `${months} months ago `;
+  //     } else if (weeks >= 1) {
+  //       const remainingDays = days % 7;
+  //       return `${weeks} weeks ${remainingDays} days ago `;
+  //     } else {
+  //       return `${days} days ago `;
+  //     }
+  //   } else {
+  //     return "Invalid Date";
+  //   }
+  // }
+
+
+  // function customFormatTimestamps(timestamp) {
+  //   if (!timestamp) {
+  //     return "N/A";
+  //   }
+  
+  //   const customDate = new Date(parseInt(timestamp));
+  //   if (!isNaN(customDate)) {
+  //     const now = new Date();
+  //     const diff = now - customDate;
+  
+  //     const seconds = Math.floor(diff / 1000);
+  //     const minutes = Math.floor(seconds / 60);
+  //     const hours = Math.floor(minutes / 60);
+  //     const days = Math.floor(hours / 24);
+  //     const weeks = Math.floor(days / 7);
+  //     const months = Math.floor(days / 30); // Approximation, not precise
+  //     const years = Math.floor(months / 12);
+  
+  //     if (years >= 1) {
+  //       const remainingMonths = months % 12;
+  //       const remainingWeeks = Math.floor((days % 30) / 7);
+  //       const remainingDays = days % 7;
+  //       return `${years} years ${remainingMonths} months ${remainingWeeks} weeks ${remainingDays} days ago`;
+  //     } else if (months >= 1) {
+  //       const remainingWeeks = Math.floor((days % 30) / 7);
+  //       const remainingDays = days % 7;
+  //       return `${months} months ${remainingWeeks} weeks ${remainingDays} days ago`;
+  //     } else if (weeks >= 1) {
+  //       const remainingDays = days % 7;
+  //       return `${weeks} weeks ${remainingDays} days ago`;
+  //     } else if (days >= 1) {
+  //       const remainingHours = hours % 24;
+  //       return `${days} days ${remainingHours} hours ago`;
+  //     } else if (hours >= 1) {
+  //       const remainingMinutes = minutes % 60;
+  //       return `${hours} hours ${remainingMinutes} minutes ago`;
+  //     } else if (minutes >= 1) {
+  //       const remainingSeconds = seconds % 60;
+  //       return `${minutes} minutes ${remainingSeconds} seconds ago`;
+  //     } else {
+  //       return `${seconds} seconds ago`;
+  //     }
+  //   } else {
+  //     return "Invalid Date";
+  //   }
+  // }
+  
+
 
   function customFormatTimestamp(timestamp) {
     if (!timestamp) {
       return "N/A";
     }
-
+  
     const customDate = new Date(parseInt(timestamp));
     if (!isNaN(customDate)) {
       const now = new Date();
       const diff = now - customDate;
-
+  
       const seconds = Math.floor(diff / 1000);
       const minutes = Math.floor(seconds / 60);
       const hours = Math.floor(minutes / 60);
       const days = Math.floor(hours / 24);
       const weeks = Math.floor(days / 7);
       const months = Math.floor(days / 30); // Approximation, not precise
-
-      if (months >= 1) {
-        return `${months} months ago `;
+      const years = Math.floor(months / 12);
+      const timeZone = "UTC";
+  
+      if (years >= 1) {
+        const remainingMonths = months % 12;
+        const remainingWeeks = Math.floor((days % 30) / 7);
+        const remainingDays = days % 7;
+        return `${years} years ${remainingMonths} months`;
+      } else if (months >= 1) {
+        const remainingWeeks = Math.floor((days % 30) / 7);
+        const remainingDays = days % 7;
+        return `${months} months ${remainingWeeks} weeks`;
       } else if (weeks >= 1) {
         const remainingDays = days % 7;
-        return `${weeks} weeks ${remainingDays} days ago `;
+        return `${weeks} weeks ${remainingDays} days ago`;
+      } else if (days >= 1) {
+        const remainingHours = hours % 24;
+        return `${days} days ${remainingHours} hours ago`;
+      } else if (hours >= 1) {
+        const remainingMinutes = minutes % 60;
+        return `${hours} hours ${remainingMinutes} minutes ago`;
+      } else if (minutes >= 1) {
+        const remainingSeconds = seconds % 60;
+        return `${minutes} minutes ${remainingSeconds} seconds ago`;
       } else {
-        return `${days} days ago `;
+        return `${seconds} seconds ago`;
       }
     } else {
       return "Invalid Date";
     }
   }
-
+  
+  
   function customFormatTDate(timestamp) {
     if (!timestamp) {
       return "N/A";
@@ -4589,29 +4667,158 @@ const ViewApp = () => {
     }
   }
 
-  const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
-  const formattedTimestamp = customFormatTDate(timestamp);
+  // const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
+  // const formattedTimestamp = customFormatTDate(timestamp);
 
-  console.log(formattedTimestamp); // Output: "Aug 21, 2023, 12:11:00 PM (UTC)"
+  // console.log(formattedTimestamp); // Output: "Aug 21, 2023, 12:11:00 PM (UTC)"
 
-  function customFormatDateTimetamp(timestamp) {
-    const customDate = new Date(parseInt(timestamp));
+  // function customFormatTDate(timestamp) {
+  //   if (!timestamp) {
+  //     return "N/A";
+  //   }
+  
+  //   const customDate = new Date(parseInt(timestamp));
+  
+  //   if (isNaN(customDate)) {
+  //     return "Invalid Date";
+  //   }
+  
+  //   const now = new Date();
+  //   const diff = now - customDate;
+  
+  //   const seconds = Math.floor(Math.abs(diff) / 1000);
+  //   const minutes = Math.floor(seconds / 60);
+  //   const hours = Math.floor(minutes / 60);
+  //   const days = Math.floor(hours / 24);
+  //   const weeks = Math.floor(days / 7);
+  //   const months = Math.floor(days / 30); // Approximation, not precise
+  //   const years = Math.floor(months / 12);
+  
+  //   const timeZone = "UTC"; // Specify the time zone as 'UTC'
+  
+  //   if (years >= 1) {
+  //     const remainingMonths = months % 12;
+  //     const remainingWeeks = Math.floor((days % 30) / 7);
+  //     const remainingDays = days % 7;
+  //     return `${years} years ${remainingMonths} months  (${timeZone})`;
+  //   } else if (months >= 1) {
+  //     const remainingWeeks = Math.floor((days % 30) / 7);
+  //     const remainingDays = days % 7;
+  //     return `${months} months ${remainingWeeks} weeks  (${timeZone})`;
+  //   } else if (weeks >= 1) {
+  //     const remainingDays = days % 7;
+  //     return `${weeks} weeks ${remainingDays} days ago (${timeZone})`;
+  //   } else if (days >= 1) {
+  //     const remainingHours = hours % 24;
+  //     return `${days} days ${remainingHours} hours ago (${timeZone})`;
+  //   } else if (hours >= 1) {
+  //     const remainingMinutes = minutes % 60;
+  //     return `${hours} hours ${remainingMinutes} minutes ago (${timeZone})`;
+  //   } else if (minutes >= 1) {
+  //     const remainingSeconds = seconds % 60;
+  //     return `${minutes} minutes ${remainingSeconds} seconds ago (${timeZone})`;
+  //   } else {
+  //     return `${seconds} seconds ago (${timeZone})`;
+  //   }
+  // }
+  
+  
+  
+  
+  
+  // function customFormatDateTimetamp(timestamp) {
+  //   const customDate = new Date(parseInt(timestamp));
 
-    if (isNaN(customDate)) {
+  //   if (isNaN(customDate)) {
+  //     return "Invalid Date";
+  //   }
+
+  //   const now = new Date();
+  //   const diff = now - customDate;
+
+  //   const seconds = Math.floor(Math.abs(diff) / 1000);
+  //   const minutes = Math.floor(seconds / 60);
+  //   const hours = Math.floor(minutes / 60);
+  //   const days = Math.floor(hours / 24);
+  //   const weeks = Math.floor(days / 7);
+  //   const months = Math.floor(days / 30); // Approximation, not precise
+
+  //   const options = {
+  //     year: "numeric",
+  //     month: "short",
+  //     day: "numeric",
+  //     hour: "numeric",
+  //     minute: "numeric",
+  //     second: "numeric",
+  //     timeZone: "UTC", // Specify the timeZone as 'UTC'
+  //   };
+  //   const dateObject = customDate;
+
+  //   if (months >= 1) {
+  //     return `${new Intl.DateTimeFormat("en-US", options).format(
+  //       dateObject
+  //     )} (UTC) in ${months} months `;
+  //   } else if (weeks >= 1) {
+  //     const remainingDays = days % 7;
+  //     return `${new Intl.DateTimeFormat("en-US", options).format(
+  //       dateObject
+  //     )} (UTC) in ${weeks} weeks and ${remainingDays} days `;
+  //   } else {
+  //     return `${new Intl.DateTimeFormat("en-US", options).format(
+  //       dateObject
+  //     )} (UTC) in ${days} days `;
+  //   }
+  // }
+
+  
+//   function customFormatDateTimetamp(timestamp) {
+//     const customDate = new Date(parseInt(timestamp));
+
+//     if (isNaN(customDate)) {
+//         return "Invalid Date";
+//     }
+
+//     const now = new Date();
+//     const diff = customDate - now;
+
+//     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+//     const weeks = Math.floor(days / 7);
+//     const months = Math.floor(weeks / 4.4); // Approximately 4 weeks in a month
+
+//     const remainingWeeks = weeks % 8;
+
+//     return `${months} months and ${remainingWeeks} weeks`;
+// }
+
+// const timestamp = Date.now() + (365 * 24 * 60 * 60 * 1000); // Assuming expiration is 1 year from now
+
+// const formattedDate = customFormatDateTimetamp(timestamp);
+
+// console.log(formattedDate);
+
+
+
+
+
+
+
+
+function customFormatDateTimetamp(timestamp) {
+  const customDate = new Date(parseInt(timestamp));
+
+  if (isNaN(customDate)) {
       return "Invalid Date";
-    }
+  }
 
-    const now = new Date();
-    const diff = now - customDate;
+  const now = new Date();
+  const diff = customDate - now;
 
-    const seconds = Math.floor(Math.abs(diff) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30); // Approximation, not precise
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(weeks / 4.4); // Approximately 4.4 weeks in a month
+  const remainingWeeks = Math.floor(weeks % 4.8);
 
-    const options = {
+  const options = {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -4619,28 +4826,29 @@ const ViewApp = () => {
       minute: "numeric",
       second: "numeric",
       timeZone: "UTC", // Specify the timeZone as 'UTC'
-    };
-    const dateObject = customDate;
+  };
+  const dateObject = customDate;
 
-    if (months >= 1) {
-      return `${new Intl.DateTimeFormat("en-US", options).format(
-        dateObject
-      )} in ${months} months (UTC)`;
-    } else if (weeks >= 1) {
-      const remainingDays = days % 7;
-      return `${new Intl.DateTimeFormat("en-US", options).format(
-        dateObject
-      )} in ${weeks} weeks and ${remainingDays} days (UTC)`;
-    } else {
-      return `${new Intl.DateTimeFormat("en-US", options).format(
-        dateObject
-      )} in ${days} days (UTC)`;
-    }
-  }
+  return `${new Intl.DateTimeFormat("en-US", options).format(
+      dateObject
+  )} (UTC) in ${months} months ${remainingWeeks} weeks`;
+}
 
-  const timestamp1 = 74263536543464; // Assuming it's a valid timestamp
-  const result2 = customFormatDateTimetamp(timestamp1);
-  console.log("result2", result2);
+const timestamp = Date.now() + (365 * 24 * 60 * 60 * 1000);
+
+const formattedDate = customFormatDateTimetamp(timestamp);
+
+console.log(formattedDate);
+
+
+
+
+
+
+
+
+
+
 
   const generateRandomSecret = () => {
     const characters =
@@ -5004,17 +5212,17 @@ const ViewApp = () => {
                                         <fieldset
                                           className="items--inline app-credential"
                                           key={index}
-                                          // style={{ border: "1px solid red" }}
+                                           //style={{ border: "1px solid red" }}
                                         >
                                           <legend>Credential</legend>
 
                                           <div className="fieldset-wrapper">
                                             <div
                                               className="wrapper--primary app-details-wrapper"
-                                              // style={{
-                                              //   border: "8px solid blue",
-                                              //   width: "600px",
-                                              // }}
+                                              style={{
+                                                //border: "4px solid blue",
+                                                width: "40%",
+                                              }}
                                             >
                                               <div className="item-property">
                                                 <label>Consumer Key</label>
@@ -5091,6 +5299,7 @@ const ViewApp = () => {
                                                     <div
                                                       className="secret__value"
                                                       style={{
+                                                       // border:"1px solid red",
                                                         fontSize: "12px",
                                                         overflow: "scroll",
                                                         width: "220px", // or "scroll"
@@ -5182,22 +5391,24 @@ const ViewApp = () => {
                                               className="item-property"
                                               // style={{ marginLeft: "45px" }}
                                               style={{
-                                                // border: "1px solid blue",
+                                                // border: "5px solid yellow",
                                                 display: "flex",
                                                 flexDirection: "column",
+                                                width:"60%"
                                               }}
                                             >
                                               <div
                                                 className="dropbutton-widget"
                                                 style={{
-                                                  marginLeft: "270px",
-                                                  // border: "1px solid red",
+                                                  marginLeft: "470px",
+                                                   //border: "1px solid red",
                                                 }}
                                               >
                                                 <div
                                                   style={{
                                                     display: "flex",
                                                     alignItems: "center",
+                                                    //border:"1px solid red"
                                                   }}
                                                 >
                                                   <button
@@ -5264,7 +5475,7 @@ const ViewApp = () => {
 
                                                       width: "114px",
                                                       textAlign: "left",
-                                                      // border: "1px solid blue",
+                                                       //border: "1px solid blue",
                                                       overflow: "auto",
                                                       zIndex: 1, // Ensure the dropdown appears above other content
                                                     }}
@@ -5289,9 +5500,9 @@ const ViewApp = () => {
                                               <div
                                                 className="wrapper--secondary"
                                                 style={{
-                                                  marginRight: "200px",
-                                                  // border: "1px solid red",
-                                                  width: "600px",
+                                                  //marginRight: "200px",
+                                                   //border: "1px solid red",
+                                                  //width: "600px",
                                                 }}
                                               >
                                                 <label
@@ -5323,6 +5534,7 @@ const ViewApp = () => {
                                                             <span
                                                               className="badge badge-success"
                                                               style={{
+                                                              //  border:"1px solid red",
                                                                 backgroundColor:
                                                                   "#C5C5C5",
                                                                 marginLeft:
@@ -5442,16 +5654,17 @@ const ViewApp = () => {
                                           <fieldset
                                             className="items--inline app-credential"
                                             key={index}
-                                            // style={{ border: "1px solid red" }}
+                                         //style={{ border: "5px solid red" }}
                                           >
                                             <legend>Credential</legend>
 
                                             <div className="fieldset-wrapper">
                                               <div
                                                 className="wrapper--primary app-details-wrapper"
-                                                // style={{
-                                                //   border: "8px solid yellow",
-                                                // }}
+                                                style={{
+                                                  width: "40%",
+                                                  //border: "8px solid yellow",
+                                                }}
                                               >
                                                 <div className="item-property">
                                                   <label>Consumer Key</label>
@@ -5529,6 +5742,7 @@ const ViewApp = () => {
                                                       <div
                                                         className="secret__value"
                                                         style={{
+                                                          border:"2px solid green",
                                                           fontSize: "12px",
                                                           overflow: "scroll",
                                                           width: "220px", // or "scroll"
@@ -5627,6 +5841,7 @@ const ViewApp = () => {
                                                   flexDirection: "column",
                                                   // border: "1px solid blue",
                                                   //marginRight: "70px",
+                                                  width:"60%"
                                                 }}
                                               >
                                                 <div

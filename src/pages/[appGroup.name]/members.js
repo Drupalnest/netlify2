@@ -22,16 +22,12 @@ const Members = ({}) => {
   const members = JSON.parse(membersSerialized);
   console.log("members Unserialized", members);
 
-
-
   const admins = members
-  .filter(item => item.roles.includes("admin"))
-  .map(item => item.developer)
-  .join(", ");
+    .filter((item) => item.roles.includes("admin"))
+    .map((item) => item.developer)
+    .join(", ");
 
-console.log("admins",admins);
-   
-
+  console.log("admins", admins);
 
   const handleEditClick = (developer) => {
     dispatch(setDeveloper(developer));
@@ -76,9 +72,9 @@ console.log("admins",admins);
                     <div className="page__content col-md">
                       <div className="hidden" />
 
-                      <table className="responsive-enabled table">
-                        <thead>
-                          <tr>
+                      {/* <table className="responsive-enabled table" >
+                        <thead >
+                          <tr >
                             <th>Member</th>
                             <th>Roles</th>
                             <th>Operations</th>
@@ -125,6 +121,109 @@ console.log("admins",admins);
                                           </Link>
                                         </li>
                                         <li style={{ listStyle: "none" }}>
+                                          <Link
+                                            to={`/members/${member.developer}/remove`}
+                                            onClick={() =>
+                                              handleEditClick(member.developer)
+                                            }
+                                          >
+                                            Remove
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="3">No members available</td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table> */}
+
+                      <table className="responsive-enabled table">
+                        <tr>
+                          <th
+                            style={{
+                              fontFamily: "'SoDo Sans', sans-serif",
+                              fontSize: "14px",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Member
+                          </th>
+                          <th
+                            style={{
+                              fontFamily: "'SoDo Sans', sans-serif",
+                              fontSize: "14px",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Roles
+                          </th>
+                          <th
+                            style={{
+                              fontFamily: "'SoDo Sans', sans-serif",
+                              fontSize: "14px",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Operations
+                          </th>
+                        </tr>
+
+                        <tbody>
+                          {members.length > 0 ? (
+                            members.map((member, index) => (
+                              <tr
+                                key={index}
+                                id={member.developer}
+                                className={index % 2 === 0 ? "even" : "odd"}
+                              >
+                                <td>
+                                  <Link to="">{member.developer}</Link>
+                                </td>
+                                <td>
+                                  <ul>
+                                    {member.roles.map((role, roleIndex) => (
+                                      <li
+                                        style={{ listStyle: "none" }}
+                                        key={roleIndex}
+                                      >
+                                        {role === "admin"
+                                          ? "Administrator"
+                                          : role.charAt(0).toUpperCase() +
+                                            role.slice(1)}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </td>
+                                <td>
+                                  <div
+                                    className="dropbutton-wrapper"
+                                    // style={{ border: "1px solid red", textAlign: "left" }}
+                                  >
+                                    <div className="dropbutton-widget">
+                                      <ul className="dropbutton">
+                                        <li style={{ listStyle: "none" }}>
+                                          <Link
+                                            to={`/members/${member.developer}/edit`}
+                                            onClick={() =>
+                                              handleEditClick(member.developer)
+                                            }
+                                          >
+                                            Edit
+                                          </Link>
+                                        </li>
+                                        <li
+                                          style={{
+                                            listStyle: "none",
+                                            textAlign: "left",
+                                          }}
+                                        >
                                           <Link
                                             to={`/members/${member.developer}/remove`}
                                             onClick={() =>

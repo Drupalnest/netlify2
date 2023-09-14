@@ -512,14 +512,15 @@
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "@reach/router";
 import { fetchTeamDetails } from "../../redux/store";
 import View from "../../pages/[appGroup.name]/view";
+import { useParams } from "@reach/router";
 
 const TeamsPage = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const teamname = searchParams.get("teamname");
+  const { teamname } = useParams();
+  console.log("teamname",teamname)
+  //const searchParams = new URLSearchParams(location.search);
+  //const teamname = searchParams.get("teamname");
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
