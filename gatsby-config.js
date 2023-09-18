@@ -125,13 +125,25 @@ module.exports = {
       //   },
       // },
 
-      {
-        resolve: `gatsby-source-drupal`,
-        options: {
-          baseUrl: `https://dev-starbucks-developer-portal.pantheonsite.io/`,
-          apiBase: `jsonapi`
-        },
-      },
+
+
+
+
+    
+
+      // {
+      //   resolve: `gatsby-source-drupal`,
+      //   options: {
+      //     baseUrl: `https://dev-starbucks-developer-portal.pantheonsite.io/`,
+      //     apiBase: `jsonapi`
+      //   },
+      // },
+
+
+
+
+
+    
 
       // {
       //   resolve: `gatsby-source-drupal`,
